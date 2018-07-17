@@ -1,0 +1,3 @@
+[submodule "gitsubmodules/predd"]
+	path = gitsubmodules/predd
+	url = git@github.com:skeeto/predd.git
