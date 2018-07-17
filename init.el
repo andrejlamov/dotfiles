@@ -38,9 +38,9 @@
 
   (global-whitespace-mode)
 
-  (load-file "~/.emacs.d/packages.el")
-  (load-file "~/.emacs.d/funcs.el")
-  (load-file "~/.emacs.d/keys.el"))
+  (load-file "~/.emacs.d/base-module.el")
+  (load-file "~/.emacs.d/base-funcs.el")
+  (load-file "~/.emacs.d/base-keys.el"))
 
 (defun almacs/module-configure ()
 
