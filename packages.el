@@ -27,17 +27,24 @@
 
 (use-package company :config (global-company-mode))
 
-(use-package paredit :defer t)
-
 (use-package helm-swoop
   :defer t
   :config
   (define-key helm-swoop-map (kbd "C-w") 'helm-yank-text-at-point))
 
-(use-package smartparens :defer t)
+(use-package smartparens
+  :defer t
+  :config
+  ;; https://github.com/Fuco1/smartparens/issues/908
+  (sp-local-pair sp-lisp-modes  "'" 'nil :actions 'nil)
+  (sp-local-pair sp-lisp-modes  "`" 'nil :actions 'nil))
+
+(use-package paredit :defer t)
 
 (use-package evil-cleverparens
-  :commands evil-cleverparens-mode)
+  :requires (paredit smartparens)
+  :commands evil-cleverparens-mode
+  :config (smartparens-global-strict-mode))
 
 (use-package clojure-mode)
 
