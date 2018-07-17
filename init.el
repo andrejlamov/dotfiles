@@ -26,7 +26,7 @@
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
 
-(defun almacs/core-configure ()
+(defun almacs/base-configure ()
   (show-paren-mode)
   (winner-mode)
   (dirtrack-mode)
@@ -66,7 +66,7 @@
 
 (defun almacs/reconfigure ()
   (interactive)
-  (almacs/core-configure)
+  (almacs/base-configure)
   (almacs/module-configure))
 
 (add-hook 'after-init-hook
