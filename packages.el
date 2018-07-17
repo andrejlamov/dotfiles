@@ -1,28 +1,18 @@
 (use-package evil
-  :pin melpa
   :init
   (setq evil-want-integration nil)
   :config
   (evil-mode 1))
 
 (use-package evil-collection
-  :pin melpa
   :custom (evil-collection-setup-minibuffer t)
   :config (evil-collection-init))
 
-(use-package auto-package-update
-  :config
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
-  (auto-package-update-maybe))
-
 (use-package general
-  :pin melpa
   :config
   (general-evil-setup))
 
 (use-package helm
-  :pin melpa
   :config
   (require 'helm-config)
   (define-key helm-map (kbd "M-w") 'helm-yank-text-at-point)
@@ -33,7 +23,7 @@
 
 (use-package iedit)
 
-(use-package avy :pin melpa)
+(use-package avy)
 
 (use-package company :config (global-company-mode))
 
@@ -47,7 +37,6 @@
 (use-package smartparens :defer t)
 
 (use-package evil-cleverparens
-  :pin melpa
   :commands evil-cleverparens-mode)
 
 (use-package clojure-mode)
@@ -59,6 +48,7 @@
   :config
   (which-key-mode))
 
-(use-package switch-buffer-functions :pin melpa)
+(use-package switch-buffer-functions)
 
-(use-package predd :load-path "~/.emacs.d/gitsubmodules/predd")
+(use-package predd
+  :straight (predd :type git :host github :repo "skeeto/predd" :files ("predd.el")))
