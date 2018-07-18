@@ -32,7 +32,7 @@
  ("paredit" . "acbe10fdd85d2e91831adf70b6a828bc7e900da0")
  ("pkg-info.el" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
  ("popup-el" . "80829dd46381754639fb764da11c67235fe63282")
- ("popwin-el" . "95dea14c60019d6cccf9a3b33e0dec4e1f22c304")
+ ("popwin-el" . "9f8b7069b67b5748f0e365da1517292f27e14bf0")
  ("predd" . "695517712f0972cdb69b2765d13b45441ec4be57")
  ("smartparens" . "34b53320f4ac41a60d641c5363cd5e02db37089e")
  ("straight.el" . "2c74d058db8399f55b948d79429c24441b338138")

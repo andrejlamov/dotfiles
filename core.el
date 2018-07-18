@@ -106,7 +106,8 @@
   (add-to-list 'purpose-user-name-purposes '("*cider-test-report*" . cider-test-report))
   (purpose-compile-user-configuration))
 
-(use-package popwin)
+(use-package popwin
+  :straight (popwin :type git :host github :repo "bmag/popwin-el"))
 
 ;;; almacs core functions
 
