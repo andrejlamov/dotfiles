@@ -64,3 +64,15 @@
   :config
   (setq evil-visualstar/persistent t)
   (global-evil-visualstar-mode))
+
+(use-package evil-mc
+  :config
+  (global-evil-mc-mode 1))
+
+(use-package expand-region)
+
+(use-package evil-iedit-state
+  :config
+  (general-define-key
+   :states '(normal)
+   "gi" 'evil-iedit-state/iedit-mode))
