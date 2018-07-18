@@ -59,3 +59,8 @@
 
 (use-package predd
   :straight (predd :type git :host github :repo "skeeto/predd" :files ("predd.el")))
+
+(use-package evil-visualstar
+  :config
+  (setq evil-visualstar/persistent t)
+  (global-evil-visualstar-mode))
