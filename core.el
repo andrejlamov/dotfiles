@@ -71,11 +71,11 @@
 
 (use-package expand-region)
 
-(use-package evil-iedit-state
+(use-package evil-iedit-state)
+
+(use-package xclip
   :config
-  (general-define-key
-   :states '(normal)
-   "gi" 'evil-iedit-state/iedit-mode))
+  (xclip-mode))
 
 (defun almacs/delete-current-buffer-file ()
   (interactive)
@@ -117,7 +117,7 @@
   "F" 'avy-goto-word-1-above)
 
 (general-create-definer almacs/leader-def
-  :states '(normal emacs)
+  :states '(normal visual emacs)
   :prefix "SPC"
   :keymaps 'override
   :non-normal-prefix "M-SPC"
@@ -132,7 +132,7 @@
   "as" '(almacs/named-shell :wk "named shell")
   "ae" '(almacs/reconfigure :wk "reconfigure emacs")
 
-  "s" '(helm-occur :wk "occur")
+  "s" '(helm-swoop :wk "swoop")
   "r" '(helm-resume :wk "resume")
 
   "f" '(:ignore t :wk "file")
@@ -152,4 +152,10 @@
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
   "br" '(rename-buffer :wk "rename")
-  "bB" '(helm-buffers-list :wk "list"))
+  "bB" '(helm-buffers-list :wk "list")
+
+  "e" '(:ignore t :wk "edit")
+  "ee" '(er/expand-region :wk "expand")
+  "ei" '(evil-iedit-state/iedit-mode :wk "iedit")
+  "es" '(evil-iedit-state :wk "iedit state")
+  "er" '(evil-iedit-state/iedit-mode-from-expand-region :wk "iedit from expand"))
