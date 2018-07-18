@@ -6,6 +6,7 @@
       gc-cons-percentage 1
       auto-window-vscroll nil
       backup-inhibited t
+      mae-backup-files nil
       auto-save-default nil)
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
