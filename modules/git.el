@@ -18,4 +18,4 @@
   "gh" '(magit-log-head :wk "log HEAD")
   "gg" '(helm-git-grep :wk "git grep")
   "gG" '(helm-git-grep-at-point :wk "git grep point")
-  "B"  '(helm-browse-project :wk "browse repo"))
+  "b"  '(helm-browse-project :wk "browse repo"))

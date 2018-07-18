@@ -51,4 +51,4 @@
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
   "br" '(rename-buffer :wk "rename")
-  "bb" '(helm-buffers-list :wk "list"))
+  "bB" '(helm-buffers-list :wk "list"))
