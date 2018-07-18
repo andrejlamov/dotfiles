@@ -1,3 +1,5 @@
+;;; emacs built-in setup
+
 (show-paren-mode)
 (winner-mode)
 (dirtrack-mode)
@@ -8,6 +10,8 @@
  whitespace-style '(face trailing))
 
 (global-whitespace-mode)
+
+;;; almacs packages
 
 (use-package evil
   :init
@@ -91,6 +95,8 @@
   :config
   (xclip-mode))
 
+;;; almacs core functions
+
 (defun almacs/delete-current-buffer-file ()
   (interactive)
   (delete-file (buffer-file-name))
@@ -112,6 +118,8 @@
   (let ((load-it (lambda (f)
 		   (load-file (concat (file-name-as-directory dir) f)))))
     (mapc load-it (directory-files dir nil "\\.el$"))))
+
+;;; almacs keys
 
 ;;  (defcustom avy-dispatch-alist
 ;;   '((?x . avy-action-kill-move)
@@ -174,7 +182,9 @@
   "es" '(evil-iedit-state :wk "iedit state")
   "er" '(evil-iedit-state/iedit-mode-from-expand-region :wk "iedit from expand"))
 
-(defun almacs/main ()
+;;; setup modules
+
+(defun almacs/setup-modules ()
 
   (predd-defmulti almacs/after-save #'identity)
   (predd-defmethod almacs/after-save :default (mode) nil)
