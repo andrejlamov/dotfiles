@@ -115,7 +115,7 @@
   "C-u" 'evil-scroll-up
   "T" 'avy-goto-line
   "TAB" 'indent-for-tab-command
-  "t" 'avy-goto-char-in-line
+  "L" 'avy-goto-char-in-line
   "f" 'avy-goto-word-1-below
   "F" 'avy-goto-word-1-above)
 
