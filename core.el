@@ -106,6 +106,8 @@
   (add-to-list 'purpose-user-name-purposes '("*cider-test-report*" . cider-test-report))
   (purpose-compile-user-configuration))
 
+(use-package popwin)
+
 ;;; almacs core functions
 
 (defun almacs/delete-current-buffer-file ()
