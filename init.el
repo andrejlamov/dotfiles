@@ -27,7 +27,7 @@
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
 
-(defun almacs/base-configure ()
+(defun almacs/core-configure ()
   (show-paren-mode)
   (winner-mode)
   (dirtrack-mode)
@@ -39,9 +39,7 @@
 
   (global-whitespace-mode)
 
-  (load-file "~/.emacs.d/base-module.el")
-  (load-file "~/.emacs.d/base-funcs.el")
-  (load-file "~/.emacs.d/base-keys.el"))
+  (load-file "~/.emacs.d/core.el"))
 
 (defun almacs/module-configure ()
 
@@ -67,7 +65,7 @@
 
 (defun almacs/reconfigure ()
   (interactive)
-  (almacs/base-configure)
+  (almacs/core-configure)
   (almacs/module-configure))
 
 (add-hook 'after-init-hook
