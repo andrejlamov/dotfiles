@@ -1,3 +1,14 @@
+(show-paren-mode)
+(winner-mode)
+(dirtrack-mode)
+
+(setq
+ make-backup-files nil
+ auto-save-default nil
+ whitespace-style '(face trailing))
+
+(global-whitespace-mode)
+
 (use-package evil
   :init
   (setq evil-want-integration nil)
@@ -133,7 +144,7 @@
 
   "a" '(:ignore t :wk "app")
   "as" '(almacs/named-shell :wk "named shell")
-  "ae" '(almacs/reconfigure :wk "reconfigure emacs")
+  "ae" '(almacs/main :wk "reconfigure emacs")
 
   "s" '(helm-swoop :wk "swoop")
   "r" '(helm-resume :wk "resume")
@@ -162,3 +173,25 @@
   "ei" '(evil-iedit-state/iedit-mode :wk "iedit")
   "es" '(evil-iedit-state :wk "iedit state")
   "er" '(evil-iedit-state/iedit-mode-from-expand-region :wk "iedit from expand"))
+
+(defun almacs/main ()
+
+  (predd-defmulti almacs/after-save #'identity)
+  (predd-defmethod almacs/after-save :default (mode) nil)
+
+  (predd-defmulti almacs/major-mode-change #'identity)
+  (predd-defmethod almacs/major-mode-change :default (mode) nil)
+
+  (add-hook
+   'after-save-hook
+   (lambda ()
+     (almacs/after-save major-mode)))
+
+  (add-hook
+   'switch-buffer-functions
+   (lambda (prev-buf curr-buf)
+     (when (not (equal prev-buf curr-buf))
+       (general-unbind '(normal) ",")
+       (almacs/major-mode-change major-mode))))
+
+  (almacs/load-el-directory "~/.emacs.d/modules/"))
