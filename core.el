@@ -95,6 +95,17 @@
   :config
   (xclip-mode))
 
+(use-package window-purpose
+  :config
+  (purpose-mode)
+  (add-to-list 'purpose-user-mode-purposes '(clojure-mode . clj))
+  (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljs))
+  (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljr))
+  (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljc))
+  (add-to-list 'purpose-user-mode-purposes '(cider-repl-mode . clj-repl))
+  (add-to-list 'purpose-user-name-purposes '("*cider-test-report*" . cider-test-report))
+  (purpose-compile-user-configuration))
+
 ;;; almacs core functions
 
 (defun almacs/delete-current-buffer-file ()
@@ -118,6 +129,7 @@
   (let ((load-it (lambda (f)
 		   (load-file (concat (file-name-as-directory dir) f)))))
     (mapc load-it (directory-files dir nil "\\.el$"))))
+
 
 ;;; almacs keys
 
@@ -152,7 +164,7 @@
 
   "a" '(:ignore t :wk "app")
   "as" '(almacs/named-shell :wk "named shell")
-  "ae" '(almacs/main :wk "reconfigure emacs")
+  "ae" '(almacs/setup-modules :wk "reconfigure emacs")
 
   "s" '(helm-swoop :wk "swoop")
   "r" '(helm-resume :wk "resume")
@@ -163,18 +175,20 @@
   "fR" '(almacs/rename-current-file :wk "rename file")
   "fD" '(almacs/delete-current-buffer-file :wk "delete file")
 
-  "p" '(:ignore t :wk "projects/bookmarks")
-  "pp" '(helm-projects-history :wk "projects history")
-  "pb" '(helm-bookmarks :wk "bookmarks")
+  "p" '(:ignore t :wk "purpose")
+  "ps" '(purpose-save-window-layout :wk "save")
+  "pl" '(purpose-load-window-layout :wk "load")
+  "pw" '(purpose-toggle-window-purpose-dedicated :wk "toggle buffer")
 
   "w" '(:ignore t :wk "windows")
   "wu" '(winner-undo :wk "winner-undo")
   "wr" '(winner-redo :wk "winner-redo")
+  "wd" '(delete-window :wk "delete")
 
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
   "br" '(rename-buffer :wk "rename")
-  "bB" '(helm-buffers-list :wk "list")
+  "bb" '(helm-buffers-list :wk "list")
 
   "e" '(:ignore t :wk "edit")
   "ev" '(er/expand-region :wk "expand")

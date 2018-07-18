@@ -8,6 +8,10 @@
 		 (call-interactively 'cider-test-run-loaded-tests)))
       (other nil))))
 
+(defun almacs/quick-cider-purpose ()
+    (interactive)
+    (purpose-load-window-layout-file "~/.emacs.d/layouts/cider.window-layout"))
+
 (use-package cider
   :commands clojure-mode cider-jack-in-clojurescript cider-jack-in
   :config
@@ -32,6 +36,8 @@
   (almacs/major-mode-change 'clojure-mode))
 (predd-defmethod almacs/major-mode-change 'clojurescript-mode (mode)
   (almacs/major-mode-change 'clojure-mode))
+(predd-defmethod almacs/major-mode-change 'cider-repl-mode (mode)
+  (almacs/major-mode-change 'clojure-mode))
 
 (predd-defmethod almacs/major-mode-change 'clojure-mode (mode)
   (evil-cleverparens-mode)
@@ -43,8 +49,9 @@
    "\"" '(cider-jack-in-clojurescript :wk "jack-in cljs")
    "T"  '(cider-test-run-project-tests :wk "project tests")
    "R"  '(cider-refresh :wk "refresh")
-
+   "p"  '(almacs/quick-cider-purpose :wk "cider purpose")
    "e"  '(:ignore t :wk "eval")
    "eb"  '(cider-eval-buffer :wk "eval buffer")
    "ee"  '(cider-pprint-eval-last-sexp :wk "eval sexp")
    "ef"  '(cider-pprint-eval-defun-at-point :wk "eval defun")))
+
