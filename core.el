@@ -69,7 +69,10 @@
   :config
   (global-evil-mc-mode 1))
 
-(use-package expand-region)
+(use-package expand-region
+  :config
+  (setq expand-region-fast-keys-enabled t
+	expand-region-contract-fast-key "V"))
 
 (use-package evil-iedit-state)
 
@@ -155,7 +158,7 @@
   "bB" '(helm-buffers-list :wk "list")
 
   "e" '(:ignore t :wk "edit")
-  "ee" '(er/expand-region :wk "expand")
+  "ev" '(er/expand-region :wk "expand")
   "ei" '(evil-iedit-state/iedit-mode :wk "iedit")
   "es" '(evil-iedit-state :wk "iedit state")
   "er" '(evil-iedit-state/iedit-mode-from-expand-region :wk "iedit from expand"))
