@@ -11,7 +11,7 @@
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("evil" . "230b87212c81aaa68ef5547a6b998d9c365fe139")
  ("evil-cleverparens" . "8c45879d49bfa6d4e414b6c1df700a4a51cbb869")
- ("evil-collection" . "e8cce20eaf2cd305f61f4e7a5d5490b46b5a863a")
+ ("evil-collection" . "eaf2b4d1c385f62cc3951882e7ae0f467165364a")
  ("evil-iedit-state" . "f75cff4ecbd5beaa9ca64a6c157c4105f078daec")
  ("evil-magit" . "9e2275b14807168451e10b93d69e420e435f21ef")
  ("evil-mc" . "05686bc98ce4682cc47530f2045dcff2a6897ea0")
