@@ -34,18 +34,33 @@
   (global-set-key (kbd "M-x") #'helm-M-x)
   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
-  (helm-mode 1))
+
+  (helm-mode 1)
+  (defvar almacs/helm-window-height 0.3)
+  (setq helm-display-function (lambda (buffer &optional _resume)
+	  (let ((window (or (purpose-display-reuse-window-buffer buffer nil)
+			    (purpose-display-reuse-window-purpose buffer nil)
+			    (purpose-display-at-bottom buffer nil almacs/helm-window-height))))
+	    (if window
+		(progn
+		  (select-window window)
+		  (switch-to-buffer buffer t t))
+	      (funcall #'helm-default-display-buffer buffer))))))
+
+(use-package helm-swoop
+  :defer t
+  :config
+  (add-hook 'helm-quit-hook (lambda ()
+			      (when (equal helm-last-buffer "*Helm Swoop*")
+				(winner-undo))))
+  (advice-add 'helm-swoop :before #'delete-other-windows)
+  (define-key helm-swoop-map (kbd "C-w") 'helm-yank-text-at-point))
 
 (use-package iedit)
 
 (use-package avy)
 
 (use-package company :config (global-company-mode))
-
-(use-package helm-swoop
-  :defer t
-  :config
-  (define-key helm-swoop-map (kbd "C-w") 'helm-yank-text-at-point))
 
 (use-package smartparens
   :defer t
