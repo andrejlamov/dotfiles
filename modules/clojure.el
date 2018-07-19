@@ -15,8 +15,16 @@
 (use-package cider
   :commands clojure-mode cider-jack-in-clojurescript cider-jack-in
   :config
+  (purpose-x-popwin-setup)
+  (push "*cider-error*" purpose-x-popwin-buffer-names)
+  (push "*cider-result*" purpose-x-popwin-buffer-names)
+  (push "*cider-result*" popwin:special-display-config)
+  (purpose-x-popwin-update-conf)
+
+
   (advice-add 'cider-refresh :before #'save-buffer)
   (advice-add 'cider-refresh--handle-response :after #'almacs/after-cider-refresh)
+
   (setq
    cider-repl-display-help-banner nil
    cljr-inject-dependencies-at-jack-in nil
@@ -44,14 +52,15 @@
   (general-define-key
    :keymaps '(normal)
    :prefix ","
-   "Q"  '(cider-quit :wk "quit")
-   "'"  '(cider-jack-in :wk "jack-in clj")
+   "Q" '(cider-quit :wk "quit")
+   "'" '(cider-jack-in :wk "jack-in clj")
    "\"" '(cider-jack-in-clojurescript :wk "jack-in cljs")
-   "T"  '(cider-test-run-project-tests :wk "project tests")
-   "R"  '(cider-refresh :wk "refresh")
-   "p"  '(almacs/quick-cider-purpose :wk "cider purpose")
-   "e"  '(:ignore t :wk "eval")
-   "eb"  '(cider-eval-buffer :wk "eval buffer")
-   "ee"  '(cider-pprint-eval-last-sexp :wk "eval sexp")
-   "ef"  '(cider-pprint-eval-defun-at-point :wk "eval defun")))
+   "T" '(cider-test-run-project-tests :wk "project tests")
+   "R" '(cider-refresh :wk "refresh")
+   "p" '(almacs/quick-cider-purpose :wk "cider purpose")
+   "e" '(:ignore t :wk "eval")
+   "eb" '(cider-eval-buffer :wk "eval buffer")
+   "ee" '(cider-pprint-eval-last-sexp :wk "eval sexp")
+   "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
+   "bc" '(cider-repl-clear-buffer :wk "eval sexp")))
 

@@ -104,10 +104,12 @@
   (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljc))
   (add-to-list 'purpose-user-mode-purposes '(cider-repl-mode . clj-repl))
   (add-to-list 'purpose-user-name-purposes '("*cider-test-report*" . cider-test-report))
+  (add-to-list 'purpose-user-name-purposes '("*cider-result*" . cider-result-report))
   (purpose-compile-user-configuration))
 
 (use-package popwin
-  :straight (popwin :type git :host github :repo "bmag/popwin-el"))
+  :straight (popwin :type git :host github :repo "bmag/popwin-el")
+  :config (popwin-mode 1))
 
 ;;; almacs core functions
 
