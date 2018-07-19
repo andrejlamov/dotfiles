@@ -135,6 +135,9 @@
 		   (load-file (concat (file-name-as-directory dir) f)))))
     (mapc load-it (directory-files dir nil "\\.el$"))))
 
+(defun almacs/go-to-core-el ()
+  (interactive)
+  (find-file "~/.emacs.d/core.el"))
 
 ;;; almacs keys
 
@@ -167,9 +170,10 @@
   "SPC" '(helm-M-x :wk "M-x")
   "TAB" '(evil-switch-to-windows-last-buffer :wk "last buffer")
 
-  "a" '(:ignore t :wk "app")
-  "as" '(almacs/named-shell :wk "named shell")
-  "ae" '(almacs/setup-modules :wk "reconfigure emacs")
+  "a" '(:ignore t :wk "stuff")
+  "aS" '(almacs/named-shell :wk "named shell")
+  "as" '(shell :wk "shell")
+  "ac" '(almacs/go-to-core-el :wk "core.el")
 
   "s" '(helm-swoop :wk "swoop")
   "r" '(helm-resume :wk "resume")
