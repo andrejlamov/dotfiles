@@ -54,7 +54,7 @@
    :prefix ","
    "Q" '(cider-quit :wk "quit")
    "'" '(cider-jack-in :wk "jack-in clj")
-   "\"" '(cider-jack-in-clojurescript :wk "jack-in cljs")
+   "\"" '(cider-jack-in-clj&cljs :wk "jack-in cljs&clj")
    "T" '(cider-test-run-project-tests :wk "project tests")
    "R" '(cider-refresh :wk "refresh")
    "p" '(almacs/quick-cider-purpose :wk "cider purpose")
