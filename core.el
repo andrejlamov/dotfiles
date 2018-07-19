@@ -123,6 +123,11 @@
   (add-to-list 'purpose-user-name-purposes '("*cider-result*" . cider-result-report))
   (purpose-compile-user-configuration))
 
+(use-package ace-jump-helm-line
+  :config
+  (setq ace-jump-helm-line-default-action 'select)
+  (define-key helm-map (kbd "C-j") 'ace-jump-helm-line))
+
 (use-package popwin
   :straight (popwin :type git :host github :repo "bmag/popwin-el")
   :config (popwin-mode 1))
