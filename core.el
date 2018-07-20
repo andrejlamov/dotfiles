@@ -227,6 +227,7 @@
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(helm-swoop :wk "swoop")
   "r" '(helm-resume :wk "resume")
+  "k" '(helm-show-kill-ring :wk "kill ring")
 
   "f" '(:ignore t :wk "file")
   "fs" '(save-buffer :wk "save")
