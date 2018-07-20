@@ -265,24 +265,20 @@
 
 ;;; setup modules
 
-(defun almacs/setup-modules ()
+(predd-defmulti almacs/after-save #'identity)
+(predd-defmethod almacs/after-save :default (mode) nil)
 
-  (predd-defmulti almacs/after-save #'identity)
-  (predd-defmethod almacs/after-save :default (mode) nil)
+(predd-defmulti almacs/major-mode-change #'identity)
+(predd-defmethod almacs/major-mode-change :default (mode) nil)
 
-  (predd-defmulti almacs/major-mode-change #'identity)
-  (predd-defmethod almacs/major-mode-change :default (mode) nil)
+(add-hook
+ 'after-save-hook
+ (lambda ()
+   (almacs/after-save major-mode)))
 
-  (add-hook
-   'after-save-hook
-   (lambda ()
-     (almacs/after-save major-mode)))
-
-  (add-hook
-   'switch-buffer-functions
-   (lambda (prev-buf curr-buf)
-     (when (not (equal prev-buf curr-buf))
-       (general-unbind '(normal) ",")
-       (almacs/major-mode-change major-mode))))
-
-  (almacs/load-el-directory "~/.emacs.d/modules/"))
+(add-hook
+ 'switch-buffer-functions
+ (lambda (prev-buf curr-buf)
+   (when (not (equal prev-buf curr-buf))
+     (general-unbind '(normal) ",")
+     (almacs/major-mode-change major-mode))))

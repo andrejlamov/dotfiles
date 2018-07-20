@@ -35,11 +35,10 @@
 	    (scroll-bar-mode -1)
 
 	    (load-file "~/.emacs.d/core.el")
-	    (almacs/setup-modules)
 	    (load-file "~/.emacs.d/theme.el")
+	    (almacs/load-el-directory "~/.emacs.d/modules/")
 
 	    (setq file-name-handler-alist file-name-handler-alist-old
 		  gc-cons-threshold 800000
-		  gc-cons-percentage 0.1)
-	    (garbage-collect)))
+		  gc-cons-percentage 0.1)))
 ;; end
