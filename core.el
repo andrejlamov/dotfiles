@@ -65,18 +65,21 @@
 (use-package company :config (global-company-mode))
 
 (use-package smartparens
-  :defer t
   :config
   ;; https://github.com/Fuco1/smartparens/issues/908
   (sp-local-pair sp-lisp-modes  "'" 'nil :actions 'nil)
   (sp-local-pair sp-lisp-modes  "`" 'nil :actions 'nil))
 
-(use-package paredit :defer t)
+(use-package paredit)
 
 (use-package evil-cleverparens
   :requires (paredit smartparens)
-  :commands evil-cleverparens-mode
-  :config (smartparens-global-strict-mode))
+  :config
+  (require 'evil-cleverparens-text-objects)
+  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
+  (smartparens-global-strict-mode))
 
 (use-package clojure-mode)
 

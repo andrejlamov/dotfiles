@@ -48,7 +48,6 @@
   (almacs/major-mode-change 'clojure-mode))
 
 (predd-defmethod almacs/major-mode-change 'clojure-mode (mode)
-  (evil-cleverparens-mode)
   (general-define-key
    :keymaps '(normal)
    :prefix ","

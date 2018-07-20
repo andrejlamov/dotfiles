@@ -1,5 +1,4 @@
 (predd-defmethod almacs/major-mode-change 'emacs-lisp-mode (mode)
-  (evil-cleverparens-mode)
   (general-define-key
    :keymaps '(normal)
    :prefix ","
