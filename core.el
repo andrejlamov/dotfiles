@@ -166,22 +166,41 @@
 
 ;;; almacs keys
 
-;;  (defcustom avy-dispatch-alist
-;;   '((?x . avy-action-kill-move)
-;;     (?X . avy-action-kill-stay)
-;;     (?t . avy-action-teleport)
-;;     (?m . avy-action-mark)
-;;     (?n . avy-action-copy)
-;;     (?y . avy-action-yank)
-;;     (?i . avy-action-ispell)
-;;     (?z . avy-action-zap-to-char))
+; avy cheat sheet
+'(defcustom avy-dispatch-alist
+  '((?x . avy-action-kill-move)
+    (?X . avy-action-kill-stay)
+    (?t . avy-action-teleport)
+    (?m . avy-action-mark)
+    (?n . avy-action-copy)
+    (?y . avy-action-yank)
+    (?i . avy-action-ispell)
+    (?z . avy-action-zap-to-char)))
+'(defvar aw-dispatch-alist
+  '((?x aw-delete-window "Delete Window")
+    (?m aw-swap-window "Swap Windows")
+    (?M aw-move-window "Move Window")
+    (?j aw-switch-buffer-in-window "Select Buffer")
+    (?n aw-flip-window)
+    (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+    (?c aw-split-window-fair "Split Fair Window")
+    (?v aw-split-window-vert "Split Vert Window")
+    (?b aw-split-window-horz "Split Horz Window")
+    (?o delete-other-windows "Delete Other Windows")
+    (?? aw-show-dispatch-help)))
+
+;; us international
+(general-def '(motion insert)
+  ; l
+  "M-ø" 'avy-goto-char-in-line
+  "ø" 'avy-goto-char-in-line
+  ; a
+  "á" 'avy-goto-word-1-above
+  "M-á" 'avy-goto-word-1-below)
+
 (general-def 'motion
   "C-u" 'evil-scroll-up
-  "T" 'avy-goto-line
-  "TAB" 'indent-for-tab-command
-  "L" 'avy-goto-char-in-line
-  "f" 'avy-goto-word-1-below
-  "F" 'avy-goto-word-1-above)
+  "TAB" 'indent-for-tab-command)
 
 (general-create-definer almacs/leader-def
   :states '(normal visual emacs)
