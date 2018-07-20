@@ -247,7 +247,10 @@
   "w" '(:ignore t :wk "windows")
   "wu" '(winner-undo :wk "winner-undo")
   "wr" '(winner-redo :wk "winner-redo")
+  "wf" '(delete-other-windows :wk "full")
   "wd" '(delete-window :wk "delete")
+  "ws" '(split-window-below :wk "split below")
+  "wS" '(split-window-right :wk "split right")
 
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
