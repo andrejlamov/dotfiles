@@ -36,6 +36,7 @@
 
 	    (load-file "~/.emacs.d/core.el")
 	    (almacs/setup-modules)
+	    (load-file "~/.emacs.d/theme.el")
 
 	    (setq file-name-handler-alist file-name-handler-alist-old
 		  gc-cons-threshold 800000
