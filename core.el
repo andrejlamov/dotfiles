@@ -221,6 +221,7 @@
   "as" '(shell :wk "shell")
   "ac" '(almacs/go-to-core-el :wk "core.el")
 
+  "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(helm-swoop :wk "swoop")
   "r" '(helm-resume :wk "resume")
 
