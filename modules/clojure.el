@@ -28,9 +28,10 @@
   (setq
    cider-repl-display-help-banner nil
    cljr-inject-dependencies-at-jack-in nil
-   cljs-lein-repl "(do (require 'figwheel-sidecar.repl-api)
-                       (figwheel-sidecar.repl-api/start-figwheel!)
-                       (figwheel-sidecar.repl-api/cljs-repl))"))
+  ;; cljs-lein-repl "(do (require 'figwheel-sidecar.repl-api)
+  ;;                     (figwheel-sidecar.repl-api/start-figwheel!)
+  ;;                     (figwheel-sidecar.repl-api/cljs-repl))"
+   ))
 
 (predd-defmethod almacs/after-save 'clojurec-mode (mode)
   (almacs/after-save 'clojure-mode))
