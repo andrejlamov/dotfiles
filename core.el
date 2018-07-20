@@ -197,7 +197,7 @@
 ;; us international
 (general-def '(motion insert)
   ; l
-  "M-ø" 'avy-goto-char-in-line
+  "M-ø" 'avy-goto-line
   "ø" 'avy-goto-char-in-line
   ; a
   "á" 'avy-goto-word-1-above
