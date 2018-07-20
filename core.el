@@ -50,10 +50,12 @@
 (use-package helm-swoop
   :defer t
   :config
-  (add-hook 'helm-quit-hook (lambda ()
-			      (when (equal helm-last-buffer "*Helm Swoop*")
-				(winner-undo))))
-  (advice-add 'helm-swoop :before #'delete-other-windows)
+  (setq helm-swoop-split-with-multiple-windows t)
+  ;; TODO: do not winner-undo when delete-other-windows on a single window
+  ;(add-hook 'helm-quit-hook (lambda ()
+  ;			      (when (equal helm-last-buffer "*Helm Swoop*")
+  ;				(winner-undo))))
+  ;(advice-add 'helm-swoop :before #'delete-other-windows)
   (define-key helm-swoop-map (kbd "C-w") 'helm-yank-text-at-point))
 
 (use-package iedit)
