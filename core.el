@@ -205,7 +205,8 @@
 
 (general-def 'motion
   "C-u" 'evil-scroll-up
-  "TAB" 'indent-for-tab-command)
+  "TAB" 'indent-for-tab-command
+  "C-w" 'ace-window)
 
 (general-create-definer almacs/leader-def
   :states '(normal visual emacs)
