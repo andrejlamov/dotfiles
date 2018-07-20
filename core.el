@@ -132,6 +132,10 @@
   :straight (popwin :type git :host github :repo "bmag/popwin-el")
   :config (popwin-mode 1))
 
+(use-package ace-window
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
 ;;; almacs core functions
 
 (defun almacs/delete-current-buffer-file ()
@@ -209,6 +213,8 @@
   "ps" '(purpose-save-window-layout :wk "save")
   "pl" '(purpose-load-window-layout :wk "load")
   "pw" '(purpose-toggle-window-purpose-dedicated :wk "toggle buffer")
+
+  "C-w" '(ace-window :wk "ace")
 
   "w" '(:ignore t :wk "windows")
   "wu" '(winner-undo :wk "winner-undo")
