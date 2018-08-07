@@ -199,11 +199,11 @@
 ;; us international
 (general-def '(motion insert)
   ; l
-  "M-ø" 'avy-goto-line
+  "Ø" 'avy-goto-line
   "ø" 'avy-goto-char-in-line
   ; a
-  "á" 'avy-goto-word-1-above
-  "M-á" 'avy-goto-word-1-below)
+  "á" 'avy-goto-word-1-below
+  "Á" 'avy-goto-word-1-above)
 
 (general-def 'motion
   "C-u" 'evil-scroll-up
