@@ -124,7 +124,7 @@
   (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljs))
   (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljr))
   (add-to-list 'purpose-user-mode-purposes '(clojure-mode . cljc))
-  (add-to-list 'purpose-user-regexp-purposes '("^\\*cider-repl .*(cljs)\\*" . cljs-repl))
+  (add-to-list 'purpose-user-regexp-purposes '("^\\*cider-repl .*(cljs:figwheel)\\*" . cljs-repl))
   (add-to-list 'purpose-user-regexp-purposes '("^\\*cider-repl .*(clj)\\*" . clj-repl))
   (add-to-list 'purpose-user-name-purposes '("*cider-test-report*" . cider-test-report))
   (add-to-list 'purpose-user-name-purposes '("*cider-result*" . cider-result-report))
