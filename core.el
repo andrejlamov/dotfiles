@@ -3,6 +3,7 @@
 (show-paren-mode)
 (winner-mode)
 (dirtrack-mode)
+(setq-default truncate-lines t)
 
 (setq
  make-backup-files nil
