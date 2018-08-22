@@ -80,8 +80,7 @@
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
   (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-  (setq evil-cleverparens-use-regular-insert t)
-  (smartparens-global-strict-mode))
+  (setq evil-cleverparens-use-regular-insert t))
 
 (use-package clojure-mode)
 
