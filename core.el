@@ -4,13 +4,13 @@
 (winner-mode)
 (dirtrack-mode)
 (setq-default truncate-lines t)
+(setq-default indent-tabs-mode nil)
 
 (setq
+ js-indent-level 4
  make-backup-files nil
  auto-save-default nil
  whitespace-style '(face trailing))
-
-(global-whitespace-mode)
 
 ;;; almacs packages
 
@@ -27,6 +27,8 @@
 (use-package general
   :config
   (general-evil-setup))
+
+(use-package scala-mode)
 
 (use-package helm
   :config
@@ -157,7 +159,7 @@
   ;; aligns annotation to the right hand side
   (setq company-tooltip-align-annotations t)
   ;; formats the buffer before saving
-  (add-hook 'before-save-hook 'tide-format-before-save)
+  ;;(add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 
@@ -244,6 +246,7 @@
   "aS" '(almacs/named-shell :wk "named shell")
   "as" '(shell :wk "shell")
   "ac" '(almacs/go-to-core-el :wk "core.el")
+  "aw" '(whitespace-mode :wk "whitespace")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(helm-swoop :wk "swoop")
