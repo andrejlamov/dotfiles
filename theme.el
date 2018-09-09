@@ -1,4 +1,5 @@
 (custom-set-faces
- '(helm-swoop-target-word-face ((t (:inherit region))))
- '(helm-swoop-target-line-face ((t (:underline t))))
- '(helm-selection ((t (:underline t)))))
+ '(helm-ls-git-modified-not-staged-face ((t (:foreground "dark orange")))))
+(set-background-color "#fdf6e3")
+(set-foreground-color "#002b36")
+
