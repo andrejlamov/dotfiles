@@ -9,8 +9,7 @@
 (setq
  js-indent-level 4
  make-backup-files nil
- auto-save-default nil
- whitespace-style '(face trailing))
+ auto-save-default nil)
 
 ;;; almacs packages
 
@@ -41,14 +40,14 @@
   (helm-mode 1)
   (defvar almacs/helm-window-height 0.3)
   (setq helm-display-function (lambda (buffer &optional _resume)
-	  (let ((window (or (purpose-display-reuse-window-buffer buffer nil)
-			    (purpose-display-reuse-window-purpose buffer nil)
-			    (purpose-display-at-bottom buffer nil almacs/helm-window-height))))
-	    (if window
-		(progn
-		  (select-window window)
-		  (switch-to-buffer buffer t t))
-	      (funcall #'helm-default-display-buffer buffer))))))
+          (let ((window (or (purpose-display-reuse-window-buffer buffer nil)
+                            (purpose-display-reuse-window-purpose buffer nil)
+                            (purpose-display-at-bottom buffer nil almacs/helm-window-height))))
+            (if window
+                (progn
+                  (select-window window)
+                  (switch-to-buffer buffer t t))
+              (funcall #'helm-default-display-buffer buffer))))))
 
 (use-package helm-swoop
   :defer t
@@ -89,7 +88,7 @@
 (use-package which-key
   :init
   (setq which-key-idle-delay 0.1
-	which-key-add-column-padding 0)
+        which-key-add-column-padding 0)
   :config
   (which-key-mode))
 
@@ -110,7 +109,7 @@
 (use-package expand-region
   :config
   (setq expand-region-fast-keys-enabled t
-	expand-region-contract-fast-key "V"))
+        expand-region-contract-fast-key "V"))
 
 (use-package evil-iedit-state)
 
@@ -173,7 +172,7 @@
 (defun almacs/rename-current-file (new-file-name)
   (interactive "Fnew name:")
   (let* ((old-file-name (buffer-file-name))
-	 (old-buffer-name (current-buffer)))
+         (old-buffer-name (current-buffer)))
     (rename-file old-file-name new-file-name t)
     (kill-buffer old-buffer-name)
     (find-file new-file-name)))
@@ -184,7 +183,7 @@
 
 (defun almacs/load-el-directory (dir)
   (let ((load-it (lambda (f)
-		   (load-file (concat (file-name-as-directory dir) f)))))
+                   (load-file (concat (file-name-as-directory dir) f)))))
     (mapc load-it (directory-files dir nil "\\.el$"))))
 
 (defun almacs/go-to-core-el ()
@@ -246,7 +245,7 @@
   "aS" '(almacs/named-shell :wk "named shell")
   "as" '(shell :wk "shell")
   "ac" '(almacs/go-to-core-el :wk "core.el")
-  "aw" '(whitespace-mode :wk "whitespace")
+  "aw" '(global-whitespace-mode :wk "whitespace")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(helm-swoop :wk "swoop")
