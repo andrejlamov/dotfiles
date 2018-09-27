@@ -11,6 +11,8 @@
  make-backup-files nil
  auto-save-default nil)
 
+(global-whitespace-mode)
+
 ;;; almacs packages
 
 (use-package evil
@@ -246,6 +248,7 @@
   "as" '(shell :wk "shell")
   "ac" '(almacs/go-to-core-el :wk "core.el")
   "aw" '(global-whitespace-mode :wk "whitespace")
+  "aW" '(whitespace-cleanup :wk "clean whitespace")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(helm-swoop :wk "swoop")
