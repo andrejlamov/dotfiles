@@ -13,9 +13,9 @@
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
 (defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+(let ((bootstrap-version 5)
+      (bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
@@ -30,15 +30,15 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-	    (menu-bar-mode -1)
-	    (tool-bar-mode -1)
-	    (scroll-bar-mode -1)
+            (menu-bar-mode -1)
+            (tool-bar-mode -1)
+            (scroll-bar-mode -1)
 
-	    (load-file "~/.emacs.d/core.el")
-	    (load-file "~/.emacs.d/theme.el")
-	    (almacs/load-el-directory "~/.emacs.d/modules/")
+            (load-file "~/.emacs.d/core.el")
+            (load-file "~/.emacs.d/theme.el")
+            (almacs/load-el-directory "~/.emacs.d/modules/")
 
-	    (setq file-name-handler-alist file-name-handler-alist-old
-		  gc-cons-threshold 800000
-		  gc-cons-percentage 0.1)))
+            (setq file-name-handler-alist file-name-handler-alist-old
+                  gc-cons-threshold 800000
+                  gc-cons-percentage 0.1)))
 ;; end
