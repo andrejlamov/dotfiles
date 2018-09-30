@@ -34,7 +34,9 @@
             (tool-bar-mode -1)
             (scroll-bar-mode -1)
 
+            (load-file "~/.emacs.d/packages.el")
             (load-file "~/.emacs.d/core.el")
+            (load-file "~/.emacs.d/keys.el")
             (load-file "~/.emacs.d/theme.el")
             (almacs/load-el-directory "~/.emacs.d/modules/")
 
