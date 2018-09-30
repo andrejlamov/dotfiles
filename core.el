@@ -1,5 +1,3 @@
-;;; emacs built-in setup
-
 (show-paren-mode)
 (winner-mode)
 (dirtrack-mode)
