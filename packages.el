@@ -130,6 +130,7 @@
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
+(use-package web-mode)
 
 (use-package tide
   :config
@@ -142,6 +143,13 @@
     (tide-hl-identifier-mode +1)
     (company-mode +1))
 
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                (setup-tide-mode))))
+  ;; enable typescript-tslint checker
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
   ;; aligns annotation to the right hand side
   (setq company-tooltip-align-annotations t)
   ;; formats the buffer before saving
