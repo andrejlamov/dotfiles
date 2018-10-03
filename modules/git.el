@@ -18,4 +18,6 @@
   "gh" '(magit-log-head :wk "log HEAD")
   "gg" '(helm-git-grep :wk "git grep")
   "gG" '(helm-git-grep-at-point :wk "git grep point")
-  "B"  '(helm-browse-project :wk "browse repo"))
+  "B"  '(helm-browse-project :wk "browse repo")
+  "gF" '(magit-fetch-all :wk "git fetch all")
+  "gR" '(magit-reset-hard :wk "git reset hard"))
