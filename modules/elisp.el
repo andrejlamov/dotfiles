@@ -1,9 +1,10 @@
-(defun almacs/elisp-test-buffer ()
+(defun almacs/eval-ert-t ()
   (interactive)
+  (ert-delete-all-tests)
   (eval-buffer)
   (ert t))
 
-(defun almacs/elisp-ert-t ()
+(defun almacs/ert-t ()
   (interactive)
   (ert t))
 
@@ -16,5 +17,5 @@
    "eb" '(eval-buffer :wk "buffer")
    "ee" '(eval-last-sexp :wk "sexp")
    "t" '(:ignore t :wk "test")
-   "tt" '(almacs/elisp-ert-t :wk "test buffer")
-   "tB" '(almacs/elisp-test-buffer :wk "test buffer")))
+   "tt" '(almacs/ert-t :wk "ert t")
+   "tB" '(almacs/eval-ert-t :wk "eval ert t")))
