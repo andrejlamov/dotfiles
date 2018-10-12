@@ -89,7 +89,7 @@
   (setq evil-visualstar/persistent t)
   (global-evil-visualstar-mode))
 
-(use-package evil-mc
+'(use-package evil-mc
   :config
   (global-evil-mc-mode 1))
 
