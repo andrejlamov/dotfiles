@@ -56,7 +56,8 @@
   "aW" '(whitespace-cleanup :wk "clean whitespace")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
-  "s" '(helm-swoop :wk "swoop")
+  "s" '(helm-swoop-without-pre-input :wk "swoop")
+  "S" '(helm-swoop :wk "swoop input")
   "r" '(helm-resume :wk "resume")
   "k" '(helm-show-kill-ring :wk "kill ring")
 
