@@ -51,6 +51,7 @@
   "aS" '(almacs/named-shell :wk "named shell")
   "as" '(shell :wk "shell")
   "ac" '(almacs/go-to-core-el :wk "core.el")
+  "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(global-whitespace-mode :wk "whitespace")
   "aW" '(whitespace-cleanup :wk "clean whitespace")
 

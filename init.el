@@ -28,18 +28,20 @@
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
 
+(defun almacs/reload ()
+  (interactive)
+  (load-file "~/.emacs.d/packages.el")
+  (load-file "~/.emacs.d/core.el")
+  (load-file "~/.emacs.d/keys.el")
+  (load-file "~/.emacs.d/theme.el")
+  (almacs/load-el-directory "~/.emacs.d/modules/"))
+
 (add-hook 'after-init-hook
           (lambda ()
             (menu-bar-mode -1)
             (tool-bar-mode -1)
             (scroll-bar-mode -1)
-
-            (load-file "~/.emacs.d/packages.el")
-            (load-file "~/.emacs.d/core.el")
-            (load-file "~/.emacs.d/keys.el")
-            (load-file "~/.emacs.d/theme.el")
-            (almacs/load-el-directory "~/.emacs.d/modules/")
-
+            (almacs/reload)
             (setq file-name-handler-alist file-name-handler-alist-old
                   gc-cons-threshold 800000
                   gc-cons-percentage 0.1)))
