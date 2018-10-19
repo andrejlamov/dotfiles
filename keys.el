@@ -23,12 +23,10 @@
 
 ;; us international
 (general-def '(motion insert)
-  ; l
-  "Ø" 'avy-goto-line
-  "ø" 'avy-goto-char-in-line
-  ; a
-  "á" 'avy-goto-word-1-below
-  "Á" 'avy-goto-word-1-above)
+  "ø" 'avy-goto-line ;; l
+  "þ" 'avy-goto-char-timer ;; t
+  "ß" 'avy-goto-word-or-subword-1 ;; s
+  )
 
 (general-def 'motion
   "C-u" 'evil-scroll-up
