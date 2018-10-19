@@ -34,7 +34,7 @@
   "C-w" 'ace-window)
 
 (general-create-definer almacs/leader-def
-  :states '(normal visual emacs)
+  :states '(normal visual emacs kakel-normal)
   :prefix "SPC"
   :keymaps 'override
   :non-normal-prefix "M-SPC"
