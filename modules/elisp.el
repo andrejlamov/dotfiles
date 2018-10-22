@@ -8,14 +8,20 @@
   (interactive)
   (ert t))
 
-(predd-defmethod almacs/major-mode-change 'emacs-lisp-mode (mode)
-  (general-define-key
-   :keymaps '(normal)
-   :prefix ","
-   "i" '(indent-sexp :wk "indent sexp")
-   "e" '(:ignore t :wk "eval")
-   "eb" '(eval-buffer :wk "buffer")
-   "ee" '(eval-last-sexp :wk "sexp")
-   "t" '(:ignore t :wk "test")
-   "tt" '(almacs/ert-t :wk "ert t")
-   "tB" '(almacs/eval-ert-t :wk "eval ert t")))
+(general-create-definer elisp-def
+  :states '(normal)
+  :keymaps '(emacs-lisp-mode-map)
+  :prefix ","
+  :keymaps 'override)
+
+(elisp-def
+ "i" '(indent-sexp :wk "indent sexp")
+ "c" '(check-parens :wk "check parens")
+ "e" '(:ignore t :wk "eval")
+ "eb" '(eval-buffer :wk "buffer")
+ "ee" '(eval-last-sexp :wk "sexp")
+ "t" '(:ignore t :wk "test")
+ "tt" '(almacs/ert-t :wk "ert t")
+ "tB" '(almacs/eval-ert-t :wk "eval ert t")
+ "d" '(:ignore t :wk "debug")
+ "dT" '(kak-debug :wk "kak"))

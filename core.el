@@ -36,21 +36,3 @@
 (defun almacs/go-to-core-el ()
   (interactive)
   (find-file "~/.emacs.d/core.el"))
-
-(predd-defmulti almacs/after-save #'identity)
-(predd-defmethod almacs/after-save :default (mode) nil)
-
-(predd-defmulti almacs/major-mode-change #'identity)
-(predd-defmethod almacs/major-mode-change :default (mode) nil)
-
-(add-hook
- 'after-save-hook
- (lambda ()
-   (almacs/after-save major-mode)))
-
-(add-hook
- 'switch-buffer-functions
- (lambda (prev-buf curr-buf)
-   (when (not (equal prev-buf curr-buf))
-     (general-unbind '(normal) ",")
-     (almacs/major-mode-change major-mode))))
