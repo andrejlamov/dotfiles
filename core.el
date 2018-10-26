@@ -8,7 +8,8 @@
  js-indent-level 4
  make-backup-files nil
  create-lockfiles nil
- auto-save-default nil)
+ auto-save-default nil
+ whitespace-style '(face trailing tabs spaces newline big-indent space-mark newline-mark))
 
 (global-whitespace-mode)
 
