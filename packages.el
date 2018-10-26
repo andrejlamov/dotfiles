@@ -161,3 +161,7 @@
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 (use-package wgrep)
+
+(use-package evil-org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode))
