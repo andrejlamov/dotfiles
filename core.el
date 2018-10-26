@@ -7,6 +7,7 @@
 (setq
  js-indent-level 4
  make-backup-files nil
+ create-lockfiles nil
  auto-save-default nil)
 
 (global-whitespace-mode)
