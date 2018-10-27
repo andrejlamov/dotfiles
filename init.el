@@ -8,7 +8,22 @@
       backup-inhibited t
       make-backup-files nil
       auto-save-default nil
-      inhibit-splash-screen t)
+      inhibit-splash-screen t
+      js-indent-level 4
+      make-backup-files nil
+      create-lockfiles nil
+      auto-save-default nil
+      whitespace-style '(face trailing tabs spaces newline big-indent space-mark newline-mark))
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(show-paren-mode)
+(winner-mode)
+(dirtrack-mode)
+(setq-default truncate-lines t)
+(setq-default indent-tabs-mode nil)
+(global-whitespace-mode)
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
@@ -38,10 +53,7 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-            (menu-bar-mode -1)
-            (tool-bar-mode -1)
-            (scroll-bar-mode -1)
-            (almacs/reload)
+           (almacs/reload)
             (setq file-name-handler-alist file-name-handler-alist-old
                   gc-cons-threshold 800000
                   gc-cons-percentage 0.1)))

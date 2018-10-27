@@ -1,4 +1,4 @@
-; avy cheat sheet
+;; avy cheat sheet
 '(defcustom avy-dispatch-alist
   '((?x . avy-action-kill-move)
     (?X . avy-action-kill-stay)
