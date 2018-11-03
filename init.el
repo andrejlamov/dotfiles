@@ -13,7 +13,7 @@
       make-backup-files nil
       create-lockfiles nil
       auto-save-default nil
-      whitespace-style '(face trailing tabs spaces newline space-mark newline-mark))
+      whitespace-style '(face trailing tabs trailing-whitespace newline newline-mark))
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
