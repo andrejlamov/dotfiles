@@ -146,6 +146,8 @@
     (eldoc-mode +1)
     (tide-hl-identifier-mode +1)
     (company-mode +1))
+  (setcar (memq 'source-inplace (flycheck-checker-get 'typescript-tslint 'command))
+          'source-original)
 
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-hook 'web-mode-hook
