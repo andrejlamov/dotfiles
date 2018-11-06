@@ -18,6 +18,7 @@
  "i" '(indent-sexp :wk "indent sexp")
  "c" '(check-parens :wk "check parens")
  "e" '(:ignore t :wk "eval")
+ "D" '(toggle-debug-on-error :wk "toggle debug on error")
  "eb" '(eval-buffer :wk "buffer")
  "ee" '(eval-last-sexp :wk "sexp")
  "t" '(:ignore t :wk "test")
