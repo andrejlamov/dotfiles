@@ -52,6 +52,7 @@
   "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(global-whitespace-mode :wk "whitespace")
   "aW" '(whitespace-cleanup :wk "clean whitespace")
+  "az" '(text-scale-adjust :wk "zoom")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(helm-swoop-without-pre-input :wk "swoop")
