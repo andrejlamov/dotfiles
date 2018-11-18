@@ -1,0 +1,16 @@
+[alias]
+	last = log -1 HEAD
+  	g = log --graph --oneline --decorate --all
+	set-gmail = config --local user.email andrej.lamov@gmail.com
+ 	set-seal = config --local user.email andrej.lamov@seal-software.com
+[core]
+	excludesfile = ~/.gitignore
+[color]
+	diff = auto
+	ui = auto
+[pull]
+        rebase = true
+[rebase]
+        autoStash = true
+[user]
+	name = "Andrej Lamov"
