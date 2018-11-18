@@ -171,4 +171,11 @@
 
 (use-package bash-completion
   :config
-  (bash-completion-setup))
+  (bash-completion-setup)
+  (setq eshell-default-completion-function 'eshell-bash-completion)
+
+  (defun eshell-bash-completion ()
+    (while (pcomplete-here
+            (nth 2 (bash-completion-dynamic-complete-nocomint
+                    (save-excursion (eshell-bol) (point))
+                    (point)))))))

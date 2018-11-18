@@ -48,6 +48,7 @@
   "a" '(:ignore t :wk "stuff")
   "aS" '(almacs/named-shell :wk "named shell")
   "as" '(shell :wk "shell")
+  "ae" '(eshell :wk "eshell")
   "ac" '(almacs/go-to-core-el :wk "core.el")
   "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(global-whitespace-mode :wk "whitespace")
