@@ -3,7 +3,7 @@ set -x
 set -e
 
 CANDIDATES=$(xdotool search --onlyvisible --"$1" "$2")
-CANDIDATES_LEN=$(echo "$CANDIDATES" | wc -l)
+CANDIDATES_LEN=$(echo "$CANDIDATES" | wc -w)
 CURRENT=$(xdotool getactivewindow)
 
 IS_NEW_TYPE="$(grep "$CURRENT" "$CANDIDATES" || true)"
@@ -16,4 +16,4 @@ else
     IDX=1
 fi;
 
-xdotool windowactivate $( echo "$CANDIDATES" | sed -n "${IDX}p")
+xdotool windowactivate "$(echo "$CANDIDATES" | sed -n "${IDX}p")"

@@ -179,3 +179,6 @@
             (nth 2 (bash-completion-dynamic-complete-nocomint
                     (save-excursion (eshell-bol) (point))
                     (point)))))))
+
+(use-package flycheck
+  :config (add-hook 'sh-mode-hook 'flycheck-mode))
