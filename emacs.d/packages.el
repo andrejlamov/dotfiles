@@ -52,8 +52,6 @@
   ;(advice-add 'helm-swoop :before #'delete-other-windows)
   (define-key helm-swoop-map (kbd "C-w") 'helm-yank-text-at-point))
 
-(use-package iedit)
-
 (use-package avy)
 
 (use-package company :config (global-company-mode))
@@ -102,8 +100,6 @@
   :config
   (setq expand-region-fast-keys-enabled t
         expand-region-contract-fast-key "V"))
-
-(use-package evil-iedit-state)
 
 (use-package xclip
   :config
