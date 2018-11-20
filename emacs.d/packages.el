@@ -178,3 +178,4 @@
 
 (use-package flycheck
   :config (add-hook 'sh-mode-hook 'flycheck-mode))
+(use-package hydra)

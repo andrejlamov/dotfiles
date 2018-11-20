@@ -81,6 +81,7 @@
   "wd" '(delete-window :wk "delete")
   "ws" '(split-window-below :wk "split below")
   "wS" '(split-window-right :wk "split right")
+  "wR" '(hydra-window-resize/body :wk "resize window")
 
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
@@ -92,3 +93,9 @@
   "ei" '(evil-iedit-state/iedit-mode :wk "iedit")
   "es" '(evil-iedit-state :wk "iedit state")
   "er" '(evil-iedit-state/iedit-mode-from-expand-region :wk "iedit from expand"))
+(defhydra hydra-window-resize ()
+  "Window resize"
+  ("h" shrink-window-horizontally "-h")
+  ("j" shrink-window "-v")
+  ("k" enlarge-window "+v" )
+  ("l" enlarge-windo-horizontally "+h"))
