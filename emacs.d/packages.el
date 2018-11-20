@@ -24,6 +24,7 @@
 (use-package helm
   :config
   (require 'helm-config)
+  (define-key shell-mode-map  (kbd "M-p") 'helm-comint-input-ring)
   (define-key helm-map (kbd "M-w") 'helm-yank-text-at-point)
   (global-set-key (kbd "M-x") #'helm-M-x)
   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
