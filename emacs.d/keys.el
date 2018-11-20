@@ -100,4 +100,4 @@
   ("h" shrink-window-horizontally "-h")
   ("j" shrink-window "-v")
   ("k" enlarge-window "+v" )
-  ("l" enlarge-windo-horizontally "+h"))
+  ("l" enlarge-window-horizontally "+h"))
