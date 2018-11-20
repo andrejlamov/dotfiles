@@ -30,6 +30,8 @@
 
 (general-def 'motion
   "C-u" 'evil-scroll-up
+  "C-SPC" 'tile
+  "C-@" 'tile
   "TAB" 'indent-for-tab-command
   "C-w" 'ace-window)
 
