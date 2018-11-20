@@ -130,7 +130,7 @@
 
 (use-package ace-window
   :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+  (setq aw-keys '(?h ?j ?k ?l)))
 
 (use-package web-mode)
 
