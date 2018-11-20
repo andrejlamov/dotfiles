@@ -6,9 +6,9 @@ CANDIDATES=$(xdotool search --onlyvisible --"$1" "$2")
 CANDIDATES_LEN=$(echo "$CANDIDATES" | wc -w)
 CURRENT=$(xdotool getactivewindow)
 
-IS_NEW_TYPE="$(grep "$CURRENT" "$CANDIDATES" || true)"
+IS_NEW_TYPE=$(echo "$CANDIDATES" | grep "$CURRENT" || true)
 
-if [ "$IS_NEW_TYPE" ]; then
+if [ ! "$IS_NEW_TYPE" ]; then
     IDX=$CANDIDATES_LEN
 elif [ $(( CANDIDATES_LEN > 1 )) = 1 ]; then
     IDX=$(( CANDIDATES_LEN - 1 ))
