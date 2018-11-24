@@ -45,10 +45,13 @@
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
 
+(use-package dash-functional)
+(use-package dash)
+
 (defun almacs/reload ()
   (interactive)
   (load-file "~/.emacs.d/packages.el")
-  (load-file "~/.emacs.d/core.el")
+  (load-file "~/.emacs.d/funs.el")
   (load-file "~/.emacs.d/keys.el")
   (load-file "~/.emacs.d/theme.el")
   (almacs/load-el-directory "~/.emacs.d/modules/"))

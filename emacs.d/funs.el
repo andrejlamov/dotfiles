@@ -13,7 +13,7 @@
 
 (defun almacs/named-shell (buffer-name)
   (interactive "Bname: ")
-  (shell buffer-name))
+  (shell (concat "*" buffer-name "*")))
 
 (defun almacs/load-el-directory (dir)
   (let ((load-it (lambda (f)
@@ -23,3 +23,15 @@
 (defun almacs/go-to-core-el ()
   (interactive)
   (find-file "~/.emacs.d/core.el"))
+
+(defun almacs/go-to-packages-el ()
+  (interactive)
+  (find-file "~/.emacs.d/packages.el"))
+
+(defun almacs/go-to-keys-el ()
+  (interactive)
+  (find-file "~/.emacs.d/keys.el"))
+
+(defun almacs/set-font-global-size (size)
+  (interactive "sSet font size: ")
+  (set-face-attribute 'default nil :height (string-to-number size)))
