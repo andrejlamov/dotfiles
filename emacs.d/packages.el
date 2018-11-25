@@ -179,5 +179,10 @@
 
 (use-package flycheck
   :config (add-hook 'sh-mode-hook 'flycheck-mode))
+
 (use-package hydra)
+
 (use-package tile)
+
+(use-package highlight-parentheses
+  :config (global-highlight-parentheses-mode))
