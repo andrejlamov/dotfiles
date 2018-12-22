@@ -45,6 +45,11 @@
   :prefix-command 'almacs/prefix-command)
 
 (almacs/leader-def
+  "C-w" '(ace-window :wk "ace")
+  "C-j" '(avy-pop-mark :wk "avy pop")
+  "F" '(helm-semantic-or-imenu :wk "semantic search")
+  "J" '(avy-goto-line :wk "avy line")
+  "S" '(helm-swoop :wk "swoop input")
   "SPC" '(helm-M-x :wk "M-x")
   "TAB" '(evil-switch-to-windows-last-buffer :wk "last buffer")
 
@@ -64,6 +69,7 @@
   "r" '(helm-resume :wk "resume")
   "k" '(helm-show-kill-ring :wk "kill ring")
 
+  "az" '(almacs/set-font-global-size :wk "global font-size")
   "f" '(:ignore t :wk "file")
   "fs" '(save-buffer :wk "save")
   "ff" '(helm-find-files :wk "ff")

@@ -20,9 +20,9 @@
                    (load-file (concat (file-name-as-directory dir) f)))))
     (mapc load-it (directory-files dir nil "\\.el$"))))
 
-(defun almacs/go-to-core-el ()
+(defun almacs/go-to-funs-el ()
   (interactive)
-  (find-file "~/.emacs.d/core.el"))
+  (find-file "~/.emacs.d/funs.el"))
 
 (defun almacs/go-to-packages-el ()
   (interactive)
