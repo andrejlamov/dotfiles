@@ -26,6 +26,7 @@
   "ø" 'avy-goto-line ;; l
   "þ" 'avy-goto-char-timer ;; t
   "ß" 'avy-goto-word-or-subword-1 ;; s
+  "á" 'avy-pop-mark ;; a
   )
 
 (general-def 'motion
