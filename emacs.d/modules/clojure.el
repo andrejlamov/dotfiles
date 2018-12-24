@@ -12,6 +12,10 @@
     (interactive)
     (purpose-load-window-layout-file "~/.emacs.d/layouts/cider.window-layout"))
 
+(defun almacs/clj-repl-purpose ()
+    (interactive)
+    (purpose-load-window-layout-file "~/.emacs.d/layouts/clj-repl.window-layout"))
+
 (use-package cider
   :commands clojure-mode cider-jack-in-clojurescript cider-jack-in
   :config
@@ -50,4 +54,5 @@
  "eb" '(cider-eval-buffer :wk "eval buffer")
  "ee" '(cider-pprint-eval-last-sexp :wk "eval sexp")
  "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
- "bc" '(cider-repl-clear-buffer :wk "eval sexp"))
+ "bc" '(cider-repl-clear-buffer :wk "eval sexp")
+ "1" '(almacs/clj-repl-purpose :wk "clj repl purpose"))
