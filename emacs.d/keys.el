@@ -21,14 +21,6 @@
     (?o delete-other-windows "Delete Other Windows")
     (?? aw-show-dispatch-help)))
 
-;; us international
-(general-def '(motion insert)
-  "ø" 'avy-goto-line ;; l
-  "þ" 'avy-goto-char-timer ;; t
-  "ß" 'avy-goto-word-or-subword-1 ;; s
-  "á" 'avy-pop-mark ;; a
-  )
-
 (general-def 'motion
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
@@ -46,9 +38,12 @@
 
 (almacs/leader-def
   "C-w" '(ace-window :wk "ace")
+
   "C-j" '(avy-pop-mark :wk "avy pop")
-  "F" '(helm-semantic-or-imenu :wk "semantic search")
   "J" '(avy-goto-line :wk "avy line")
+  "j" '(avy-goto-char-timer :wk "avy timer")
+
+  "F" '(helm-semantic-or-imenu :wk "semantic search")
   "S" '(helm-swoop :wk "swoop input")
   "SPC" '(helm-M-x :wk "M-x")
   "TAB" '(evil-switch-to-windows-last-buffer :wk "last buffer")
