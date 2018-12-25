@@ -39,7 +39,7 @@
 
 (general-create-definer cloj-def
   :states '(normal)
-  :keymaps '(clojure-mode-map clojurescript-mode-map clojurec-mode-map)
+  :keymaps '(clojure-mode-map clojurescript-mode-map clojurec-mode-map cider-repl-mode-map)
   :prefix ","
   :keymaps 'override)
 
@@ -54,5 +54,5 @@
  "eb" '(cider-eval-buffer :wk "eval buffer")
  "ee" '(cider-pprint-eval-last-sexp :wk "eval sexp")
  "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
- "bc" '(cider-repl-clear-buffer :wk "eval sexp")
+ "bc" '(cider-repl-clear-buffer :wk "cider repl clear")
  "1" '(almacs/clj-repl-purpose :wk "clj repl purpose"))
