@@ -46,7 +46,9 @@
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "S" '(helm-swoop :wk "swoop input")
   "SPC" '(helm-M-x :wk "M-x")
-  "TAB" '(evil-switch-to-windows-last-buffer :wk "last buffer")
+
+  "TAB" '(bs-cycle-next :wk "next buffer")
+  "C-M-i" '(bs-cycle-previous :wk "prev buffer")
 
   "a" '(:ignore t :wk "stuff")
   "aS" '(almacs/named-shell :wk "named shell")
