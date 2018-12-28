@@ -19,6 +19,11 @@
 (use-package cider
   :commands clojure-mode cider-jack-in-clojurescript cider-jack-in
   :config
+  (add-hook 'cider-mode-hook
+            (lambda ()
+              (add-hook 'after-save-hook 'cider-eval-buffer nil 'make-it-local)))
+
+  (cider-auto-test-mode)
   (purpose-x-popwin-setup)
   (push "*cider-error*" purpose-x-popwin-buffer-names)
   (push "*cider-result*" purpose-x-popwin-buffer-names)
