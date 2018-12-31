@@ -47,8 +47,8 @@
   "S" '(helm-swoop :wk "swoop input")
   "SPC" '(helm-M-x :wk "M-x")
 
-  "TAB" '(bs-cycle-next :wk "next buffer")
-  "C-M-i" '(bs-cycle-previous :wk "prev buffer")
+  "TAB" '(bs-cycle-previous :wk "prev buffer")
+  "C-M-i" '(bs-cycle-next :wk "next buffer")
 
   "a" '(:ignore t :wk "stuff")
   "aS" '(almacs/named-shell :wk "named shell")
