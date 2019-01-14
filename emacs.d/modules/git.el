@@ -18,6 +18,7 @@
   "gF" '(magit-fetch-all :wk "git fetch all")
   "gG" '(helm-git-grep-at-point :wk "git grep point")
   "gR" '(magit-reset-hard :wk "git reset hard")
+  "gW" '(almacs/helm-ls-git-word-at-point :wk "lsgit word")
   "gg" '(helm-git-grep :wk "git grep")
   "gh" '(magit-log-head :wk "log HEAD")
   "gs" '(magit-status :wk "status"))

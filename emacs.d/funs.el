@@ -49,3 +49,10 @@
           (eval (list eval-fun))
           (evil-jump-item))
       (eval (list eval-fun)))))
+
+(defun almacs/helm-ls-git-word-at-point ()
+  (interactive)
+  (helm :sources helm-ls-git-default-sources
+        :ff-transformer-show-only-basename nil
+        :buffer "*helm lsgit*"
+        :input (thing-at-point 'word 'no-properties)))
