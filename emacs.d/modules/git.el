@@ -13,11 +13,11 @@
   :config (evil-magit-init))
 
 (almacs/leader-def
-  "g" '(:ignore t :wk "git")
-  "gs" '(magit-status :wk "status")
-  "gh" '(magit-log-head :wk "log HEAD")
-  "gg" '(helm-git-grep :wk "git grep")
-  "gG" '(helm-git-grep-at-point :wk "git grep point")
   "B"  '(helm-browse-project :wk "browse repo")
+  "g" '(:ignore t :wk "git")
   "gF" '(magit-fetch-all :wk "git fetch all")
-  "gR" '(magit-reset-hard :wk "git reset hard"))
+  "gG" '(helm-git-grep-at-point :wk "git grep point")
+  "gR" '(magit-reset-hard :wk "git reset hard")
+  "gg" '(helm-git-grep :wk "git grep")
+  "gh" '(magit-log-head :wk "log HEAD")
+  "gs" '(magit-status :wk "status"))
