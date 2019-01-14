@@ -57,7 +57,7 @@
  "p" '(almacs/quick-cider-purpose :wk "cider purpose")
  "e" '(:ignore t :wk "eval")
  "eb" '(cider-eval-buffer :wk "eval buffer")
- "ee" '(cider-pprint-eval-last-sexp :wk "eval sexp")
+ "ee" '(almacs/eval-sexp :wk "eval sexp")
  "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
  "bc" '(cider-repl-clear-buffer :wk "cider repl clear")
  "f" '(cider-format-defun :wk "format defun")

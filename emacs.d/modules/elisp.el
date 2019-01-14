@@ -20,7 +20,7 @@
  "e" '(:ignore t :wk "eval")
  "D" '(toggle-debug-on-error :wk "toggle debug on error")
  "eb" '(eval-buffer :wk "buffer")
- "ee" '(eval-last-sexp :wk "sexp")
+ "ee" '(almacs/eval-sexp :wk "eval sexp")
  "t" '(:ignore t :wk "test")
  "tt" '(almacs/ert-t :wk "ert t")
  "tB" '(almacs/eval-ert-t :wk "eval ert t")

@@ -35,3 +35,17 @@
 (defun almacs/set-font-global-size (size)
   (interactive "sSet font size: ")
   (set-face-attribute 'default nil :height (string-to-number size)))
+
+(defun almacs/eval-sexp ()
+  "Eval expression on point in normal mode."
+  (interactive)
+  (let ((eval-fun (lambda () (pcase major-mode
+                               ('emacs-lisp-mode (call-interactively 'eval-last-sexp))
+                               ('clojure-mode (call-interactively 'cider-eval-last-sexp))
+                               (mode (message "Not supported lisp mode %S" mode))))))
+    (if (equal "(" (string (char-after)))
+        (progn
+          (evil-jump-item)
+          (eval (list eval-fun))
+          (evil-jump-item))
+      (eval (list eval-fun)))))
