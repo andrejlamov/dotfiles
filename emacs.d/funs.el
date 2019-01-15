@@ -43,6 +43,8 @@
                     (evil-append 0)
                     (pcase major-mode
                                ('emacs-lisp-mode (call-interactively 'eval-last-sexp))
+                               ('clojurec-mode (call-interactively 'cider-pprint-eval-last-sexp))
+                               ('clojurescript-mode (call-interactively 'cider-pprint-eval-last-sexp))
                                ('clojure-mode (call-interactively 'cider-pprint-eval-last-sexp))
                                (mode (message "Not supported lisp mode %S" mode)))
                     (evil-force-normal-state))))
