@@ -164,10 +164,6 @@
 
 (use-package wgrep)
 
-(use-package evil-org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode))
-
 (use-package bash-completion
   :config
   (bash-completion-setup)
