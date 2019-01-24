@@ -74,6 +74,7 @@
   "ff" '(helm-find-files :wk "ff")
   "fR" '(almacs/rename-current-file :wk "rename file")
   "fD" '(almacs/delete-current-buffer-file :wk "delete file")
+  "fL" '(helm-locate :wk "locate file")
 
   "p" '(:ignore t :wk "purpose")
   "ps" '(purpose-save-window-layout :wk "save")
