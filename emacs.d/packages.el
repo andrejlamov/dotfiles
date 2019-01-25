@@ -188,3 +188,6 @@
 
 (use-package highlight-parentheses
   :config (global-highlight-parentheses-mode))
+
+(use-package diff-hl
+  :config (diff-hl-mode))
