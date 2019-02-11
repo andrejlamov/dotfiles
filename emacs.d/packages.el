@@ -186,4 +186,4 @@
   :config (global-highlight-parentheses-mode))
 
 (use-package diff-hl
-  :config (diff-hl-mode))
+  :config (global-diff-hl-mode))
