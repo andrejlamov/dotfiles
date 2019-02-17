@@ -17,7 +17,7 @@
  ("evil" . "506f758aa431128b40c987ff634b56c49f69fdb8")
  ("evil-cleverparens" . "8c45879d49bfa6d4e414b6c1df700a4a51cbb869")
  ("evil-collection" . "7b12395c18a676e9021f698d93619cf6529f7d7b")
- ("evil-magit" . "624ebf784e2f1d8922971535b9b179cbc055ac9a")
+ ("evil-magit" . "256614fc7d03d91859ed87514ee914d8cc2edb7a")
  ("evil-org-mode" . "b6d652a9163d3430a9e0933a554bdbee5244bbf6")
  ("evil-surround" . "9e445b7ab1b2381a1882804553af2789c2282987")
  ("evil-visualstar" . "06c053d8f7381f91c53311b1234872ca96ced752")
