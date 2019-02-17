@@ -47,8 +47,8 @@
   "S" '(helm-swoop :wk "swoop input")
   "SPC" '(helm-M-x :wk "M-x")
 
-  "<backtab>" '(evil-buffer :wk "toggle buffer")
-  "TAB" '(bs-cycle-previous :wk "prev buffer")
+  "TAB" '(evil-buffer :wk "toggle buffer")
+  "<backtab>" '(bs-cycle-previous :wk "prev buffer")
   "C-M-i" '(bs-cycle-next :wk "next buffer")
 
   "a" '(:ignore t :wk "stuff")
