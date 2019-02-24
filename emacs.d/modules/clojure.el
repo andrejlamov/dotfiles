@@ -1,12 +1,7 @@
 (defun almacs/after-cider-refresh (response _log-buffer)
-  (let ((status (nrepl-dbind-response response
-                    (out err reloading status error error-ns after before)
-                  status)))
-    (pcase status
-      ('("ok") (progn
-                 ;; (call-interactively 'cider-eval-buffer)
-                 (call-interactively 'cider-test-run-loaded-tests)))
-      (other nil))))
+  (nrepl-dbind-response response (out err reloading status error error-ns after before)
+    (when (member "ok" status)
+      (call-interactively 'cider-test-run-project-tests))))
 
 (defun almacs/quick-cider-purpose ()
     (interactive)
@@ -32,7 +27,7 @@
 
 
   (advice-add 'cider-refresh :before #'save-buffer)
-  (advice-add 'cider-refresh--handle-response :after #'almacs/after-cider-refresh)
+  (advice-add 'cider-ns-refresh--handle-response :after #'almacs/after-cider-refresh)
 
   (setq
    cider-repl-display-help-banner nil
