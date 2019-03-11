@@ -1,6 +1,10 @@
 (use-package evil-org
   :after org
   :config
+
+  (org-babel-do-load-languages 'org-babel-load-languages
+    '((shell . t)))
+
   (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'evil-org-mode-hook
             (lambda ()
