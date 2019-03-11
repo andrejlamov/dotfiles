@@ -14,3 +14,4 @@
         autoStash = true
 [user]
 	name = "Andrej Lamov"
+        userConfigOnly = true
