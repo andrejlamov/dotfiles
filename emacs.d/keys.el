@@ -53,8 +53,7 @@
 
   "a" '(:ignore t :wk "stuff")
   "aS" '(almacs/named-shell :wk "named shell")
-  "as" '(shell :wk "shell")
-  "ae" '(eshell :wk "eshell")
+  "at" '(almacs/bash-term :wk "term")
   "ak" '(almacs/go-to-keys-el :wk "keys.el")
   "ap" '(almacs/go-to-packages-el :wk "packages.el")
   "aC" '(almacs/reload :wk "reload almacs")

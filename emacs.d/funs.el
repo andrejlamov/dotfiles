@@ -61,3 +61,7 @@
         :ff-transformer-show-only-basename nil
         :buffer "*helm lsgit*"
         :input (thing-at-point 'word 'no-properties)))
+
+(defun almacs/bash-term ()
+  (interactive)
+  (ansi-term "/bin/bash"))
