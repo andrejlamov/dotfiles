@@ -87,8 +87,8 @@
   "wr" '(winner-redo :wk "winner-redo")
   "wf" '(delete-other-windows :wk "full")
   "wd" '(delete-window :wk "delete")
-  "ws" '(split-window-below :wk "split below")
-  "wS" '(split-window-right :wk "split right")
+  "ws" '(split-window-right :wk "split right")
+  "wS" '(split-window-below :wk "split below")
   "wR" '(hydra-window-resize/body :wk "resize window")
 
   "b" '(:ignore t :wk "buffers")
