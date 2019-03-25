@@ -5,6 +5,8 @@
   (org-babel-do-load-languages 'org-babel-load-languages
     '((shell . t)))
 
+  (defun almacs/org/confirm-babel-evaluate (lang body) nil)
+  (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate)
   (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'evil-org-mode-hook
             (lambda ()
