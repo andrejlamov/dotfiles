@@ -187,3 +187,22 @@
 
 (use-package diff-hl
   :config (global-diff-hl-mode))
+
+(use-package helm-tramp)
+
+(use-package symon
+  :config
+  (setq symon-sparkline-type 'gridded)
+  (require 'symon)
+
+  (setq symon-monitors
+        '(symon-linux-memory-monitor
+          symon-linux-cpu-monitor
+          symon-linux-battery-monitor))
+  (symon-mode))
+
+
+(use-package focus)
+(use-package writeroom-mode)
+
+(use-package yaml-mode)
