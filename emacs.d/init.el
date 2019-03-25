@@ -26,6 +26,9 @@
 (setq-default truncate-lines t)
 (setq-default indent-tabs-mode nil)
 (global-whitespace-mode)
+(setq ido-default-buffer-method 'selected-window)
+(require 'tramp)
+(tramp-change-syntax 'default)
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
