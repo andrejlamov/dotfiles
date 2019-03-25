@@ -30,6 +30,13 @@
 (require 'tramp)
 (tramp-change-syntax 'default)
 
+;; Disabling prompts
+(fset 'yes-or-no-p 'y-or-n-p)
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
+
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
 (defvar bootstrap-version)
