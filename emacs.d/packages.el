@@ -40,7 +40,20 @@
                 (progn
                   (select-window window)
                   (switch-to-buffer buffer t t))
-              (funcall #'helm-default-display-buffer buffer))))))
+              (funcall #'helm-default-display-buffer buffer)))))
+
+
+  (defun almacs/helm-buffer-split-right-switch-other (candidate)
+    (interactive)
+    (split-window-right)
+    (switch-to-buffer-other-window candidate))
+
+  (put 'almacs/helm-buffer-split-right-switch-other 'helm-only t)
+
+  (helm-add-action-to-source "Split right switch other"
+                             #'almacs/helm-buffer-split-right-switch-other
+                             helm-source-buffers-list 0)
+  )
 
 (use-package helm-swoop
   :defer t
@@ -124,7 +137,10 @@
 (use-package ace-jump-helm-line
   :config
   (setq ace-jump-helm-line-default-action 'select)
-  (define-key helm-map (kbd "C-j") 'ace-jump-helm-line))
+  
+
+  (evil-collection-define-key 'normal 'helm-buffer-map)
+  )
 
 (use-package popwin
   :straight (popwin :type git :host github :repo "bmag/popwin-el")
