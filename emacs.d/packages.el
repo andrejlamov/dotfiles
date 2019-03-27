@@ -40,7 +40,14 @@
                 (progn
                   (select-window window)
                   (switch-to-buffer buffer t t))
-              (funcall #'helm-default-display-buffer buffer))))))
+              (funcall #'helm-default-display-buffer buffer)))))
+
+  (setq helm-source-buffers-list
+        (helm-make-source "Buffers" 'helm-source-buffers))
+
+  (helm-add-action-to-source "Switch to buffer (same window)"
+                             'almacs/switch-to-buffer
+                             helm-source-buffers-list 0))
 
 (use-package helm-swoop
   :defer t
@@ -124,7 +131,7 @@
 (use-package ace-jump-helm-line
   :config
   (setq ace-jump-helm-line-default-action 'select)
-  (define-key helm-map (kbd "C-j") 'ace-jump-helm-line))
+  (evil-collection-define-key 'normal 'helm-buffer-map))
 
 (use-package popwin
   :straight (popwin :type git :host github :repo "bmag/popwin-el")

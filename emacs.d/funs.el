@@ -114,3 +114,15 @@
                      (-sort 's-less?)
                      (-find (lambda (b) (s-starts-with? (char-to-string char) (s-trim b) t))))))
     (switch-to-buffer b t t)))
+
+(defun almacs/helm-occur ()
+  (interactive)
+  (let  ((c (face-attribute 'region :background)))
+    (unwind-protect
+        (set-face-attribute 'region nil :background nil)
+      (helm-occur)
+      (set-face-attribute 'region nil :background c))))
+
+(defun almacs/switch-to-buffer (candidate)
+  (interactive)
+  (switch-to-buffer candidate nil t))
