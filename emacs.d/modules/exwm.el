@@ -20,6 +20,10 @@
 
                             ([?\s-t] . tile)
 
+                            ([?\s-C] . (lambda ()
+                                         (interactive)
+                                         (start-process-shell-command "chromium" nil "chromium")))
+                            ([?\s-n] . almacs/next-buffer)
                             ([?\s-n] . almacs/next-buffer)
                             ([?\s-p] . almacs/prev-buffer)
                             ([?\s-b] . helm-buffers-list)
