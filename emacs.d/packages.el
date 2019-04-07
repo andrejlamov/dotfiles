@@ -52,17 +52,6 @@
                              'almacs/switch-to-buffer
                              helm-source-buffers-list 0))
 
-(use-package helm-swoop
-  :defer t
-  :config
-  (setq helm-swoop-split-with-multiple-windows t)
-  ;; TODO: do not winner-undo when delete-other-windows on a single window
-  ;(add-hook 'helm-quit-hook (lambda ()
-  ;			      (when (equal helm-last-buffer "*Helm Swoop*")
-  ;				(winner-undo))))
-  ;(advice-add 'helm-swoop :before #'delete-other-windows)
-  (define-key helm-swoop-map (kbd "C-w") 'helm-yank-text-at-point))
-
 (use-package avy)
 
 (use-package company :config (global-company-mode))
@@ -172,7 +161,6 @@
   ;;(add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
-(use-package wgrep)
 
 (use-package bash-completion
   :config

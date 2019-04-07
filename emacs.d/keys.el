@@ -22,6 +22,7 @@
     (?? aw-show-dispatch-help)))
 
 (general-def 'motion
+  "®" 'er/expand-region
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
   "C-@" 'tile
@@ -44,7 +45,6 @@
   "j" '(avy-goto-char-timer :wk "avy timer")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
-  "S" '(helm-swoop :wk "swoop input")
   "SPC" '(helm-M-x :wk "M-x")
 
   "TAB" '(evil-buffer :wk "toggle buffer")
@@ -62,8 +62,7 @@
   "az" '(text-scale-adjust :wk "zoom")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
-  "s" '(helm-swoop-without-pre-input :wk "swoop")
-  "S" '(helm-swoop :wk "swoop input")
+  "s" '(almacs/helm-occur :wk "occur")
   "r" '(helm-resume :wk "resume")
   "k" '(helm-show-kill-ring :wk "kill ring")
 
@@ -94,13 +93,8 @@
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
   "br" '(rename-buffer :wk "rename")
-  "bb" '(helm-buffers-list :wk "list")
+  "bb" '(helm-buffers-list :wk "list"))
 
-  "e" '(:ignore t :wk "edit")
-  "ev" '(er/expand-region :wk "expand")
-  "ei" '(evil-iedit-state/iedit-mode :wk "iedit")
-  "es" '(evil-iedit-state :wk "iedit state")
-  "er" '(evil-iedit-state/iedit-mode-from-expand-region :wk "iedit from expand"))
 (defhydra hydra-window-resize ()
   "Window resize"
   ("h" shrink-window-horizontally "-h")
