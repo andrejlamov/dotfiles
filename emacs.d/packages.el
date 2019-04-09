@@ -30,6 +30,9 @@
   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
 
+  (helm-autoresize-mode 1)
+  (setq helm-autoresize-max-height 60
+        helm-autoresize-min-height 60)
   (helm-mode 1)
   (defvar almacs/helm-window-height 0.3)
   (setq helm-display-function (lambda (buffer &optional _resume)
@@ -131,7 +134,7 @@
 (use-package ace-jump-helm-line
   :config
   (setq ace-jump-helm-line-default-action 'select)
-  (evil-collection-define-key 'normal 'helm-buffer-map))
+  (define-key helm-map (kbd "C-j") 'ace-jump-helm-line))
 
 (use-package popwin
   :straight (popwin :type git :host github :repo "bmag/popwin-el")
