@@ -30,6 +30,7 @@
 (require 'tramp)
 (tramp-change-syntax 'default)
 (auto-compression-mode 1)
+(setq vc-handled-backends nil)
 
 ;; Disabling prompts
 (fset 'yes-or-no-p 'y-or-n-p)
