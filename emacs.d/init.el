@@ -61,11 +61,11 @@
 
 (defun almacs/reload ()
   (interactive)
+  (load-file "~/.emacs.d/theme.el")
   (load-file "~/.emacs.d/packages.el")
   (load-file "~/.emacs.d/funs.el")
-  (load-file "~/.emacs.d/keys.el")
-  (load-file "~/.emacs.d/theme.el")
-  (almacs/load-el-directory "~/.emacs.d/modules/"))
+  (almacs/load-el-directory "~/.emacs.d/modules/")
+  (load-file "~/.emacs.d/keys.el"))
 
 (add-hook 'after-init-hook
           (lambda ()
@@ -74,3 +74,16 @@
                   gc-cons-threshold 800000
                   gc-cons-percentage 0.1)))
 ;; end
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((org-duration-format . h:mm))))
+ '(tramp-syntax (quote default) nil (tramp)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
