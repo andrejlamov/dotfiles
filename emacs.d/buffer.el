@@ -26,7 +26,7 @@
    ((eq current-idx 0) max-idx)
    (t (1- current-idx))))
 
-(defun almacs/-next-idx (current-idx max-id)
+(defun almacs/-next-idx (current-idx max-idx)
   (cond
    ((eq current-idx max-idx) 0)
    (t (1+ current-idx))))
