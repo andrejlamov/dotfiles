@@ -22,7 +22,10 @@
     (?? aw-show-dispatch-help)))
 
 (general-def 'motion
-  "®" 'er/expand-region
+  "®" 'er/expand-region ;; v
+  "ï" 'evil-avy-goto-char ;; j
+  "Ï" 'evil-avy-goto-char-2 ;; J
+  "ø" 'evil-avy-goto-char-in-line ;; l
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
   "C-@" 'tile
