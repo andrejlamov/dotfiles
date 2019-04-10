@@ -20,6 +20,9 @@
 
                             ([?\s-t] . tile)
 
+                            ([?\s-J] . (lambda ()
+                                         (interactive)
+                                         (start-process-shell-command "jetbrains" nil "idea")))
                             ([?\s-C] . (lambda ()
                                          (interactive)
                                          (start-process-shell-command "chromium" nil "chromium")))
