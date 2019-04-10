@@ -43,11 +43,10 @@
   (exwm-input-set-key (kbd "s-x") #'exwm-input-toggle-keyboard)
   (exwm-enable)
 
-  ;; (setq exwm-randr-workspace-monitor-plist '(0 "DP-3-2" 0 "eDP-1"))
-  ;; (add-hook 'exwm-randr-screen-change-hook
-  ;;          (lambda ()
-  ;;            (start-process-shell-command
-  ;;             "xrandr" nil "xrandr --output DP-3-2 --primary --auto --output eDP-1 --off")))
+  (add-hook 'exwm-randr-screen-change-hook
+            (lambda ()
+              (start-process-shell-command
+               "xrandr" nil "xrandr --output eDP-1 --mode 2560x1440 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DP-3-3 --off --output DP-3-2 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off")))
   (require 'exwm-randr)
   (exwm-randr-enable))
 
