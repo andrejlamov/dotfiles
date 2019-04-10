@@ -11,7 +11,10 @@
 
 (defun almacs/non-asterisk-other-hidden-buffers-same-prefix ()
   (->> (almacs/non-asterisk-other-hidden-buffers)
-       (-filter (lambda (b) (s-starts-with? (substring (buffer-name) 0 1) b)))))
+       (-filter (lambda (b) (s-starts-with? (-> (buffer-name)
+                                                (substring 0 1)
+                                                (s-lower-camel-case))
+                                            (s-lower-camel-case b))))))
 
 (defun almacs/switch-buffer (buffers next-idx-fn)
   (let* ((max-idx (1- (length buffers)))
