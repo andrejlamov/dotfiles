@@ -65,8 +65,8 @@
   (load-file "~/.emacs.d/theme.el")
   (load-file "~/.emacs.d/packages.el")
   (load-file "~/.emacs.d/funs.el")
-  (almacs/load-el-directory "~/.emacs.d/modules/")
-  (load-file "~/.emacs.d/keys.el"))
+  (load-file "~/.emacs.d/keys.el")
+  (almacs/load-el-directory "~/.emacs.d/modules/"))
 
 (add-hook 'after-init-hook
           (lambda ()
