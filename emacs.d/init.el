@@ -29,6 +29,7 @@
 (setq ido-default-buffer-method 'selected-window)
 (require 'tramp)
 (tramp-change-syntax 'default)
+(auto-compression-mode 1)
 
 ;; Disabling prompts
 (fset 'yes-or-no-p 'y-or-n-p)
