@@ -1,3 +1,4 @@
+(use-package wgrep)
 (use-package wgrep-helm
   :config
   (add-hook 'helm-grep-mode-hook 'wgrep-change-to-wgrep-mode)
