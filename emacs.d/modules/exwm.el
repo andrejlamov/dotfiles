@@ -17,6 +17,7 @@
                             ([?\s-j] . windmove-down)
                             ([?\s-k] . windmove-up)
                             ([?\s-l] . windmove-right)
+                            ([?\s-w] . almacs/window-prefix-command)
 
                             ([?\s-t] . tile)
 
