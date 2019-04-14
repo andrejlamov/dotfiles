@@ -73,7 +73,8 @@
   (defalias 'evil-cp-insert 'evil-insert)
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode))
+  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'hy-mode-hook #'evil-cleverparens-mode))
 
 (use-package clojure-mode)
 
@@ -213,6 +214,4 @@
   (global-set-key (kbd "C-h F") #'helpful-function)
   (global-set-key (kbd "C-h C") #'helpful-command))
 
-(use-package hy-mode
-  :config
-  (add-hook 'hy-mode-hook #'evil-cleverparens-mode))
+(use-package hy-mode)
