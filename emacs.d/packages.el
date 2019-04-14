@@ -161,7 +161,6 @@
   ;;(add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
-
 (use-package bash-completion
   :config
   (bash-completion-setup)
@@ -199,8 +198,8 @@
           symon-linux-battery-monitor))
   (symon-mode))
 
-
 (use-package focus)
+
 (use-package writeroom-mode)
 
 (use-package yaml-mode)
