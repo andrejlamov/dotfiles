@@ -213,3 +213,7 @@
   (global-set-key (kbd "C-c C-d") #'helpful-at-point)
   (global-set-key (kbd "C-h F") #'helpful-function)
   (global-set-key (kbd "C-h C") #'helpful-command))
+
+(use-package hy-mode
+  :config
+  (add-hook 'hy-mode-hook #'evil-cleverparens-mode))
