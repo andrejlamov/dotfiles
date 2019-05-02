@@ -67,6 +67,7 @@
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(almacs/helm-occur :wk "occur")
   "r" '(helm-resume :wk "resume")
+  "R" '(helm-recentf :wk "recentf")
   "k" '(helm-show-kill-ring :wk "kill ring")
 
   "az" '(almacs/set-font-global-size :wk "global font-size")
@@ -76,6 +77,7 @@
   "fR" '(almacs/rename-current-file :wk "rename file")
   "fD" '(almacs/delete-current-buffer-file :wk "delete file")
   "fL" '(helm-locate :wk "locate file")
+  "ft" '(helm-tramp :wk "tramp")
 
   "p" '(:ignore t :wk "purpose")
   "ps" '(purpose-save-window-layout :wk "save")
