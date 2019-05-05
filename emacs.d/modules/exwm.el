@@ -47,10 +47,20 @@
   (exwm-input-set-key (kbd "s-x") #'exwm-input-toggle-keyboard)
   (exwm-enable)
 
-  (add-hook 'exwm-randr-screen-change-hook
-            (lambda ()
-              (start-process-shell-command
-               "xrandr" nil "xrandr --output eDP-1 --mode 2560x1440 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DP-3-3 --off --output DP-3-2 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off")))
+  (defun almacs/dock-mirror ()
+    (start-process-shell-command
+     "xrandr" nil "xrandr --output eDP-1 --mode 2560x1440 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DP-3-3 --off --output DP-3-2 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off"))
+
+  (defun almacs/disable-screen-change-hook ()
+    (interactive)
+    (remove-hook 'exwm-randr-screen-change-hook 'almacs/dock-mirror))
+
+  (defun almacs/enable-screen-change-hook ()
+    (interactive)
+    (add-hook 'exwm-randr-screen-change-hook 'almacs/dock-mirror))
+
+  (almacs/enable-screen-change-hook)
+
   (require 'exwm-randr)
   (exwm-randr-enable))
 
