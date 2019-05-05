@@ -73,5 +73,9 @@
         (set-face-attribute 'region nil :background nil)
       (helm-occur)
       (set-face-attribute 'region nil :background c))))
+
+(defun almacs/revert-buffer ()
+  (interactive)
+  (revert-buffer nil t t))
 (defun spacecat (&rest terms)
   (s-join " " terms))

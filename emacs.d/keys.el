@@ -99,7 +99,8 @@
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
   "br" '(rename-buffer :wk "rename")
-  "bb" '(helm-buffers-list :wk "list"))
+  "bb" '(helm-buffers-list :wk "list")
+  "b." '(almacs/revert-buffer :wk "revert"))
 
 (defhydra hydra-window-resize ()
   "Window resize"
