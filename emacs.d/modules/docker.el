@@ -28,10 +28,10 @@
        (-remove 's-blank?)
        (-map (-partial 's-split "\t"))
        (-map (-lambda ((name port status))
-               (let ((display-name (->> (spacecat
-                                         (s-pad-right 32 " " name)
-                                         (s-pad-right 32 " " (s-concat "(" status ")"))
-                                         (s-pad-right 32 " " port))))
+               (let ((display-name (spacecat
+                                    (s-pad-right 32 " " name)
+                                    (s-pad-right 32 " " (s-concat "(" status ")"))
+                                    (s-pad-right 32 " " port)))
                      (tramp-path (s-concat "/docker:" name ":/")))
                  `(,display-name . (:tramp-path ,tramp-path
                                                 :name ,name
