@@ -36,14 +36,14 @@
   (helm-mode 1)
   (defvar almacs/helm-window-height 0.3)
   (setq helm-display-function (lambda (buffer &optional _resume)
-          (let ((window (or (purpose-display-reuse-window-buffer buffer nil)
-                            (purpose-display-reuse-window-purpose buffer nil)
-                            (purpose-display-at-bottom buffer nil almacs/helm-window-height))))
-            (if window
-                (progn
-                  (select-window window)
-                  (switch-to-buffer buffer t t))
-              (funcall #'helm-default-display-buffer buffer)))))
+                                (let ((window (or (purpose-display-reuse-window-buffer buffer nil)
+                                                  (purpose-display-reuse-window-purpose buffer nil)
+                                                  (purpose-display-at-bottom buffer nil almacs/helm-window-height))))
+                                  (if window
+                                      (progn
+                                        (select-window window)
+                                        (switch-to-buffer buffer t t))
+                                    (funcall #'helm-default-display-buffer buffer)))))
 
   (setq helm-source-buffers-list
         (helm-make-source "Buffers" 'helm-source-buffers))
