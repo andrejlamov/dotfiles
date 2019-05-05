@@ -3,6 +3,13 @@
   (require 'docker-tramp-compat)
   (setq docker-tramp-use-names t))
 
+(defun almacs/-helm-docker-action (cmd)
+  (->> (helm-marked-candidates)
+       (-map (-lambda ((&plist :name name)) name))
+       (s-join " ")
+       (spacecat "docker" cmd)
+       (shell-command-to-string)))
+
 (setq almacs/helm-docker-actions
       (helm-make-actions
        "Tramp open" (-lambda ((&plist :tramp-path path))
@@ -10,12 +17,9 @@
        "Shell" (-lambda ((&plist :tramp-path path))
                  (let ((default-directory path))
                    (shell (s-concat "*docker tramp shell - " path))))
-       "Stop" (-lambda ((&plist :name name))
-                (shell-command-to-string (spacecat "docker stop" name)))
-       "Start" (-lambda ((&plist :name name))
-                 (shell-command-to-string (spacecat "docker start" name)))
-       "Restart" (-lambda ((&plist :name name))
-                   (shell-command-to-string (spacecat "docker restart" name)))))
+       "Stop" (lambda (_) (almacs/-helm-docker-action "stop"))
+       "Start" (lambda (_)(almacs/-helm-docker-action "start"))
+       "Restart" (lambda (_) (almacs/-helm-docker-action "restart"))))
 
 (defun almacs/helm-docker-ps-candidates ()
   (->> "docker ps -a --format \"{{.Names}}\t{{.Ports}}\t{{.Status}}\""
