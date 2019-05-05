@@ -31,8 +31,10 @@
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
 
   (helm-autoresize-mode 1)
-  (setq helm-autoresize-max-height 60
-        helm-autoresize-min-height 60)
+  (setq helm-autoresize-min-height 40
+        helm-ff-auto-update-initial-value t
+        helm-mode-fuzzy-match t
+        helm-completion-in-region-fuzzy-match t)
   (helm-mode 1)
   (defvar almacs/helm-window-height 0.3)
   (setq helm-display-function (lambda (buffer &optional _resume)
