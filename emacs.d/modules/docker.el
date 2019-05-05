@@ -38,7 +38,6 @@
                                                 :port ,port
                                                 :status ,status)))))))
 
-
 (setq almacs/helm-docker-ps-source (helm-build-sync-source "docker ps -a"
                                      :action 'almacs/helm-docker-actions
                                      :candidates 'almacs/helm-docker-ps-candidates))
