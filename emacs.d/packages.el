@@ -214,10 +214,5 @@
   (global-set-key (kbd "C-h C") #'helpful-command))
 
 (use-package hy-mode)
-(use-package helm-tramp)
 
-(use-package docker-tramp
-  :commands helm-tramp
   :config
-  (require 'docker-tramp-compat)
-  (setq docker-tramp-use-names t))

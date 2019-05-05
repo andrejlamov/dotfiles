@@ -77,7 +77,8 @@
   "fR" '(almacs/rename-current-file :wk "rename file")
   "fD" '(almacs/delete-current-buffer-file :wk "delete file")
   "fL" '(helm-locate :wk "locate file")
-  "ft" '(helm-tramp :wk "tramp")
+
+  "dp" '(almacs/helm-docker-ps :wk "helm docker ps")
 
   "p" '(:ignore t :wk "purpose")
   "ps" '(purpose-save-window-layout :wk "save")
