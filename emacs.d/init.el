@@ -59,6 +59,7 @@
 
 (use-package dash-functional)
 (use-package dash)
+(use-package s)
 
 (defun almacs/reload ()
   (interactive)
