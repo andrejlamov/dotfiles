@@ -27,6 +27,10 @@
   (interactive)
   (find-file "~/.emacs.d/keys.el"))
 
+(defun almacs/go-to-modules-el ()
+  (interactive)
+  (helm-find-files-1 "~/.emacs.d/modules/"))
+
 (defun almacs/set-font-global-size (size)
   (interactive "sSet font size: ")
   (set-face-attribute 'default nil :height (string-to-number size)))
