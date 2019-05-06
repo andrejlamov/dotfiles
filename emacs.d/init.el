@@ -13,7 +13,9 @@
       make-backup-files nil
       create-lockfiles nil
       auto-save-default nil
-      whitespace-style '(face trailing tabs trailing-whitespace newline newline-mark))
+      whitespace-style '(face trailing tabs trailing-whitespace newline newline-mark)
+      val-expression-print-length nil
+      eval-expression-print-level nil)
 
 (add-to-list 'exec-path "~/.bin")
 
@@ -31,6 +33,8 @@
 (tramp-change-syntax 'default)
 (auto-compression-mode 1)
 (setq vc-handled-backends nil)
+(blink-cursor-mode 0)
+(global-auto-revert-mode 1)
 
 ;; Disabling prompts
 (fset 'yes-or-no-p 'y-or-n-p)
