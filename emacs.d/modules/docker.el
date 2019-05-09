@@ -44,7 +44,6 @@
        (-map (-lambda ((name cpu mem))
                (list :name name :cpu cpu :mem mem)))))
 
-
 (defun almacs/helm-docker-make-candidates (ps stats)
   (->> (-concat
         (almacs/helm-docker-stats-entries stats)
