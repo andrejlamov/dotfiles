@@ -81,9 +81,9 @@
                                         (shell-command-to-string
                                          "docker stats --no-stream --format \"{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\"")))
                                      (-lambda ((ps stats))
-                                       (setq almacs/helm-docker-candidates
-                                             (almacs/helm-docker-make-candidates ps stats))
                                        (with-helm-buffer
+                                         (setq almacs/helm-docker-candidates
+                                               (almacs/helm-docker-make-candidates ps stats))
                                          (let ((n (helm-candidate-number-at-point)))
                                            (helm-force-update
                                             (lambda ()
