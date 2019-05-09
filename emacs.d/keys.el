@@ -82,6 +82,7 @@
   "dd" '(almacs/helm-docker-ps :wk "docker ps")
   "de" '(helm-list-emacs-process :wk "emacs ps")
   "dh" '(helm-top :wk "top")
+  "dt" '(helm-timers :wk "timers")
 
   "p" '(:ignore t :wk "purpose")
   "ps" '(purpose-save-window-layout :wk "save")
@@ -103,7 +104,8 @@
   "bd" '(kill-this-buffer :wk "kill")
   "br" '(rename-buffer :wk "rename")
   "bb" '(helm-buffers-list :wk "list")
-  "b." '(almacs/revert-buffer :wk "revert"))
+  "b." '(almacs/revert-buffer :wk "revert")
+  "?" '(helm-man-woman :wk "man"))
 
 (defhydra hydra-window-resize ()
   "Window resize"
