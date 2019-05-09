@@ -35,7 +35,8 @@
   (setq helm-autoresize-min-height 40
         helm-ff-auto-update-initial-value t
         helm-mode-fuzzy-match t
-        helm-completion-in-region-fuzzy-match t)
+        helm-completion-in-region-fuzzy-match t
+        helm-locate-command "locate %s -e -A --regex %s | grep -v \"^$HOME/\\\..*\"")
   (helm-mode 1)
   (defvar almacs/helm-window-height 0.3)
   (setq helm-display-function (lambda (buffer &optional _resume)
