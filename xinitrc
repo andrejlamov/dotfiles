@@ -8,5 +8,6 @@ setxkbmap -layout us -variant altgr-intl
 
 nm-applet &
 volumeicon &
+redshift &
 
 exec emacs
