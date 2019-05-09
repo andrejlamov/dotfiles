@@ -80,16 +80,3 @@
                   gc-cons-threshold 800000
                   gc-cons-percentage 0.1)))
 ;; end
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((org-duration-format . h:mm))))
- '(tramp-syntax (quote default) nil (tramp)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
