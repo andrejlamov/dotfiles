@@ -69,7 +69,7 @@
 (use-package paredit)
 
 (use-package evil-cleverparens
-  :requires (paredit smartparens)
+  :straight (evil-cleverparens :type git :host github :repo "andrejlamov/evil-cleverparens")
   :config
   (require 'evil-cleverparens-text-objects)
   (setq evil-cleverparens-use-additional-bindings t
