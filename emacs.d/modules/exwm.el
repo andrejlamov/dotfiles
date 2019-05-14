@@ -41,6 +41,7 @@
                             ([?\s-d] . delete-window)
                             ([?\s-D] . kill-this-buffer)
                             ([?\s-\ ] . almacs/prefix-command)
+                            ([?\s-` ] . exwm-input-send-next-key)
                             ([?\s-,] . almacs/switch-buffer-by-first-char)))
 
   (exwm-input-set-key (kbd "s-R") #'exwm-reset)
