@@ -77,6 +77,8 @@
   "r" '(helm-resume :wk "resume")
   "R" '(helm-recentf :wk "recentf")
   "k" '(helm-show-kill-ring :wk "kill ring")
+  "c" '(comment-region :wk "comment")
+  "C" '(uncomment-region :wk "comment")
 
   "az" '(almacs/set-font-global-size :wk "global font-size")
   "f" '(:ignore t :wk "file")
