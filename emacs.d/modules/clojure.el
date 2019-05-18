@@ -4,12 +4,12 @@
       (call-interactively 'cider-test-run-project-tests))))
 
 (defun almacs/quick-cider-purpose ()
-    (interactive)
-    (purpose-load-window-layout-file "~/.emacs.d/layouts/cider.window-layout"))
+  (interactive)
+  (purpose-load-window-layout-file "~/.emacs.d/layouts/cider.window-layout"))
 
 (defun almacs/clj-repl-purpose ()
-    (interactive)
-    (purpose-load-window-layout-file "~/.emacs.d/layouts/clj-repl.window-layout"))
+  (interactive)
+  (purpose-load-window-layout-file "~/.emacs.d/layouts/clj-repl.window-layout"))
 
 (use-package cider
   :commands clojure-mode cider-jack-in-clojurescript cider-jack-in
@@ -32,9 +32,9 @@
   (setq
    cider-repl-display-help-banner nil
    cljr-inject-dependencies-at-jack-in nil
-  ;; cljs-lein-repl "(do (require 'figwheel-sidecar.repl-api)
-  ;;                     (figwheel-sidecar.repl-api/start-figwheel!)
-  ;;                     (figwheel-sidecar.repl-api/cljs-repl))"
+   ;; cljs-lein-repl "(do (require 'figwheel-sidecar.repl-api)
+   ;;                     (figwheel-sidecar.repl-api/start-figwheel!)
+   ;;                     (figwheel-sidecar.repl-api/cljs-repl))"
    ))
 
 (general-create-definer cloj-def
@@ -44,16 +44,16 @@
   :keymaps 'override)
 
 (cloj-def
- "Q" '(cider-quit :wk "quit")
- "'" '(cider-jack-in :wk "jack-in clj")
- "\"" '(cider-jack-in-clj&cljs :wk "jack-in cljs&clj")
- "T" '(cider-test-run-project-tests :wk "project tests")
- "R" '(cider-refresh :wk "refresh")
- "p" '(almacs/quick-cider-purpose :wk "cider purpose")
- "e" '(:ignore t :wk "eval")
- "eb" '(cider-eval-buffer :wk "eval buffer")
- "ee" '(almacs/eval-sexp :wk "eval sexp")
- "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
- "bc" '(cider-repl-clear-buffer :wk "cider repl clear")
- "f" '(cider-format-defun :wk "format defun")
- "1" '(almacs/clj-repl-purpose :wk "clj repl purpose"))
+  "Q" '(cider-quit :wk "quit")
+  "'" '(cider-jack-in :wk "jack-in clj")
+  "\"" '(cider-jack-in-clj&cljs :wk "jack-in cljs&clj")
+  "T" '(cider-test-run-project-tests :wk "project tests")
+  "R" '(cider-refresh :wk "refresh")
+  "p" '(almacs/quick-cider-purpose :wk "cider purpose")
+  "e" '(:ignore t :wk "eval")
+  "eb" '(cider-eval-buffer :wk "eval buffer")
+  "ee" '(almacs/eval-sexp :wk "eval sexp")
+  "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
+  "bc" '(cider-repl-clear-buffer :wk "cider repl clear")
+  "f" '(cider-format-defun :wk "format defun")
+  "1" '(almacs/clj-repl-purpose :wk "clj repl purpose"))
