@@ -13,6 +13,11 @@
   :custom (evil-collection-setup-minibuffer t)
   :config (evil-collection-init))
 
+(use-package evil-mc
+  :config
+  (global-evil-mc-mode 1)
+  (setq evil-mc-custom-known-commands '((sp-raise-sexp . ((:default . evil-mc-execute-default-call-with-count))))))
+
 (use-package dash-functional)
 
 (use-package general
@@ -98,10 +103,6 @@
   :config
   (setq evil-visualstar/persistent t)
   (global-evil-visualstar-mode))
-
-'(use-package evil-mc
-  :config
-  (global-evil-mc-mode 1))
 
 (use-package expand-region
   :config

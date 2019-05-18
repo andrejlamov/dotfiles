@@ -26,6 +26,13 @@
   "ï" 'evil-avy-goto-char ;; j
   "Ï" 'evil-avy-goto-char-2 ;; J
   "ø" 'evil-avy-goto-char-in-line ;; l
+  "ä" 'evil-mc-undo-all-cursors ;; q
+  "ñ" 'evil-mc-make-and-goto-next-match ;; n
+  "ß" 'evil-mc-skip-and-goto-next-match ;; s
+  "ö" 'evil-mc-pause-cursors  ;; p
+  "ë" 'evil-mc-resume-cursors  ;; r
+  "á" 'evil-mc-make-cursor-here  ;; a
+  "ú" 'evil-mc-undo-last-added-cursor  ;; u
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
   "C-@" 'tile
