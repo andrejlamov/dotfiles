@@ -40,7 +40,9 @@
   "Ï" 'evil-avy-goto-char-2 ;; J
   "ø" 'evil-avy-goto-char-in-line ;; l
   "ñ" 'evil-mc-make-and-goto-next-match ;; n
+  "Ñ" 'evil-mc-make-and-goto-prev-match ;; N
   "ß" 'evil-mc-skip-and-goto-next-match ;; s
+  "§" 'evil-mc-skip-and-goto-next-match ;; S
   "ö" 'evil-mc-pause-cursors  ;; p
   "ë" 'evil-mc-resume-cursors  ;; r
   "á" 'evil-mc-make-cursor-here  ;; a
