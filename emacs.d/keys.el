@@ -30,9 +30,9 @@
 (general-def 'normal
   "<escape>" (lambda () (interactive)
                (evil-force-normal-state)
+               (fancy-widen)
                (evil-mc-undo-all-cursors)
-               (evil-mc-remove-all-overlays)
-               (widen)))
+               (remove-overlays)))
 
 (general-def 'motion
   "C-s" 'isearch-forward-regexp
