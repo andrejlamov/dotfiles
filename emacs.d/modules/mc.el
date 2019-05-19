@@ -12,12 +12,14 @@
 
 (defun almacs/-add-mc-widen-exit-isearch ()
   (ignore-errors
-    (backward-char)
-    (evil-mc-make-cursor-here)
-    (while (re-search-forward isearch-string nil t nil)
-      (backward-char)
-      (evil-mc-make-cursor-here))
-    (evil-mc-undo-cursor-at-pos (point)))
+    (let ((points (list (point))))
+      (while (re-search-forward isearch-string nil t nil)
+        (add-to-list 'points (point)))
+      (save-excursion
+        (-each (cdr points)
+          (lambda (pos)
+            (goto-char pos)
+            (evil-mc-make-cursor-here))))))
   (fancy-widen)
   (remove-hook 'isearch-mode-end-hook 'almacs/-add-mc-widen-exit-isearch))
 
