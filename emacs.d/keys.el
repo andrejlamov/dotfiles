@@ -31,6 +31,7 @@
   "<escape>" (lambda () (interactive)
                (evil-force-normal-state)
                (evil-mc-undo-all-cursors)
+               (evil-mc-remove-all-overlays)
                (widen)))
 
 (general-def 'motion
