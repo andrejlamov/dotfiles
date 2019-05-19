@@ -5,6 +5,7 @@
   (global-evil-mc-mode 1)
   (setq evil-mc-custom-known-commands
         '((sp-splice-sexp . ((:default . evil-mc-execute-default-call-with-count)))
+          (sp-convolute-sexp . ((:default . evil-mc-execute-default-call-with-count)))
           (sp-raise-sexp . ((:default . evil-mc-execute-default-call-with-count)))))
   (custom-set-faces
    '(evil-mc-cursor-default-face ((t (:inherit cursor :background "tan" :inverse-video nil))))))
