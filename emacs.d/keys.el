@@ -20,13 +20,24 @@
     (?b aw-split-window-horz "Split Horz Window")
     (?o delete-other-windows "Delete Other Windows")
     (?? aw-show-dispatch-help)))
+(general-def 'visual
+  "C-s" 'almacs/evil-mc-isearch-region
+  "v" 'er/expand-region)
+
+(general-def 'emacs
+  "<escape>" 'evil-force-normal-state)
+
+(general-def 'normal
+  "<escape>" (lambda () (interactive)
+               (evil-force-normal-state)
+               (evil-mc-undo-all-cursors)
+               (widen)))
 
 (general-def 'motion
-  "®" 'er/expand-region ;; v
+  "C-s" 'isearch-forward-regexp
   "ï" 'evil-avy-goto-char ;; j
   "Ï" 'evil-avy-goto-char-2 ;; J
   "ø" 'evil-avy-goto-char-in-line ;; l
-  "ä" 'evil-mc-undo-all-cursors ;; q
   "ñ" 'evil-mc-make-and-goto-next-match ;; n
   "ß" 'evil-mc-skip-and-goto-next-match ;; s
   "ö" 'evil-mc-pause-cursors  ;; p
