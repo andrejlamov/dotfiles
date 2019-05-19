@@ -15,7 +15,8 @@
     (evil-mc-make-cursor-here)
     (while (re-search-forward isearch-string nil t nil)
       (backward-char)
-      (evil-mc-make-cursor-here)))
+      (evil-mc-make-cursor-here))
+    (evil-mc-undo-cursor-at-pos (point)))
   (fancy-widen)
   (remove-hook 'isearch-mode-end-hook 'almacs/-add-mc-widen-exit-isearch))
 
