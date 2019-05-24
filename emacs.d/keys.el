@@ -36,6 +36,8 @@
                (remove-overlays)))
 
 (general-def 'motion
+  "e" 'evil-forward-little-word-end
+  "w" 'evil-a-little-word
   "C-s" 'isearch-forward-regexp
   "ï" 'evil-avy-goto-char ;; j
   "Ï" 'evil-avy-goto-char-2 ;; J

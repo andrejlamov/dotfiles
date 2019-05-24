@@ -13,6 +13,8 @@
   :custom (evil-collection-setup-minibuffer t)
   :config (evil-collection-init))
 
+(use-package evil-little-word
+  :straight (evil-little-word :type git :host github :repo "tarao/evil-plugins" :files ("evil-little-word.el")))
 (use-package dash-functional)
 
 (use-package general
@@ -208,6 +210,7 @@
 
 (use-package aggressive-indent
   :config
+  (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
   (add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode))
 
 (use-package edbi)
