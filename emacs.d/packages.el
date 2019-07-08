@@ -35,7 +35,7 @@
 
   (helm-autoresize-mode 1)
   (setq helm-autoresize-min-height 40
-        helm-ff-auto-update-initial-value t
+        helm-ff-auto-update-initial-value nil
         helm-mode-fuzzy-match t
         helm-completion-in-region-fuzzy-match t
         helm-locate-command "locate %s -e -A --regex %s | grep -v \"^$HOME/\\\..*\"")
