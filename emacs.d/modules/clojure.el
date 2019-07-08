@@ -14,20 +14,24 @@
 (use-package cider
   :commands clojure-mode cider-jack-in-clojurescript cider-jack-in
   :config
-  (add-hook 'cider-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook 'cider-eval-buffer nil 'make-it-local)))
+  '(add-hook 'cider-mode-hook
+             (lambda ()
+               (add-hook 'after-save-hook 'cider-eval-buffer nil 'make-it-local)))
 
+  (add-hook 'cider-test-report-mode-hook (lambda ()
+                                           (force-mode-line-update)))
   (cider-auto-test-mode)
+
+  (setq cider-font-lock-reader-conditionals nil)
+
   (purpose-x-popwin-setup)
   (push "*cider-error*" purpose-x-popwin-buffer-names)
   (push "*cider-result*" purpose-x-popwin-buffer-names)
   (push "*cider-result*" popwin:special-display-config)
   (purpose-x-popwin-update-conf)
 
-
-  (advice-add 'cider-refresh :before #'save-buffer)
-  (advice-add 'cider-ns-refresh--handle-response :after #'almacs/after-cider-refresh)
+  '(advice-add 'cider-refresh :before #'save-buffer)
+  '(advice-add 'cider-ns-refresh--handle-response :after #'almacs/after-cider-refresh)
 
   (setq
    cider-repl-display-help-banner nil
