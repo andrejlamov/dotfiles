@@ -1,11 +1,28 @@
 (defun almacs/swap-windows (windmove-fn)
-    (let ((b0 (current-buffer))
-          (w0 (selected-window))
-          (_ (funcall windmove-fn))
-          (b1 (current-buffer)))
-      (switch-to-buffer b0 nil t)
-      (select-window w0)
-      (switch-to-buffer b1 nil t)))
+  (let ((b0 (current-buffer))
+        (w0 (selected-window))
+        (_ (funcall windmove-fn))
+        (b1 (current-buffer)))
+    (switch-to-buffer b0 nil t)
+    (select-window w0)
+    (switch-to-buffer b1 nil t)
+    (funcall windmove-fn)))
+
+(defun almacs/swap-left ()
+  (interactive)
+  (almacs/swap-windows 'windmove-left))
+
+(defun almacs/swap-right ()
+  (interactive)
+  (almacs/swap-windows 'windmove-right))
+
+(defun almacs/swap-up ()
+  (interactive)
+  (almacs/swap-windows 'windmove-up))
+
+(defun almacs/swap-down ()
+  (interactive)
+  (almacs/swap-windows 'windmove-down))
 
 (general-define-key
  :states '(normal visual emacs insert)
@@ -36,5 +53,5 @@
         (windmove-right)
         (delete-window))
  "dh" (lambda () (interactive)
-          (windmove-left)
-          (delete-window)))
+        (windmove-left)
+        (delete-window)))

@@ -5,8 +5,8 @@
   (exwm-config-default)
   (setq exwm-workspace-number 1)
 
-  (require 'exwm-systemtray)
-  (exwm-systemtray-enable)
+  '(require 'exwm-systemtray)
+  '(exwm-systemtray-enable)
   (customize-set-variable 'exwm-input-global-keys
                           `(([?\s-&] . (lambda (command)
                                          (interactive (list (read-shell-command "$ ")))
@@ -17,6 +17,12 @@
                             ([?\s-j] . windmove-down)
                             ([?\s-k] . windmove-up)
                             ([?\s-l] . windmove-right)
+
+                            ([?\s-H] . almacs/swap-left)
+                            ([?\s-J] . almacs/swap-down)
+                            ([?\s-K] . almacs/swap-up)
+                            ([?\s-L] . almacs/swap-right)
+
                             ([?\s-w] . almacs/window-prefix-command)
 
                             ([?\s-t] . tile)

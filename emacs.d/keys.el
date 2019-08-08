@@ -79,6 +79,7 @@
   "C-M-i" '(bs-cycle-next :wk "next buffer")
 
   "a" '(:ignore t :wk "stuff")
+  "as" '(shell :wk "shell")
   "aS" '(almacs/named-shell :wk "named shell")
   "at" '(almacs/bash-term :wk "term")
   "ak" '(almacs/go-to-keys-el :wk "keys.el")
@@ -122,6 +123,7 @@
   "wr" '(winner-redo :wk "winner-redo")
   "wf" '(delete-other-windows :wk "full")
   "wd" '(delete-window :wk "delete")
+  "wb" '(balance-windows :wk "balance")
   "ws" '(split-window-right :wk "split right")
   "wS" '(split-window-below :wk "split below")
   "wR" '(hydra-window-resize/body :wk "resize window")
