@@ -88,7 +88,8 @@
   "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(global-whitespace-mode :wk "whitespace")
   "aW" '(whitespace-cleanup :wk "clean whitespace")
-  "az" '(text-scale-adjust :wk "zoom")
+  "az" '(almacs/set-font-global-size :wk "global font-size")
+  "aZ" '(text-scale-adjust :wk "local text scale")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(almacs/helm-occur :wk "occur")
@@ -97,8 +98,8 @@
   "k" '(helm-show-kill-ring :wk "kill ring")
   "c" '(comment-region :wk "comment")
   "C" '(uncomment-region :wk "comment")
+  "t" '(toggle-truncate-lines t :wk "toggle truncate")
 
-  "az" '(almacs/set-font-global-size :wk "global font-size")
   "f" '(:ignore t :wk "file")
   "fs" '(save-buffer :wk "save")
   "ff" '(helm-find-files :wk "ff")
@@ -119,14 +120,14 @@
   "C-w" '(ace-window :wk "ace")
 
   "w" '(:ignore t :wk "windows")
-  "wu" '(winner-undo :wk "winner-undo")
-  "wr" '(winner-redo :wk "winner-redo")
+  "wu" '(almacs/winner-undo :wk "winner-undo")
+  "ww" '(almacs/writeroom-enable :wk "toogle writeroom")
   "wf" '(delete-other-windows :wk "full")
   "wd" '(delete-window :wk "delete")
   "wb" '(balance-windows :wk "balance")
   "ws" '(split-window-right :wk "split right")
   "wS" '(split-window-below :wk "split below")
-  "wR" '(hydra-window-resize/body :wk "resize window")
+  "wr" '(hydra-window-resize/body :wk "resize window")
 
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")

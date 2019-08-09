@@ -83,3 +83,11 @@
   (revert-buffer nil t t))
 (defun spacecat (&rest terms)
   (s-join " " terms))
+(defun almacs/winner-undo ()
+  (interactive)
+  (writeroom--disable)
+  (call-interactively 'winner-undo))
+
+(defun almacs/writeroom-enable ()
+  (interactive)
+  (writeroom--enable))

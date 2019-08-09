@@ -192,7 +192,9 @@
 
 (use-package focus)
 
-(use-package writeroom-mode)
+(use-package writeroom-mode
+  :config
+  (setq writeroom-width 142))
 
 (use-package yaml-mode)
 
@@ -215,3 +217,8 @@
   (add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode))
 
 (use-package edbi)
+
+(use-package adaptive-wrap
+  :config
+  (global-visual-line-mode)
+  (add-hook 'visual-line-mode-hook 'adaptive-wrap-prefix-mode))
