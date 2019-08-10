@@ -38,6 +38,7 @@
         helm-ff-auto-update-initial-value nil
         helm-mode-fuzzy-match t
         helm-completion-in-region-fuzzy-match t
+        helm-split-window-inside-p t
         helm-locate-command "locate %s -e -A --regex %s | grep -v \"^$HOME/\\\..*\"")
   (helm-mode 1)
   (defvar almacs/helm-window-height 0.3)
