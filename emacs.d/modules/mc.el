@@ -1,5 +1,3 @@
-(use-package fancy-narrow)
-
 (use-package evil-mc
   :config
   (global-evil-mc-mode 1)
@@ -25,13 +23,13 @@
           (lambda (pos)
             (goto-char pos)
             (evil-mc-make-cursor-here))))))
-  (fancy-widen)
+  (widen)
   (remove-hook 'isearch-mode-end-hook 'almacs/-add-mc-widen-exit-isearch))
 
 (defun almacs/evil-mc-isearch-region ()
   (interactive)
   (add-hook 'isearch-mode-end-hook 'almacs/-add-mc-widen-exit-isearch)
-  (call-interactively 'fancy-narrow-to-region)
+  (call-interactively 'narrow-to-region)
   (evil-force-normal-state)
   (evil-goto-first-line)
   (call-interactively 'isearch-forward-regexp))

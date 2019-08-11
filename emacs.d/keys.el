@@ -30,10 +30,9 @@
 
 (general-def 'normal
   "<escape>" (lambda () (interactive)
-               (evil-force-normal-state)
-               (fancy-widen)
                (evil-mc-undo-all-cursors)
-               (remove-overlays)))
+               (evil-force-normal-state)
+               (ignore-errors (remove-overlays))))
 
 (general-def 'motion
   "e" 'evil-forward-little-word-end
@@ -42,6 +41,7 @@
   "ï" 'evil-avy-goto-char ;; j
   "Ï" 'evil-avy-goto-char-2 ;; J
   "ø" 'evil-avy-goto-char-in-line ;; l
+  "Á" 'evil-mc-make-all-cursors  ;; a
   "ñ" 'evil-mc-make-and-goto-next-match ;; n
   "Ñ" 'evil-mc-make-and-goto-prev-match ;; N
   "ß" 'evil-mc-skip-and-goto-next-match ;; s
@@ -50,6 +50,8 @@
   "ë" 'evil-mc-resume-cursors  ;; r
   "á" 'evil-mc-make-cursor-here  ;; a
   "ú" 'evil-mc-undo-last-added-cursor  ;; u
+  "å" 'narrow-to-region ;; å
+  "Å" 'widen ;; Å
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
   "C-@" 'tile
