@@ -27,6 +27,12 @@
 
                             ([?\s-t] . toggle-truncate-lines)
 
+                            ([?\s-!] . (lambda ()
+                                         (interactive)
+                                         (shell-command "~/.screenlayout/internal.sh")))
+                            ([?\s-@] . (lambda ()
+                                         (interactive)
+                                         (shell-command "~/.screenlayout/external.sh")))
                             ([?\s-I] . (lambda ()
                                          (interactive)
                                          (start-process-shell-command "jetbrains" nil "idea")))

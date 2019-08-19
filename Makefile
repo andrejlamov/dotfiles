@@ -8,6 +8,7 @@ dots:
 	ln -sfn $(DIR)/gitconfig ~/.gitconfig
 	ln -sfn $(DIR)/tmux.conf ~/.tmux.conf
 	ln -sfn $(DIR)/bash_aliases ~/.bash_aliases
+	ln -sfn $(DIR)/screenlayout ~/.screenlayout
 emacs-deps:
 	cpan RPC::EPC::Service DBI DBD::Pg
 os:
