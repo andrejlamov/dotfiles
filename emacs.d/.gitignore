@@ -5,3 +5,7 @@
 /straight/
 /recentf
 /eshell/
+workspace
+.cache
+.lsp-session-v*
+eclipse.jdt.ls
