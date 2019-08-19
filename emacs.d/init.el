@@ -68,7 +68,7 @@
 (defun almacs/reload ()
   (interactive)
   (load-file "~/.emacs.d/theme.el")
-  (load-file "~/.emacs.d/packages.el")
+  (load-file "~/.emacs.d/base-packages.el")
   (load-file "~/.emacs.d/funs.el")
   (load-file "~/.emacs.d/keys.el")
   (almacs/load-el-directory "~/.emacs.d/modules/"))
