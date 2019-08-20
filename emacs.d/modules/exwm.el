@@ -5,8 +5,8 @@
   (exwm-config-default)
   (setq exwm-workspace-number 1)
 
-  '(require 'exwm-systemtray)
-  '(exwm-systemtray-enable)
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
   (customize-set-variable 'exwm-input-global-keys
                           `(([?\s-&] . (lambda (command)
                                          (interactive (list (read-shell-command "$ ")))
