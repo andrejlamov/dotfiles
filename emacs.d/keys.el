@@ -86,7 +86,7 @@
   "at" '(almacs/bash-term :wk "term")
   "ak" '(almacs/go-to-keys-el :wk "keys.el")
   "am" '(almacs/go-to-modules-el :wk "modules")
-  "ap" '(almacs/go-to-packages-el :wk "packages.el")
+  "ap" '(almacs/go-to-base-packages-el :wk "base-packages.el")
   "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(global-whitespace-mode :wk "whitespace")
   "aW" '(whitespace-cleanup :wk "clean whitespace")

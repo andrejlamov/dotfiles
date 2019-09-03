@@ -19,9 +19,9 @@
   (interactive)
   (find-file "~/.emacs.d/funs.el"))
 
-(defun almacs/go-to-packages-el ()
+(defun almacs/go-to-base-packages-el ()
   (interactive)
-  (find-file "~/.emacs.d/packages.el"))
+  (find-file "~/.emacs.d/base-packages.el"))
 
 (defun almacs/go-to-keys-el ()
   (interactive)
