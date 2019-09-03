@@ -3,6 +3,7 @@ DIR = $(shell pwd)
 .PHONY: all os emacs-deps
 
 dots:
+	mkdir -p .local/bin
 	ln -sfn $(DIR)/emacs.d ~/.emacs.d
 	ln -sfn $(DIR)/gitignore ~/.gitignore
 	ln -sfn $(DIR)/gitconfig ~/.gitconfig
@@ -10,6 +11,7 @@ dots:
 	ln -sfn $(DIR)/bash_aliases ~/.bash_aliases
 	ln -sfn $(DIR)/screenlayout ~/.screenlayout
 	ln -sfn $(DIR)/xinitrc ~/.xinitrc
+	ln -sfn $(DIR)/os/kbd-us-intl.sh ~/.local/bin/kbd-us-intl.sh
 
 emacs-deps:
 	cpan RPC::EPC::Service DBI DBD::Pg
