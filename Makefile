@@ -3,7 +3,7 @@ DIR = $(shell pwd)
 .PHONY: all os emacs-deps
 
 dots:
-	mkdir -p .local/bin
+	mkdir -p ~/.local/bin
 	ln -sfn $(DIR)/emacs.d ~/.emacs.d
 	ln -sfn $(DIR)/gitignore ~/.gitignore
 	ln -sfn $(DIR)/gitconfig ~/.gitconfig
