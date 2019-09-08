@@ -52,6 +52,7 @@
   "'" '(cider-jack-in :wk "jack-in clj")
   "\"" '(cider-jack-in-clj&cljs :wk "jack-in cljs&clj")
   "T" '(cider-test-run-project-tests :wk "project tests")
+  "t" '(cider-test-run-ns-tests :wk "ns tests")
   "R" '(cider-refresh :wk "refresh")
   "p" '(almacs/quick-cider-purpose :wk "cider purpose")
   "e" '(:ignore t :wk "eval")
