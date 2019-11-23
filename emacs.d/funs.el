@@ -92,3 +92,16 @@
 (defun almacs/writeroom-enable ()
   (interactive)
   (writeroom--enable))
+
+(defun almacs/reload-dir-locals-for-current-buffer ()
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+
+(defun almacs/reload-dir-locals-for-all-buffer-in-this-directory ()
+  (interactive)
+  (let ((dir default-directory))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (equal default-directory dir))
+        (almacs/reload-dir-locals-for-current-buffer)))))
