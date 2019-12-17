@@ -9,3 +9,4 @@ workspace
 .cache
 .lsp-session-v*
 eclipse.jdt.ls
+/ido.last
