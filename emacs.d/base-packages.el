@@ -52,6 +52,12 @@
                                         (switch-to-buffer buffer t t))
                                     (funcall #'helm-default-display-buffer buffer)))))
 
+  (defun almacs/kill-hggrep-buffer (&rest args)
+    (ignore-errors
+      (kill-buffer "*hggrep*")))
+
+  (advice-add 'helm-git-grep-save-results :before #'almacs/kill-hggrep-buffer)
+
   (setq helm-source-buffers-list
         (helm-make-source "Buffers" 'helm-source-buffers))
 
