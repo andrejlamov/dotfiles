@@ -39,7 +39,7 @@
   "Eval expression on point in normal mode."
   (interactive)
   (let ((eval-fun (lambda ()
-                    (evil-append 0)
+                    (goto-char (1+ (point)))
                     (pcase major-mode
                       ('hy-mode (call-interactively 'hy-shell-eval-last-sexp))
                       ('emacs-lisp-mode (call-interactively 'eval-last-sexp))
@@ -47,7 +47,7 @@
                       ('clojurescript-mode (call-interactively 'cider-pprint-eval-last-sexp))
                       ('clojure-mode (call-interactively 'cider-pprint-eval-last-sexp))
                       (mode (message "Not supported lisp mode %S" mode)))
-                    (evil-force-normal-state))))
+                    (goto-char (1- (point))))))
     (if (member (string (char-after)) '("(" "[" "{"))
         (progn
           (evil-jump-item)
