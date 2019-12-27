@@ -73,10 +73,19 @@
   :config
   ;; https://github.com/Fuco1/smartparens/issues/908
   (sp-local-pair sp-lisp-modes  "'" 'nil :actions 'nil)
-  (sp-local-pair sp-lisp-modes  "`" 'nil :actions 'nil)
+  (sp-local-pair sp-lisp-modes  "`" 'nil :actions 'nil))
 
-  ;; Redefine sp-forward-sexp to fix end of line in evil
-  (defun sp-forward-sexp (&optional arg)
+(use-package paredit)
+
+(use-package evil-cleverparens
+  :straight (evil-cleverparens :type git :host github :repo "andrejlamov/evil-cleverparens")
+  :config
+  (require 'evil-cleverparens-text-objects)
+  (setq evil-cleverparens-use-additional-bindings t
+        evil-cleverparens-use-additional-movement-keys t)
+
+  ;; Redefine custom sp-forward-sexp to fix end of line in evil
+  (defun almacs/sp-forward-sexp (&optional arg)
     (interactive "^p")
     (setq arg (or arg 1))
     (if (< arg 0)
@@ -94,21 +103,17 @@
           (setq ok (sp-get-thing))
           (setq n (1- n))
           (when ok (goto-char (sp-get ok :end))))
-        ok))))
-
-(use-package paredit)
-
-(use-package evil-cleverparens
-  :straight (evil-cleverparens :type git :host github :repo "andrejlamov/evil-cleverparens")
-  :config
-  (require 'evil-cleverparens-text-objects)
-  (setq evil-cleverparens-use-additional-bindings t
-        evil-cleverparens-use-additional-movement-keys nil)
+        ok)))
 
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
   (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'hy-mode-hook #'evil-cleverparens-mode))
+  (add-hook 'hy-mode-hook #'evil-cleverparens-mode)
+
+  :general
+  (:keymaps 'evil-cleverparens-mode-map
+            :states 'normal
+            "L" 'almacs/sp-forward-sexp))
 
 (use-package clojure-mode)
 
