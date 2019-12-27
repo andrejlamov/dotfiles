@@ -1,7 +1,8 @@
 (use-package evil
   :init
   (setq evil-want-integration t
-        evil-want-keybinding nil)
+        evil-want-keybinding nil
+        evil-move-beyond-eol t)
   :config
   (evil-mode 1))
 
@@ -85,35 +86,34 @@
         evil-cleverparens-use-additional-movement-keys t)
 
   ;; Redefine custom sp-forward-sexp to fix end of line in evil
-  (defun almacs/sp-forward-sexp (&optional arg)
-    (interactive "^p")
-    (setq arg (or arg 1))
-    (if (< arg 0)
-        (sp-backward-sexp (- arg))
-      (let* ((n arg)
-             (ok t))
-        (while (and ok (> n 0))
-          (when (and
-                 (> arg 0)
-                 (eq (point)
-                     (save-excursion
-                       (call-interactively 'evil-end-of-line)
-                       (point))))
-            (goto-char (1+ (point))))
-          (setq ok (sp-get-thing))
-          (setq n (1- n))
-          (when ok (goto-char (sp-get ok :end))))
-        ok)))
+  ;; (defun almacs/sp-forward-sexp (&optional arg)
+  ;;   (interactive "^p")
+  ;;   (setq arg (or arg 1))
+  ;;   (if (< arg 0)
+  ;;       (sp-backward-sexp (- arg))
+  ;;     (let* ((n arg)
+  ;;            (ok t))
+  ;;       (while (and ok (> n 0))
+  ;;         (when (and
+  ;;                (> arg 0)
+  ;;                (eq (point)
+  ;;                    (save-excursion
+  ;;                      (call-interactively 'evil-end-of-line)
+  ;;                      (point))))
+  ;;           (goto-char (1+ (point))))
+  ;;         (setq ok (sp-get-thing))
+  ;;         (setq n (1- n))
+  ;;         (when ok (goto-char (sp-get ok :end))))
+  ;;       ok)))
+  ;; :general
+  ;; (:keymaps 'evil-cleverparens-mode-map
+  ;;           :states 'normal
+  ;;           "L" 'almacs/sp-forward-sexp)
 
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
   (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'hy-mode-hook #'evil-cleverparens-mode)
-
-  :general
-  (:keymaps 'evil-cleverparens-mode-map
-            :states 'normal
-            "L" 'almacs/sp-forward-sexp))
+  (add-hook 'hy-mode-hook #'evil-cleverparens-mode))
 
 (use-package clojure-mode)
 
