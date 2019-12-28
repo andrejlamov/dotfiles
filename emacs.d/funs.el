@@ -36,7 +36,7 @@
   (set-face-attribute 'default nil :height (string-to-number size)))
 
 (defun almacs/eval-enclosed-sexp (eval-fn)
-  "Eval enclosed sexp with EVAL-FN when in normal mode."
+  "Eval enclosed sexp with EVAL-FN when in normal mode at some bracket."
   (interactive)
   (let ((normal-eval-fn (lambda ()
                           (save-excursion
