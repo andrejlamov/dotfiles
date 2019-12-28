@@ -35,25 +35,19 @@
   (interactive "sSet font size: ")
   (set-face-attribute 'default nil :height (string-to-number size)))
 
-(defun almacs/eval-sexp ()
-  "Eval expression on point in normal mode."
+(defun almacs/eval-enclosed-sexp (eval-fn)
+  "Eval enclosed sexp with EVAL-FN when in normal mode."
   (interactive)
-  (let ((eval-fun (lambda ()
-                    (save-excursion
-                      (goto-char (1+ (point)))
-                      (pcase major-mode
-                        ('hy-mode (call-interactively 'hy-shell-eval-last-sexp))
-                        ('emacs-lisp-mode (call-interactively 'eval-last-sexp))
-                        ('clojurec-mode (call-interactively 'cider-pprint-eval-last-sexp))
-                        ('clojurescript-mode (call-interactively 'cider-pprint-eval-last-sexp))
-                        ('clojure-mode (call-interactively 'cider-pprint-eval-last-sexp))
-                        (mode (message "Not supported lisp mode %S" mode)))))))
+  (let ((normal-eval-fn (lambda ()
+                          (save-excursion
+                            (goto-char (1+ (point)))
+                            (call-interactively eval-fn)))))
     (if (member (string (char-after)) '("(" "[" "{"))
         (progn
           (evil-jump-item)
-          (eval (list eval-fun))
+          (eval (list normal-eval-fn))
           (evil-jump-item))
-      (eval (list eval-fun)))))
+      (eval (list normal-eval-fn)))))
 
 (defun almacs/helm-ls-git-word-at-point ()
   (interactive)

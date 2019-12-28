@@ -52,13 +52,24 @@
   "'" '(cider-jack-in :wk "jack-in clj")
   "\"" '(cider-jack-in-clj&cljs :wk "jack-in cljs&clj")
   "T" '(cider-test-run-project-tests :wk "project tests")
-  "t" '(cider-test-run-ns-tests :wk "ns tests")
-  "R" '(cider-refresh :wk "refresh")
+  "t" '(cider-test-run-test :wk "run test")
   "p" '(almacs/quick-cider-purpose :wk "cider purpose")
+
   "e" '(:ignore t :wk "eval")
   "eb" '(cider-eval-buffer :wk "eval buffer")
-  "ee" '(almacs/eval-sexp :wk "eval sexp")
+  "ee" '((lambda () (interactive)
+           (almacs/eval-enclosed-sexp
+            'cider-eval-last-sexp)) :wk "eval sexp")
+  "er" '((lambda () (interactive)
+           (almacs/eval-enclosed-sexp
+            'cider-pprint-eval-last-sexp)) :wk "pprint eval sexp")
+  "ec" '((lambda () (interactive)
+           (almacs/eval-enclosed-sexp
+            'cider-pprint-eval-last-sexp-to-comment)) :wk "pprint eval sexp to comment")
   "ef" '(cider-pprint-eval-defun-at-point :wk "eval defun")
-  "bc" '(cider-repl-clear-buffer :wk "cider repl clear")
+
   "f" '(cider-format-defun :wk "format defun")
-  "1" '(almacs/clj-repl-purpose :wk "clj repl purpose"))
+  "1" '(almacs/clj-repl-purpose :wk "clj repl purpose")
+
+  "b" '(:ignore t :wk "buffer")
+  "bc" '(cider-repl-clear-buffer :wk "cider repl clear"))
