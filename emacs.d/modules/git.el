@@ -10,7 +10,9 @@
 
 (use-package magit
   :commands magit-status magit-log magit-log-head
-  :config (evil-magit-init))
+  :config
+  (evil-magit-init)
+  (setq magit-diff-refine-hunk t))
 
 (almacs/leader-def
   "B"  '(helm-browse-project :wk "browse repo")
