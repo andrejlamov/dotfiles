@@ -88,8 +88,7 @@
   "am" '(almacs/go-to-modules-el :wk "modules")
   "ap" '(almacs/go-to-base-packages-el :wk "base-packages.el")
   "aC" '(almacs/reload :wk "reload almacs")
-  "aw" '(global-whitespace-mode :wk "whitespace")
-  "aW" '(whitespace-cleanup :wk "clean whitespace")
+  "aw" '(whitespace-cleanup :wk "clean whitespace")
   "az" '(almacs/set-font-global-size :wk "global font-size")
   "aZ" '(text-scale-adjust :wk "local text scale")
 

@@ -27,7 +27,6 @@
 (dirtrack-mode)
 (setq-default truncate-lines t)
 (setq-default indent-tabs-mode nil)
-(global-whitespace-mode)
 (setq ido-default-buffer-method 'selected-window)
 (require 'tramp)
 (tramp-change-syntax 'default)
@@ -35,6 +34,7 @@
 (setq vc-handled-backends nil)
 (blink-cursor-mode 0)
 (global-auto-revert-mode 1)
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; Disabling prompts
 (fset 'yes-or-no-p 'y-or-n-p)
