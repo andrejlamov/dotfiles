@@ -226,7 +226,9 @@
 
 (use-package writeroom-mode
   :config
-  (setq writeroom-width 142))
+  (setq
+   writeroom-mode-line t
+   writeroom-width 142))
 
 (use-package yaml-mode)
 

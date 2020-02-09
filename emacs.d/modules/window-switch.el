@@ -29,6 +29,7 @@
  :prefix "s-w"
  :keymaps 'override
  :prefix-command 'almacs/window-prefix-command
+ "w" '(almacs/writeroom-enable :wk "toogle writeroom")
  "s" (lambda () (interactive)
        (split-window-right)
        (windmove-right))
