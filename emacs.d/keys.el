@@ -28,12 +28,6 @@
 (general-def 'emacs
   "<escape>" 'evil-force-normal-state)
 
-(general-def 'normal
-  "<escape>" (lambda () (interactive)
-               (evil-mc-undo-all-cursors)
-               (evil-force-normal-state)
-               (ignore-errors (remove-overlays))))
-
 (general-def 'motion
   "e" 'evil-forward-little-word-end
   "w" 'evil-a-little-word
