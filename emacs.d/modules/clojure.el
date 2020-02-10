@@ -21,7 +21,7 @@
   (add-hook 'cider-test-report-mode-hook (lambda ()
                                            (force-mode-line-update)))
   (cider-auto-test-mode)
-
+  (evil-set-command-property 'cider-find-var :jump t)
   (setq cider-font-lock-reader-conditionals nil)
 
   (purpose-x-popwin-setup)
