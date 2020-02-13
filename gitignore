@@ -1,2 +1,5 @@
 .idea/
 .flycheck_*
+.bloop
+.metals
+project/metals.sbt
