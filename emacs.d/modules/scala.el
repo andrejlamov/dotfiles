@@ -1,4 +1,8 @@
 (use-package scala-mode
+  :general
+  (:keymaps 'scala-mode-map
+            :states 'normal
+            "s-l" 'windmove-right)
   :mode "\\.s\\(cala\\|bt\\)$")
 
 (use-package sbt-mode
