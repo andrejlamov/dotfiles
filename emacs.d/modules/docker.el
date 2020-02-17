@@ -4,6 +4,10 @@
   :config
   (setq docker-tramp-use-names t))
 
+(use-package docker)
+
+(use-package docker-compose-mode)
+
 (setq almacs/helm-docker-candidates nil)
 
 (defun almacs/-helm-docker-action (cmd)

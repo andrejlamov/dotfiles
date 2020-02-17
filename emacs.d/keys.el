@@ -103,6 +103,7 @@
   "fL" '(helm-locate :wk "locate file")
 
   "dd" '(almacs/helm-docker-ps :wk "docker ps")
+  "dc" '(docker-compose :wk "docker compose")
   "de" '(helm-list-emacs-process :wk "emacs ps")
   "dh" '(helm-top :wk "top")
   "dt" '(helm-timers :wk "timers")

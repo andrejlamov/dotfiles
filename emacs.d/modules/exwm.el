@@ -42,6 +42,12 @@
                             ([?\s-C] . (lambda ()
                                          (interactive)
                                          (start-process-shell-command "chromium" nil "chromium")))
+
+                            ([?\s-1] . eyebrowse-switch-to-window-config-1)
+                            ([?\s-2] . eyebrowse-switch-to-window-config-2)
+                            ([?\s-3] . eyebrowse-switch-to-window-config-3)
+                            ([?\s-4] . eyebrowse-switch-to-window-config-4)
+
                             ([?\s-n] . almacs/next-buffer-within-prefix)
                             ([?\s-p] . almacs/prev-buffer-within-prefix)
                             ([?\s-N] . almacs/next-buffer)
