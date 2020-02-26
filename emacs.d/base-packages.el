@@ -266,3 +266,8 @@
   :config
   (global-visual-line-mode)
   (add-hook 'visual-line-mode-hook 'adaptive-wrap-prefix-mode))
+
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode 1)
+  (eyebrowse-setup-evil-keys))
