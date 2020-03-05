@@ -56,10 +56,9 @@
         :buffer "*helm lsgit*"
         :input (thing-at-point 'word 'no-properties)))
 
-(defun almacs/bash-term ()
+(defun almacs/xfce4-term ()
   (interactive)
-  (ansi-term "/bin/bash")
-  (rename-buffer "term" t))
+  (start-process-shell-command "xfce4-terminal" nil "xfce4-terminal"))
 
 (defun almacs/x-screensaver ()
   (interactive)

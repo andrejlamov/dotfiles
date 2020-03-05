@@ -77,7 +77,7 @@
   "a" '(:ignore t :wk "stuff")
   "as" '(shell :wk "shell")
   "aS" '(almacs/named-shell :wk "named shell")
-  "at" '(almacs/bash-term :wk "term")
+  "at" '(almacs/xfce4-term :wk "term")
   "ak" '(almacs/go-to-keys-el :wk "keys.el")
   "am" '(almacs/go-to-modules-el :wk "modules")
   "ap" '(almacs/go-to-base-packages-el :wk "base-packages.el")
