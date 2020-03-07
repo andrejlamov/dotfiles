@@ -21,7 +21,7 @@
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
-  :hook (scala-mode . lsp)
+  ;;  :hook (scala-mode . lsp)
   :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui)
