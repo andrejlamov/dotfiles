@@ -16,8 +16,8 @@
    minibuffer-local-completion-map))
 
 ;; Enable nice rendering of diagnostics like compile errors.
-(use-package flycheck
-  :init (global-flycheck-mode))
+;;(use-package flycheck
+;;  :init '(global-flycheck-mode))
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
