@@ -102,6 +102,9 @@
   "fD" '(almacs/delete-current-buffer-file :wk "delete file")
   "fL" '(helm-locate :wk "locate file")
 
+  "o" '(:ignore t :wk "org")
+  "oc" '(org-capture :wk "capture")
+
   "dd" '(almacs/helm-docker-ps :wk "docker ps")
   "dc" '(docker-compose :wk "docker compose")
   "de" '(helm-list-emacs-process :wk "emacs ps")
