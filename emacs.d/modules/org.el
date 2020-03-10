@@ -1,34 +1,57 @@
+(use-package org-evil
+  :config
+  (require 'org-evil)
+  (require' org-id)
+  (setq
+   org-id-link-to-org-use-id t
+   org-directory "~/Dropbox/org"
+   org-default-notes-file (concat org-directory "/inbox.org")
+   org-capture-templates
+   '(("p" "Capture at point" entry (file "~/Dropbox/org/inbox.org")
+      "* %?\n  %i\n  %a")
+     ("c" "Capture" entry (file "~/Dropbox/org/inbox.org")
+      "* %?"))
+   org-agenda-start-day "-1d"
+   org-agenda-span 14
+   org-agenda-start-on-weekday nil
+   org-refile-use-outline-path nil
+   org-agenda-files '("~/Dropbox/org/inbox.org"
+                      "~/Dropbox/org/projects.org"
+                      "~/Dropbox/org/reference.org"
+                      "~/Dropbox/org/someday.org"
+                      "~/Dropbox/org/calendar.org")
+   org-refile-targets '((("~/Dropbox/org/projects.org") :maxlevel . 1)))
+  ;; eval src blocks
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((shell . t)))
+  (defun almacs/org/confirm-babel-evaluate (lang body) nil)
+  (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate))
+
 (use-package org-mind-map
   :init (require 'ox-org)
   :config (setq org-mind-map-engine "dot"))
 
-(use-package evil-org
-  :after org
-  :config
+(defun almacs/org-insert-custom-id ()
+  (org-set-property "CUSTOM_ID" (s-concat "id-" (almacs/uuid))))
 
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((shell . t)))
+(advice-add 'evil-org-org-insert-heading-respect-content-below :after #'almacs/org-insert-custom-id)
 
-  (defun almacs/org/confirm-babel-evaluate (lang body) nil)
-  (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate)
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys)
-
-  (evil-define-key 'normal org-mode-map
-    (kbd "TAB") 'org-cycle
-    "t" 'org-todo))
+(use-package helm-org)
 
 (general-create-definer org-def
-  :states '(normal)
+  :states '(motion)
   :keymaps '(org-mode-map evil-org-mode-map)
   :prefix ","
   :keymaps 'override)
 
 (org-def
+  "r" '(org-refile :wk "refile")
+  "s" '(org-insert-structure-template :wk "template")
+  "t" '(org-set-tags-command :wk "tag")
+  "l" '(:ignore t :wk "link")
+  "ls" '(org-store-link :wk "store")
+  "li" '(org-insert-link :wk "insert")
+
   "m" '(:ignore t :wk "mind map")
   "mf" '(org-mind-map-write :wk "file")
   "mt" '(org-mind-map-write-current-tree :wk "tree")

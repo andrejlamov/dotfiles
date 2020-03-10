@@ -59,6 +59,8 @@
   (load bootstrap-file nil 'nomessage))
 
 (setq straight-use-package-by-default t)
+(straight-use-package 'org)
+(straight-use-package 'org-plus-contrib)
 (straight-use-package 'use-package)
 
 (use-package dash-functional)
