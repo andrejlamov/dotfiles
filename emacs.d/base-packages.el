@@ -272,5 +272,5 @@
 
 (use-package eyebrowse
   :config
-  (eyebrowse-mode 1)
+  (eyebrowse-init)
   (eyebrowse-setup-evil-keys))
