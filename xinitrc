@@ -7,5 +7,6 @@ nm-applet &
 volumeicon &
 redshift &
 xss-lock slock &
+dropbox &
 
 exec emacs
