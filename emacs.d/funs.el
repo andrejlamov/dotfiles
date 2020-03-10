@@ -98,3 +98,7 @@
       (with-current-buffer buffer
         (when (equal default-directory dir))
         (almacs/reload-dir-locals-for-current-buffer)))))
+
+(defun almacs/uuid ()
+  (interactive)
+  (s-trim (shell-command-to-string "uuidgen")))
