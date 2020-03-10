@@ -27,6 +27,9 @@
 (use-package evil-mc
   :config
   (global-evil-mc-mode 1)
+  (evil-define-key 'visual evil-mc-key-map
+    "A" #'evil-mc-make-cursor-in-visual-selection-end
+    "I" #'evil-mc-make-cursor-in-visual-selection-beg)
   (setq evil-mc-custom-known-commands
         '((sp-splice-sexp . ((:default . evil-mc-execute-default-call-with-count)))
           (sp-convolute-sexp . ((:default . evil-mc-execute-default-call-with-count)))
