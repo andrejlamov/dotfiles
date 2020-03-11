@@ -12,6 +12,7 @@
      ("c" "Capture" entry (file "~/Dropbox/org/inbox.org")
       "* %?"))
    org-agenda-start-day "-1d"
+   org-startup-indented t
    org-agenda-span 14
    org-agenda-start-on-weekday nil
    org-refile-use-outline-path nil
