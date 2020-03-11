@@ -25,16 +25,15 @@
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((shell . t)))
   (defun almacs/org/confirm-babel-evaluate (lang body) nil)
-  (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate))
+  (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate)
+
+  (defun almacs/org-insert-custom-id (&rest rest)
+    (org-set-property "CUSTOM_ID" (s-concat "id-" (almacs/uuid))))
+  (advice-add 'org-insert-heading-respect-content :after #'almacs/org-insert-custom-id))
 
 (use-package org-mind-map
   :init (require 'ox-org)
   :config (setq org-mind-map-engine "dot"))
-
-(defun almacs/org-insert-custom-id ()
-  (org-set-property "CUSTOM_ID" (s-concat "id-" (almacs/uuid))))
-
-(advice-add 'evil-org-org-insert-heading-respect-content-below :after #'almacs/org-insert-custom-id)
 
 (use-package helm-org)
 
