@@ -47,7 +47,8 @@
 (org-def
   "r" '(org-refile :wk "refile")
   "s" '(org-insert-structure-template :wk "template")
-  "t" '(org-set-tags-command :wk "tag")
+  "t" '(org-todo :wk "todo")
+  "'" '(org-set-tags-command :wk "tag")
   "l" '(:ignore t :wk "link")
   "ls" '(org-store-link :wk "store")
   "li" '(org-insert-link :wk "insert")
