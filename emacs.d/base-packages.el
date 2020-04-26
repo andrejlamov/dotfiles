@@ -137,8 +137,6 @@
   :config
   (which-key-mode))
 
-(use-package switch-buffer-functions)
-
 (use-package predd
   :straight (predd :type git :host github :repo "skeeto/predd" :files ("predd.el")))
 
@@ -233,9 +231,6 @@
 
 (use-package diff-hl
   :config (global-diff-hl-mode))
-
-
-(use-package focus)
 
 (use-package writeroom-mode
   :config
