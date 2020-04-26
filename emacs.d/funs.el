@@ -102,3 +102,10 @@
 (defun almacs/uuid ()
   (interactive)
   (s-trim (shell-command-to-string "uuidgen")))
+
+(defmacro almacs/evil-define-key (state keymaps &rest bindings)
+  `(cond
+    ((keymapp ,keymaps)
+     (evil-define-key ,state ,keymaps ,@bindings))
+    (t
+     (-each ,keymaps (lambda (km) (evil-define-key ,state km ,@bindings))))))

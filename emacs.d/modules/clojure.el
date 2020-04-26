@@ -18,32 +18,29 @@
   (add-to-list 'purpose-user-name-purposes '("*cider-result*" . cider-result-report))
   (purpose-compile-user-configuration))
 
-(-each
-    (list clojure-mode-map clojurescript-mode-map clojurec-mode-map cider-repl-mode-map)
-  (lambda (mode-map)
-    (evil-define-key* 'normal mode-map
-                      ",q" 'cider-quit
-                      ",'" 'cider-jack-in-clj&cljs
-                      ",tt" 'cider-test-run-ns-tests
+(almacs/evil-define-key 'normal (list clojure-mode-map clojurescript-mode-map clojurec-mode-map cider-repl-mode-map)
+                        ",q" 'cider-quit
+                        ",'" 'cider-jack-in-clj&cljs
+                        ",tt" 'cider-test-run-ns-tests
 
-                      ",fd" 'cider-format-defun
-                      ",fb" 'cider-format-buffer
+                        ",fd" 'cider-format-defun
+                        ",fb" 'cider-format-buffer
 
-                      ",l1" (lambda () (interactive)
-                              (purpose-load-window-layout-file "~/.emacs.d/layouts/cider.window-layout"))
+                        ",l1" (lambda () (interactive)
+                                (purpose-load-window-layout-file "~/.emacs.d/layouts/cider.window-layout"))
 
-                      ",eb" 'cider-eval-buffer
-                      ",ec" 'cider-repl-clear-buffer
-                      ",em" (lambda () (interactive)
-                              (almacs/eval-enclosed-sexp
-                               'cider-macroexpand-1))
-                      ",ee" (lambda () (interactive)
-                              (almacs/eval-enclosed-sexp
-                               'cider-eval-last-sexp))
-                      ",er" (lambda () (interactive)
-                              (almacs/eval-enclosed-sexp
-                               'cider-pprint-eval-last-sexp))
-                      ",ec" (lambda () (interactive)
-                              (almacs/eval-enclosed-sexp
-                               'cider-pprint-eval-last-sexp-to-comment))
-                      ",ef" 'cider-pprint-eval-defun-at-point)))
+                        ",eb" 'cider-eval-buffer
+                        ",ec" 'cider-repl-clear-buffer
+                        ",em" (lambda () (interactive)
+                                (almacs/eval-enclosed-sexp
+                                 'cider-macroexpand-1))
+                        ",ee" (lambda () (interactive)
+                                (almacs/eval-enclosed-sexp
+                                 'cider-eval-last-sexp))
+                        ",er" (lambda () (interactive)
+                                (almacs/eval-enclosed-sexp
+                                 'cider-pprint-eval-last-sexp))
+                        ",ec" (lambda () (interactive)
+                                (almacs/eval-enclosed-sexp
+                                 'cider-pprint-eval-last-sexp-to-comment))
+                        ",ef" 'cider-pprint-eval-defun-at-point)
