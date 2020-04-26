@@ -15,6 +15,7 @@
    org-startup-indented t
    org-agenda-span 14
    org-agenda-start-on-weekday nil
+   org-startup-with-inline-images t
    org-refile-use-outline-path nil
    org-agenda-files '("~/Dropbox/org/inbox.org"
                       "~/Dropbox/org/projects.org"
@@ -25,6 +26,7 @@
   ;; eval src blocks
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((shell . t)))
+  (org-display-inline-images t t)
   (defun almacs/org/confirm-babel-evaluate (lang body) nil)
   (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate)
 
@@ -52,6 +54,7 @@
   "l" '(:ignore t :wk "link")
   "ls" '(org-store-link :wk "store")
   "li" '(org-insert-link :wk "insert")
+  "d" '(org-display-inline-images :wk "display inline images")
 
   "p" '(:ignore t :wk "prio")
   "pp" '(org-priority :wk "up")
