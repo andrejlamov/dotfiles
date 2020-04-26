@@ -18,6 +18,8 @@
   ",c" 'check-parens
   ",D" 'toggle-debug-on-error
   ",eb" 'almacs/elisp-check-eval-buffer
+  ",ep" (lambda () (interactive)
+          (almacs/eval-enclosed-sexp 'pp-eval-last-sexp))
   ",ee" (lambda () (interactive)
           (almacs/eval-enclosed-sexp 'eval-last-sexp))
   ",tt" 'almacs/ert-t
