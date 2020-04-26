@@ -8,24 +8,17 @@
   (interactive)
   (ert t))
 
-(general-create-definer elisp-def
-  :states '(normal)
-  :keymaps '(emacs-lisp-mode-map)
-  :prefix ","
-  :keymaps 'override)
+(defun almacs/elisp-check-eval-buffer ()
+  (interactive)
+  (check-parens)
+  (eval-buffer))
 
-(elisp-def
-  "i" '(indent-sexp :wk "indent sexp")
-  "c" '(check-parens :wk "check parens")
-  "e" '(:ignore t :wk "eval")
-  "D" '(toggle-debug-on-error :wk "toggle debug on error")
-  "eb" '((lambda () (interactive)
-           (check-parens)
-           (eval-buffer)) :wk "buffer")
-  "ee" '((lambda () (interactive)
-           (almacs/eval-enclosed-sexp 'eval-last-sexp)) :wk "eval sexp")
-  "t" '(:ignore t :wk "test")
-  "tt" '(almacs/ert-t :wk "ert t")
-  "tB" '(almacs/eval-ert-t :wk "eval ert t")
-  "d" '(:ignore t :wk "debug")
-  "dT" '(kak-debug :wk "kak"))
+(evil-define-key 'normal emacs-lisp-mode-map
+  ",i" 'indent-sexp
+  ",c" 'check-parens
+  ",D" 'toggle-debug-on-error
+  ",eb" 'almacs/elisp-check-eval-buffer
+  ",ee" (lambda () (interactive)
+          (almacs/eval-enclosed-sexp 'eval-last-sexp))
+  ",tt" 'almacs/ert-t
+  ",tB" 'almacs/eval-ert-t)
