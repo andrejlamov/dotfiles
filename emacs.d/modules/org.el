@@ -54,6 +54,8 @@
   "l" '(:ignore t :wk "link")
   "ls" '(org-store-link :wk "store")
   "li" '(org-insert-link :wk "insert")
+
+  "h" '(helm-org-in-buffer-headings :wk "headings")
   "d" '(org-display-inline-images :wk "display inline images")
 
   "p" '(:ignore t :wk "prio")
