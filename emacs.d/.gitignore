@@ -10,3 +10,5 @@ workspace
 .lsp-session-v*
 eclipse.jdt.ls
 /ido.last
+bookmarks
+.org-id-locations
