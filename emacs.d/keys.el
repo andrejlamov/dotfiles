@@ -85,6 +85,7 @@
   "aw" '(whitespace-cleanup :wk "clean whitespace")
   "az" '(almacs/set-font-global-size :wk "global font-size")
   "aZ" '(text-scale-adjust :wk "local text scale")
+  "al" '(toggle-input-method :wk "toggle input")
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(almacs/helm-occur :wk "occur")
