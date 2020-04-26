@@ -57,6 +57,9 @@
 
   "e" '(:ignore t :wk "eval")
   "eb" '(cider-eval-buffer :wk "eval buffer")
+  "em" '((lambda () (interactive)
+           (almacs/eval-enclosed-sexp
+            'cider-macroexpand-1)) :wk "macro expand")
   "ee" '((lambda () (interactive)
            (almacs/eval-enclosed-sexp
             'cider-eval-last-sexp)) :wk "eval sexp")
