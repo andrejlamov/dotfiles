@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defun almacs/rename-current-file (new-file-name)
   (interactive "Fnew name:")
   (let* ((old-file-name (buffer-file-name))
@@ -103,9 +105,35 @@
   (interactive)
   (s-trim (shell-command-to-string "uuidgen")))
 
-(defmacro almacs/evil-define-key (state keymaps &rest bindings)
-  `(cond
-    ((keymapp ,keymaps)
-     (evil-define-key ,state ,keymaps ,@bindings))
-    (t
-     (-each ,keymaps (lambda (km) (evil-define-key ,state km ,@bindings))))))
+(defmacro almacs/define-key (state keymap &rest bindings)
+  (-let ((keymaps `(if (symbolp ,keymap)
+                       (list ,keymap) ,keymap))
+
+         (bindings1 `(->> ',bindings
+                          (-partition 2)
+                          (-reduce-from (-lambda ((acc &as x . xs) (binding &as k v))
+                                          (if (stringp k)
+                                              (cons (list binding) acc)
+                                            (cons (cons binding x) xs)))
+                                        nil)
+                          (-map 'reverse)
+                          (reverse))))
+    `(-each ,keymaps
+       (lambda (km)
+         (-each ,bindings1
+           (-lambda (((key def) . options))
+             (cond
+              ((or
+                (and (symbolp def) (fboundp def))
+                (eq 'lambda (car def))
+                (eq nil def))
+               (evil-define-key* ,state (symbol-value km) key def))
+              (t (evil-define-key* ,state (symbol-value km) key `(lambda () (interactive) ,def))))
+             (-each options
+               (-lambda ((opt v))
+                 (cond
+                  ((eq opt :wk)
+                   (progn (which-key-add-major-mode-key-based-replacements
+                            (intern (s-chop-suffix "-map" (symbol-name km)))
+                            key v)))
+                  (t nil))))))))))
