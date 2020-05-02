@@ -13,14 +13,12 @@
   (check-parens)
   (eval-buffer))
 
-(evil-define-key 'normal emacs-lisp-mode-map
-  ",i" 'indent-sexp
-  ",c" 'check-parens
-  ",D" 'toggle-debug-on-error
-  ",eb" 'almacs/elisp-check-eval-buffer
-  ",ep" (lambda () (interactive)
-          (almacs/eval-enclosed-sexp 'pp-eval-last-sexp))
-  ",ee" (lambda () (interactive)
-          (almacs/eval-enclosed-sexp 'eval-last-sexp))
-  ",tt" 'almacs/ert-t
-  ",tB" 'almacs/eval-ert-t)
+(almacs/define-key 'normal 'emacs-lisp-mode-map
+                   ",i" indent-sexp
+                   ",c" check-parens
+                   ",D" toggle-debug-on-error
+                   ",eb" almacs/elisp-check-eval-buffer :wk "buffer"
+                   ",ep" (almacs/eval-enclosed-sexp 'pp-eval-last-sexp) :wk "exp pretty"
+                   ",ee" (almacs/eval-enclosed-sexp 'eval-last-sexp) :wk "exp"
+                   ",tt" almacs/ert-t
+                   ",tB" almacs/eval-ert-t)
