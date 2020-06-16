@@ -12,7 +12,7 @@
   :commands magit-status magit-log magit-log-head
   :config
   (evil-magit-init)
-  (setq magit-diff-refine-hunk t))
+  (setq magit-diff-refine-hunk 'all))
 
 (almacs/leader-def
   "B"  '(helm-browse-project :wk "browse repo")
