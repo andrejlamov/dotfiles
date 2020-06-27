@@ -93,20 +93,22 @@
 
 (use-package evil-cleverparens
   :straight (evil-cleverparens :type git :host github :repo "andrejlamov/evil-cleverparens")
+  :commands evil-cleverparens-mode
+  :init
+  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'hy-mode-hook #'evil-cleverparens-mode)
   :config
   (require 'evil-cleverparens-text-objects)
   (setq evil-cleverparens-use-additional-bindings t
         evil-cleverparens-use-additional-movement-keys t)
 
   (almacs/define-key 'normal '(evil-cleverparens-mode-map)
+                     "\M-r" nil
                      "\M-rh" sp-splice-sexp-killing-backward
                      "\M-rr" sp-raise-sexp
-                     "\M-rl" sp-splice-sexp-killing-forward)
-
-  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'hy-mode-hook #'evil-cleverparens-mode))
+                     "\M-rl" sp-splice-sexp-killing-forward))
 
 (use-package clojure-mode)
 
