@@ -98,30 +98,10 @@
   (setq evil-cleverparens-use-additional-bindings t
         evil-cleverparens-use-additional-movement-keys t)
 
-  ;; Redefine custom sp-forward-sexp to fix end of line in evil
-  ;; (defun almacs/sp-forward-sexp (&optional arg)
-  ;;   (interactive "^p")
-  ;;   (setq arg (or arg 1))
-  ;;   (if (< arg 0)
-  ;;       (sp-backward-sexp (- arg))
-  ;;     (let* ((n arg)
-  ;;            (ok t))
-  ;;       (while (and ok (> n 0))
-  ;;         (when (and
-  ;;                (> arg 0)
-  ;;                (eq (point)
-  ;;                    (save-excursion
-  ;;                      (call-interactively 'evil-end-of-line)
-  ;;                      (point))))
-  ;;           (goto-char (1+ (point))))
-  ;;         (setq ok (sp-get-thing))
-  ;;         (setq n (1- n))
-  ;;         (when ok (goto-char (sp-get ok :end))))
-  ;;       ok)))
-  ;; :general
-  ;; (:keymaps 'evil-cleverparens-mode-map
-  ;;           :states 'normal
-  ;;           "L" 'almacs/sp-forward-sexp)
+  (almacs/define-key 'normal '(evil-cleverparens-mode-map)
+                     "\M-rh" sp-splice-sexp-killing-backward
+                     "\M-rr" sp-raise-sexp
+                     "\M-rl" sp-splice-sexp-killing-forward)
 
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
