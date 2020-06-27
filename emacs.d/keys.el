@@ -32,20 +32,6 @@
   "e" 'evil-forward-little-word-end
   "w" 'evil-a-little-word
   "C-s" 'isearch-forward-regexp
-  "ï" 'evil-avy-goto-char ;; j
-  "Ï" 'evil-avy-goto-char-2 ;; J
-  "ø" 'evil-avy-goto-char-in-line ;; l
-  "Á" 'evil-mc-make-all-cursors  ;; a
-  "ñ" 'evil-mc-make-and-goto-next-match ;; n
-  "Ñ" 'evil-mc-make-and-goto-prev-match ;; N
-  "ß" 'evil-mc-skip-and-goto-next-match ;; s
-  "§" 'evil-mc-skip-and-goto-next-match ;; S
-  "ö" 'evil-mc-pause-cursors  ;; p
-  "ë" 'evil-mc-resume-cursors  ;; r
-  "á" 'evil-mc-make-cursor-here  ;; a
-  "ú" 'evil-mc-undo-last-added-cursor  ;; u
-  "å" 'narrow-to-region ;; å
-  "Å" 'widen ;; Å
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
   "C-@" 'tile
