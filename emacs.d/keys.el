@@ -53,6 +53,7 @@
   "C-w" 'ace-window
 
   "t" 'evil-avy-goto-char-in-line
+  "T" 'evil-avy-goto-line
   "f" 'evil-avy-goto-char-timer)
 
 (general-create-definer almacs/leader-def
