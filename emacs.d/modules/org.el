@@ -30,9 +30,9 @@
   (defun almacs/org/confirm-babel-evaluate (lang body) nil)
   (setq org-confirm-babel-evaluate 'almacs/org/confirm-babel-evaluate)
 
-  (defun almacs/org-insert-custom-id (&rest rest)
-    (org-set-property "CUSTOM_ID" (s-concat "id-" (almacs/uuid))))
-  (advice-add 'org-insert-heading-respect-content :after #'almacs/org-insert-custom-id))
+  '(defun almacs/org-insert-custom-id (&rest rest)
+     (org-set-property "CUSTOM_ID" (s-concat "id-" (almacs/uuid))))
+  '(advice-add 'org-insert-heading-respect-content :after #'almacs/org-insert-custom-id))
 
 (use-package org-mind-map
   :init (require 'ox-org)
