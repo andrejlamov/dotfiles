@@ -37,6 +37,8 @@
   (custom-set-faces
    '(evil-mc-cursor-default-face ((t (:inherit cursor :background "tan" :inverse-video nil))))))
 
+(use-package helm-ag)
+
 (use-package helm
   :config
   (require 'helm-config)
