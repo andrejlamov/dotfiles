@@ -108,9 +108,10 @@
 
   (almacs/define-key 'normal '(evil-cleverparens-mode-map)
                      "\M-r" nil
-                     "\M-rh" sp-splice-sexp-killing-backward
+                     "\M-r(" sp-splice-sexp-killing-backward
                      "\M-rr" sp-raise-sexp
-                     "\M-rl" sp-splice-sexp-killing-forward))
+                     "\M-r\M-r" sp-raise-sexp
+                     "\M-r)" sp-splice-sexp-killing-forward))
 
 (use-package clojure-mode)
 
