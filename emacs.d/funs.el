@@ -137,3 +137,10 @@
                             (intern (s-chop-suffix "-map" (symbol-name km)))
                             key v)))
                   (t nil))))))))))
+(defun almacs/helm-occur-from-region ()
+  (interactive)
+  (helm-multi-occur-1
+   (list (current-buffer))
+   (buffer-substring-no-properties
+    (region-beginning)
+    (region-end))))

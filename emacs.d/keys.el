@@ -22,7 +22,8 @@
      (?? aw-show-dispatch-help)))
 
 (general-def 'visual
-  "C-s" 'almacs/evil-mc-isearch-region
+  "C-s" 'almacs/helm-occur-from-region
+  "M-s" 'almacs/helm-occur
   "v" 'er/expand-region)
 
 (general-def 'emacs
