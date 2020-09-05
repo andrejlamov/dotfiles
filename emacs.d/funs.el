@@ -144,3 +144,7 @@
    (buffer-substring-no-properties
     (region-beginning)
     (region-end))))
+
+(defun almacs/motion-escape ()
+  (interactive)
+  (evil-mc-undo-all-cursors))

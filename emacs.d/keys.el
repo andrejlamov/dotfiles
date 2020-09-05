@@ -29,6 +29,9 @@
 (general-def 'emacs
   "<escape>" 'evil-force-normal-state)
 
+(general-def 'normal
+  "<escape>" 'almacs/motion-escape)
+
 (general-def 'motion
   "e" 'evil-forward-little-word-end
   "w" 'evil-a-little-word
@@ -80,6 +83,7 @@
 
   "F" '(helm-semantic-or-imenu :wk "semantic search")
   "s" '(almacs/helm-occur :wk "occur")
+  "m" '(almacs/vr-evil-mc :wk "mc")
   "r" '(helm-resume :wk "resume")
   "R" '(helm-recentf :wk "recentf")
   "k" '(helm-show-kill-ring :wk "kill ring")
