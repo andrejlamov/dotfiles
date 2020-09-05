@@ -122,7 +122,12 @@
   "wb" '(balance-windows :wk "balance")
   "ws" '(split-window-right :wk "split right")
   "wS" '(split-window-below :wk "split below")
+  "wm" '(delete-other-windows :wk "full screen")
   "wr" '(hydra-window-resize/body :wk "resize window")
+  "w1" '(eyebrowse-switch-to-window-config-1 :wk "w1")
+  "w2" '(eyebrowse-switch-to-window-config-2 :wk "w2")
+  "w3" '(eyebrowse-switch-to-window-config-3 :wk "w3")
+  "w4" '(eyebrowse-switch-to-window-config-4 :wk "w4")
 
   "b" '(:ignore t :wk "buffers")
   "bd" '(kill-this-buffer :wk "kill")
