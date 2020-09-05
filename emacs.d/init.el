@@ -20,8 +20,6 @@
 (add-to-list 'exec-path "~/.bin")
 
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
 (show-paren-mode)
 (winner-mode)
 (dirtrack-mode)
