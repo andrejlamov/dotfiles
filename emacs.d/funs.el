@@ -148,3 +148,8 @@
 (defun almacs/motion-escape ()
   (interactive)
   (evil-mc-undo-all-cursors))
+
+(defun almacs/avy-cp-backward-up ()
+  (interactive)
+  (call-interactively 'avy-goto-char-timer)
+  (call-interactively 'evil-cp-backward-up-sexp))

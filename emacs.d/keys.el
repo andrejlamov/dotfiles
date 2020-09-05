@@ -40,11 +40,7 @@
   "C-SPC" 'tile
   "C-@" 'tile
   "TAB" 'indent-for-tab-command
-  "C-w" 'ace-window
-
-  "t" 'evil-avy-goto-char-in-line
-  "T" 'evil-avy-goto-line
-  "f" 'evil-avy-goto-char-timer)
+  "C-w" 'ace-window)
 
 (general-create-definer almacs/leader-def
   :states '(normal visual emacs)

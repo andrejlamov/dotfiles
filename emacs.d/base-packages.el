@@ -92,8 +92,8 @@
   (require 'evil-cleverparens-text-objects)
   (setq evil-cleverparens-use-additional-bindings t
         evil-cleverparens-use-additional-movement-keys t)
-
   (almacs/define-key 'normal '(evil-cleverparens-mode-map)
+                     "\M-H" almacs/avy-cp-backward-up
                      "\M-r" nil
                      "\M-r(" sp-splice-sexp-killing-backward
                      "\M-rr" sp-raise-sexp
