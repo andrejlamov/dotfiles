@@ -3,6 +3,7 @@
   	g = log --graph --oneline --decorate --all
 	set-gmail = config --local user.email andrej.lamov@gmail.com
  	set-seal = config --local user.email andrej.lamov@seal-software.com
+ 	set-astra = config --local user.email andrej.lamov@astrazeneca.com
 [core]
 	excludesfile = ~/.gitignore
 [color]
