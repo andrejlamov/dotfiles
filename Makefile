@@ -9,6 +9,7 @@ dots:
 	ln -sfn $(DIR)/gitconfig ~/.gitconfig
 	ln -sfn $(DIR)/tmux.conf ~/.tmux.conf
 	ln -sfn $(DIR)/bash_aliases ~/.bash_aliases
+	ln -sfn $(DIR)/bashrc ~/.bashrc
 	ln -sfn $(DIR)/screenlayout ~/.screenlayout
 	ln -sfn $(DIR)/xinitrc ~/.xinitrc
 	ln -sfn $(DIR)/os/kbd-us-intl.sh ~/.local/bin/kbd-us-intl.sh
