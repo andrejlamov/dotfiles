@@ -1,7 +1,7 @@
 (if (display-graphic-p)
-    (do
-        (set-foreground-color "#002b36")
-        (set-background-color "#fdf6e3")
+    (progn
+      (set-foreground-color "#002b36")
+      (set-background-color "#fdf6e3")
       (set-frame-font "Source code pro")
       (custom-set-faces
        '(magit-diff-context-highlight ((t (:background "#fdf6e3"))))
