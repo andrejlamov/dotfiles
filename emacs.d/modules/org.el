@@ -32,7 +32,10 @@
 
   '(defun almacs/org-insert-custom-id (&rest rest)
      (org-set-property "CUSTOM_ID" (s-concat "id-" (almacs/uuid))))
-  '(advice-add 'org-insert-heading-respect-content :after #'almacs/org-insert-custom-id))
+  '(advice-add 'org-insert-heading-respect-content :after #'almacs/org-insert-custom-id)
+  (general-define-key
+   :keymaps 'org-mode-map
+   [remap evil-jump-forward] 'org-cycle))
 
 (use-package org-mind-map
   :init (require 'ox-org)
