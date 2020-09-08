@@ -169,7 +169,12 @@
   (setq company-tooltip-align-annotations t)
   ;; formats the buffer before saving
   ;;(add-hook 'before-save-hook 'tide-format-before-save)
-  (add-hook 'typescript-mode-hook #'setup-tide-mode))
+  (add-hook 'js-mode-hook #'setup-tide-mode)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+  :general
+  (tide-mode-map
+   "gb" 'tide-jump-back))
 
 (use-package bash-completion
   :config
