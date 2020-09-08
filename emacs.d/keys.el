@@ -77,8 +77,12 @@
   "aZ" '(text-scale-adjust :wk "local text scale")
   "al" '(toggle-input-method :wk "toggle input")
 
+  "s" '(:ignore t :wk "search")
+  "ss" '(almacs/helm-occur :wk "occur")
+  "sa" '(helm-do-ag :wk "ag dir")
+  "sf" '(helm-do-ag-this-file :wk "ag this file")
+
   "F" '(helm-semantic-or-imenu :wk "semantic search")
-  "s" '(almacs/helm-occur :wk "occur")
   "m" '(almacs/vr-evil-mc :wk "mc")
   "r" '(helm-resume :wk "resume")
   "R" '(helm-recentf :wk "recentf")
