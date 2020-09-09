@@ -2,7 +2,7 @@
   :config
   (add-hook 'cider-test-report-mode-hook (lambda ()
                                            (force-mode-line-update)))
-  (cider-auto-test-mode)
+  cider-auto-test-mode
   (evil-set-command-property 'cider-find-var :jump t)
   (setq
    cider-repl-display-help-banner nil

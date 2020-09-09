@@ -39,7 +39,6 @@
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
   "C-@" 'tile
-  "TAB" 'indent-for-tab-command
   "C-w" 'ace-window)
 
 (general-create-definer almacs/leader-def
@@ -73,6 +72,7 @@
   "ap" '(almacs/go-to-base-packages-el :wk "base-packages.el")
   "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(whitespace-cleanup :wk "clean whitespace")
+  "aW" '(whitespace-mode :wk "whitespace mode")
   "az" '(almacs/set-font-global-size :wk "global font-size")
   "aZ" '(text-scale-adjust :wk "local text scale")
   "al" '(toggle-input-method :wk "toggle input")
@@ -134,7 +134,17 @@
   "br" '(rename-buffer :wk "rename")
   "bb" '(helm-buffers-list :wk "list")
   "b." '(almacs/revert-buffer :wk "revert")
-  "?" '(helm-man-woman :wk "man"))
+  "?" '(helm-man-woman :wk "man")
+  "B"  '(helm-browse-project :wk "browse repo")
+
+  "g" '(:ignore t :wk "git")
+  "gF" '(magit-fetch-all :wk "git fetch all")
+  "gG" '(helm-git-grep-at-point :wk "git grep point")
+  "gR" '(magit-reset-hard :wk "git reset hard")
+  "gW" '(almacs/helm-ls-git-word-at-point :wk "lsgit word")
+  "gg" '(helm-git-grep :wk "git grep")
+  "gh" '(magit-log-head :wk "log HEAD")
+  "gs" '(magit-status :wk "status"))
 
 (defhydra hydra-window-resize ()
   "Window resize"
