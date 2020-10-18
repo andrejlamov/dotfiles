@@ -31,7 +31,8 @@
 
 (general-def 'normal
   "<escape>" 'almacs/motion-escape)
-
+(general-def 'insert
+  "C-w" 'ace-window)
 (general-def 'motion
   "e" 'evil-forward-little-word-end
   "w" 'evil-a-little-word
@@ -73,6 +74,8 @@
   "aC" '(almacs/reload :wk "reload almacs")
   "aw" '(whitespace-cleanup :wk "clean whitespace")
   "aW" '(whitespace-mode :wk "whitespace mode")
+  "a/" '(indent-region :wk "indent-region")
+  "a TAB" '(tabify :wk "tabify")
   "az" '(almacs/set-font-global-size :wk "global font-size")
   "aZ" '(text-scale-adjust :wk "local text scale")
   "al" '(toggle-input-method :wk "toggle input")
