@@ -31,7 +31,7 @@
 
 (defun almacs/go-to-modules-el ()
   (interactive)
-  (helm-find-files-1 "~/.emacs.d/modules/"))
+  (helm-find-files-1 "~/.emacs.d/lisp/"))
 
 (defun almacs/set-font-global-size (size)
   (interactive "sSet font size: ")
