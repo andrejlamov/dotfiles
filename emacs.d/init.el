@@ -174,7 +174,7 @@
 
 (use-package which-key
   :init
-  (setq which-key-idle-delay 1
+  (setq which-key-idle-delay 0
         which-key-add-column-padding 0)
   :config
   (which-key-mode))
