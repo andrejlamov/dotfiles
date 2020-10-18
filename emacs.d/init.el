@@ -74,7 +74,18 @@
         evil-want-keybinding nil
         evil-move-beyond-eol t)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+
+  '(progn
+     (defun almacs/insert-modeline-theme ()
+       (custom-set-faces '(mode-line ((t (:background "pink" :foreground "white"))))))
+     (defun almacs/normal-modeline-theme ()
+       (custom-set-faces '(mode-line ((t (:background "black" :foreground "white"))))))
+
+     (add-hook 'evil-insert-state-entry-hook
+               'almacs/insert-modeline-theme)
+     (add-hook 'evil-insert-state-exit-hook
+               'almacs/normal-modeline-theme)))
 
 (use-package evil-surround
   :config
@@ -90,7 +101,9 @@
 
 (use-package general
   :config
-  (general-evil-setup))
+  (general-evil-setup)
+  (setq general-override-states '(normal visual motion))
+  (general-override-mode))
 
 (use-package scala-mode)
 
@@ -213,8 +226,6 @@
   :config
   (setq aw-keys '(?h ?j ?k ?l)))
 
-(use-package web-mode)
-
 (use-package bash-completion
   :config
   (bash-completion-setup)
@@ -293,6 +304,28 @@
   (evil-magit-init)
   (setq magit-diff-refine-hunk 'all))
 
+(setq lsp-keymap-prefix "C-c l")
+
+(use-package lsp-mode
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (js-jsx-mode . lsp)
+         (js-mode . lsp)
+         (web-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp
+  :config
+  (setq lsp-ui-sideline-enable nil))
+
+;; (setq lsp-eslint-server-command 
+;;       '("node" 
+;;         "/home/USER/.vscode/extensions/dbaeumer.vscode-eslint-2.0.11/server/out/eslintServer.js" 
+;;         "--stdio"))
+;; optionally
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+
+(use-package graphql-mode)
+
 (load-file "~/.emacs.d/funs.el")
 (load-file "~/.emacs.d/keys.el")
 (almacs/load-el-directory "~/.emacs.d/lisp/")
@@ -302,4 +335,20 @@
             (setq file-name-handler-alist file-name-handler-alist-old
                   gc-cons-threshold 800000
                   gc-cons-percentage 0.1)))
+
 ;; end
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-collection-setup-minibuffer t)
+ '(safe-local-variable-values
+   '((web-mode-code-indent-offest . 4)
+     (css-indent-offset . 2)
+     (eval web-mode-use-tabs)
+     (-web-mode-use-tabs . t)
+     (web-mode-indent-style . 1)))
+ '(tramp-syntax 'default nil (tramp)))
+
+(put 'upcase-region 'disabled nil)

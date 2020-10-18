@@ -1,21 +1,30 @@
-(use-package rjsx-mode
+(use-package web-mode
   :config
-  (add-hook 'js-mode-hook #'rjsx-mode))
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'")))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-hook 'js-mode-hook 'web-mode)
 
-(use-package tide
+  '(setq js-indent-level 2
+         web-mode-enable-auto-pairing t
+         web-mode-enable-auto-expanding t
+         web-mode-markup-indent-offset 2
+         web-mode-css-indent-offset 2
+         web-mode-code-indent-offset 2
+         web-mode-indent-style  1
+         web-mode-enable-css-colorization t))
+
+(use-package company-web
   :config
-  (defun setup-tide-mode ()
-    (interactive)
-    (tide-setup)
-    (flycheck-mode +1)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (eldoc-mode +1)
-    (tide-hl-identifier-mode +1)
-    (company-mode +1))
+  (push '(company-web-html company-css company-dabbrev) company-backends))
 
-  (setq company-tooltip-align-annotations t)
-  (add-hook 'js-mode-hook #'setup-tide-mode))
-
-(almacs/define-key 'normal '(tide-mode-map rjsx-mode-map)
-                   ",r" rjsx-rename-tag-at-point
-                   ",gb" tide-jump-back)
+(almacs/define-key '(motion) '(web-mode-map)
+                   ",ff" web-mode-fold-or-unfold
+                   ",fc" web-mode-element-children-fold-or-unfold
+                   ",ei" web-mode-element-insert
+                   ",ec" web-mode-element-clone
+                   ",ek" web-mode-element-kill
+                   ",ev" web-mode-element-vanish
+                   ",er" web-mode-element-rename
+                   "(" web-mode-element-parent
+                   ",ew" web-mode-element-wrap)
