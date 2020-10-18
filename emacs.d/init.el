@@ -35,7 +35,7 @@
 (setq vc-handled-backends nil)
 (blink-cursor-mode 0)
 (global-auto-revert-mode 1)
-'(add-hook 'prog-mode-hook 'whitespace-mode)
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; Disabling prompts
 (fset 'yes-or-no-p 'y-or-n-p)
