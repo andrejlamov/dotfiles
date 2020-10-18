@@ -46,11 +46,18 @@
   (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'evil-org-mode-hook
             (lambda ()
-              (evil-org-set-key-theme)))
+              (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys)
   (general-define-key :keymaps 'org-mode-map
-                      [remap evil-jump-forward] 'org-cycle))
+                      [remap evil-jump-forward] 'org-cycle)
+
+  (setq org-agenda-files (list "~/org/todo.org" "~/org/know.org")
+        org-refile-targets '((org-agenda-files :maxlevel . 2))
+        org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
+                                   (todo . " %i %-12:c %-6e")
+                                   (tags . " %i %-12:c")
+                                   (search . " %i %-12:c"))))
 
 (use-package org-mind-map
   :init (require 'ox-org)
@@ -65,18 +72,27 @@
   :keymaps 'override)
 
 (org-def
+  "a" '(org-agenda :wk "agenda")
+
   "r" '(org-refile :wk "refile")
   "s" '(org-insert-structure-template :wk "template")
   "t" '(org-todo :wk "todo")
   "'" '(org-set-tags-command :wk "tag")
 
-  ;; filter
-  "f" '(:ignore t :wk "filter")
+  ;; clock
+  "ci" '(org-clock-in :wk "clock in")
+  "co" '(org-clock-out :wk "clock out")
+  "ce" '(org-clock-modify-effort-estimate :wk "effort estimate")
+
+  ;; subtree / filter
+  "f" '(:ignore t :wk "tree")
+  "fa" '(org-archive-subtree :wk "archive")
   "ft" '(org-show-todo-tree :wk "todo tree")
 
   ;; list items
   "i" '(:ignore t :wk "list items")
-  "it" '(org-toggle-radio-button :wk "radio")
+  "ir" '(org-toggle-radio-button :wk "radio")
+  "ic" '(org-toggle-checkbox :wk "radio")
 
   ;; links
   "l" '(:ignore t :wk "links")
