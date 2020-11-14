@@ -236,6 +236,14 @@
 
 (use-package markdown-mode)
 
+(use-package docker-tramp
+  :config
+  (setq docker-tramp-use-names t))
+
+(use-package docker)
+
+(use-package docker-compose-mode)
+
 (load-file "~/.emacs.d/funs.el")
 (load-file "~/.emacs.d/keys.el")
 (almacs/load-el-directory "~/.emacs.d/lisp/")

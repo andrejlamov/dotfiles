@@ -1,12 +1,6 @@
 (require 'org)
-
-(use-package docker-tramp
-  :config
-  (setq docker-tramp-use-names t))
-
-(use-package docker)
-
-(use-package docker-compose-mode)
+(require 'dash)
+(require 's)
 
 (setq almacs/helm-docker-candidates nil)
 
