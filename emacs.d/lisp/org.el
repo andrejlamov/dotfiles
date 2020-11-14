@@ -53,6 +53,12 @@
                       [remap evil-jump-forward] 'org-cycle)
 
   (setq org-agenda-files (list "~/org/todo.org" "~/org/know.org")
+        org-outline-path-complete-in-steps nil
+        org-capture-templates '(("c" "Inbox" entry (file+headline "~/org/todo.org" "Inbox")))
+        org-refile-use-outline-path 'file
+        org-agenda-span 10
+        org-agenda-start-on-weekday nil
+        org-agenda-start-day "-3d"
         org-refile-targets '((org-agenda-files :maxlevel . 2))
         org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
                                    (todo . " %i %-12:c %-6e")
@@ -64,6 +70,8 @@
   :config (setq org-mind-map-engine "dot"))
 
 (use-package helm-org)
+
+(use-package org-drill)
 
 (general-create-definer org-def
   :states '(motion)
@@ -82,7 +90,8 @@
   ;; clock
   "ci" '(org-clock-in :wk "clock in")
   "co" '(org-clock-out :wk "clock out")
-  "ce" '(org-clock-modify-effort-estimate :wk "effort estimate")
+  "ces" '(org-set-effort :wk "set effort")
+  "cs" '(org-schedule :wk "schedule")
 
   ;; subtree / filter
   "f" '(:ignore t :wk "tree")
@@ -111,3 +120,4 @@
   "mf" '(org-mind-map-write :wk "file")
   "mt" '(org-mind-map-write-current-tree :wk "tree")
   "mb" '(org-mind-map-write-current-branch :wk "branch"))
+
