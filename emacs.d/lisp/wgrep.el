@@ -10,10 +10,10 @@
     (grep-mode)
     (wgrep-change-to-wgrep-mode))
 
-  (add-hook 'grep-mode-hook 'almacs/force-wgrep)
-  (add-hook 'helm-grep-mode-hook 'almacs/force-wgrep)
-  (add-hook 'helm-git-grep-mode-hook 'almacs/force-wgrep)
-  (add-hook 'helm-occur-mode-hook 'almacs/force-wgrep)
+  ;; (add-hook 'grep-mode-hook 'almacs/force-wgrep)
+  ;; (add-hook 'helm-grep-mode-hook 'almacs/force-wgrep)
+  ;; (add-hook 'helm-git-grep-mode-hook 'almacs/force-wgrep)
+  ;; (add-hook 'helm-occur-mode-hook 'almacs/force-wgrep)
 
   (general-create-definer wgrep-def
     :states '(normal)
