@@ -561,18 +561,3 @@
                   gc-cons-percentage 0.1)))
 
 ;; end
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(evil-collection-setup-minibuffer t)
- '(safe-local-variable-values
-   '((web-mode-code-indent-offest . 4)
-     (css-indent-offset . 2)
-     (eval web-mode-use-tabs)
-     (-web-mode-use-tabs . t)
-     (web-mode-indent-style . 1)))
- '(tramp-syntax 'default nil (tramp)))
-
-(put 'upcase-region 'disabled nil)
