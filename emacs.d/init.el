@@ -8,18 +8,7 @@
         evil-want-keybinding nil
         evil-move-beyond-eol t)
   :config
-  (evil-mode 1)
-
-  '(progn
-     (defun almacs/insert-modeline-theme ()
-       (custom-set-faces '(mode-line ((t (:background "pink" :foreground "white"))))))
-     (defun almacs/normal-modeline-theme ()
-       (custom-set-faces '(mode-line ((t (:background "black" :foreground "white"))))))
-
-     (add-hook 'evil-insert-state-entry-hook
-               'almacs/insert-modeline-theme)
-     (add-hook 'evil-insert-state-exit-hook
-               'almacs/normal-modeline-theme)))
+  (evil-mode 1))
 
 (use-package evil-surround
   :config
