@@ -1,69 +1,3 @@
-(custom-set-faces
- '(mode-line ((t (:background "black" :foreground "white"))))
- '(whitespace-tab ((t (:background "grey90"))))
- '(region ((t (:background "#eee8d5")))))
-
-(setq package-enable-at-startup nil
-      inhibit-splash-screen t
-      file-name-handler-alist nil
-      message-log-max 16384
-      gc-cons-threshold 64000000
-      gc-cons-percentage 1
-      auto-window-vscroll nil
-      backup-inhibited t
-      make-backup-files nil
-      auto-save-default nil
-      inhibit-splash-screen t
-      js-indent-level 4
-      make-backup-files nil
-      create-lockfiles nil
-      auto-save-default nil
-      whitespace-style '(face trailing tabs trailing-whitespace newline newline-mark)
-      val-expression-print-length nil
-      eval-expression-print-level nil)
-
-(menu-bar-mode -1)
-(show-paren-mode)
-(winner-mode)
-(dirtrack-mode)
-(setq-default truncate-lines t)
-(setq-default indent-tabs-mode nil)
-(setq ido-default-buffer-method 'selected-window)
-(require 'tramp)
-(tramp-change-syntax 'default)
-(auto-compression-mode 1)
-(setq vc-handled-backends nil)
-(blink-cursor-mode 0)
-(global-auto-revert-mode 1)
-(add-hook 'prog-mode-hook 'whitespace-mode)
-
-;; Disabling prompts
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq confirm-nonexistent-file-or-buffer nil)
-(setq kill-buffer-query-functions
-      (remq 'process-kill-buffer-query-function
-            kill-buffer-query-functions))
-
-(defvar file-name-handler-alist-old file-name-handler-alist)
-
-(defvar bootstrap-version)
-(let ((bootstrap-version 5)
-      (bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(setq straight-use-package-by-default t)
-(straight-use-package 'org)
-(straight-use-package 'org-plus-contrib)
-(straight-use-package 'use-package)
-
 (use-package dash-functional)
 (use-package dash)
 (use-package s)
@@ -304,27 +238,26 @@
   (evil-magit-init)
   (setq magit-diff-refine-hunk 'all))
 
-(setq lsp-keymap-prefix "C-c l")
-
-(use-package lsp-mode
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (js-jsx-mode . lsp)
-         (js-mode . lsp)
-         (web-mode . lsp)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp
-  :config
-  (setq lsp-ui-sideline-enable nil))
-
-;; (setq lsp-eslint-server-command 
-;;       '("node" 
-;;         "/home/USER/.vscode/extensions/dbaeumer.vscode-eslint-2.0.11/server/out/eslintServer.js" 
-;;         "--stdio"))
-;; optionally
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+;; TODO: experiment more with lsp
+'(progn
+   (setq lsp-keymap-prefix "C-c l")
+   (use-package lsp-mode
+     :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+            (js-jsx-mode . lsp)
+            (js-mode . lsp)
+            (web-mode . lsp)
+            ;; if you want which-key integration
+            (lsp-mode . lsp-enable-which-key-integration))
+     :commands lsp
+     :config
+     (setq lsp-ui-sideline-enable nil))
+   (use-package helm-lsp :commands helm-lsp-workspace-symbol))
 
 (use-package graphql-mode)
+
+(use-package git-auto-commit-mode)
+
+(use-package markdown-mode)
 
 (load-file "~/.emacs.d/funs.el")
 (load-file "~/.emacs.d/keys.el")
