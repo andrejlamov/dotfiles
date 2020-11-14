@@ -22,6 +22,7 @@
 
 (use-package evil-little-word
   :straight (evil-little-word :type git :host github :repo "tarao/evil-plugins" :files ("evil-little-word.el")))
+
 (use-package dash-functional)
 
 (use-package general
