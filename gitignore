@@ -4,3 +4,4 @@
 .metals
 project/metals.sbt
 .DS_Store
+jsconfig.json
