@@ -1,10 +1,150 @@
+;; -*- lexical-binding: t -*-
+
+;;; Libraries
+
 (use-package dash-functional)
 
 (use-package dash)
 
 (use-package s)
 
-(load-file "~/.emacs.d/funs.el")
+;;; Functions
+
+(defun almacs/rename-current-file (new-file-name)
+  (interactive "Fnew name:")
+  (let* ((old-file-name (buffer-file-name))
+         (old-buffer-name (current-buffer)))
+    (rename-file old-file-name new-file-name t)
+    (kill-buffer old-buffer-name)
+    (find-file new-file-name)))
+
+(defun almacs/named-shell (buffer-name)
+  (interactive "Bname: ")
+  (shell (concat "*" buffer-name "*")))
+
+(defun almacs/load-el-directory (dir)
+  (let ((load-it (lambda (f)
+                   (load-file (concat (file-name-as-directory dir) f)))))
+    (mapc load-it (directory-files dir nil "\\.el$"))))
+
+
+(defun almacs/go-to-keys-el ()
+  (interactive)
+  (find-file "~/.emacs.d/keys.el"))
+
+(defun almacs/eval-enclosed-sexp (eval-fn)
+  "Eval enclosed sexp with EVAL-FN when in normal mode at some bracket."
+  (interactive)
+  (let ((normal-eval-fn (lambda ()
+                          (save-excursion
+                            (goto-char (1+ (point)))
+                            (call-interactively eval-fn)))))
+    (if (member (string (char-after)) '("(" "[" "{"))
+        (progn
+          (evil-jump-item)
+          (eval (list normal-eval-fn))
+          (evil-jump-item))
+      (eval (list normal-eval-fn)))))
+
+(defun almacs/helm-ls-git-word-at-point ()
+  (interactive)
+  (helm :sources helm-ls-git-default-sources
+        :ff-transformer-show-only-basename nil
+        :buffer "*helm lsgit*"
+        :input (thing-at-point 'word 'no-properties)))
+
+(defun almacs/helm-occur ()
+  (interactive)
+  (let  ((c (face-attribute 'region :background)))
+    (unwind-protect
+        (set-face-attribute 'region nil :background nil)
+      (helm-occur)
+      (set-face-attribute 'region nil :background c))))
+
+(defun almacs/revert-buffer ()
+  (interactive)
+  (revert-buffer nil t t))
+
+(defun spacecat (&rest terms)
+  (s-join " " terms))
+
+(defun almacs/winner-undo ()
+  (interactive)
+  (writeroom--disable)
+  (call-interactively 'winner-undo))
+
+(defun almacs/writeroom-enable ()
+  (interactive)
+  (writeroom--enable))
+
+(defun almacs/reload-dir-locals-for-current-buffer ()
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+
+(defun almacs/reload-dir-locals-for-all-buffer-in-this-directory ()
+  (interactive)
+  (let ((dir default-directory))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (equal default-directory dir))
+        (almacs/reload-dir-locals-for-current-buffer)))))
+
+(defun almacs/uuid ()
+  (interactive)
+  (s-trim (shell-command-to-string "uuidgen")))
+
+(defmacro almacs/define-key (state keymap &rest bindings)
+  (-let ((keymaps `(if (symbolp ,keymap)
+                       (list ,keymap) ,keymap))
+
+         (bindings1 `(->> ',bindings
+                          (-partition 2)
+                          (-reduce-from (-lambda ((acc &as x . xs) (binding &as k v))
+                                          (if (stringp k)
+                                              (cons (list binding) acc)
+                                            (cons (cons binding x) xs)))
+                                        nil)
+                          (-map 'reverse)
+                          (reverse))))
+    `(-each ,keymaps
+       (lambda (km)
+         (-each ,bindings1
+           (-lambda (((key def) . options))
+             (cond
+              ((or
+                (and (symbolp def) (fboundp def))
+                (eq 'lambda (car def))
+                (eq nil def))
+               (evil-define-key* ,state (symbol-value km) key def))
+              (t (evil-define-key* ,state (symbol-value km) key `(lambda () (interactive) ,def))))
+             (-each options
+               (-lambda ((opt v))
+                 (cond
+                  ((eq opt :wk)
+                   (progn (which-key-add-major-mode-key-based-replacements
+                            (intern (s-chop-suffix "-map" (symbol-name km)))
+                            key v)))
+                  (t nil))))))))))
+
+(defun almacs/helm-occur-from-region ()
+  (interactive)
+  (helm-multi-occur-1
+   (list (current-buffer))
+   (buffer-substring-no-properties
+    (region-beginning)
+    (region-end))))
+
+(defun almacs/motion-escape ()
+  (interactive)
+  (evil-mc-undo-all-cursors))
+
+(defun almacs/avy-cp-backward-up ()
+  (interactive)
+  (call-interactively 'avy-goto-char-timer)
+  (call-interactively 'evil-cp-backward-up-sexp))
+
+;;; Packages
 
 (use-package evil
   :init
@@ -259,8 +399,6 @@
 (use-package docker)
 
 (use-package docker-compose-mode)
-
-(load-file "~/.emacs.d/keys.el")
 
 (use-package cider
   :config
@@ -552,12 +690,178 @@
   (evil-collection-define-key 'normal 'wgrep-mode-map
     (kbd "C-l") 'compile-goto-error))
 
-(almacs/load-el-directory "~/.emacs.d/lisp/")
+;;; Keys
 
+;; avy cheat sheet
+'(defcustom avy-dispatch-alist
+   '((?x . avy-action-kill-move)
+     (?X . avy-action-kill-stay)
+     (?t . avy-action-teleport)
+     (?m . avy-action-mark)
+     (?n . avy-action-copy)
+     (?y . avy-action-yank)
+     (?i . avy-action-ispell)
+     (?z . avy-action-zap-to-char)))
+'(defvar aw-dispatch-alist
+   '((?x aw-delete-window "Delete Window")
+     (?m aw-swap-window "Swap Windows")
+     (?M aw-move-window "Move Window")
+     (?j aw-switch-buffer-in-window "Select Buffer")
+     (?n aw-flip-window)
+     (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+     (?c aw-split-window-fair "Split Fair Window")
+     (?v aw-split-window-vert "Split Vert Window")
+     (?b aw-split-window-horz "Split Horz Window")
+     (?o delete-other-windows "Delete Other Windows")
+     (?? aw-show-dispatch-help)))
+
+(general-def 'visual
+  "C-s" 'almacs/helm-occur-from-region
+  "M-s" 'almacs/helm-occur
+  "v" 'er/expand-region)
+
+(general-def 'emacs
+  "<escape>" 'evil-force-normal-state)
+
+(general-def 'normal
+  "<escape>" 'almacs/motion-escape)
+(general-def 'insert
+  "C-w" 'ace-window)
+(general-def 'motion
+  "e" 'evil-forward-little-word-end
+  "w" 'evil-a-little-word
+  "C-s" 'isearch-forward-regexp
+  "C-u" 'evil-scroll-up
+  "C-SPC" 'tile
+  "C-@" 'tile
+  "C-w" 'ace-window)
+
+(general-create-definer almacs/leader-def
+  :states '(normal visual emacs)
+  :prefix "SPC"
+  :keymaps 'override
+  :non-normal-prefix "M-SPC"
+  :prefix-map 'almacs/prefix-map
+  :prefix-command 'almacs/prefix-command)
+
+(almacs/leader-def
+  "C-w" '(ace-window :wk "ace")
+
+  "C-j" '(avy-pop-mark :wk "avy pop")
+  "J" '(avy-goto-line :wk "avy line")
+  "j" '(avy-goto-char-timer :wk "avy timer")
+
+  "F" '(helm-semantic-or-imenu :wk "semantic search")
+  "SPC" '(helm-M-x :wk "M-x")
+
+  "TAB" '(evil-buffer :wk "toggle buffer")
+  "<backtab>" '(bs-cycle-previous :wk "prev buffer")
+  "C-M-i" '(bs-cycle-next :wk "next buffer")
+
+  "a" '(:ignore t :wk "stuff")
+  "as" '(shell :wk "shell")
+  "aS" '(almacs/named-shell :wk "named shell")
+  "at" '(almacs/xfce4-term :wk "term")
+  "ak" '(almacs/go-to-keys-el :wk "keys.el")
+  "am" '(almacs/go-to-modules-el :wk "modules")
+  "ap" '(almacs/go-to-base-packages-el :wk "base-packages.el")
+  "aC" '(almacs/reload :wk "reload almacs")
+  "aw" '(whitespace-cleanup :wk "clean whitespace")
+  "aW" '(whitespace-mode :wk "whitespace mode")
+  "a/" '(indent-region :wk "indent-region")
+  "a TAB" '(tabify :wk "tabify")
+  "az" '(almacs/set-font-global-size :wk "global font-size")
+  "aZ" '(text-scale-adjust :wk "local text scale")
+  "al" '(toggle-input-method :wk "toggle input")
+
+  "s" '(:ignore t :wk "search")
+  "ss" '(almacs/helm-occur :wk "occur")
+  "sa" '(helm-do-ag :wk "ag dir")
+  "sf" '(helm-do-ag-this-file :wk "ag this file")
+
+  "F" '(helm-semantic-or-imenu :wk "semantic search")
+  "m" '(almacs/vr-evil-mc :wk "mc")
+  "r" '(helm-resume :wk "resume")
+  "R" '(helm-recentf :wk "recentf")
+  "k" '(helm-show-kill-ring :wk "kill ring")
+  "c" '(comment-region :wk "comment")
+  "C" '(uncomment-region :wk "comment")
+  "t" '(toggle-truncate-lines t :wk "toggle truncate")
+
+  "f" '(:ignore t :wk "file")
+  "fs" '(save-buffer :wk "save")
+  "ff" '(helm-find-files :wk "ff")
+  "fR" '(almacs/rename-current-file :wk "rename file")
+  "fD" '(almacs/delete-current-buffer-file :wk "delete file")
+  "fL" '(helm-locate :wk "locate file")
+
+  "o" '(:ignore t :wk "org")
+  "oa" '(org-agenda :wk "agenda")
+  "oc" '(org-capture :wk "capture")
+
+  "dd" '(almacs/helm-docker-ps :wk "docker ps")
+  "dc" '(docker-compose :wk "docker compose")
+  "de" '(helm-list-emacs-process :wk "emacs ps")
+  "dh" '(helm-top :wk "top")
+  "dt" '(helm-timers :wk "timers")
+
+  "p" '(:ignore t :wk "purpose")
+  "ps" '(purpose-save-window-layout :wk "save")
+  "pl" '(purpose-load-window-layout :wk "load")
+  "pw" '(purpose-toggle-window-purpose-dedicated :wk "toggle buffer")
+
+  "C-w" '(ace-window :wk "ace")
+
+  "w" '(:ignore t :wk "windows")
+  "wu" '(almacs/winner-undo :wk "winner-undo")
+  "ww" '(almacs/writeroom-enable :wk "toogle writeroom")
+  "wf" '(delete-other-windows :wk "full")
+  "wd" '(delete-window :wk "delete")
+  "wb" '(balance-windows :wk "balance")
+  "ws" '(split-window-right :wk "split right")
+  "wS" '(split-window-below :wk "split below")
+  "wm" '(delete-other-windows :wk "full screen")
+  "wr" '(hydra-window-resize/body :wk "resize window")
+  "1" '(eyebrowse-switch-to-window-config-1 :wk "w1")
+  "2" '(eyebrowse-switch-to-window-config-2 :wk "w2")
+  "3" '(eyebrowse-switch-to-window-config-3 :wk "w3")
+  "4" '(eyebrowse-switch-to-window-config-4 :wk "w4")
+
+  "b" '(:ignore t :wk "buffers")
+  "bd" '(kill-this-buffer :wk "kill")
+  "br" '(rename-buffer :wk "rename")
+  "bb" '(helm-buffers-list :wk "list")
+  "b." '(almacs/revert-buffer :wk "revert")
+  "?" '(helm-man-woman :wk "man")
+  "B"  '(helm-browse-project :wk "browse repo")
+
+  "g" '(:ignore t :wk "git")
+  "gF" '(magit-fetch-all :wk "git fetch all")
+  "gG" '(helm-git-grep-at-point :wk "git grep point")
+  "gR" '(magit-reset-hard :wk "git reset hard")
+  "gW" '(almacs/helm-ls-git-word-at-point :wk "lsgit word")
+  "gg" '(helm-git-grep :wk "git grep")
+  "gh" '(magit-log-head :wk "log HEAD")
+  "gs" '(magit-status :wk "status"))
+
+(defhydra hydra-window-resize ()
+  "Window resize"
+  ("h" shrink-window-horizontally "-h")
+  ("j" shrink-window "-v")
+  ("k" enlarge-window "+v" )
+  ("l" enlarge-window-horizontally "+h"))
+
+(evil-define-key 'normal sql-mode-map
+  ",eb" 'sql-send-buffer
+  ",ee" 'sql-send-line-and-next)
+
+(evil-define-key 'visual sql-mode-map
+  ",ee" 'sql-send-region)
+
+;; End
 (add-hook 'after-init-hook
           (lambda ()
             (setq file-name-handler-alist file-name-handler-alist-old
                   gc-cons-threshold 800000
                   gc-cons-percentage 0.1)))
 
-;; end
