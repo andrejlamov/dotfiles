@@ -63,10 +63,6 @@
                      (-find (lambda (b) (s-starts-with? (char-to-string char) (s-trim b) t))))))
     (switch-to-buffer b t t)))
 
-(defun almacs/switch-to-buffer (candidate)
-  (interactive)
-  (switch-to-buffer candidate nil t))
-
 (defun almacs/delete-current-buffer-file ()
   (interactive)
   (delete-file (buffer-file-name))
