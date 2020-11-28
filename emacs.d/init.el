@@ -461,22 +461,6 @@
                             'cider-pprint-eval-last-sexp-to-comment)
                      ",ef" cider-pprint-eval-defun-at-point))
 
-;;;;
-
-(use-package tide
-  :config
-  (defun setup-tide-mode ()
-    (interactive)
-    (tide-setup)
-    (flycheck-mode +1)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (eldoc-mode +1)
-    (tide-hl-identifier-mode +1)
-    (company-mode +1))
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-  (setq company-tooltip-align-annotations t))
-
 (use-package web-mode
   :general
   (:keymaps
@@ -506,9 +490,22 @@
    ",-" 'web-mode-element-contract)
 
   :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-hook 'web-mode-hook
@@ -524,6 +521,13 @@
         web-mode-code-indent-offset 2
         web-mode-indent-style  1
         web-mode-enable-css-colorization t))
+
+(use-package tide
+  :ensure t
+  :config
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)))
 
 (use-package prettier-js
   :config '(add-hook 'web-mode-hook 'prettier-js-mode))
