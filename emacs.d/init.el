@@ -574,6 +574,41 @@
 (use-package evil-org
   :ensure t
   :after org
+  :general
+  (:keymaps
+   '(evil-org-mode-map org-mode-map)
+   :states '(motion)
+   ",a" 'org-agenda
+
+   ",r" 'org-refile
+   ",s" 'org-insert-structure-template
+   ",t" 'org-todo
+   ",'" 'org-set-tags-command
+
+   ",ci" 'org-clock-in
+   ",co" 'org-clock-out
+   ",ces" 'org-set-effort
+   ",cs" 'org-schedule
+
+   ",fa" 'org-archive-subtree
+   ",ft" 'org-show-todo-tree
+
+   ",ir" 'org-toggle-radio-button
+   ",ic" 'org-toggle-checkbox
+
+   ",ls" 'org-store-link
+   ",li" 'org-insert-link
+
+   ",h" 'helm-org-in-buffer-headings
+   ",d" 'org-display-inline-images
+
+   ",pp" 'org-priority
+   ",pk" 'org-priority-up
+   ",pj" 'org-priority-down
+
+   ",mf" 'org-mind-map-write
+   ",mt" 'org-mind-map-write-current-tree
+   ",mb" 'org-mind-map-write-current-branch)
   :config
   (require 'org-id)
   (setq org-id-link-to-org-use-id t)
@@ -586,7 +621,7 @@
   (general-define-key :keymaps 'org-mode-map
                       [remap evil-jump-forward] 'org-cycle)
 
-  (setq org-agenda-files (list "~/org/todo.org" "~/org/know.org")
+  (setq org-agenda-files (list "~/org/todo.org" "~/org/work.org")
         org-outline-path-complete-in-steps nil
         org-capture-templates '(("c" "Inbox" entry (file+headline "~/org/todo.org" "Inbox")))
         org-refile-use-outline-path 'file
@@ -597,55 +632,7 @@
         org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
                                    (todo . " %i %-12:c %-6e")
                                    (tags . " %i %-12:c")
-                                   (search . " %i %-12:c")))
-
-  (general-create-definer org-def
-    :states '(motion)
-    :keymaps '(org-mode-map evil-org-mode-map)
-    :prefix ","
-    :keymaps 'override)
-
-  (org-def
-    "a" '(org-agenda :wk "agenda")
-
-    "r" '(org-refile :wk "refile")
-    "s" '(org-insert-structure-template :wk "template")
-    "t" '(org-todo :wk "todo")
-    "'" '(org-set-tags-command :wk "tag")
-
-    ;; clock
-    "ci" '(org-clock-in :wk "clock in")
-    "co" '(org-clock-out :wk "clock out")
-    "ces" '(org-set-effort :wk "set effort")
-    "cs" '(org-schedule :wk "schedule")
-
-    ;; subtree / filter
-    "f" '(:ignore t :wk "tree")
-    "fa" '(org-archive-subtree :wk "archive")
-    "ft" '(org-show-todo-tree :wk "todo tree")
-
-    ;; list items
-    "i" '(:ignore t :wk "list items")
-    "ir" '(org-toggle-radio-button :wk "radio")
-    "ic" '(org-toggle-checkbox :wk "radio")
-
-    ;; links
-    "l" '(:ignore t :wk "links")
-    "ls" '(org-store-link :wk "store")
-    "li" '(org-insert-link :wk "insert")
-
-    "h" '(helm-org-in-buffer-headings :wk "headings")
-    "d" '(org-display-inline-images :wk "display inline images")
-
-    "p" '(:ignore t :wk "prio")
-    "pp" '(org-priority :wk "up")
-    "pk" '(org-priority-up :wk "up")
-    "pj" '(org-priority-down :wk "down")
-
-    "m" '(:ignore t :wk "mind map")
-    "mf" '(org-mind-map-write :wk "file")
-    "mt" '(org-mind-map-write-current-tree :wk "tree")
-    "mb" '(org-mind-map-write-current-branch :wk "branch")))
+                                   (search . " %i %-12:c"))))
 
 (use-package org-mind-map
   :init (require 'ox-org)
@@ -655,38 +642,23 @@
 
 (use-package org-drill)
 
-(use-package wgrep)
+(use-package wgrep
+  :config
+  (setq wgrep-enable-key "r"))
 
 (use-package wgrep-helm
+  :general
+  (:keymaps
+   '(wgrep-mode-map grep-mode-map helm-occur-mode-map helm-git-grep-mode-map)
+   :states '(normal)
+   ",w" 'wgrep-change-to-wgrep-mode
+   "C-l" 'compile-goto-error)
   :config
-
   (setq wgrep-auto-save-buffer t
-        wgrep-change-readonly-file t)
+        wgrep-change-readonly-file t))
 
-  (defun almacs/force-wgrep ()
-    (grep-mode)
-    (wgrep-change-to-wgrep-mode))
-
-  ;; (add-hook 'grep-mode-hook 'almacs/force-wgrep)
-  ;; (add-hook 'helm-grep-mode-hook 'almacs/force-wgrep)
-  ;; (add-hook 'helm-git-grep-mode-hook 'almacs/force-wgrep)
-  ;; (add-hook 'helm-occur-mode-hook 'almacs/force-wgrep)
-
-  (general-create-definer wgrep-def
-    :states '(normal)
-    :keymaps '(wgrep-mode-map grep-mode-map helm-occur-mode-map helm-git-grep-mode-map)
-    :prefix ","
-    :keymaps 'override)
-
-  (wgrep-def
-    "w" '(wgrep-change-to-wgrep-mode :wk "wgrep"))
-
-  (evil-collection-define-key 'normal 'helm-grep-mode-map
-    (kbd "C-l") 'compile-goto-error)
-  (evil-collection-define-key 'normal 'grep-mode-map
-    (kbd "C-l") 'compile-goto-error)
-  (evil-collection-define-key 'normal 'wgrep-mode-map
-    (kbd "C-l") 'compile-goto-error))
+(use-package tdd
+  :straight (emacs-tdd :type git :host github :repo "jorgenschaefer/emacs-tdd"))
 
 ;;; Keys
 
@@ -856,6 +828,15 @@
 (evil-define-key 'visual sql-mode-map
   ",ee" 'sql-send-region)
 
+(almacs/define-key 'normal 'emacs-lisp-mode-map
+                   ",i" indent-sexp
+                   ",c" check-parens
+                   ",D" toggle-debug-on-error
+                   ",eb" almacs/elisp-check-eval-buffer :wk "buffer"
+                   ",ep" (almacs/eval-enclosed-sexp 'pp-eval-last-sexp) :wk "exp pretty"
+                   ",ee" (almacs/eval-enclosed-sexp 'eval-last-sexp) :wk "exp"
+                   ",tt" almacs/ert-t
+                   ",tB" almacs/eval-ert-t)
 ;; End
 (add-hook 'after-init-hook
           (lambda ()
