@@ -577,8 +577,8 @@
   :after org
   :general
   (:keymaps
-   '(evil-org-mode-map org-mode-map)
-   :states '(motion)
+   '(evil-org-mode-map)
+   :states '(normal visual)
    ",a" 'org-agenda
 
    ",r" 'org-refile
