@@ -254,13 +254,13 @@
   :general
   (:keymaps
    'evil-cleverparens-mode-map
-   :states '(normal visual)
-   "\M-r" nil
-   "\M-H" 'almacs/avy-cp-backward-up
-   "\M-r(" 'sp-splice-sexp-killing-backward
-   "\M-rr" 'sp-raise-sexp
-   "\M-r\M-r" 'sp-raise-sexp
-   "\M-r)" 'sp-splice-sexp-killing-forward)
+   :states '(normal visual motion)
+   "M-H" 'almacs/avy-cp-backward-up
+   "M-r" nil
+   "M-r (" 'sp-splice-sexp-killing-backward
+   "M-r r" 'sp-raise-sexp
+   "M-r M-r" 'sp-raise-sexp
+   "M-r )" 'sp-splice-sexp-killing-forward)
   :init
   (add-hook 'clojure-mode-hook 'evil-cleverparens-mode)
   (add-hook 'lisp-mode-hook 'evil-cleverparens-mode)
