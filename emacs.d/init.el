@@ -14,7 +14,7 @@
   (interactive)
   (switch-to-buffer candidate nil t))
 
-(defun almacs/rename-current- (new-file-name)
+(defun almacs/rename-current-file (new-file-name)
   (interactive "Fnew name:")
   (let* ((old-file-name (buffer-file-name))
          (old-buffer-name (current-buffer)))
