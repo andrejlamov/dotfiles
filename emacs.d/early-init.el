@@ -1,5 +1,3 @@
-'(custom-set-faces
-
 (setq package-enable-at-startup nil
       inhibit-splash-screen t
       file-name-handler-alist nil
