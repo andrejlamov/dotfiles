@@ -31,10 +31,9 @@
                    (load-file (concat (file-name-as-directory dir) f)))))
     (mapc load-it (directory-files dir nil "\\.el$"))))
 
-
-(defun almacs/go-to-keys-el ()
+(defun almacs/go-to-init-el ()
   (interactive)
-  (find-file "~/.emacs.d/keys.el"))
+  (find-file "~/.emacs.d/init.el"))
 
 (defun almacs/eval-enclosed-sexp (eval-fn)
   "Eval enclosed sexp with EVAL-FN when in normal mode at some bracket."
@@ -731,11 +730,7 @@
   "a" '(:ignore t :wk "stuff")
   "as" '(shell :wk "shell")
   "aS" '(almacs/named-shell :wk "named shell")
-  "at" '(almacs/xfce4-term :wk "term")
-  "ak" '(almacs/go-to-keys-el :wk "keys.el")
-  "am" '(almacs/go-to-modules-el :wk "modules")
-  "ap" '(almacs/go-to-base-packages-el :wk "base-packages.el")
-  "aC" '(almacs/reload :wk "reload almacs")
+  "ai" '(almacs/go-to-init-el :wk "init.el")
   "aw" '(whitespace-cleanup :wk "clean whitespace")
   "aW" '(whitespace-mode :wk "whitespace mode")
   "a/" '(indent-region :wk "indent-region")
