@@ -250,24 +250,26 @@
 (use-package paredit)
 
 (use-package evil-cleverparens
-  :straight (evil-cleverparens :type git :host github :repo "andrejlamov/evil-cleverparens")
   :commands evil-cleverparens-mode
+  :general
+  (:keymaps
+   'evil-cleverparens-mode-map
+   :states '(normal visual)
+   "\M-r" nil
+   "\M-H" 'almacs/avy-cp-backward-up
+   "\M-r(" 'sp-splice-sexp-killing-backward
+   "\M-rr" 'sp-raise-sexp
+   "\M-r\M-r" 'sp-raise-sexp
+   "\M-r)" 'sp-splice-sexp-killing-forward)
   :init
-  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'hy-mode-hook #'evil-cleverparens-mode)
+  (add-hook 'clojure-mode-hook 'evil-cleverparens-mode)
+  (add-hook 'lisp-mode-hook 'evil-cleverparens-mode)
+  (add-hook 'emacs-lisp-mode-hook 'evil-cleverparens-mode)
+  (add-hook 'hy-mode-hook 'evil-cleverparens-mode)
   :config
   (require 'evil-cleverparens-text-objects)
   (setq evil-cleverparens-use-additional-bindings t
-        evil-cleverparens-use-additional-movement-keys t)
-  (almacs/define-key 'normal '(evil-cleverparens-mode-map)
-                     "\M-H" almacs/avy-cp-backward-up
-                     "\M-r" nil
-                     "\M-r(" sp-splice-sexp-killing-backward
-                     "\M-rr" sp-raise-sexp
-                     "\M-r\M-r" sp-raise-sexp
-                     "\M-r)" sp-splice-sexp-killing-forward))
+        evil-cleverparens-use-additional-movement-keys t))
 
 (use-package clojure-mode)
 
