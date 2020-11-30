@@ -575,8 +575,7 @@
 (use-package visual-regexp)
 
 (use-package evil-org
-  :ensure t
-  :after org
+  :hook (org-mode . evil-org-mode)
   :general
   (:keymaps
    '(evil-org-mode-map)
@@ -615,7 +614,6 @@
   :config
   (require 'org-id)
   (setq org-id-link-to-org-use-id t)
-  (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'evil-org-mode-hook
             (lambda ()
               (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))))
