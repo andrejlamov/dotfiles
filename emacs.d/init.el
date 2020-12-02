@@ -661,6 +661,10 @@
 (use-package tdd
   :straight (emacs-tdd :type git :host github :repo "jorgenschaefer/emacs-tdd"))
 
+(use-package treemacs)
+
+(use-package treemacs-evil)
+
 ;;; Keys
 
 ;; avy cheat sheet
@@ -740,6 +744,7 @@
   "az" '(almacs/set-font-global-size :wk "global font-size")
   "aZ" '(text-scale-adjust :wk "local text scale")
   "al" '(toggle-input-method :wk "toggle input")
+  "at" '(treemacs :wk "treemacs")
 
   "s" '(:ignore t :wk "search")
   "ss" '(almacs/helm-occur :wk "occur")
