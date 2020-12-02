@@ -5,4 +5,4 @@
 project/metals.sbt
 .DS_Store
 jsconfig.json
-.rej
+*.rej
