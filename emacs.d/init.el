@@ -312,6 +312,7 @@
 
 (use-package ace-window
   :config
+  (ace-window-display-mode 1)
   (setq aw-keys '(?h ?j ?k ?l)))
 
 (use-package bash-completion
