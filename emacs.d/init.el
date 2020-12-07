@@ -207,7 +207,7 @@
 
   (helm-autoresize-mode 1)
   (setq helm-autoresize-min-height 40
-        helm-ff-auto-update-initial-value nil
+        helm-ff-auto-update-initial-value t
         helm-mode-fuzzy-match t
         helm-completion-in-region-fuzzy-match t
         helm-split-window-inside-p t
