@@ -666,6 +666,7 @@
 
 (use-package treemacs-evil)
 
+(use-package org-kanban)
 ;;; Keys
 
 ;; avy cheat sheet
