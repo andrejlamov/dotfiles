@@ -737,6 +737,7 @@
   "a" '(:ignore t :wk "stuff")
   "as" '(shell :wk "shell")
   "aS" '(almacs/named-shell :wk "named shell")
+  "ac" 'comint-clear-buffer
   "ai" '(almacs/go-to-init-el :wk "init.el")
   "aw" '(whitespace-cleanup :wk "clean whitespace")
   "aW" '(whitespace-mode :wk "whitespace mode")
