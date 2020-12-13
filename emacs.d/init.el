@@ -587,8 +587,8 @@
   :hook (org-mode . evil-org-mode)
   :general
   (:keymaps
-   '(evil-org-mode-map)
-   :states '(normal visual)
+   '(org-mode-map evil-org-mode-map)
+   :states '(motion)
    ",a" 'org-agenda
 
    ",r" 'org-refile
@@ -606,6 +606,9 @@
 
    ",ir" 'org-toggle-radio-button
    ",ic" 'org-toggle-checkbox
+
+   ",is" 'org-insert-subheading
+   ",ih" 'org-insert-heading
 
    ",ls" 'org-store-link
    ",li" 'org-insert-link
