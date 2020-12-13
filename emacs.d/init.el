@@ -49,6 +49,14 @@
           (evil-jump-item))
       (eval (list normal-eval-fn)))))
 
+(defun almacs/pp-eval-last-sexp ()
+  (interactive)
+  (almacs/eval-enclosed-sexp 'pp-eval-last-sexp))
+
+(defun almacs/eval-last-sexp ()
+  (interactive)
+  (almacs/eval-enclosed-sexp 'eval-last-sexp))
+
 (defun almacs/helm-ls-git-word-at-point ()
   (interactive)
   (helm :sources helm-ls-git-default-sources
@@ -667,7 +675,31 @@
 (use-package treemacs-evil)
 
 (use-package org-kanban)
+
 ;;; Keys
+
+(general-define-key
+ :keymaps 'emacs-lisp-mode-map
+ :state 'normal
+ ",i" 'indent-sexp
+ ",c" 'check-parens
+ ",D" 'toggle-debug-on-error
+ ",eb" 'almacs/elisp-check-eval-buffer
+ ",ep" 'almacs/pp-eval-last-sexp
+ ",ee" 'almacs/eval-last-sexp
+ ",tt" 'almacs/ert-t
+ ",tB" 'almacs/eval-ert-t)
+
+(general-define-key
+ :keymaps 'sql-mode-map
+ :state 'visual
+ ",ee" 'sql-send-region)
+
+(general-define-key
+ :keymaps 'sql-mode-map
+ :state 'normal
+ ",eb" 'sql-send-buffer
+ ",ee" 'sql-send-line-and-next)
 
 ;; avy cheat sheet
 '(defcustom avy-dispatch-alist
@@ -825,23 +857,6 @@
   ("j" shrink-window "-v")
   ("k" enlarge-window "+v" )
   ("l" enlarge-window-horizontally "+h"))
-
-(evil-define-key 'normal sql-mode-map
-  ",eb" 'sql-send-buffer
-  ",ee" 'sql-send-line-and-next)
-
-(evil-define-key 'visual sql-mode-map
-  ",ee" 'sql-send-region)
-
-(almacs/define-key 'normal 'emacs-lisp-mode-map
-                   ",i" indent-sexp
-                   ",c" check-parens
-                   ",D" toggle-debug-on-error
-                   ",eb" almacs/elisp-check-eval-buffer :wk "buffer"
-                   ",ep" (almacs/eval-enclosed-sexp 'pp-eval-last-sexp) :wk "exp pretty"
-                   ",ee" (almacs/eval-enclosed-sexp 'eval-last-sexp) :wk "exp"
-                   ",tt" almacs/ert-t
-                   ",tB" almacs/eval-ert-t)
 ;; End
 (add-hook 'after-init-hook
           (lambda ()
