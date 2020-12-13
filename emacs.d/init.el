@@ -683,7 +683,7 @@
 
 (general-define-key
  :keymaps 'emacs-lisp-mode-map
- :state 'normal
+ :states 'normal
  ",i" 'indent-sexp
  ",c" 'check-parens
  ",D" 'toggle-debug-on-error
@@ -695,12 +695,12 @@
 
 (general-define-key
  :keymaps 'sql-mode-map
- :state 'visual
+ :states 'visual
  ",ee" 'sql-send-region)
 
 (general-define-key
  :keymaps 'sql-mode-map
- :state 'normal
+ :states 'normal
  ",eb" 'sql-send-buffer
  ",ee" 'sql-send-line-and-next)
 
