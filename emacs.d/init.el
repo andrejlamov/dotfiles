@@ -8,7 +8,7 @@
 (defun almacs/cream-theme ()
   (let ((brightwhite (almacs/c "#fdf6e3" "brightwhite"))
         (white (almacs/c "#eee8d5" "white"))
-        (black (almacs/c "#002b36" "black")))
+        (black (almacs/c "#073642" "black")))
 
     (when window-system
       (set-background-color brightwhite)
