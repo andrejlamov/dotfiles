@@ -17,7 +17,6 @@
       val-expression-print-length nil
       eval-expression-print-level nil)
 
-(menu-bar-mode -1)
 (show-paren-mode)
 (winner-mode)
 (dirtrack-mode)

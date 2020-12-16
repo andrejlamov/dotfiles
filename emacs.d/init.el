@@ -1,5 +1,31 @@
 ;; -*- lexical-binding: t -*-
 
+;;; Miminal visuals
+
+(defun almacs/c (x-color nw-color)
+  (if window-system x-color nw-color))
+
+(defun almacs/cream-theme ()
+  (let ((brightwhite (almacs/c "#fdf6e3" "brightwhite"))
+        (white (almacs/c "#eee8d5" "white"))
+        (black (almacs/c "#002b36" "black")))
+
+    (when window-system
+      (set-background-color brightwhite)
+      (set-frame-font "Source code pro"))
+
+    (custom-set-faces
+     `(mode-line ((t (:background ,black :foreground ,brightwhite))))
+     `(mode-line-inactive ((t (:box nil :background ,white :foreground ,black )))))))
+
+(when window-system
+  (fringe-mode 0)
+  (tool-bar-mode -1)
+  (toggle-scroll-bar -1))
+
+(menu-bar-mode -1)
+(almacs/cream-theme)
+
 ;;; Libraries
 
 (use-package dash-functional)
