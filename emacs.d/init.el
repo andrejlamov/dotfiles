@@ -271,7 +271,9 @@
                              'almacs/switch-to-buffer
                              helm-source-buffers-list 0))
 
-(use-package avy)
+(use-package avy
+  :config
+  (setq avy-background t))
 
 (use-package company :config (global-company-mode))
 
