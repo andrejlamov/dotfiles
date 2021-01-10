@@ -21,6 +21,9 @@
 (winner-mode)
 (dirtrack-mode)
 
+(setq whitespace-style '(face trailing ))
+(global-whitespace-mode)
+
 (set-frame-font "Source Code Pro")
 (fset 'yes-or-no-p 'y-or-n-p)
 (when window-system
