@@ -1,31 +1,32 @@
 ;; -*- lexical-binding: t -*-
 
-;;; Miminal visuals
+(defvar bootstrap-version)
+(let ((bootstrap-version 5)
+      (bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
-;; (defun almacs/c (x-color nw-color)
-;;   (if window-system x-color nw-color))
-
-;; (defun almacs/cream-theme ()
-;;   (let ((brightwhite (almacs/c "#fdf6e3" "brightwhite"))
-;;         (white (almacs/c "#eee8d5" "white"))
-;;         (black (almacs/c "#073642" "black")))
-
-;;     (when window-system
-;;       (set-background-color brightwhite)
-;;       (set-frame-font "Source code pro"))
-
-;;     (custom-set-faces
-;;      `(mode-line ((t (:background ,black :foreground ,brightwhite))))
-;;      `(mode-line-inactive ((t (:box nil :background ,white :foreground ,black )))))))
+(straight-use-package 'org)
+(straight-use-package 'org-plus-contrib)
+(show-paren-mode)
+(winner-mode)
+(dirtrack-mode)
 
 (set-frame-font "Source Code Pro")
+(fset 'yes-or-no-p 'y-or-n-p)
 (when window-system
   (fringe-mode 0)
   (tool-bar-mode -1)
   (toggle-scroll-bar -1))
-
-;; (menu-bar-mode -1)
-;; (almacs/cream-theme)
 
 (setq visible-bell nil
       ring-bell-function 'ignore)
@@ -234,6 +235,7 @@
 (use-package helm-ag)
 
 (use-package helm
+  :defer t
   :config
   (require 'helm-config)
   (helm-top-poll-mode)
@@ -245,7 +247,6 @@
 
   (helm-autoresize-mode 1)
   (setq helm-autoresize-min-height 40
-        helm-ff-auto-update-initial-value t
         helm-mode-fuzzy-match t
         helm-completion-in-region-fuzzy-match t
         helm-split-window-inside-p t
@@ -508,35 +509,13 @@
 
 (use-package web-mode
   :config
-  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable for .js/.jsx files
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
   (setq
    web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))
    web-mode-enable-auto-pairing t
    web-mode-enable-auto-expanding t
    web-mode-enable-auto-closing t
-   web-mode-markup-indent-offset 2
-   web-mode-css-indent-offset 2
-   web-mode-code-indent-offset 2
-   web-mode-indent-style  1
    web-mode-enable-css-colorization t)
-
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-  ;; (defun setup-tide-mode ()
-  ;;   (interactive)
-  ;;   (tide-setup)
-  ;;   (flycheck-mode +1)
-  ;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  ;;   (eldoc-mode +1)
-  ;;   (tide-hl-identifier-mode +1)
-  ;;   (company-mode +1))
-
-  ;; (add-hook 'web-mode-hook
-  ;;           (lambda ()
-  ;;             (when (string-equal "jsx" (file-name-extension buffer-file-name))
-  ;;               (setup-tide-mode))))
-
-  :hook ((js-mode . web-mode))
   :general
   (:keymaps
    'web-mode-map
@@ -889,10 +868,4 @@
   ("j" shrink-window "-v")
   ("k" enlarge-window "+v" )
   ("l" enlarge-window-horizontally "+h"))
-;; End
-(add-hook 'after-init-hook
-          (lambda ()
-            (setq file-name-handler-alist file-name-handler-alist-old
-                  gc-cons-threshold 800000
-                  gc-cons-percentage 0.1)))
 
