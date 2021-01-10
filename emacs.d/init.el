@@ -777,16 +777,14 @@
 
 (general-def 'normal
   "<escape>" 'almacs/motion-escape)
-(general-def 'insert
-  "C-w" 'ace-window)
+
 (general-def 'motion
   "e" 'evil-forward-little-word-end
   "w" 'evil-a-little-word
   "C-s" 'isearch-forward-regexp
   "C-u" 'evil-scroll-up
   "C-SPC" 'tile
-  "C-@" 'tile
-  "C-w" 'ace-window)
+  "C-@" 'tile)
 
 (general-create-definer almacs/leader-def
   :states '(normal visual emacs)
@@ -797,8 +795,6 @@
   :prefix-command 'almacs/prefix-command)
 
 (almacs/leader-def
-  "C-w" '(ace-window :wk "ace")
-
   "C-j" '(avy-pop-mark :wk "avy pop")
   "J" '(avy-goto-line :wk "avy line")
   "j" '(avy-goto-char-timer :wk "avy timer")
@@ -859,8 +855,6 @@
   "ps" '(purpose-save-window-layout :wk "save")
   "pl" '(purpose-load-window-layout :wk "load")
   "pw" '(purpose-toggle-window-purpose-dedicated :wk "toggle buffer")
-
-  "C-w" '(ace-window :wk "ace")
 
   "w" '(:ignore t :wk "windows")
   "wu" '(almacs/winner-undo :wk "winner-undo")
