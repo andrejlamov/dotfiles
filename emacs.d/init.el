@@ -355,7 +355,7 @@
 
 (use-package ace-window
   :general
-  (:states 'normal
+  (:states '(visual normal)
            :keymaps 'override
            "C-w" 'ace-window)
   :config
