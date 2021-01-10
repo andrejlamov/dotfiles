@@ -441,9 +441,6 @@
   (eyebrowse-init)
   (eyebrowse-setup-evil-keys))
 
-(use-package evil-magit
-  :commands evil-magit-init)
-
 (use-package helm-ls-git
   :commands helm-ls-git-ls helm-browse-project)
 
@@ -454,7 +451,6 @@
 (use-package magit
   :commands magit-status magit-log magit-log-head
   :config
-  (evil-magit-init)
   (setq magit-diff-refine-hunk 'all))
 
 (use-package graphql-mode)
