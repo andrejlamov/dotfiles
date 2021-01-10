@@ -27,6 +27,9 @@
 ;; (menu-bar-mode -1)
 ;; (almacs/cream-theme)
 
+(setq visible-bell nil
+      ring-bell-function 'ignore)
+
 ;;; Libraries
 
 (use-package dash-functional)
