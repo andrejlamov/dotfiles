@@ -331,6 +331,9 @@
   (global-evil-visualstar-mode))
 
 (use-package expand-region
+  :general
+  (:states 'normal
+           "v" 'er/expand-region )
   :config
   (setq expand-region-fast-keys-enabled t
         expand-region-contract-fast-key "V"))
@@ -769,8 +772,7 @@
 
 (general-def 'visual
   "C-s" 'almacs/helm-occur-from-region
-  "M-s" 'almacs/helm-occur
-  "v" 'er/expand-region)
+  "M-s" 'almacs/helm-occur)
 
 (general-def 'emacs
   "<escape>" 'evil-force-normal-state)
