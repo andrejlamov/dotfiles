@@ -34,6 +34,10 @@
 (setq visible-bell nil
       ring-bell-function 'ignore)
 
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
+
 ;;; Libraries
 
 (use-package dash-functional)
