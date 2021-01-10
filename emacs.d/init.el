@@ -333,7 +333,7 @@
 
 (use-package expand-region
   :general
-  (:states 'normal
+  (:states 'visual
            "v" 'er/expand-region )
   :config
   (setq expand-region-fast-keys-enabled t
