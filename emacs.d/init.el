@@ -714,6 +714,7 @@
 
 (use-package org-kanban)
 
+(use-package better-defaults)
 ;;; Keys
 
 (general-define-key
