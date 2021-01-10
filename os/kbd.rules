@@ -1,1 +1,0 @@
-SUBSYSTEM=="usb", ATTRS{product}=="HHKB Professional", RUN+="/etc/udev/rules.d/kbd.sh"
