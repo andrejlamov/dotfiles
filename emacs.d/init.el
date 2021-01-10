@@ -354,6 +354,10 @@
   :config (popwin-mode 1))
 
 (use-package ace-window
+  :general
+  (:states 'normal
+           :keymaps 'override
+           "C-w" 'ace-window)
   :config
   (ace-window-display-mode 1)
   (setq aw-keys '(?h ?j ?k ?l)))
