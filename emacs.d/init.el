@@ -273,8 +273,13 @@
                              helm-source-buffers-list 0))
 
 (use-package avy
+  :general
+  (:states '(override normal)
+           "C-'" 'avy-goto-char-2
+           "'" 'avy-goto-char-2)
   :config
-  (setq avy-background t))
+  (setq avy-background t)
+  (avy-setup-default))
 
 (use-package company :config (global-company-mode))
 
@@ -339,9 +344,10 @@
   (purpose-mode))
 
 (use-package ace-jump-helm-line
+  :after helm
   :config
   (setq ace-jump-helm-line-default-action 'select)
-  (define-key helm-map (kbd "C-j") 'ace-jump-helm-line))
+  (define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
 
 (use-package popwin
   :straight (popwin :type git :host github :repo "bmag/popwin-el")
