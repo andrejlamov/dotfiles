@@ -153,6 +153,7 @@
   :general
   (:states '(normal visual)
            :keymaps 'override
+           "<SPC> g l" 'magit-log-current
            "<SPC> g s" 'magit-status)
   :config
   (setq magit-diff-refine-hunk 'all))
