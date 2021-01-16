@@ -195,4 +195,12 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
+(use-package undo-tree
+  :general (:states '(normal visual)
+                    :keymaps 'override
+                    "U" 'undo-tree-visualize
+                    "u" 'undo-tree-undo)
+  :config
+  (global-undo-tree-mode))
+
 (message (emacs-init-time))
