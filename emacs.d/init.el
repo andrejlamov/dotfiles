@@ -71,7 +71,9 @@
   (eval-after-load "isearch"
     '(define-key isearch-mode-map (kbd "M-'") 'avy-isearch)))
 
-(use-package company :config (global-company-mode))
+(use-package company
+  :config (global-company-mode)
+  :defer 2)
 
 (use-package helm-ls-git
   :general (:states
