@@ -16,7 +16,10 @@
 (setq whitespace-style '(face trailing ))
 (global-whitespace-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
-(set-frame-font "Source Code Pro")
+
+(when window-system
+  (set-frame-font "Source Code Pro")
+  (fringe-mode 0))
 
 (use-package general
   :config
