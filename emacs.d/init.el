@@ -82,11 +82,12 @@
 
 (use-package helm
   :general (:states
-            '(normal visual)
+            '(normal visual motion)
             :prefix "<SPC>"
             :keymaps 'override
             "<SPC>" 'helm-M-x
             "b" 'helm-buffers-list
+            "k" 'helm-show-kill-ring
             "s s" 'helm-occur
             "s g" 'helm-do-grep-ag
             "s f" 'helm-find
@@ -138,7 +139,7 @@
 
 (use-package ace-window
   :general
-  (:states '(visual normal)
+  (:states '(visual normal motion)
            :keymaps 'override
            "C-w" 'ace-window)
   :config
