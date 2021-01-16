@@ -13,6 +13,10 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
+
 (setq whitespace-style '(face trailing ))
 (global-whitespace-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -37,10 +41,6 @@
     "w l" 'split-window-right
     "w j" 'split-window-below
     "f s" 'save-buffer))
-
-(use-package gcmh
-  :config
-  (gcmh-mode 1))
 
 (use-package better-defaults)
 
