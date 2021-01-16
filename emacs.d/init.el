@@ -26,6 +26,7 @@
   (fringe-mode 0))
 
 (use-package general
+  :after evil
   :config
   (general-evil-setup)
   (setq general-override-states '(normal visual motion))
