@@ -40,7 +40,8 @@
     :keymaps 'override
     :prefix "<SPC>"
     "v" 'evil-visual-char
-    "w d" 'evil-delete-buffer
+    "b d" 'evil-delete-buffer
+    "b r" 'rename-buffer
     "w m" 'delete-other-windows
     "w l" 'split-window-right
     "w j" 'split-window-below
@@ -92,7 +93,7 @@
             :prefix "<SPC>"
             :keymaps 'override
             "<SPC>" 'helm-M-x
-            "b" 'helm-buffers-list
+            "b b" 'helm-buffers-list
             "k" 'helm-show-kill-ring
             "r" 'helm-resume
             "s s" 'helm-occur
