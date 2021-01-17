@@ -20,6 +20,7 @@
 (setq whitespace-style '(face trailing ))
 (global-whitespace-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq kill-buffer-query-functions nil)
 
 (when window-system
   (set-frame-font "Source Code Pro")
