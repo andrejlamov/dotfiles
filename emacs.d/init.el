@@ -99,7 +99,8 @@
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files))
   :config
-  (helm-mode 1))
+  (helm-mode 1)
+  (setq helm-ff-preferred-shell-mode 'shell-mode))
 
 (use-package evil-surround
   :config
@@ -208,5 +209,12 @@
                     "u" 'undo-tree-undo)
   :config
   (global-undo-tree-mode))
+
+(use-package helm-selector
+  :general (:states
+            '(normal visual motion)
+            :keymaps 'override
+            :prefix "<SPC>"
+            "w s" 'helm-selector-shell-other-window))
 
 (message (emacs-init-time))
