@@ -226,4 +226,17 @@
   (setq ace-jump-helm-line-default-action 'select)
   (define-key helm-map (kbd "M-'") 'ace-jump-helm-line))
 
+(use-package anaconda-mode
+  :hook (python-mode . anaconda-mode)
+  :general
+  (:keymaps
+   'anaconda-mode-map
+   :states '(normal visual)
+   ",'" 'pythonic-activate))
+
+(use-package company-anaconda
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
+
 (message (emacs-init-time))
