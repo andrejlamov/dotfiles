@@ -24,7 +24,9 @@
 
 (when window-system
   (set-frame-font "Source Code Pro")
-  (fringe-mode 0))
+  (fringe-mode 0)
+  (setq visible-bell nil
+      ring-bell-function 'ignore))
 
 (use-package general
   :after evil
