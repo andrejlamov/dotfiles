@@ -188,7 +188,9 @@
 
 (use-package expand-region
   :general (:states 'normal
-                    "v" 'er/expand-region))
+                    "v" 'er/expand-region)
+  :config
+  (setq expand-region-smart-cursor t))
 
 (use-package evil-org
   :hook ((org-mode) . evil-org-mode)
