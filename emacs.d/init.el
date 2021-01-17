@@ -196,7 +196,7 @@
   :hook ((org-mode) . evil-org-mode)
   :general (:states
             'normal
-            :keymap
+            :keymaps
             'evil-org-mode-map
             ",t" 'org-todo
             "M-<RET>" 'org-insert-heading)
