@@ -21,6 +21,7 @@
  ("f.el" . "c4dbf8c8e83df834f5d6f72cd5649b9d8a8812ec")
  ("gcmh" . "0089f9c3a6d4e9a310d0791cf6fa8f35642ecfd9")
  ("general.el" . "a0b17d207badf462311b2eef7c065b884462cb7c")
+ ("git-auto-commit-mode" . "a6b6e0fa183be381463e2b44ef128db1b6c4234b")
  ("gnu-elpa-mirror" . "4bfb97e3888e3eef8f933181a92f6e36da7eabc8")
  ("goto-chg" . "2af612153bc9f5bed135d25abe62f46ddaa9027f")
  ("helm" . "d0073fd556e5e2296b4fea824929dfab9b1895b8")

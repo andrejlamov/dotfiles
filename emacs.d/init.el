@@ -241,4 +241,7 @@
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
+(use-package git-auto-commit-mode
+  :defer t)
+
 (message (emacs-init-time))
