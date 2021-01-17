@@ -123,7 +123,6 @@
     lisp-mode
     emacs-lisp-mode
     hy-mode) . evil-cleverparens-mode)
-  :init
   :general
   (:keymaps
    'evil-cleverparens-mode-map
