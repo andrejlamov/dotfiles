@@ -28,6 +28,20 @@
   (setq visible-bell nil
       ring-bell-function 'ignore))
 
+(use-package s :defer t)
+
+(defun almacs/rename-buffer (name)
+  (interactive "B: " )
+  (if (member major-mode '(shell-mode))
+      (rename-buffer
+       (if (and
+            (s-ends-with? "*" name)
+            (s-starts-with? "*" name))
+           name
+         (s-concat "*" (s-trim name) " (shell)*"))
+       t)
+    (rename-buffer name t)))
+
 (use-package general
   :after evil
   :config
@@ -40,8 +54,9 @@
     :keymaps 'override
     :prefix "<SPC>"
     "v" 'evil-visual-char
+    "a s" 'shell
     "b d" 'evil-delete-buffer
-    "b r" 'rename-buffer
+    "b r" 'almacs/rename-buffer
     "w m" 'delete-other-windows
     "w l" 'split-window-right
     "w j" 'split-window-below
@@ -215,13 +230,6 @@
                     "u" 'undo-tree-undo)
   :config
   (global-undo-tree-mode))
-
-(use-package helm-selector
-  :general (:states
-            '(normal visual motion)
-            :keymaps 'override
-            :prefix "<SPC>"
-            "w s" 'helm-selector-shell-other-window))
 
 (use-package ace-jump-helm-line
   :after helm
