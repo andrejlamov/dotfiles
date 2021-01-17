@@ -1,3 +1,4 @@
+(add-to-list 'load-path "~/.emacs.d/lisp")
 (defvar bootstrap-version)
 (let ((bootstrap-version 5)
       (bootstrap-file
@@ -30,18 +31,6 @@
 
 (use-package s :defer t)
 
-(defun almacs/rename-buffer (name)
-  (interactive "B: " )
-  (if (member major-mode '(shell-mode))
-      (rename-buffer
-       (if (and
-            (s-ends-with? "*" name)
-            (s-starts-with? "*" name))
-           name
-         (s-concat "*" (s-trim name) " (shell)*"))
-       t)
-    (rename-buffer name t)))
-
 (use-package general
   :after evil
   :config
@@ -56,11 +45,19 @@
     "v" 'evil-visual-char
     "a s" 'shell
     "b d" 'evil-delete-buffer
-    "b r" 'almacs/rename-buffer
     "w m" 'delete-other-windows
     "w l" 'split-window-right
     "w j" 'split-window-below
     "f s" 'save-buffer))
+
+(use-package almacs-utils
+  :straight nil
+  :defer t
+  :general
+  (:states
+   '(normal visual)
+   :keymaps 'override
+    "<SPC> b r" 'almacs/rename-buffer))
 
 (use-package better-defaults)
 
