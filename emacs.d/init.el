@@ -225,11 +225,15 @@
 
 (use-package anaconda-mode
   :hook (python-mode . anaconda-mode)
-  :general
-  (:keymaps
-   'anaconda-mode-map
-   :states '(normal visual)
-   ",'" 'pythonic-activate))
+  :config
+  (general-def 'normal 'anaconda-mode-map
+    ",ee" 'python-shell-send-statement
+    ",eb" 'python-shell-send-buffer
+    ",sr" 'run-python
+    ",ws" 'python-shell-switch-to-shell
+    ",sa" 'pythonic-activate)
+  (general-def 'visual 'anaconda-mode-map
+    ",ee" 'python-shell-send-region))
 
 (use-package company-anaconda
   :after company
