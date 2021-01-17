@@ -235,8 +235,8 @@
   (general-def 'normal 'anaconda-mode-map
     ",ee" 'python-shell-send-statement
     ",eb" 'python-shell-send-buffer
-    ",sr" 'run-python
     ",ws" 'python-shell-switch-to-shell
+    ",ss" 'run-python
     ",sa" 'pythonic-activate)
   (general-def 'visual 'anaconda-mode-map
     ",ee" 'python-shell-send-region))
