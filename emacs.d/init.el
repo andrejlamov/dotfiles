@@ -37,7 +37,7 @@
     :states '(normal visual)
     :keymaps 'override
     :prefix "<SPC>"
-    "v" 'evil-visual-state
+    "v" 'evil-visual-char
     "w d" 'evil-delete-buffer
     "w m" 'delete-other-windows
     "w l" 'split-window-right
