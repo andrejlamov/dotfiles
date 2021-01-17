@@ -217,4 +217,10 @@
             :prefix "<SPC>"
             "w s" 'helm-selector-shell-other-window))
 
+(use-package ace-jump-helm-line
+  :after helm
+  :config
+  (setq ace-jump-helm-line-default-action 'select)
+  (define-key helm-map (kbd "M-'") 'ace-jump-helm-line))
+
 (message (emacs-init-time))
