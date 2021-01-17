@@ -92,6 +92,7 @@
             "<SPC>" 'helm-M-x
             "b" 'helm-buffers-list
             "k" 'helm-show-kill-ring
+            "r" 'helm-resume
             "s s" 'helm-occur
             "s g" 'helm-do-grep-ag
             "s f" 'helm-find
