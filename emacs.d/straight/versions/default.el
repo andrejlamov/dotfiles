@@ -1,4 +1,5 @@
 (("Emacs-wgrep" . "f0ef9bfa44db503cdb2f83fcfbd2fa4e2382ef1f")
+ ("ace-jump-helm-line" . "1483055255df3f8ae349f7520f05b1e43ea3ed37")
  ("ace-window" . "c7cb315c14e36fded5ac4096e158497ae974bec9")
  ("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
  ("avy" . "e92cb37457b43336b765630dbfbea8ba4be601fa")
@@ -22,6 +23,7 @@
  ("goto-chg" . "2af612153bc9f5bed135d25abe62f46ddaa9027f")
  ("helm" . "d0073fd556e5e2296b4fea824929dfab9b1895b8")
  ("helm-ls-git" . "4da1a53f2f0a078ee2e896a914a1b19c0bf1d5ed")
+ ("helm-selector" . "6a943b9952c749c2a83c284cfcf5b56f5f6622ad")
  ("helpful" . "584ecc887bb92133119f93a6716cdf7af0b51dca")
  ("magit" . "9a96de26ec3772a3e374351738e911ac18e3e6de")
  ("melpa" . "75600cc888a717d300c6ca05b629fa7acba9390b")
@@ -31,6 +33,7 @@
  ("smartparens" . "63695c64233d215a92bf08e762f643cdb595bdd9")
  ("straight.el" . "2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1")
  ("transient" . "7811dcff825210c17bd15525fb6a98854501af99")
+ ("undo-tree" . "e326c6135e62f5fe8536528d3acd5e798f847407")
  ("use-package" . "365c73d2618dd0040a32c2601c5456ab5495b812")
  ("with-editor" . "139ef3933ea7aa3fe67b87450a6a1ac0895e5c81"))
 :beta
