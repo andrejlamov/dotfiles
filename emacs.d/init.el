@@ -216,6 +216,12 @@
 
 (use-package evil-org
   :hook ((org-mode) . evil-org-mode)
+  :general (:states
+            '(normal)
+            :keymaps 'org-mode-map
+            ",t" 'org-show-todo-tree)
+  :init
+  (setq org-agenda-files '("~/org/todo.org"))
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
