@@ -104,7 +104,13 @@
 	 ("C-x C-f" . helm-find-files))
   :config
   (helm-mode 1)
-  (setq helm-ff-preferred-shell-mode 'shell-mode))
+  (setq helm-ff-preferred-shell-mode 'shell-mode)
+  (general-def
+    :states
+    '(normal visual insert)
+    :keymaps
+    '(inferior-python-mode-map shell-mode-map)
+    "M-p" 'helm-comint-input-ring))
 
 (use-package evil-surround
   :config
