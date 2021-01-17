@@ -69,6 +69,7 @@
   (:states
    '(override normal)
    "M-'" 'avy-goto-char-2
+   "M-\"" 'avy-goto-line
    "'" 'avy-goto-char-2)
   :config
   (setq avy-background t)
