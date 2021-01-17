@@ -43,6 +43,7 @@
     :keymaps 'override
     :prefix "<SPC>"
     "v" 'evil-visual-char
+    "TAB" 'evil-switch-to-windows-last-buffer
     "a s" 'shell
     "b d" 'evil-delete-buffer
     "w m" 'delete-other-windows
