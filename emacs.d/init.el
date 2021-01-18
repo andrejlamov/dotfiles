@@ -270,4 +270,52 @@
 (use-package git-auto-commit-mode
   :defer t)
 
+(use-package web-mode
+  :mode (".html?$")
+  :hook (js-mode . web-mode)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+  (setq
+   web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))
+   web-mode-enable-auto-pairing t
+   web-mode-enable-auto-expanding t
+   web-mode-enable-auto-closing t
+   web-mode-enable-css-colorization t)
+  :general
+  (:keymaps
+   'web-mode-map
+   :states '(normal visual motion)
+    ",e/" 'web-mode-element-close
+    ",ea" 'web-mode-element-content-select
+    ",eb" 'web-mode-element-beginning
+    ",ec" 'web-mode-element-clone
+    ",ed" 'web-mode-element-child
+    ",ee" 'web-mode-element-end
+    ",ef" 'web-mode-element-children-fold-or-unfold
+    ",ei" 'web-mode-element-insert
+    ",eI" 'web-mode-element-insert-at-point
+    ",ek" 'web-mode-element-kill
+    ",em" 'web-mode-element-mute-blanks
+    ",en" 'web-mode-element-next
+    ",ep" 'web-mode-element-previous
+    ",er" 'web-mode-element-rename
+    ",es" 'web-mode-element-select
+    ",et" 'web-mode-element-transpose
+    ",eu" 'web-mode-element-parent
+    ",ev" 'web-mode-element-vanish
+    ",ew" 'web-mode-element-wrap
+    ",e+" 'web-mode-element-extract
+    ",e-" 'web-mode-element-contract))
+
+(use-package lsp-mode
+    :hook ((web-mode . lsp)
+           (js-mode . lsp))
+    :commands lsp
+    :general
+    (:keymaps
+     'lsp-mode-map
+     :states '(normal visual motion)
+     :prefix ",l"
+     "gr" 'lsp-find-references))
+
 (message (emacs-init-time))
