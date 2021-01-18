@@ -221,11 +221,14 @@
   (:states
    '(normal)
    :keymaps 'org-mode-map
-   ",t" 'org-show-todo-tree)
+   ",t" 'org-show-todo-tree
+   ",p" 'org-priority)
   (:states
-   '(normal)
-   :keymaps 'override
-   "<SPC> o w" '((lambda () (interactive) (find-file "~/org/work.org")) :wk "work.org"))
+   '(normal motion visual)
+   :keymaps '(override)
+   :prefix "<SPC>"
+   "o a" '((lambda () (interactive) (org-agenda nil "n")) :wk "agenda")
+   "o w" '((lambda () (interactive) (find-file "~/org/work.org")) :wk "work.org"))
   :init
   (setq org-agenda-files '("~/org/work.org"))
   :config
