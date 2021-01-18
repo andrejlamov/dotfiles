@@ -216,12 +216,17 @@
 
 (use-package evil-org
   :hook ((org-mode) . evil-org-mode)
-  :general (:states
-            '(normal)
-            :keymaps 'org-mode-map
-            ",t" 'org-show-todo-tree)
+  :general
+  (:states
+   '(normal)
+   :keymaps 'org-mode-map
+   ",t" 'org-show-todo-tree)
+  (:states
+   '(normal)
+   :keymaps 'override
+   "<SPC> o w" '((lambda () (interactive) (find-file "~/org/work.org")) :wk "work.org"))
   :init
-  (setq org-agenda-files '("~/org/todo.org"))
+  (setq org-agenda-files '("~/org/work.org"))
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
