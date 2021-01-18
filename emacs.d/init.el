@@ -216,7 +216,7 @@
   (setq expand-region-smart-cursor t))
 
 (use-package evil-org
-  :hook ((org-mode) . evil-org-mode)
+  :hook ((org-mode org-agenda-mode) . evil-org-mode)
   :general
   (:states
    '(normal)
