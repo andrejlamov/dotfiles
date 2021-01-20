@@ -230,7 +230,11 @@
    "o a" '((lambda () (interactive) (org-agenda nil "n")) :wk "agenda")
    "o w" '((lambda () (interactive) (find-file "~/org/work.org")) :wk "work.org"))
   :init
-  (setq org-agenda-files '("~/org/work.org"))
+  (setq org-agenda-files '("~/org/work.org")
+        org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
+                                   (todo . " %i %-12:c %-6e")
+                                   (tags . " %i %-12:c")
+                                   (search . " %i %-12:c")))
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
