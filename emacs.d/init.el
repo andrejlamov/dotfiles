@@ -50,7 +50,8 @@
     "w m" 'delete-other-windows
     "w l" 'split-window-right
     "w j" 'split-window-below
-    "f s" 'save-buffer))
+    "f s" 'save-buffer
+    "t" 'toggle-truncate-lines))
 
 (use-package almacs-utils
   :straight nil
