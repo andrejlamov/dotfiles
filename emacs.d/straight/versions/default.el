@@ -1,4 +1,5 @@
-(("Emacs-wgrep" . "f0ef9bfa44db503cdb2f83fcfbd2fa4e2382ef1f")
+(("ESS" . "1c77e93c9f810e95afe75b7f908bbc3aa50e219b")
+ ("Emacs-wgrep" . "f0ef9bfa44db503cdb2f83fcfbd2fa4e2382ef1f")
  ("ace-jump-helm-line" . "1483055255df3f8ae349f7520f05b1e43ea3ed37")
  ("ace-window" . "c7cb315c14e36fded5ac4096e158497ae974bec9")
  ("anaconda-mode" . "80afec20f91f13614647b192522fff460505db6f")
@@ -15,7 +16,6 @@
  ("evil" . "cc9d6886b418389752a0591b9fcb270e83234cf9")
  ("evil-cleverparens" . "8c45879d49bfa6d4e414b6c1df700a4a51cbb869")
  ("evil-collection" . "a67450ff537b9681a5fed25010ce28d4128e6db2")
- ("evil-mc" . "7dfb2ca5ac00c249cb2f55cd6fa91fb2bfb1117e")
  ("evil-org-mode" . "80ef38fb378541937f6ddfe836809e76eda1e355")
  ("evil-surround" . "346d4d85fcf1f9517e9c4991c1efe68b4130f93a")
  ("expand-region.el" . "ea6b4cbb9985ddae532bd2faf9bb00570c9f2781")
@@ -45,5 +45,6 @@
  ("undo-tree" . "e326c6135e62f5fe8536528d3acd5e798f847407")
  ("use-package" . "365c73d2618dd0040a32c2601c5456ab5495b812")
  ("web-mode" . "a3ce21f795e03c7a5489a24b2b3c4fce2d7a2f59")
- ("with-editor" . "139ef3933ea7aa3fe67b87450a6a1ac0895e5c81"))
+ ("with-editor" . "139ef3933ea7aa3fe67b87450a6a1ac0895e5c81")
+ ("yaml-mode" . "fc5e1c58f94472944c4aa838f00f6adcac6fa992"))
 :beta

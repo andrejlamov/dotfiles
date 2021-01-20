@@ -322,4 +322,10 @@
      :prefix ",l"
      "gr" 'lsp-find-references))
 
+(use-package ess
+  :defer t)
+
+(use-package yaml-mode
+  :defer t)
+
 (message (emacs-init-time))
