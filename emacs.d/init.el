@@ -85,6 +85,7 @@
    '(override normal)
    "M-'" 'avy-goto-char-2
    "M-\"" 'avy-goto-line
+   "<SPC> r '" 'avy-resume
    "'" 'avy-goto-char-2)
   :config
   (setq avy-background t)
@@ -111,7 +112,7 @@
             "<SPC>" 'helm-M-x
             "b b" 'helm-buffers-list
             "k" 'helm-show-kill-ring
-            "r" 'helm-resume
+            "r r" 'helm-resume
             "s s" 'helm-occur
             "s g" 'helm-do-grep-ag
             "s f" 'helm-find
