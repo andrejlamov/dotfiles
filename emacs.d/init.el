@@ -73,7 +73,8 @@
         evil-want-C-u-scroll t
         evil-want-C-i-jump nil)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (require 'evil-surround))
 
 (use-package evil-collection
   :after evil
