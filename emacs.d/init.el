@@ -66,6 +66,7 @@
 (use-package better-defaults)
 
 (use-package evil
+  :defer t
   :init
   (setq evil-want-keybinding nil
         evil-move-beyond-eol t
@@ -131,6 +132,7 @@
     "M-p" 'helm-comint-input-ring))
 
 (use-package evil-surround
+  :defer t
   :config
   (global-evil-surround-mode 1))
 
