@@ -343,8 +343,14 @@
   :general (:keymaps
             'override
             :states '(normal visual motion)
-            "<escape>" 'evil-mc-undo-all-cursors
-            "C-g" 'evil-mc-undo-all-cursors
+            "<escape>" '(lambda () (interactive)
+                          (with-demoted-errors
+                            (evil-mc-undo-all-cursors))
+                          (evil-force-normal-state))
+            "C-g" '(lambda () (interactive)
+                     (with-demoted-errors
+                      (evil-mc-undo-all-cursors))
+                     (keyboard-quiet))
             "M-m" 'almacs/vr-evil-mc)
   :config
   (global-evil-mc-mode 1)
@@ -355,6 +361,8 @@
   (custom-set-faces
    '(evil-mc-cursor-default-face ((t (:inherit cursor :background "tan" :inverse-video nil)))))
 
+  (setq evil-mc-mode-line-text-cursor-color nil
+        evil-mc-mode-line-text-inverse-colors nil)
   (defun almacs/vr-evil-mc (regexp start end)
     (interactive
      (vr--interactive-get-args 'vr--mode-regexp 'vr--calling-func-mc-mark))
