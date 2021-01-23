@@ -88,6 +88,7 @@
    "M-'" 'avy-goto-char-2
    "M-\"" 'avy-goto-line
    "<SPC> r '" 'avy-resume
+   "<SPC> r o" 'avy-pop-mark
    "'" 'avy-goto-char-2)
   :config
   (setq avy-background t)
