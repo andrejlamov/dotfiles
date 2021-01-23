@@ -206,6 +206,9 @@
 
 (use-package helpful
   :defer t
+  :config
+  (require 'helm)
+  (helm-mode 1)
   :bind
   ("C-h f" . 'helpful-callable)
   ("C-h v" . 'helpful-variable)
