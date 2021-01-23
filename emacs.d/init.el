@@ -12,7 +12,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
+(setq straight-use-package-by-default t
+      use-package-compute-statistics t)
 
 (use-package gcmh
   :config
