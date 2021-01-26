@@ -2,7 +2,6 @@
 
 (defun almacs/rename-buffer (name)
   (interactive "B: " )
-  (require 's)
   (if (member major-mode '(shell-mode))
       (rename-buffer
        (if (and
