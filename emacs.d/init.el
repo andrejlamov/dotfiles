@@ -399,4 +399,15 @@
                      :states '(normal visual motion)
                      "<SPC> s r" 'vr/replace))
 
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode)
+  :general (:states
+            '(normal visual)
+            :prefix "<SPC>"
+            "1" '(eyebrowse-switch-to-window-config-1 :wk "w1")
+            "2" '(eyebrowse-switch-to-window-config-2 :wk "w2")
+            "3" '(eyebrowse-switch-to-window-config-3 :wk "w3")
+            "4" '(eyebrowse-switch-to-window-config-4 :wk "w4")))
+
 (message (emacs-init-time))

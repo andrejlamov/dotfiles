@@ -20,6 +20,7 @@
  ("evil-org-mode" . "80ef38fb378541937f6ddfe836809e76eda1e355")
  ("evil-surround" . "346d4d85fcf1f9517e9c4991c1efe68b4130f93a")
  ("expand-region.el" . "ea6b4cbb9985ddae532bd2faf9bb00570c9f2781")
+ ("eyebrowse" . "88c7b59aa7c5c93bc23812217213adfa238f977b")
  ("f.el" . "c4dbf8c8e83df834f5d6f72cd5649b9d8a8812ec")
  ("gcmh" . "0089f9c3a6d4e9a310d0791cf6fa8f35642ecfd9")
  ("general.el" . "a0b17d207badf462311b2eef7c065b884462cb7c")
