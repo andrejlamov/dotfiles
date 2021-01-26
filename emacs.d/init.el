@@ -344,13 +344,13 @@
             'override
             :states '(normal visual motion)
             "<escape>" '(lambda () (interactive)
-                          (with-demoted-errors
+                          (ignore-errors
                             (evil-mc-undo-all-cursors))
                           (evil-force-normal-state))
             "C-g" '(lambda () (interactive)
-                     (with-demoted-errors
+                     (ignore-errors
                       (evil-mc-undo-all-cursors))
-                     (keyboard-quiet))
+                     (keyboard-quit))
             "M-m" 'almacs/vr-evil-mc)
   :config
   (global-evil-mc-mode 1)
