@@ -40,7 +40,7 @@
   (general-override-mode)
 
   (general-def
-    :states '(normal visual)
+    :states '(normal visual motion)
     :keymaps 'override
     :prefix "<SPC>"
     "v" 'evil-visual-char
