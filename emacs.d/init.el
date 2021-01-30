@@ -162,6 +162,7 @@
   :general
   (:states
    '(normal visual)
+   :keymaps 'override
    "<SPC> w u" 'winner-undo)
   :config
   (winner-mode))
