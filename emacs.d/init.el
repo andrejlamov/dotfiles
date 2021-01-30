@@ -161,8 +161,8 @@
 (use-package winner
   :general
   (:states
-   '(normal visual)
-   :keymaps 'override
+   '(normal visual motion)
+   :keymaps '(override)
    "<SPC> w u" 'winner-undo)
   :config
   (winner-mode))
