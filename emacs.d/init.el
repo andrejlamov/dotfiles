@@ -243,7 +243,7 @@
   :init
   (setq org-agenda-files '("~/org/work.org")
         org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
-                                   (todo . " %i %-12:c %-6e")
+                                   (todo . "%b %e")
                                    (tags . " %i %-12:c")
                                    (search . " %i %-12:c")))
   :config
