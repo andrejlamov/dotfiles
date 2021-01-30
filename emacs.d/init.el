@@ -351,7 +351,7 @@
             "C-g" '(lambda () (interactive)
                      (ignore-errors
                       (evil-mc-undo-all-cursors))
-                     (keyboard-quit))
+                     (call-interactively 'keyboard-quit))
             "M-m" 'almacs/vr-evil-mc)
   :config
   (global-evil-mc-mode 1)
