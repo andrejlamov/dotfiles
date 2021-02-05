@@ -413,4 +413,7 @@
             "3" '(eyebrowse-switch-to-window-config-3 :wk "w3")
             "4" '(eyebrowse-switch-to-window-config-4 :wk "w4")))
 
+(use-package tdd
+  :straight (emacs-tdd :type git :host github :repo "jorgenschaefer/emacs-tdd"))
+
 (message (emacs-init-time))
