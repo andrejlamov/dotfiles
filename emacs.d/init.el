@@ -350,10 +350,10 @@
                           (ignore-errors
                             (evil-mc-undo-all-cursors))
                           (evil-force-normal-state))
-            "C-g" '(lambda () (interactive)
-                     (ignore-errors
-                      (evil-mc-undo-all-cursors))
-                     (call-interactively 'keyboard-quit))
+            ;; "C-g" '(lambda () (interactive)
+            ;;          (ignore-errors
+            ;;           (evil-mc-undo-all-cursors))
+            ;;          (keyboard-quit))
             "M-m" 'almacs/vr-evil-mc)
   :config
   (global-evil-mc-mode 1)
