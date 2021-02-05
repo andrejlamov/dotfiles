@@ -105,7 +105,8 @@
             '(normal visual)
             :prefix "<SPC>"
             :keymaps 'override
-            "g g" 'helm-grep-do-git-grep
+            "g g" '(lambda () (interactive)
+                     (helm-grep-do-git-grep t))
             "B" 'helm-ls-git-ls))
 
 (use-package helm
