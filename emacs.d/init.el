@@ -246,7 +246,8 @@
         org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
                                    (todo . "%b %e")
                                    (tags . " %i %-12:c")
-                                   (search . " %i %-12:c")))
+                                   (search . " %i %-12:c"))
+        org-agenda-span 14)
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
