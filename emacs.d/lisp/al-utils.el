@@ -1,6 +1,6 @@
 (require 's)
 
-(defun almacs/rename-buffer (name)
+(defun al/rename-buffer (name)
   (interactive "B: " )
   (if (member major-mode '(shell-mode))
       (rename-buffer
@@ -12,4 +12,4 @@
        t)
     (rename-buffer name t)))
 
-(provide 'almacs-utils)
+(provide 'al-utils)

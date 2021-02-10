@@ -55,14 +55,14 @@
     "f s" 'save-buffer
     "t" 'toggle-truncate-lines))
 
-(use-package almacs-utils
+(use-package al-utils
   :straight nil
   :defer t
   :general
   (:states
    '(normal visual)
    :keymaps 'override
-    "<SPC> b r" 'almacs/rename-buffer))
+    "<SPC> b r" 'al/rename-buffer))
 
 (use-package better-defaults)
 
@@ -346,7 +346,7 @@
   :defer t)
 
 (use-package evil-mc
-  :commands almacs/vr-evil-mc
+  :commands al/vr-evil-mc
   :general (:keymaps
             'override
             :states '(normal visual motion)
@@ -358,7 +358,7 @@
             ;;          (ignore-errors
             ;;           (evil-mc-undo-all-cursors))
             ;;          (keyboard-quit))
-            "M-m" 'almacs/vr-evil-mc)
+            "M-m" 'al/vr-evil-mc)
   :config
   (global-evil-mc-mode 1)
   (setq evil-mc-custom-known-commands
@@ -370,7 +370,7 @@
 
   (setq evil-mc-mode-line-text-cursor-color nil
         evil-mc-mode-line-text-inverse-colors nil)
-  (defun almacs/vr-evil-mc (regexp start end)
+  (defun al/vr-evil-mc (regexp start end)
     (interactive
      (vr--interactive-get-args 'vr--mode-regexp 'vr--calling-func-mc-mark))
     (with-current-buffer vr--target-buffer
