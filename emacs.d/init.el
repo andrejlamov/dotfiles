@@ -270,12 +270,15 @@
 (use-package anaconda-mode
   :hook (python-mode . anaconda-mode)
   :config
-  (general-def 'normal 'anaconda-mode-map
-    ",ee" 'python-shell-send-statement
-    ",eb" 'python-shell-send-buffer
-    ",ws" 'python-shell-switch-to-shell
-    ",ss" 'run-python
-    ",sa" 'pythonic-activate)
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True")
+   (general-def 'normal 'anaconda-mode-map
+     ",ee" 'python-shell-send-statement
+     ",eb" 'python-shell-send-buffer
+     ",ws" 'python-shell-switch-to-shell
+     ",s" '(:wk "env & shell")
+     ",ss" 'run-python
+     ",sa" 'pythonic-activate)
   (general-def 'visual 'anaconda-mode-map
     ",ee" 'python-shell-send-region))
 
