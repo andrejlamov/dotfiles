@@ -30,6 +30,7 @@
   (setq visible-bell nil
       ring-bell-function 'ignore))
 
+(setq comint-scroll-to-bottom-on-output t)
 (use-package s :defer t)
 
 (use-package general
