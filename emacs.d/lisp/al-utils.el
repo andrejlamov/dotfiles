@@ -1,7 +1,7 @@
 (require 's)
 
 (defun al/rename-buffer (name)
-  (interactive "B: " )
+  (interactive "Bnew buffer name: " )
   (if (member major-mode '(shell-mode))
       (rename-buffer
        (if (and
