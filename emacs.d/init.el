@@ -56,6 +56,7 @@
     "t" 'toggle-truncate-lines))
 
 (use-package al-utils
+  :commands al/evil-eval-sexp
   :straight nil
   :defer t
   :general
@@ -171,7 +172,7 @@
 
 (with-eval-after-load 'lisp-mode
   (general-def 'normal 'emacs-lisp-mode-map
-    ",ee" 'eval-last-sexp
+    ",ee" '((lambda () (interactive)  (al/evil-eval-sexp 'eval-last-sexp)) :wk "eval")
     ",eb" 'eval-buffer)
   (general-def 'visual 'emacs-lisp-mode-map
     ",ee" 'eval-region))
@@ -419,5 +420,14 @@
 
 (use-package tdd
   :straight (emacs-tdd :type git :host github :repo "jorgenschaefer/emacs-tdd"))
+
+(use-package cider
+  :general (:states
+            '(normal visual)
+            :keymaps '(clojure-mode-map clojurescript-mode-map)
+            ",eb" 'cider-eval-buffer
+            ",ee" '((lambda ()
+                     (interactive)
+                     (al/evil-eval-sexp 'cider-pprint-eval-last-sexp)) :wk "eval sexp")))
 
 (message (emacs-init-time))
