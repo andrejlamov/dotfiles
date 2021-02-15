@@ -23,6 +23,7 @@
 (global-whitespace-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq kill-buffer-query-functions nil)
+(setq vc-follow-symlinks t)
 
 (when window-system
   (set-frame-font "Source Code Pro")
