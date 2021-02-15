@@ -272,18 +272,24 @@
 
 (use-package anaconda-mode
   :hook (python-mode . anaconda-mode)
+  :general
+  (:states
+   'normal
+   :keymaps 'anaconda-mode-map
+   ",ee" 'python-shell-send-statement
+   ",eb" 'python-shell-send-buffer
+   ",ws" 'python-shell-switch-to-shell
+   ",s" '(:wk "env & shell")
+   ",ss" 'run-python
+   ",sa" 'pythonic-activate)
+  (:states
+   'visual
+   :keymaps 'anaconda-mode-map
+   ",ee" 'python-shell-send-region)
   :config
+  ;; TODO: add fun thath advices once: wraps stm in print() for `python-shell-send-string`, bind to ,ep
   (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True")
-   (general-def 'normal 'anaconda-mode-map
-     ",ee" 'python-shell-send-statement
-     ",eb" 'python-shell-send-buffer
-     ",ws" 'python-shell-switch-to-shell
-     ",s" '(:wk "env & shell")
-     ",ss" 'run-python
-     ",sa" 'pythonic-activate)
-  (general-def 'visual 'anaconda-mode-map
-    ",ee" 'python-shell-send-region))
+        python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True"))
 
 (use-package company-anaconda
   :after company
