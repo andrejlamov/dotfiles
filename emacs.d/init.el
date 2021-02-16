@@ -15,24 +15,27 @@
 (setq straight-use-package-by-default t
       use-package-compute-statistics t)
 
-(use-package gcmh
-  :config
-  (gcmh-mode 1))
-
 (setq whitespace-style '(face trailing ))
 (global-whitespace-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq kill-buffer-query-functions nil)
 (setq vc-follow-symlinks t)
+(setq comint-scroll-to-bottom-on-output t)
+
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
+
+(use-package s :commands s-join :defer t)
 
 (when window-system
+  (when (eq system-type 'darwin)
+    (setenv "PATH" (s-join ":" (list "/usr/local/bin" (getenv "PATH"))))
+    (add-to-list 'exec-path "/usr/local/bin"))
   (set-frame-font "Source Code Pro")
   (fringe-mode 0)
   (setq visible-bell nil
       ring-bell-function 'ignore))
-
-(setq comint-scroll-to-bottom-on-output t)
-(use-package s :defer t)
 
 (use-package general
   :after evil
