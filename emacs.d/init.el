@@ -29,13 +29,14 @@
 (use-package s :commands s-join :defer t)
 
 (when window-system
-  (when (eq system-type 'darwin)
-    (setenv "PATH" (s-join ":" (list "/usr/local/bin" (getenv "PATH"))))
-    (add-to-list 'exec-path "/usr/local/bin"))
   (set-frame-font "Source Code Pro")
   (fringe-mode 0)
   (setq visible-bell nil
-      ring-bell-function 'ignore))
+        ring-bell-function 'ignore))
+
+(use-package al-macos
+  :straight nil
+  :if (eq system-type 'darwin))
 
 (use-package general
   :after evil
