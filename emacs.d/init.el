@@ -440,4 +440,14 @@
                      (interactive)
                      (al/evil-eval-sexp 'cider-pprint-eval-last-sexp)) :wk "eval sexp")))
 
+(use-package docker-compose-mode
+  :defer t)
+
+(use-package docker
+  :defer t
+  :general (:keymaps
+            'override
+            :states '(normal visual)
+            "<SPC> d" 'docker))
+
 (message (emacs-init-time))
