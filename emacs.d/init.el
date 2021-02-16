@@ -450,4 +450,15 @@
             :states '(normal visual)
             "<SPC> d" 'docker))
 
+(with-eval-after-load 'sql-mode
+  (general-def 'normal 'sql-mode-map
+    ",sp" '((lambda () (interactive)
+              (sql-set-product "postgres" )
+              (sql-set-sqli-buffer))
+            :wk "postgres")
+    ",ee" 'sql-send-paragraph
+    ",el" 'sql-send-line-and-next)
+  (general-def 'visual 'sql-mode-map
+    ",ee" 'sql-send-region))
+
 (message (emacs-init-time))
