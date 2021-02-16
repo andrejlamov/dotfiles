@@ -1,3 +1,5 @@
+(require 's)
+
 ;; gui emacs in "quarantine"
 (setenv "PATH" (s-join ":" (list "/usr/local/bin" (getenv "PATH"))))
 (add-to-list 'exec-path "/usr/local/bin")
