@@ -175,7 +175,8 @@
 (with-eval-after-load 'lisp-mode
   (general-def 'normal 'emacs-lisp-mode-map
     ",ee" '((lambda () (interactive)  (al/evil-eval-sexp 'eval-last-sexp)) :wk "eval")
-    ",eb" 'eval-buffer)
+    ",eb" 'eval-buffer
+    "TAB" 'indent-pp-sexp)
   (general-def 'visual 'emacs-lisp-mode-map
     ",ee" 'eval-region))
 
