@@ -22,17 +22,13 @@
 (setq vc-follow-symlinks t)
 (setq comint-scroll-to-bottom-on-output t)
 
+(use-package al-theme :straight nil)
+
 (use-package gcmh
   :config
   (gcmh-mode 1))
 
 (use-package s :commands s-join :defer t)
-
-(when window-system
-  (set-frame-font "Source Code Pro")
-  (fringe-mode 0)
-  (setq visible-bell nil
-        ring-bell-function 'ignore))
 
 (use-package al-macos
   :straight nil
@@ -132,6 +128,7 @@
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files))
   :config
+  (set-face-attribute 'helm-source-header nil :height 1)
   (helm-mode 1)
   (setq helm-ff-preferred-shell-mode 'shell-mode)
   (general-def
