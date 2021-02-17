@@ -1,5 +1,6 @@
 (require 's)
 (require 'evil)
+(require 'evil-cleverparens)
 
 (defun al/rename-buffer (name)
   (interactive "Bnew buffer name: " )
