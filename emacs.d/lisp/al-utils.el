@@ -1,4 +1,5 @@
 (require 's)
+(require 'evil)
 
 (defun al/rename-buffer (name)
   (interactive "Bnew buffer name: " )
