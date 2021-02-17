@@ -466,4 +466,11 @@
   (general-def 'visual 'sql-mode-map
     ",ee" 'sql-send-region))
 
+(use-package rotate
+  :general (:keymaps
+            'override
+            :states 'normal
+            "<SPC> w r v" 'rotate:even-vertical
+            "<SPC> w r h" 'rotate:even-horizontal))
+
 (message (emacs-init-time))

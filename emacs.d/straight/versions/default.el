@@ -17,6 +17,7 @@
  ("docker.el" . "0ca910badf86ff2e2dbfdf3f18819dd72a3198fc")
  ("elisp-refs" . "b3634a4567c655a1cda51b217629849cba0ac6a7")
  ("emacs-async" . "14f48de586b0977e3470f053b810d77b07ea427a")
+ ("emacs-rotate" . "4e9ac3ff800880bd9b705794ef0f7c99d72900a6")
  ("emacs-tdd" . "1f18a061c92bffb3fbf3f690dc52bf8a76291c92")
  ("emacs-which-key" . "428aedfce0157920814fbb2ae5d00b4aea89df88")
  ("emacsmirror-mirror" . "faaf1ba1cba6ac726da4645f02967cf7ffa4b4f9")
