@@ -272,7 +272,7 @@
   (define-key helm-map (kbd "M-'") 'ace-jump-helm-line))
 
 (use-package al-python
-  :after anaconda-mode
+  :defer t
   :straight nil)
 
 (use-package anaconda-mode
@@ -291,13 +291,12 @@
   (:states
    'visual
    :keymaps 'anaconda-mode-map
-   ",ee" 'al/python-run-stm-in-python-shell
+   ",ee" 'al/python-run-region-in-python-shell
    ",es" 'python-shell-send-region)
   :config
+  (require 'al-python)
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True"))
-
-
 
 (use-package company-anaconda
   :after company
