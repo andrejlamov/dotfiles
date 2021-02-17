@@ -271,13 +271,18 @@
   (setq ace-jump-helm-line-default-action 'select)
   (define-key helm-map (kbd "M-'") 'ace-jump-helm-line))
 
+(use-package al-python
+  :after anaconda-mode
+  :straight nil)
+
 (use-package anaconda-mode
   :hook (python-mode . anaconda-mode)
   :general
   (:states
    'normal
    :keymaps 'anaconda-mode-map
-   ",ee" 'python-shell-send-statement
+   ",ee" 'al/python-run-stm-in-python-shell
+   ",es" 'python-shell-send-statement
    ",eb" 'python-shell-send-buffer
    ",ws" 'python-shell-switch-to-shell
    ",s" '(:wk "env & shell")
@@ -286,11 +291,13 @@
   (:states
    'visual
    :keymaps 'anaconda-mode-map
-   ",ee" 'python-shell-send-region)
+   ",ee" 'al/python-run-stm-in-python-shell
+   ",es" 'python-shell-send-region)
   :config
-  ;; TODO: add fun thath advices once: wraps stm in print() for `python-shell-send-string`, bind to ,ep
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True"))
+
+
 
 (use-package company-anaconda
   :after company
