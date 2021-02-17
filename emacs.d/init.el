@@ -161,7 +161,9 @@
   :config
   (require 'evil-cleverparens-text-objects)
   (setq evil-cleverparens-use-additional-bindings t
-        evil-cleverparens-use-additional-movement-keys t))
+        evil-cleverparens-use-additional-movement-keys t)
+  (sp-local-pair '(emacs-lisp-mode clojure-mode lisp-mode hy-mode) "`" "`" :actions nil)
+  (sp-local-pair '(emacs-lisp-mode clojure-mode lisp-mode hy-mode) "'" "'" :actions nil))
 
 (use-package winner
   :general
