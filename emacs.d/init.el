@@ -153,6 +153,7 @@
   (:keymaps
    'evil-cleverparens-mode-map
    :states '(normal visual)
+   "x" 'evil-delete-char
    "M-r" nil
    "M-r (" 'sp-splice-sexp-killing-backward
    "M-r r" 'sp-raise-sexp
