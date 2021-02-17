@@ -154,12 +154,14 @@
    'evil-cleverparens-mode-map
    :states '(normal visual)
    "x" 'evil-delete-char
+   "M-d" 'al/delete-sexp-or-symbol
    "M-r" nil
    "M-r (" 'sp-splice-sexp-killing-backward
    "M-r r" 'sp-raise-sexp
    "M-r M-r" 'sp-raise-sexp
    "M-r )" 'sp-splice-sexp-killing-forward)
   :config
+  (require 'al-utils)
   (require 'evil-cleverparens-text-objects)
   (setq evil-cleverparens-use-additional-bindings t
         evil-cleverparens-use-additional-movement-keys t)
