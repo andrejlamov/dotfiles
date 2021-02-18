@@ -19,6 +19,4 @@
    (insert string)
    (comint-send-input)))
 
-
-(message "hello")
 (provide 'al-python)
