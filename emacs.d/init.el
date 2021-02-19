@@ -430,13 +430,15 @@
 (use-package eyebrowse
   :config
   (eyebrowse-mode)
-  :general (:states
-            '(normal visual)
-            :prefix "<SPC>"
-            "1" '(eyebrowse-switch-to-window-config-1 :wk "w1")
-            "2" '(eyebrowse-switch-to-window-config-2 :wk "w2")
-            "3" '(eyebrowse-switch-to-window-config-3 :wk "w3")
-            "4" '(eyebrowse-switch-to-window-config-4 :wk "w4")))
+  :general
+  (:states
+   '(normal visual)
+   :keymaps 'override
+   :prefix "<SPC>"
+   "1" '(eyebrowse-switch-to-window-config-1 :wk "w1")
+   "2" '(eyebrowse-switch-to-window-config-2 :wk "w2")
+   "3" '(eyebrowse-switch-to-window-config-3 :wk "w3")
+   "4" '(eyebrowse-switch-to-window-config-4 :wk "w4")))
 
 (use-package tdd
   :straight (emacs-tdd :type git :host github :repo "jorgenschaefer/emacs-tdd"))
