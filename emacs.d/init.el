@@ -462,16 +462,22 @@
             :states '(normal visual)
             "<SPC> d" 'docker))
 
-(with-eval-after-load 'sql-mode
+
+(use-package sql
+  :straight nil
+  :config
   (general-def 'normal 'sql-mode-map
-    ",sp" '((lambda () (interactive)
-              (sql-set-product "postgres" )
-              (sql-set-sqli-buffer))
-            :wk "postgres")
+    ",sp" 'al/sql-postgres-connect
     ",ee" 'sql-send-paragraph
     ",el" 'sql-send-line-and-next)
   (general-def 'visual 'sql-mode-map
-    ",ee" 'sql-send-region))
+    ",ee" 'sql-send-region)
+  (defun al/sql-postgres-connect ()
+    (interactive)
+    (sql-set-product "postgres" )
+    (sql-set-sqli-buffer)) )
+
+
 
 (use-package rotate
   :general (:keymaps
