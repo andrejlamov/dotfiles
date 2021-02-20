@@ -211,6 +211,7 @@
   (setq magit-diff-refine-hunk 'all))
 
 (use-package which-key
+  :defer 2
   :config
   (setq which-key-idle-delay 0
         which-key-idle-secondary-delay 0)
