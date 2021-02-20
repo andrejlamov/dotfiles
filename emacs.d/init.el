@@ -178,13 +178,19 @@
   :config
   (winner-mode))
 
-(with-eval-after-load 'lisp-mode
-  (general-def 'normal 'emacs-lisp-mode-map
-    ",ee" '((lambda () (interactive)  (al/evil-eval-sexp 'eval-last-sexp)) :wk "eval")
-    ",eb" 'eval-buffer
-    "TAB" 'indent-pp-sexp)
-  (general-def 'visual 'emacs-lisp-mode-map
-    ",ee" 'eval-region))
+(use-package lisp-mode
+  :straight nil
+  :general
+  (:states
+   'normal
+   :keymaps 'emacs-lisp-mode
+   ",ee" '((lambda () (interactive)  (al/evil-eval-sexp 'eval-last-sexp)) :wk "eval")
+   ",eb" 'eval-buffer
+   "TAB" 'indent-pp-sexp)
+  (:states
+   'visual
+   :keymaps 'emacs-lisp-mode
+   ",ee" 'eval-region))
 
 (use-package ace-window
   :general
@@ -466,17 +472,23 @@
 
 (use-package sql
   :straight nil
-  :config
-  (general-def 'normal 'sql-mode-map
+  :general
+  (:states
+   'normal
+   :keymaps 'sql-mode-map
     ",sp" 'al/sql-postgres-connect
     ",ee" 'sql-send-paragraph
     ",el" 'sql-send-line-and-next)
-  (general-def 'visual 'sql-mode-map
-    ",ee" 'sql-send-region)
+  (:states
+   'visual
+   :keymaps
+   'sql-mode-map
+   ",ee" 'sql-send-region)
+  :config
   (defun al/sql-postgres-connect ()
     (interactive)
     (sql-set-product "postgres" )
-    (sql-set-sqli-buffer)) )
+    (sql-set-sqli-buffer)))
 
 
 
