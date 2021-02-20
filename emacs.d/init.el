@@ -183,13 +183,13 @@
   :general
   (:states
    'normal
-   :keymaps 'emacs-lisp-mode
+   :keymaps 'emacs-lisp-mode-map
    ",ee" '((lambda () (interactive)  (al/evil-eval-sexp 'eval-last-sexp)) :wk "eval")
    ",eb" 'eval-buffer
    "TAB" 'indent-pp-sexp)
   (:states
    'visual
-   :keymaps 'emacs-lisp-mode
+   :keymaps 'emacs-lisp-mode-map
    ",ee" 'eval-region))
 
 (use-package ace-window
