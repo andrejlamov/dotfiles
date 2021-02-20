@@ -449,6 +449,7 @@
    "4" '(eyebrowse-switch-to-window-config-4 :wk "w4")))
 
 (use-package tdd
+  :defer t
   :straight (emacs-tdd :type git :host github :repo "jorgenschaefer/emacs-tdd"))
 
 (use-package cider
