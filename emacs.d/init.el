@@ -48,6 +48,7 @@
     "v" 'evil-visual-char
     "TAB" 'evil-switch-to-windows-last-buffer
     "a s" 'shell
+    "a c" 'comint-clear-buffer
     "a i" '((lambda () (interactive) (find-file "~/.emacs.d/init.el")) :wk "init.el")
     "b d" 'evil-delete-buffer
     "w m" 'delete-other-windows
