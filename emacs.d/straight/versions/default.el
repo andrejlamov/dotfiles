@@ -44,6 +44,7 @@
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
  ("json-snatcher" . "b28d1c0670636da6db508d03872d96ffddbc10f2")
+ ("key-chord" . "7f7fd7c5bd2b996fa054779357e1566f7989e07d")
  ("lsp-mode" . "1f013cdddfb05d515c5ecc6f4157594fdd201c3f")
  ("magit" . "9a96de26ec3772a3e374351738e911ac18e3e6de")
  ("markdown-mode" . "6d64f9e96203b1e76e3f0adfd2f545b5b02f5ffb")

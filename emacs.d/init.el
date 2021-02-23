@@ -34,13 +34,21 @@
   :straight nil
   :if (eq system-type 'darwin))
 
+(use-package key-chord
+  :config
+  (key-chord-mode 1))
+
 (use-package general
-  :after evil
+  :after evil key-chord
   :config
   (general-evil-setup)
-  (setq general-override-states '(normal visual motion))
+  (setq general-override-states '(normal visual motion insert))
   (general-override-mode)
-
+  (general-def
+    :keymaps 'override
+    :states 'insert
+    (general-chord "jk") 'evil-normal-state
+    (general-chord "kj") 'evil-normal-state)
   (general-def
     :states '(normal visual motion)
     :keymaps 'override
