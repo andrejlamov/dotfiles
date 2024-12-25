@@ -2,5 +2,5 @@
 	email = andrej.lamov@gmail.com
 	name = Andrej Lamov
 [alias]
-	set-name = config --local user.name 'Andrej Lamov' user.email 'andrej.lamov@gmail.com'
-	set-az-name = config --local user.name 'Lamov, Andrej' user.email 'andrej.lamov@astrazeneca.com'
+	set-me = !git config --local user.name 'Andrej Lamov' && git config --local  user.email 'andrej.lamov@gmail.com'
+	set-az-me = !git config --local user.name 'Lamov, Andrej' && git config --local  user.email 'andrej.lamov@astrazeneca.com'
