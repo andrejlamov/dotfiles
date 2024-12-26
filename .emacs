@@ -537,3 +537,7 @@
 
 (progn
   (require 'al-watch))
+
+(progn
+  (require 'al-back)
+  (global-set-key (kbd "M-,") 'al-back-go-backward))
