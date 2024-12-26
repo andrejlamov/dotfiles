@@ -36,8 +36,10 @@
 (defun al-back-go-backward ()
   (interactive)
   (-let (((&plist :point pos :buffer b) (al-back-pop)))
-    (when pos
-      (switch-to-buffer b)
+    (when (and pos b)
+      (if (get-buffer-window b)
+          (select-window (get-buffer-window b))
+        (switch-to-buffer b))
       (goto-char pos))))
 
 (defun al-back-go-forward ()
