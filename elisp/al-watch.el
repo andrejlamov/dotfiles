@@ -1,7 +1,6 @@
-;; Display the value of a variable in a dedicated buffer.
-;; The buffe is automatically updated on variable update.
-;; To achive this, built-in `add-variable-watcher` is used.
-
+;; Display the value of a variable in a dedicated buffer.  The buffer
+;; is automatically updated when the variable is changed, to achive
+;; this, built-in `add-variable-watcher` is used.
 
 (require 'dash)
 
@@ -31,13 +30,13 @@
         (insert "\n")
         (insert (funcall al-watch-formatter newval))))))
 
-(defun al-watch-add-fn (symbol)
+(defun al-watch-add (symbol)
   (interactive "S")
   (add-variable-watcher
    symbol #'al-watch-watcher-fn))
 
 
-(defun al-watch-remove-fn (symbol)
+(defun al-watch-remove (symbol)
   (interactive "S")
   (let ((b (get-buffer-create (concat al-watch-buffer-prefix " " (symbol-name symbol)))))
     (with-current-buffer b
