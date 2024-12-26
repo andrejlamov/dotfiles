@@ -4,6 +4,7 @@
 (require 'dash)
 
 (defvar al-back-stack nil)
+(defvar al-back-max-length 1000)
 
 (defun al-back-push-pos ()
   (let ((not-minibuffer (not (minibuffer-window-active-p (get-buffer-window))))
@@ -13,7 +14,9 @@
               ((&plist :line new-line) new-entry)
               ((&plist :line prev-line) (-first-item al-back-stack)))
         (unless (eq prev-line new-line)
-          (push (al-back-pos-entry) al-back-stack))))))
+          (progn
+            (push (al-back-pos-entry) al-back-stack)
+            (setq al-back-stack (-take al-back-max-length al-back-stack))))))))
 
 
 (defun al-back-pop ()
