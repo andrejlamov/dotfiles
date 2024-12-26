@@ -533,6 +533,7 @@
 
 (progn
   "thanks magnars"
+  (straight-use-package 's)
   (straight-use-package 'dash))
 
 (progn
