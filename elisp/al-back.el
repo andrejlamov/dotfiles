@@ -20,7 +20,10 @@
 
 
 (defun al-back-pop ()
-  (pop al-back-stack))
+  (if (-contains? '(undo al-back-go-backward) last-command)
+      (pop al-back-stack)
+    (pop al-back-stack)
+    (pop al-back-stack)))
 
 
 (defun al-back-pos-entry ()
