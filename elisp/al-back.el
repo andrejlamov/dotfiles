@@ -45,4 +45,8 @@
 (defun al-back-go-forward ()
   (interactive))
 
+(defun al-back-init ()
+  (interactive)
+  (add-hook 'post-command-hook #'al-back-push-pos))
+
 (provide 'al-back)

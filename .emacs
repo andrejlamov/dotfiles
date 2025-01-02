@@ -541,4 +541,5 @@
 
 (progn
   (require 'al-back)
+  (al-back-init)
   (global-set-key (kbd "M-,") 'al-back-go-backward))
