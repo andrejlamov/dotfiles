@@ -197,7 +197,7 @@
 
 
 (progn
-  straight-use-package 'vertico
+  (straight-use-package 'vertico)
   (straight-use-package 'consult)
   (straight-use-package 'orderless)
   (straight-use-package 'corfu)
