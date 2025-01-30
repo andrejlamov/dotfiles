@@ -529,7 +529,9 @@
 
 
 (progn
-    (setq org-log-done 'time))
+  (setq org-log-done 'time
+        org-startup-indented t
+        org-hide-leading-stars t))
 
 (progn
   "thanks magnars"
