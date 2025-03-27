@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (progn
   "Bootstrap straight package manager."
   (defvar bootstrap-version)
@@ -222,8 +224,15 @@
   (global-set-key (kbd "M-L") 'consult-project-buffer)
   (global-set-key (kbd "M-u") 'consult-git-grep)
   (global-set-key (kbd "M-U") 'consult-grep)
+  (global-set-key (kbd "M-C-u") 'al/consult-grep-current-buffer-file)
   (keymap-set vertico-map "M-q" #'vertico-quick-insert)
-  (keymap-set vertico-map "C-q" #'vertico-quick-exit))
+  (keymap-set vertico-map "C-q" #'vertico-quick-exit)
+
+  (defun al/consult-grep-current-buffer-file ()
+    (interactive)
+    (let ((consult-grep-args  (-concat consult-grep-args (list (concat "--include=" (buffer-name))))))
+      (when (buffer-file-name)
+        (consult-grep)))))
 
 
 (progn
