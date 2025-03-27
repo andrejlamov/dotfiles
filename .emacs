@@ -1,8 +1,4 @@
 (progn
-  "Fast startup"
-  (setq gc-cons-threshold (* 1024 1024 100)))
-
-(progn
   "Bootstrap straight package manager."
   (defvar bootstrap-version)
   (let ((bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" (or (bound-and-true-p straight-base-dir) user-emacs-directory)))
