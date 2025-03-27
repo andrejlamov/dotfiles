@@ -381,9 +381,8 @@
 
 (progn
   "isearch"
-
-  (straight-use-package 'isearch-plus)
-  (eval-after-load "isearch" '(require 'isearch+))
+  ;; (straight-use-package 'isearch-plus)
+  ;; (eval-after-load "isearch" '(require 'isearch+))
   (define-key isearch-mode-map (kbd "M-q") 'avy-isearch)
   (global-set-key (kbd "C-s") 'isearch-forward-regexp)
   (global-set-key (kbd "C-r") 'isearch-backward-regexp)
