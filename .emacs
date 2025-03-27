@@ -91,7 +91,7 @@
                       dired-mode
                       occur-mode))
 
-  (global-whitespace-mode))
+  (global-whitespace-mode 1))
 
 
 (progn
