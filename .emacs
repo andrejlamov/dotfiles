@@ -27,7 +27,6 @@
   (straight-use-package 'ef-themes)
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
-  (global-set-key (kbd "M-SPC t r") 'ef-themes-load-random)
   (load-theme 'ef-cherie t))
 
 (progn
