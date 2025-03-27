@@ -535,3 +535,17 @@
   (require 'al-back)
   (al-back-init)
   (global-set-key (kbd "M-,") 'al-back-go-backward))
+
+(progn
+  "kubernetes"
+  (straight-use-package 'kubernetes)
+  (setq kubernetes-poll-frequency 3600
+        kubernetes-redraw-frequency 3600))
+
+(progn
+  (straight-use-package 'load-env-vars))
+
+(progn
+  "tdd"
+  (straight-use-package '(tdd-mode :type git :host github :repo "jorgenschaefer/emacs-tdd")))
+
