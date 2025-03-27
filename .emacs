@@ -21,6 +21,7 @@
   (setq confirm-nonexistent-file-or-buffer nil)
   (setopt use-short-answers t)
   (straight-use-package 'ef-themes)
+  (straight-use-package 'standard-themes)
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
   (load-theme 'ef-cherie t))
