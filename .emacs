@@ -440,13 +440,8 @@
     (exec-path-from-shell-initialize)))
 
 (progn
-  (straight-use-package 'pet)
-  (add-hook 'python-base-mode-hook 'pet-mode -10)
-  (add-hook 'python-mode-hook 'pet-mode -10)
-  (add-hook 'inferior-python-mode-hook 'pet-mode -10)
-  (straight-use-package 'auto-virtualenvwrapper)
-  (require 'auto-virtualenvwrapper)
-  (add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
+
+  (straight-use-package 'elpy)
   (setq python-indent-guess-indent-offset nil)
   (setq python-indent-offset 4)
 
@@ -490,19 +485,15 @@
     (let ((python-shell-interpreter "python")
           (python-shell-interpreter-args "manage.py shell -i ipython"))
       (call-interactively 'run-python)))
+  (defun al/django-shell2 ()
+    (interactive)
+    (let ((python-shell-interpreter ".venv/bin/python")
+          (python-shell-interpreter-args "manage.py shell -i ipython"))
+      (call-interactively 'run-python)))
 
-  (add-hook 'python-mode-hook
-          (lambda ()
-            (setq-local python-shell-interpreter (pet-executable-find "python")
-                        python-shell-virtualenv-root (pet-virtualenv-root))))
-
-
-  ;; (defun python-comint-filter (output)
-  ;;   (replace-regexp-in-string "__PYTHON_EL.*" "" output))
-  ;; (add-to-list 'comint-preoutput-filter-functions #'python-comint-filter)
-
-  (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
-  (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))
+  (add-hook 'python-mode-hook (lambda ()
+                                (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
+                                (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))))
 
 (progn
   (straight-use-package 'yaml-mode))
