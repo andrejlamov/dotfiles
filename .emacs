@@ -224,15 +224,26 @@
   (global-set-key (kbd "M-L") 'consult-project-buffer)
   (global-set-key (kbd "M-u") 'consult-git-grep)
   (global-set-key (kbd "M-U") 'consult-grep)
+  (keymap-set isearch-mode-map "M-u" #'al/isearch-to-consult-grep)
+  (keymap-set isearch-mode-map "M-U" #'al/isearch-to-consult-grep)
   (global-set-key (kbd "M-C-u") 'al/consult-grep-current-buffer-file)
+  (define-key isearch-mode-map "\M-\C-u" 'al/isearch-to-consult-grep-current-buffer-file)
   (keymap-set vertico-map "M-q" #'vertico-quick-insert)
   (keymap-set vertico-map "C-q" #'vertico-quick-exit)
 
-  (defun al/consult-grep-current-buffer-file ()
+  (defun al/isearch-to-consult-grep ()
+    (interactive)
+    (consult-grep nil isearch-string))
+
+  (defun al/isearch-to-consult-grep-current-buffer-file ()
+    (interactive)
+    (al/consult-grep-current-buffer-file isearch-string))
+
+  (defun al/consult-grep-current-buffer-file (&optional pattern)
     (interactive)
     (let ((consult-grep-args  (-concat consult-grep-args (list (concat "--include=" (buffer-name))))))
       (when (buffer-file-name)
-        (consult-grep)))))
+        (consult-grep nil pattern)))))
 
 
 (progn
