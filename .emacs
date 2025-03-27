@@ -399,6 +399,7 @@
   (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
   (straight-use-package 'casual-isearch)
+  (require 'casual-isearch)
   (keymap-set isearch-mode-map "C-o" #'casual-isearch-tmenu))
 
 
