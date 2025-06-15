@@ -23,10 +23,11 @@
   (setq confirm-nonexistent-file-or-buffer nil)
   (setopt use-short-answers t)
   (straight-use-package 'ef-themes)
-  (straight-use-package 'standard-themes)
+  (straight-use-package '(standard-themes :type git :host github :repo "protesilaos/standard-themes"))
+  (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
-  (load-theme 'ef-cherie t))
+  (load-theme 'doric-plum t))
 
 (progn
   (setq vc-follow-symlinks t))
@@ -224,9 +225,9 @@
   (global-set-key (kbd "M-L") 'consult-project-buffer)
   (global-set-key (kbd "M-u") 'consult-git-grep)
   (global-set-key (kbd "M-U") 'consult-grep)
-  (keymap-set isearch-mode-map "M-u" #'al/isearch-to-consult-grep)
-  (keymap-set isearch-mode-map "M-U" #'al/isearch-to-consult-grep)
-  (global-set-key (kbd "M-C-u") 'al/consult-grep-current-buffer-file)
+  ;; (keymap-set isearch-mode-map "M-u" #'al/isearch-to-consult-grep)
+  ;; (keymap-set isearch-mode-map "M-U" #'al/isearch-to-consult-grep)
+  ;; (global--key (kbd "M-C-u") 'al/consult-grep-current-buffer-file)
   (define-key isearch-mode-map "\M-\C-u" 'al/isearch-to-consult-grep-current-buffer-file)
   (keymap-set vertico-map "M-q" #'vertico-quick-insert)
   (keymap-set vertico-map "C-q" #'vertico-quick-exit)
@@ -270,15 +271,13 @@
 (progn
   "avy"
   (straight-use-package 'avy)
-  (straight-use-package 'casual-avy)
-  (global-set-key (kbd "M-q") 'avy-goto-char-timer)
-  (keymap-global-set "M-Q" #'casual-avy-tmenu)
+  (global-set-key (kbd "C-q") 'avy-goto-char-timer)
 
   '(custom-set-faces
-   '(avy-lead-face ((t (:background "#7feaff" :foreground "black" :inherit bold))))
-   '(avy-lead-face-0 ((t (:background "#ffaaff" :foreground "black" :inherit bold))))
-   '(avy-lead-face-1 ((t (:background "#7feaff" :foreground "black" :inherit bold))))
-   '(avy-lead-face-2 ((t (:background "#ffaaff" :foreground "black" :inherit bold))))))
+    '(avy-lead-face ((t (:background "#7feaff" :foreground "black" :inherit bold))))
+    '(avy-lead-face-0 ((t (:background "#ffaaff" :foreground "black" :inherit bold))))
+    '(avy-lead-face-1 ((t (:background "#7feaff" :foreground "black" :inherit bold))))
+    '(avy-lead-face-2 ((t (:background "#ffaaff" :foreground "black" :inherit bold))))))
 
 
 (progn
@@ -299,10 +298,14 @@
     (interactive "sName: ")
     (shell (concat "*shell* " name)))
 
+  (defun al/shell ()
+    (interactive)
+    (shell (generate-new-buffer-name "*shell*")))
+
   (defun al/async-shell-named (name)
     (interactive "sName: ")
     )
-  (define-key al/meta-spc-map (kbd "as") #'al/shell-named)
+  (define-key al/meta-spc-map (kbd "as") #'al/shell)
   (define-key al/meta-spc-map (kbd "aa") #'async-shell-command))
 
 
@@ -329,7 +332,7 @@
 
   (defun al/setup-eglot-format ()
     (setq-local tab-width 2)
-    (if (member 'eglot--managed-mode minor-mode-list)
+    (if (and (member 'eglot--managed-mode minor-mode-list) (boundp 'tsx-ts-mode-map))
         (define-key tsx-ts-mode-map [remap indent-for-tab-command] 'al/eglot-indent-for-tab-command)))
 
   (add-hook 'eglot-managed-mode-hook 'al/setup-eglot-format))
@@ -397,25 +400,19 @@
   (define-key isearch-mode-map (kbd "M-q") 'avy-isearch)
   (global-set-key (kbd "C-s") 'isearch-forward-regexp)
   (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-
-  (straight-use-package 'casual-isearch)
-  (require 'casual-isearch)
-  (keymap-set isearch-mode-map "C-o" #'casual-isearch-tmenu))
+  )
 
 
 (progn
   "regexp builder"
-  (straight-use-package 'casual-re-builder)
   (require 're-builder)
-  (keymap-set reb-mode-map "C-o" #'casual-re-builder-tmenu)
-  (keymap-set reb-lisp-mode-map "C-o" #'casual-re-builder-tmenu))
+  )
 
 
 (progn
   (straight-use-package 'which-key)
   (setq which-key-idle-delay 0.1)
   (setq which-key-idle-secondary-delay 0.1)
-  
   (which-key-mode 1))
 
 
@@ -426,23 +423,20 @@
 (progn
   (global-auto-revert-mode 1)
   (setq global-auto-revert-non-file-buffers t)
-  (setq auto-revert-verbose nil)
-)
+  (setq auto-revert-verbose nil))
+
 (progn
-  (straight-use-package 'casual-dired)
-  (require 'casual-dired)
+  "dired"
   (setq insert-directory-program "gls" dired-use-ls-dired t)
   (setq dired-listing-switches "-al --group-directories-first")
-  (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
-  (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu)
-  (keymap-set dired-mode-map "/" #'casual-dired-search-replace-tmenu))
+  (setq dired-dwim-target t)
+  
+  )
 
 
 (progn
   (straight-use-package 'markdown-mode)
   (setq markdown-command "pandoc -t html5"))
-
-
 
 
 (progn
@@ -453,8 +447,7 @@
 
 (progn
   (straight-use-package 'exec-path-from-shell)
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
 
 (progn
 
@@ -464,7 +457,8 @@
 
   (defun al/python-eval-dwim ()
     (interactive)
-    (let* ((process (python-shell-get-process))
+    (let* ((this-buffer (current-buffer))
+           (process (python-shell-get-process))
            (code-snippet (buffer-substring
                           (if (region-active-p)
                               (region-beginning)
@@ -476,10 +470,10 @@
                             (save-excursion
                               (python-nav-end-of-statement)
                               (point))))))
-      (save-window-excursion
-        (switch-to-buffer-other-window (process-buffer process))
-        (end-of-buffer))
-      (python-shell-send-string code-snippet process)))
+      (switch-to-buffer-other-window (process-buffer process))
+      (end-of-buffer)
+      (python-shell-send-string code-snippet process)
+      (switch-to-buffer-other-window this-buffer)))
 
   (defun al/python-eval-defun ()
     (interactive)
@@ -496,7 +490,6 @@
         (end-of-buffer))
       (python-shell-send-string code-snippet process)))
 
-
   (defun al/django-shell ()
     (interactive)
     (let ((python-shell-interpreter "python")
@@ -505,7 +498,7 @@
   (defun al/django-shell2 ()
     (interactive)
     (let ((python-shell-interpreter ".venv/bin/python")
-          (python-shell-interpreter-args "manage.py shell -i ipython"))
+          (python-shell-interpreter-args "manage.py shell"))
       (call-interactively 'run-python)))
 
   (add-hook 'python-mode-hook (lambda ()
@@ -517,27 +510,15 @@
 
 
 (progn
-  (straight-use-package '(edraw-org :type git :host github :repo "misohena/el-easydraw"))
-  (with-eval-after-load 'org
-    (require 'edraw-org)
-    (edraw-org-setup-default))
-  ;; When using the org-export-in-background option (when using the
-  ;; asynchronous export function), the following settings are
-  ;; required. This is because Emacs started in a separate process does
-  ;; not load org.el but only ox.el.
-  (with-eval-after-load "ox"
-    (require 'edraw-org)
-    (edraw-org-setup-exporter)))
-
-
-(progn
   (straight-use-package 'org-download)
   (add-hook 'dired-mode-hook 'org-download-enable))
 
 
 (progn
+  "org mode"
   (setq org-log-done 'time
         org-startup-indented t
+        org-default-notes-file "~/org/todo.org"
         org-hide-leading-stars t))
 
 (progn
@@ -565,4 +546,23 @@
 (progn
   "tdd"
   (straight-use-package '(tdd-mode :type git :host github :repo "jorgenschaefer/emacs-tdd")))
+
+(progn
+  (straight-use-package 'vlf)
+  (require 'vlf-setup)
+  (setq vlf-application 'dont-ask))
+
+(progn
+  (straight-use-package 'docker))
+
+(progn
+  (straight-use-package 'eyebrowse)
+  (eyebrowse-mode 1))
+
+
+
+
+
+
+
 
