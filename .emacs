@@ -225,9 +225,7 @@
   (global-set-key (kbd "M-L") 'consult-project-buffer)
   (global-set-key (kbd "M-u") 'consult-git-grep)
   (global-set-key (kbd "M-U") 'consult-grep)
-  ;; (keymap-set isearch-mode-map "M-u" #'al/isearch-to-consult-grep)
-  ;; (keymap-set isearch-mode-map "M-U" #'al/isearch-to-consult-grep)
-  ;; (global--key (kbd "M-C-u") 'al/consult-grep-current-buffer-file)
+
   (define-key isearch-mode-map "\M-\C-u" 'al/isearch-to-consult-grep-current-buffer-file)
   (keymap-set vertico-map "M-q" #'vertico-quick-insert)
   (keymap-set vertico-map "C-q" #'vertico-quick-exit)
