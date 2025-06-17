@@ -24,10 +24,12 @@
   (setopt use-short-answers t)
   (straight-use-package 'ef-themes)
   (straight-use-package '(standard-themes :type git :host github :repo "protesilaos/standard-themes"))
+  (straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
   (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
-  (load-theme 'doric-plum t))
+
+  (load-theme 'modus-operandi-tinted t))
 
 (progn
   (setq vc-follow-symlinks t))
