@@ -271,7 +271,8 @@
 (progn
   "avy"
   (straight-use-package 'avy)
-  (global-set-key (kbd "C-q") 'avy-goto-char-timer)
+  (keymap-unset prog-mode-map "M-q")
+  (global-set-key (kbd "M-q") 'avy-goto-char-timer)
 
   '(custom-set-faces
     '(avy-lead-face ((t (:background "#7feaff" :foreground "black" :inherit bold))))
