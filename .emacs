@@ -23,7 +23,7 @@
   (setq ring-bell-function 'ignore)
   (setq-default indent-tabs-mode nil)
   (setq confirm-nonexistent-file-or-buffer nil)
-  (setopt use-short-answers t)
+  (setq use-short-answers t)
   (straight-use-package 'ef-themes)
   (straight-use-package '(standard-themes :type git :host github :repo "protesilaos/standard-themes"))
   (straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
