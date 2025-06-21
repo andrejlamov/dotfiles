@@ -207,6 +207,13 @@
   (straight-use-package 'corfu)
   (straight-use-package 'consult-ls-git)
 
+  (unless (display-graphic-p)
+    (straight-use-package
+     '(corfu-terminal
+       :type git
+       :repo "https://codeberg.org/akib/emacs-corfu-terminal.git"))
+    (corfu-terminal-mode +1))
+
   (setq corfu-auto t)
   (global-corfu-mode)
   (setq completion-styles '(orderless basic))
