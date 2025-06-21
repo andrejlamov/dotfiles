@@ -406,6 +406,8 @@
   "dired"
   (when (string= system-type "darwin")       
     (setq dired-use-ls-dired nil))
+  '(setq insert-directory-program "gls" dired-use-ls-dired t)
+  '(setq dired-listing-switches "-al --group-directories-first")
   (setq dired-dwim-target t)
   
   )
