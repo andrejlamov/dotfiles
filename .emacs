@@ -13,11 +13,13 @@
 
 (progn
   (menu-bar-mode -1)
-  (scroll-bar-mode -1)
+  (ignore-errors
+    (scroll-bar-mode -1)
+    (set-fringe-mode 0))
   (tool-bar-mode -1)
   '(global-display-line-numbers-mode)
   (setq visible-bell nil)
-  (set-fringe-mode 0)
+
   (setq ring-bell-function 'ignore)
   (setq-default indent-tabs-mode nil)
   (setq confirm-nonexistent-file-or-buffer nil)
@@ -429,8 +431,8 @@
 
 (progn
   "dired"
-  (setq insert-directory-program "gls" dired-use-ls-dired t)
-  (setq dired-listing-switches "-al --group-directories-first")
+  (when (string= system-type "darwin")       
+    (setq dired-use-ls-dired nil))
   (setq dired-dwim-target t)
   
   )
