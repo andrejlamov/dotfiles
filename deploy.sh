@@ -6,4 +6,5 @@ ln -sf "$ROOT"/.emacs ~/.emacs
 ln -sf "$ROOT"/.bashrc ~/.bashrc
 ln -sf "$ROOT"/.bash_profile ~/.bash_profile
 ln -sf "$ROOT"/.gitconfig ~/.gitconfig
+mkdir -p ~/.emacs.d/straight/versions && ln -sf "$ROOT"/straight/versions/* ~/.emacs.d/straight/versions
 mkdir -p ~/elisp && ln -sf "$ROOT"/elisp/* ~/elisp
