@@ -31,7 +31,7 @@
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
 
-  (load-theme 'modus-operandi-tinted t))
+  (load-theme 'ef-cherie t))
 
 (progn
   (setq vc-follow-symlinks t))
