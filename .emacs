@@ -19,6 +19,7 @@
   (tool-bar-mode -1)
   '(global-display-line-numbers-mode)
   (setq visible-bell nil)
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
   (setq ring-bell-function 'ignore)
   (setq-default indent-tabs-mode nil)
