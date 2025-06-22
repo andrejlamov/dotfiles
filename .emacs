@@ -284,6 +284,7 @@
   (straight-use-package 'avy)
   (keymap-unset prog-mode-map "M-q")
   (global-set-key (kbd "M-q") 'avy-goto-char-timer)
+  (global-set-key (kbd "M-Q") 'avy-goto-line)
 
   '(custom-set-faces
     '(avy-lead-face ((t (:background "#7feaff" :foreground "black" :inherit bold))))
