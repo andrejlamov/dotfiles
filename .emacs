@@ -70,13 +70,16 @@
   (global-set-key (kbd "C-h F") 'helpful-function))
 
 
-(when (window-system)
+(if (window-system)
   (progn
     ;; todo: Custom autoload?
     (straight-use-package 'good-scroll)
     (good-scroll-mode 1)
     (global-set-key (kbd "M-v") 'good-scroll-down)
-    (global-set-key (kbd "C-v") 'good-scroll-up)))
+    (global-set-key (kbd "C-v") 'good-scroll-up))
+  (progn
+    (global-set-key (kbd "M-v") 'scroll-down-line)
+    (global-set-key (kbd "C-v") 'scroll-up-line)))
 
 
 (progn
