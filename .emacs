@@ -298,9 +298,7 @@
   (setq aw-background nil)
   (ace-window-display-mode 1)
   (global-set-key (kbd "M-o") 'ace-window)
-
-
-  (global-set-key (kbd "M-SPC w r") 'crux-transpose-windows))
+  (global-set-key (kbd "M-O") 'crux-transpose-windows))
 
 
 (progn
