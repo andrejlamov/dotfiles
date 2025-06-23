@@ -44,9 +44,15 @@
 
   (when (getenv "TMUX")
     (advice-add 'load-theme :after (defun al/tmux-theme (&rest args)
-                                     (let ((fg (face-attribute 'mode-line :foreground))
-                                           (bg (face-attribute 'mode-line :background)))
-                                       (shell-command (s-concat "tmux set -g status-style fg=" fg ",bg=" bg)  ))))))
+                                     (let ((modeline-fg (face-attribute 'mode-line :foreground))
+                                           (modeline-bg (face-attribute 'mode-line :background))
+                                           (fg (face-attribute 'default :foreground))
+                                           (bg (face-attribute 'default :background)))
+                                       (shell-command
+                                        (s-concat
+                                         "tmux set -g status-style fg=" modeline-fg ",bg=" modeline-bg
+                                         " && "
+                                         "tmux set -g window-style fg=" fg ",bg=" bg)))))))
 (progn
   (setq vc-follow-symlinks t))
 
