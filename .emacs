@@ -32,27 +32,32 @@
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
 
-  (load-theme 'ef-cherie t))
+  (ef-themes-load-random))
 
 (progn
   "thanks magnars"
   (straight-use-package 's)
-  (straight-use-package 'dash))
+  (straight-use-package 'dash)
+  (require 's)
+  (require 'dash)
+  )
 
 (progn
   "tmux theme sync"
+  (defun al/tmux-theme (&rest args)
+    (let ((modeline-fg (face-attribute 'mode-line :foreground))
+          (modeline-bg (face-attribute 'mode-line :background))
+          (fg (face-attribute 'default :foreground))
+          (bg (face-attribute 'default :background)))
+      (shell-command
+       (s-concat
+        "tmux set -g status-style fg=" modeline-fg ",bg=" modeline-bg
+        " && "
+        "tmux set -g window-style fg=" fg ",bg=" bg))))
 
   (when (getenv "TMUX")
-    (advice-add 'load-theme :after (defun al/tmux-theme (&rest args)
-                                     (let ((modeline-fg (face-attribute 'mode-line :foreground))
-                                           (modeline-bg (face-attribute 'mode-line :background))
-                                           (fg (face-attribute 'default :foreground))
-                                           (bg (face-attribute 'default :background)))
-                                       (shell-command
-                                        (s-concat
-                                         "tmux set -g status-style fg=" modeline-fg ",bg=" modeline-bg
-                                         " && "
-                                         "tmux set -g window-style fg=" fg ",bg=" bg)))))))
+    (al/tmux-theme)
+    (advice-add 'load-theme :after 'al/tmux-theme)))
 (progn
   (setq vc-follow-symlinks t))
 
