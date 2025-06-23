@@ -35,12 +35,26 @@
   (load-theme 'ef-cherie t))
 
 (progn
+  "thanks magnars"
+  (straight-use-package 's)
+  (straight-use-package 'dash))
+
+(progn
+  "tmux theme sync"
+
+  (when (getenv "TMUX")
+    (advice-add 'load-theme :after (defun al/tmux-theme (&rest args)
+                                     (let ((fg (face-attribute 'mode-line :foreground))
+                                           (bg (face-attribute 'mode-line :background)))
+                                       (shell-command (s-concat "tmux set -g status-style fg=" fg ",bg=" bg)  ))))))
+(progn
   (setq vc-follow-symlinks t))
 
 (progn
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
   (global-set-key (kbd "C-z") 'repeat)
+  (global-set-key (kbd "M-SPC a t") 'ef-themes-load-random)
   (global-set-key (kbd "C-x C-f") 'find-file)
   (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
 
@@ -510,10 +524,7 @@
         org-default-notes-file "~/org/todo.org"
         org-hide-leading-stars t))
 
-(progn
-  "thanks magnars"
-  (straight-use-package 's)
-  (straight-use-package 'dash))
+
 
 (progn
   (require 'al-watch))
