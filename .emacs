@@ -171,6 +171,13 @@
 
 
 (progn
+  (straight-use-package 'transient)
+  (require 'transient)
+    (keymap-set transient-predicate-map
+              "<mouse-set-region>"
+              #'transient--do-stay)
+  )
+(progn
   (straight-use-package 'magit)
   (setq magit-diff-refine-hunk 'all)
   (add-hook 'magit-status-mode-hook (lambda ()
@@ -390,9 +397,11 @@
 (progn
   (straight-use-package 'embark)
   (straight-use-package 'embark-consult)
+  (require 'embark)
 
   ;; embark
   (global-set-key (kbd "C-.") 'embark-act)
+  (global-set-key (kbd "M-.") 'embark-act)
   (global-set-key (kbd "C-;") 'embark-dwim)
   (global-set-key (kbd "C-h B") 'embark-bindings))
 
@@ -570,10 +579,7 @@
   (straight-use-package 'eyebrowse)
   (eyebrowse-mode 1))
 
-
-
-
-
-
-
-
+(progn
+  (straight-use-package 'native-complete)
+  (native-complete-setup-bash)
+  )
