@@ -583,3 +583,7 @@
   (straight-use-package 'native-complete)
   (native-complete-setup-bash)
   )
+
+(progn
+  (straight-use-package 'xclip)
+  (xclip-mode +1))
