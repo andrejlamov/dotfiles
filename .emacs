@@ -622,3 +622,10 @@
   "registers"
   (global-set-key (kbd "M-M") 'point-to-register)
   (global-set-key (kbd "M-m") 'jump-to-register))
+(progn
+  "compile"
+  (setq compilation-always-kill t
+        compilation-ask-about-save nil)
+
+  (global-set-key (kbd "M-SPC r") 'recompile)
+  )
