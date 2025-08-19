@@ -36,12 +36,13 @@
   (ef-themes-load-random))
 
 (progn
-  "thanks magnars"
+  "normal std lib"
   (straight-use-package 's)
   (straight-use-package 'dash)
+  (straight-use-package 'f)
   (require 's)
   (require 'dash)
-  )
+  (require 'f))
 
 (progn
   "tmux theme sync"
