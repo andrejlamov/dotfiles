@@ -603,6 +603,22 @@
   (straight-use-package 'golden-ratio)
   (golden-ratio-mode -1))
 (progn
+  "emacs lisp"
+  (defun al/eval-last-sexp-to-comment ()
+    (interactive)
+    (insert " ;; ")
+    (pp-eval-last-sexp '(4)))
+
+  (define-key emacs-lisp-mode-map (kbd "M-SPC e x") #'edebug-defun)
+  (define-key emacs-lisp-mode-map (kbd "M-SPC e t") #'toggle-debug-on-error)
+  (define-key emacs-lisp-mode-map (kbd "M-SPC e b") #'eval-buffer)
+  (keymap-set emacs-lisp-mode-map "C-x C-S-e" 'pp-macroexpand-last-sexp)
+  (keymap-set emacs-lisp-mode-map "C-x C-e" 'pp-eval-last-sexp)
+
+  (straight-use-package 'aggressive-indent-mode)
+)
+
+(progn
   "registers"
   (global-set-key (kbd "M-M") 'point-to-register)
   (global-set-key (kbd "M-m") 'jump-to-register))
