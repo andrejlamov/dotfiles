@@ -11,6 +11,7 @@
         (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage)))
 
+(ignore-errors (load-env-vars "~/.private.env"))
 (progn
   (menu-bar-mode -1)
   (ignore-errors
@@ -273,6 +274,8 @@
   (global-set-key (kbd "M-L") 'consult-project-buffer)
   (global-set-key (kbd "M-u") 'consult-git-grep)
   (global-set-key (kbd "M-U") 'consult-grep)
+  (global-set-key (kbd "M-g i") 'consult-imenu)
+  (global-set-key (kbd "C-c h") 'consult-history)
 
   (define-key isearch-mode-map "\M-\C-u" 'al/isearch-to-consult-grep-current-buffer-file)
   (keymap-set vertico-map "M-q" #'vertico-quick-insert)
@@ -335,6 +338,7 @@
   (setq aw-background nil)
   (ace-window-display-mode 1)
   (global-set-key (kbd "M-o") 'ace-window)
+  (global-unset-key (kbd "C-x o"))
   (global-set-key (kbd "M-O") 'crux-transpose-windows))
 
 
@@ -432,8 +436,8 @@
 
 (progn
   (straight-use-package 'which-key)
-  (setq which-key-idle-delay 0.1)
-  (setq which-key-idle-secondary-delay 0.1)
+  (setq which-key-idle-delay 0)
+  (setq which-key-idle-secondary-delay 0.01)
   (which-key-mode 1))
 
 
@@ -536,6 +540,9 @@
   (straight-use-package 'org-download)
   (add-hook 'dired-mode-hook 'org-download-enable))
 
+(progn
+  "speedtype"
+  (straight-use-package 'speed-type))
 
 (progn
   "org mode"
@@ -573,7 +580,9 @@
   (setq vlf-application 'dont-ask))
 
 (progn
-  (straight-use-package 'docker))
+  (straight-use-package 'docker)
+  (global-set-key (kbd "M-SPC c") 'docker)
+  )
 
 (progn
   (straight-use-package 'eyebrowse)
@@ -587,3 +596,7 @@
 (progn
   (straight-use-package 'xclip)
   (xclip-mode +1))
+(progn
+  "registers"
+  (global-set-key (kbd "M-M") 'point-to-register)
+  (global-set-key (kbd "M-m") 'jump-to-register))
