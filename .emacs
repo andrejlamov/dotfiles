@@ -337,6 +337,8 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq aw-background nil)
   (ace-window-display-mode 1)
+  (custom-set-faces
+   '(aw-leading-char-face ((t (:inherit (bold ef-themes-reset-soft) :height 1)))))
   (global-set-key (kbd "M-o") 'ace-window)
   (global-unset-key (kbd "C-x o"))
   (global-set-key (kbd "M-O") 'crux-transpose-windows))
