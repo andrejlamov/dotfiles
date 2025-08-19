@@ -31,9 +31,8 @@
   (straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
   (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
   (ignore-errors
-    (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
-
-  (ef-themes-load-random))
+    (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+  (load-theme 'ef-cherie nil))
 
 (progn
   "normal std lib"
