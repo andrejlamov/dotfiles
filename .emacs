@@ -596,6 +596,10 @@
 (progn
   (straight-use-package 'xclip)
   (xclip-mode +1))
+
+(progn
+  (straight-use-package 'golden-ratio)
+  (golden-ratio-mode -1))
 (progn
   "registers"
   (global-set-key (kbd "M-M") 'point-to-register)
