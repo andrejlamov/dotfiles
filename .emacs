@@ -33,7 +33,7 @@
   (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
-  (load-theme 'ef-cherie nil))
+  (load-theme 'ef-cherie t))
 
 (progn
   "normal std lib"
