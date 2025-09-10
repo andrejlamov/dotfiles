@@ -129,6 +129,7 @@
                       magit-diff-mode
                       ibuffer-mode
                       dired-mode
+                      corfu-mode
                       occur-mode))
 
   (global-whitespace-mode 1))
