@@ -550,6 +550,10 @@
 
 (progn
   "org mode"
+
+  (require 'al-org)
+  (global-set-key (kbd "M-SPC o") 'al-org-key-map)
+
   (setq org-log-done 'time
         org-startup-indented t
         org-default-notes-file "~/org/todo.org"
