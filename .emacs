@@ -604,6 +604,10 @@
 (progn
   (straight-use-package 'golden-ratio)
   (golden-ratio-mode -1))
+
+(progn
+  (straight-use-package 'flycheck))
+
 (progn
   "emacs lisp"
   (defun al/eval-last-sexp-to-comment ()
