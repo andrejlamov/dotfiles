@@ -633,7 +633,7 @@
   (setq compilation-always-kill t
         compilation-ask-about-save nil)
 
-  (global-set-key (kbd "M-SPC r") 'recompile)
+  (global-set-key (kbd "M-SPC r") 'recompile))
 
 (progn
   "rust"
