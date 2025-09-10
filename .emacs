@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t -*-
-
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
 (progn
   "Bootstrap straight package manager."
   (defvar bootstrap-version)
