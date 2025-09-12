@@ -24,7 +24,7 @@
   (progn
     (switch-to-buffer "*typo-all-combos*")
     (erase-buffer)
-    (insert (typo-generate-strings typo-all-pairs))))
+    (insert (typo-generate-strings (typo-pairs)))))
 
 (defun typo-pairs ()
   (->> typo-fingers
