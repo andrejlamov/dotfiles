@@ -546,6 +546,7 @@
 
 (progn
   "speedtype"
+  (require 'al-typo)
   (straight-use-package 'speed-type))
 
 (progn

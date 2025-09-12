@@ -56,3 +56,5 @@
                  res)))
        (-flatten)
        (s-join " ")))
+
+(provide 'al-typo)
