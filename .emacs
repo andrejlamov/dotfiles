@@ -84,7 +84,12 @@
 (progn
   (straight-use-package 'no-littering)
   (require 'no-littering)
-  (no-littering-theme-backups))
+  (no-littering-theme-backups)
+  (setq backup-by-copying t)
+  (setq make-backup-files nil)
+  (setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+    )
 
 
 (progn
