@@ -129,6 +129,7 @@
                       magit-diff-mode
                       ibuffer-mode
                       dired-mode
+                      wdired-mode
                       corfu-mode
                       occur-mode))
 
@@ -236,7 +237,12 @@
   (global-set-key (kbd "C-M-w") 'sp-copy-sexp))
 
 (progn
-  (straight-use-package 'wgrep))
+  "wgrep, wdired, etc"
+  (straight-use-package 'wgrep)
+  (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode)
+  (define-key wgrep-mode-map (kbd "C-c C-c") 'wgrep-finish-edit)
+  (define-key occur-mode-map (kbd "C-c C-p") 'occur-edit-mode)
+  (setq wgrep-auto-save-buffer t))
 
 
 (progn
@@ -268,7 +274,12 @@
   (keymap-set vertico-map "S-<next>" #'vertico-repeat-next)
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
 
-  (global-set-key (kbd "M-s l") 'consult-line)
+  (defun al/grep-current-file-buffer ()
+    (interactive)
+    (when-let ((name (buffer-file-name)))
+      (consult-grep `(,name))))
+
+  (global-set-key (kbd "M-s l") 'al/grep-current-file-buffer)
   (global-set-key (kbd "C-x b") 'consult-buffer)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
 
