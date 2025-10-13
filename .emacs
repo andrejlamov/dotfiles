@@ -12,7 +12,28 @@
         (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage)))
 
+(progn
+  (straight-use-package 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
+
 (ignore-errors (load-env-vars "~/.private.env"))
+
+(progn
+  (defvar al/meta-spc-map (make-sparse-keymap))
+  (global-set-key (kbd "M-SPC") al/meta-spc-map)
+  (global-set-key (kbd "C-z") 'repeat)
+  (global-set-key (kbd "M-SPC a t") 'ef-themes-load-random)
+  (global-set-key (kbd "C-x C-f") 'find-file)
+  (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
+
+  (defun al/backward-kill-or-kill-region ()
+    (interactive)
+    (if (region-active-p)
+        (call-interactively 'kill-region)
+      (call-interactively 'backward-kill-word)))
+  (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region))
+
 (progn
   (menu-bar-mode -1)
   (ignore-errors
