@@ -48,13 +48,18 @@
   (setq-default indent-tabs-mode nil)
   (setq confirm-nonexistent-file-or-buffer nil)
   (setq use-short-answers t)
-  (straight-use-package 'ef-themes)
-  (straight-use-package '(standard-themes :type git :host github :repo "protesilaos/standard-themes"))
-  (straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
+  '(straight-use-package 'prism)
+
+  '(straight-use-package 'ef-themes)
+  '(straight-use-package '(standard-themes :type git :host github :repo "protesilaos/standard-themes"))
+  '(straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
   (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
+
+  (blink-cursor-mode 1)
+  (setq-default cursor-type '(bar . 3))
+  (load-theme 'doric-dark t nil)
   (ignore-errors
-    (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
-  (load-theme 'ef-cherie t))
+    (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")))
 
 (progn
   "normal std lib"
@@ -85,21 +90,6 @@
   (setq vc-follow-symlinks t))
 
 (progn
-  (defvar al/meta-spc-map (make-sparse-keymap))
-  (global-set-key (kbd "M-SPC") al/meta-spc-map)
-  (global-set-key (kbd "C-z") 'repeat)
-  (global-set-key (kbd "M-SPC a t") 'ef-themes-load-random)
-  (global-set-key (kbd "C-x C-f") 'find-file)
-  (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
-
-  (defun al/backward-kill-or-kill-region ()
-    (interactive)
-    (if (region-active-p)
-        (call-interactively 'kill-region)
-      (call-interactively 'backward-kill-word)))
-  (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region))
-
-(progn
   (add-to-list 'load-path "~/elisp/"))
 
 (progn
@@ -109,8 +99,7 @@
   (setq backup-by-copying t)
   (setq make-backup-files nil)
   (setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-    )
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 
 (progn
@@ -124,12 +113,12 @@
 
 
 (if (window-system)
-  (progn
-    ;; todo: Custom autoload?
-    (straight-use-package 'good-scroll)
-    (good-scroll-mode 1)
-    (global-set-key (kbd "M-v") 'good-scroll-down)
-    (global-set-key (kbd "C-v") 'good-scroll-up))
+    (progn
+      ;; todo: Custom autoload?
+      (straight-use-package 'good-scroll)
+      (good-scroll-mode 1)
+      (global-set-key (kbd "M-v") 'good-scroll-down)
+      (global-set-key (kbd "C-v") 'good-scroll-up))
   (progn
     (global-set-key (kbd "M-v") 'scroll-down-line)
     (global-set-key (kbd "C-v") 'scroll-up-line)))
@@ -137,7 +126,8 @@
 
 (progn
   (setq-default whitespace-style
-                '(face spaces empty tabs newline trailing space-mark tab-mark newline-mark))
+                '(face tabs newline trailing  tab-mark newline-mark))
+
   (setq-default whitespace-display-mappings
                 '( ;; space -> · else .
                   (space-mark 32 [183] [46])
@@ -203,7 +193,7 @@
 (progn
   (straight-use-package 'transient)
   (require 'transient)
-    (keymap-set transient-predicate-map
+  (keymap-set transient-predicate-map
               "<mouse-set-region>"
               #'transient--do-stay)
   )
@@ -218,7 +208,7 @@
 (progn
   (straight-use-package 'smartparens)
   (require 'smartparens-config)
-  (smartparens-global-mode t)
+  (smartparens-global-mode -1)
   (show-smartparens-global-mode t)
 
   ;; sp move
@@ -265,6 +255,8 @@
 (progn
   "wgrep, wdired, etc"
   (straight-use-package 'wgrep)
+  (require 'dired)
+  (require 'wgrep)
   (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode)
   (define-key wgrep-mode-map (kbd "C-c C-c") 'wgrep-finish-edit)
   (define-key occur-mode-map (kbd "C-c C-p") 'occur-edit-mode)
@@ -277,7 +269,6 @@
   (straight-use-package 'orderless)
   (straight-use-package 'corfu)
   (straight-use-package 'consult-ls-git)
-
   (unless (display-graphic-p)
     (straight-use-package
      '(corfu-terminal
@@ -300,12 +291,9 @@
   (keymap-set vertico-map "S-<next>" #'vertico-repeat-next)
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
 
-  (defun al/grep-current-file-buffer ()
-    (interactive)
-    (when-let ((name (buffer-file-name)))
-      (consult-grep `(,name))))
 
   (global-set-key (kbd "M-s l") 'al/grep-current-file-buffer)
+  (global-set-key (kbd "M-s o") 'consult-line)
   (global-set-key (kbd "C-x b") 'consult-buffer)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
 
@@ -320,6 +308,11 @@
   (keymap-set vertico-map "M-q" #'vertico-quick-insert)
   (keymap-set vertico-map "C-q" #'vertico-quick-exit)
 
+  (defun al/grep-current-file-buffer ()
+    (interactive)
+    (when-let ((name (buffer-file-name)))
+      (consult-grep `(,name))))
+
   (defun al/isearch-to-consult-grep ()
     (interactive)
     (consult-grep nil isearch-string))
@@ -332,11 +325,14 @@
     (interactive)
     (let ((consult-grep-args  (-concat consult-grep-args (list (concat "--include=" (buffer-name))))))
       (when (buffer-file-name)
-        (consult-grep nil pattern)))))
+        (consult-grep nil pattern))))
 
+  (straight-use-package 'marginalia)
+  (marginalia-mode 1))
 
 (progn
   (straight-use-package 'expand-region)
+  (require 'expand-region)
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 (progn
@@ -426,7 +422,10 @@
     (if (and (member 'eglot--managed-mode minor-mode-list) (boundp 'tsx-ts-mode-map))
         (define-key tsx-ts-mode-map [remap indent-for-tab-command] 'al/eglot-indent-for-tab-command)))
 
-  (add-hook 'eglot-managed-mode-hook 'al/setup-eglot-format))
+  (add-hook 'eglot-managed-mode-hook 'al/setup-eglot-format)
+
+
+  )
 
 
 (progn
@@ -497,14 +496,13 @@
     (setq dired-use-ls-dired nil))
   '(setq insert-directory-program "gls" dired-use-ls-dired t)
   '(setq dired-listing-switches "-al --group-directories-first")
-  (setq dired-dwim-target t)
-  
-  )
+  (setq dired-dwim-target t))
 
 
 (progn
   (straight-use-package 'markdown-mode)
-  (setq markdown-command "pandoc -t html5"))
+  (setq markdown-command "pandoc -t html5")
+  )
 
 
 (progn
@@ -518,7 +516,7 @@
   (exec-path-from-shell-initialize))
 
 (progn
-
+  "python"
   (straight-use-package 'elpy)
   (setq python-indent-guess-indent-offset nil)
   (setq python-indent-offset 4)
@@ -563,15 +561,27 @@
     (let ((python-shell-interpreter "python")
           (python-shell-interpreter-args "manage.py shell -i ipython"))
       (call-interactively 'run-python)))
+
   (defun al/django-shell2 ()
     (interactive)
     (let ((python-shell-interpreter ".venv/bin/python")
           (python-shell-interpreter-args "manage.py shell"))
       (call-interactively 'run-python)))
 
-  (add-hook 'python-mode-hook (lambda ()
-                                (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
-                                (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))))
+  (defun al/uv-pythons ()
+    (interactive)
+    (let ((python-shell-interpreter "uv")
+          (python-shell-interpreter-args "run python -i"))
+      (call-interactively 'run-python)))
+
+  (require 'python)
+  (setq python-shell-interpreter "python"
+        python-shell-interpreter-args "-i")
+
+  '(add-hook 'python-mode-hook (lambda ()
+                                 (al/prism-whitespace)
+                                 (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
+                                 (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))))
 
 (progn
   (straight-use-package 'yaml-mode))
@@ -632,7 +642,13 @@
 
 (progn
   (straight-use-package 'eyebrowse)
-  (eyebrowse-mode 1))
+  (eyebrowse-mode 1)
+  (global-set-key (kbd "M-SPC 1") 'eyebrowse-switch-to-window-config-1)
+  (global-set-key (kbd "M-SPC 2") 'eyebrowse-switch-to-window-config-2)
+  (global-set-key (kbd "M-SPC 3") 'eyebrowse-switch-to-window-config-3)
+  (global-set-key (kbd "M-§") 'eyebrowse-last-window-config)
+
+  )
 
 (progn
   (straight-use-package 'native-complete)
@@ -663,8 +679,10 @@
   (keymap-set emacs-lisp-mode-map "C-x C-S-e" 'pp-macroexpand-last-sexp)
   (keymap-set emacs-lisp-mode-map "C-x C-e" 'pp-eval-last-sexp)
 
+  '(add-hook 'emacs-lisp-mode-hook (lambda ()
+                                     (al/prism)))
   (straight-use-package 'aggressive-indent-mode)
-)
+  )
 
 (progn
   "registers"
@@ -673,8 +691,8 @@
 (progn
   "compile"
   (setq compilation-always-kill t
-        compilation-ask-about-save nil)
-
+        compilation-ask-about-save nil
+        compilation-scroll-output 'first-error)
   (global-set-key (kbd "M-SPC r") 'recompile))
 
 (progn
@@ -689,3 +707,31 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
+
+(progn
+  "postgres"
+  (straight-use-package '(pgmacs :type git :host github :repo "emarsden/pgmacs"))
+
+  (setq sql-postgres-login-params
+        '((user :default "postgres")
+          (database :default "postgres")
+          (server :default "localhost")
+          (port :default 5432))))
+
+
+(progn
+  "llm"
+  (straight-use-package 'gptel)
+  (gptel-make-gh-copilot "Copilot"))
+
+(progn
+  "term and shell"
+
+  (straight-use-package 'vterm))
+
+
+(progn
+  "compilation"
+  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
+
