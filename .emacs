@@ -16,14 +16,26 @@
   (straight-use-package 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
+(progn
+  (straight-use-package 'selected)
+  (selected-global-mode)
+  (defun al/get-selected ()
+    (interactive)
+    (when (region-active-p)
+      (buffer-substring-no-properties (region-beginning) (region-end)))))
 
 (ignore-errors (load-env-vars "~/.private.env"))
+(progn
+  (setq vc-follow-symlinks t)
+  (add-to-list 'load-path "~/elisp/")
+  (savehist-mode 1)
+  )
 
 (progn
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
   (global-set-key (kbd "C-z") 'repeat)
-  (global-set-key (kbd "M-SPC a t") 'ef-themes-load-random)
+  (global-set-key (kbd "M-SPC a t") 'doric-themes-rotate)
   (global-set-key (kbd "C-x C-f") 'find-file)
   (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
 
@@ -55,20 +67,21 @@
   '(straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
   (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
 
-  (blink-cursor-mode 1)
-  (setq-default cursor-type '(bar . 3))
+  (blink-cursor-mode -1)
+  (setq-default cursor-type t)
   (load-theme 'doric-dark t nil)
   (ignore-errors
     (set-frame-font "-*-IBM Plex Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")))
 
 (progn
-  "normal std lib"
+  "std libs"
   (straight-use-package 's)
   (straight-use-package 'dash)
   (straight-use-package 'f)
   (require 's)
   (require 'dash)
-  (require 'f))
+  (require 'f)
+  (require 'subr-x))
 
 (progn
   "tmux theme sync"
@@ -86,11 +99,7 @@
   (when (getenv "TMUX")
     (al/tmux-theme)
     (advice-add 'load-theme :after 'al/tmux-theme)))
-(progn
-  (setq vc-follow-symlinks t))
 
-(progn
-  (add-to-list 'load-path "~/elisp/"))
 
 (progn
   (straight-use-package 'no-littering)
@@ -269,6 +278,7 @@
   (straight-use-package 'orderless)
   (straight-use-package 'corfu)
   (straight-use-package 'consult-ls-git)
+
   (unless (display-graphic-p)
     (straight-use-package
      '(corfu-terminal
@@ -287,26 +297,49 @@
   (keymap-global-set "M-R" #'vertico-repeat)
   (keymap-set vertico-map "M-P" #'vertico-repeat-previous)
   (keymap-set vertico-map "M-N" #'vertico-repeat-next)
-  (keymap-set vertico-map "S-<prior>" #'vertico-repeat-previous)
-  (keymap-set vertico-map "S-<next>" #'vertico-repeat-next)
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
 
 
-  (global-set-key (kbd "M-s l") 'al/grep-current-file-buffer)
-  (global-set-key (kbd "M-s o") 'consult-line)
+  ;;(global-set-key (kbd "M-s l") 'al/grep-current-file-buffer)
+
+  (defun al/consult-line-dwim ()
+    (interactive)
+    (if (region-active-p)
+        (al/consult-line-from-region)
+      (consult-line)))
+
   (global-set-key (kbd "C-x b") 'consult-buffer)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
-
   (global-set-key (kbd "M-l") 'consult-ls-git)
   (global-set-key (kbd "M-L") 'consult-project-buffer)
   (global-set-key (kbd "M-u") 'consult-git-grep)
   (global-set-key (kbd "M-U") 'consult-grep)
   (global-set-key (kbd "M-g i") 'consult-imenu)
   (global-set-key (kbd "C-c h") 'consult-history)
+  (keymap-set vertico-map "M-q" #'vertico-quick-exit)
+  (global-set-key (kbd "M-s l") #'al/consult-line-dwim)
+  (define-key isearch-mode-map (kbd "M-s l") 'al/consult-line-from-isearch)
 
-  (define-key isearch-mode-map "\M-\C-u" 'al/isearch-to-consult-grep-current-buffer-file)
-  (keymap-set vertico-map "M-q" #'vertico-quick-insert)
-  (keymap-set vertico-map "C-q" #'vertico-quick-exit)
+  (defun al/consult-line-from-region ()
+    (interactive)
+    (let ((text (buffer-substring (region-beginning) (region-end))))
+      (consult-line text)))
+
+
+  (defun al/consult-line-from-isearch ()
+    (interactive)
+    (consult-line isearch-string))
+
+  (defun al/grep-from-isearch ()
+    (interactive)
+    (call-interactively consult-line t (vector isearch-string)))
+
+  (defun al/grep-from-region ())
+  (defun al/mc-from-isearch ())
+
+  (defun al/consult-line-dwim ()
+    (interactive)
+    )
 
   (defun al/grep-current-file-buffer ()
     (interactive)
@@ -329,6 +362,10 @@
 
   (straight-use-package 'marginalia)
   (marginalia-mode 1))
+
+
+
+
 
 (progn
   (straight-use-package 'expand-region)
@@ -357,26 +394,25 @@
   (straight-use-package 'avy)
   (keymap-unset prog-mode-map "M-q")
   (global-set-key (kbd "M-q") 'avy-goto-char-timer)
-  (global-set-key (kbd "M-Q") 'avy-goto-line)
-
-  '(custom-set-faces
-    '(avy-lead-face ((t (:background "#7feaff" :foreground "black" :inherit bold))))
-    '(avy-lead-face-0 ((t (:background "#ffaaff" :foreground "black" :inherit bold))))
-    '(avy-lead-face-1 ((t (:background "#7feaff" :foreground "black" :inherit bold))))
-    '(avy-lead-face-2 ((t (:background "#ffaaff" :foreground "black" :inherit bold))))))
+  (global-set-key (kbd "M-Q") 'avy-goto-line))
 
 
 (progn
   "window managment"
   (straight-use-package 'ace-window)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
+  (setq aw-background t)
   (ace-window-display-mode 1)
   (custom-set-faces
    '(aw-leading-char-face ((t (:inherit (bold ef-themes-reset-soft) :height 1)))))
-  (global-set-key (kbd "M-o") 'ace-window)
+
+  (setq windmove-wrap-around t)
   (global-unset-key (kbd "C-x o"))
-  (global-set-key (kbd "M-O") 'crux-transpose-windows))
+
+  ;(global-set-key (kbd "M-o") 'windmove-right)
+  ;(global-set-key (kbd "M-O") 'windmove-left)
+  (global-set-key (kbd "M-O") 'crux-transpose-windows)
+  (global-set-key (kbd "M-o") 'ace-window))
 
 
 (progn
@@ -459,12 +495,23 @@
 
 (progn
   "isearch"
-  ;; (straight-use-package 'isearch-plus)
-  ;; (eval-after-load "isearch" '(require 'isearch+))
-  (define-key isearch-mode-map (kbd "M-q") 'avy-isearch)
+
+  (defun al/isearch-highlight-overlay-to-region ()
+    (interactive)
+    (save-excursion
+      (set-mark (overlay-start isearch-overlay))
+      (goto-char (overlay-end isearch-overlay)))
+    (isearch-exit))
+
   (global-set-key (kbd "C-s") 'isearch-forward-regexp)
   (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-  )
+  (define-key isearch-mode-map (kbd "M-q") 'avy-isearch)
+  (define-key isearch-mode-map (kbd "C-<SPC>") 'al/isearch-highlight-overlay-to-region)
+  (define-key selected-keymap (kbd "C-s") #'isearch-forward-thing-at-point)
+  (defun al/isearch-from-region ()
+    (interactive)
+    (isearch-process-search-string nil "")
+    (isearch-process-search-string nil (al/get-selected))))
 
 
 (progn
@@ -521,6 +568,23 @@
   (setq python-indent-guess-indent-offset nil)
   (setq python-indent-offset 4)
 
+  
+  (defun al/python-eval-thing-between-spaces ()
+    (interactive)
+    (let ((end (save-excursion (re-search-forward "\s\\|$")))
+          (start (save-excursion (re-search-backward "\s\\|$"))))
+      (al/python-eval-string (-> (buffer-substring start end)
+                                 (string-trim)))))
+
+  (defun al/python-eval-string (code-snippet)
+    (interactive)
+    (let* ((this-buffer (current-buffer))
+           (process (python-shell-get-process)))
+      (switch-to-buffer-other-window (process-buffer process))
+      (end-of-buffer)
+      (python-shell-send-string code-snippet process)
+      (switch-to-buffer-other-window this-buffer)))
+
   (defun al/python-eval-dwim ()
     (interactive)
     (let* ((this-buffer (current-buffer))
@@ -568,20 +632,16 @@
           (python-shell-interpreter-args "manage.py shell"))
       (call-interactively 'run-python)))
 
-  (defun al/uv-pythons ()
+  (defun al/uv-python ()
     (interactive)
     (let ((python-shell-interpreter "uv")
-          (python-shell-interpreter-args "run python -i"))
+          (python-shell-interpreter-args "run ipython --simple-prompt -i"))
       (call-interactively 'run-python)))
 
-  (require 'python)
-  (setq python-shell-interpreter "python"
-        python-shell-interpreter-args "-i")
-
-  '(add-hook 'python-mode-hook (lambda ()
-                                 (al/prism-whitespace)
-                                 (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
-                                 (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))))
+  (add-hook 'python-mode-hook (lambda ()
+                                (keymap-set python-mode-map "C-x C-S-e" #'al/python-eval-thing-between-spaces)
+                                (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
+                                (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))))
 
 (progn
   (straight-use-package 'yaml-mode))
@@ -606,7 +666,6 @@
         org-startup-indented t
         org-default-notes-file "~/org/todo.org"
         org-hide-leading-stars t))
-
 
 
 (progn
@@ -646,9 +705,7 @@
   (global-set-key (kbd "M-SPC 1") 'eyebrowse-switch-to-window-config-1)
   (global-set-key (kbd "M-SPC 2") 'eyebrowse-switch-to-window-config-2)
   (global-set-key (kbd "M-SPC 3") 'eyebrowse-switch-to-window-config-3)
-  (global-set-key (kbd "M-§") 'eyebrowse-last-window-config)
-
-  )
+  (global-set-key (kbd "M-§") 'eyebrowse-last-window-config))
 
 (progn
   (straight-use-package 'native-complete)
@@ -703,10 +760,26 @@
 (progn
   (straight-use-package 'multiple-cursors)
   (require 'multiple-cursors)
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
+  (defun al/mc-mark-lazy-isearch-overlays ()
+    (interactive)
+    (-each isearch-lazy-highlight-overlays
+      (lambda (o)
+        (let ((start (overlay-start o))
+              (end (overlay-end o)))
+          (when (not (= start (point)))
+            (save-excursion
+              (goto-char end)
+              (mc/create-fake-cursor-at-point))))))
+    (isearch-exit)
+    (mc/maybe-multiple-cursors-mode))
+
+  (al-watch-add 'isearch-lazy-highlight-overlays)
+  (define-key selected-keymap (kbd "l") 'mc/edit-lines)
+  (define-key selected-keymap (kbd ">") 'mc/mark-next-like-this)
+  (define-key selected-keymap (kbd "<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  (define-key isearch-mode-map (kbd "C-<") 'al/mc-mark-lazy-isearch-overlays))
 
 
 (progn
