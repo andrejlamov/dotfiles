@@ -412,20 +412,17 @@
 
 
 (progn
-
-  (defun al/shell-named (name)
-    (interactive "sName: ")
-    (shell (concat "*shell* " name)))
-
+  "shell"
   (defun al/shell ()
     (interactive)
     (shell (generate-new-buffer-name "*shell*")))
 
-  (defun al/async-shell-named (name)
-    (interactive "sName: ")
-    )
-  (define-key al/meta-spc-map (kbd "as") #'al/shell)
-  (define-key al/meta-spc-map (kbd "aa") #'async-shell-command))
+  (defun al/shell-rename (name)
+    (interactive "M")
+    (rename-buffer (s-concat name " *shell*") t))
+
+  (define-key shell-mode-map (kbd "C-x x r") 'al/shell-rename)
+  (define-key al/meta-spc-map (kbd "as") #'al/shell))
 
 
 (progn
