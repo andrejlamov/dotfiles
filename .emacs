@@ -300,13 +300,7 @@
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
 
 
-  ;;(global-set-key (kbd "M-s l") 'al/grep-current-file-buffer)
-
-  (defun al/consult-line-dwim ()
-    (interactive)
-    (if (region-active-p)
-        (al/consult-line-from-region)
-      (consult-line)))
+  
 
   (global-set-key (kbd "C-x b") 'consult-buffer)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
@@ -334,12 +328,14 @@
     (interactive)
     (call-interactively consult-line t (vector isearch-string)))
 
-  (defun al/grep-from-region ())
-  (defun al/mc-from-isearch ())
-
   (defun al/consult-line-dwim ()
     (interactive)
-    )
+    (if (region-active-p)
+        (al/consult-line-from-region)
+      (call-interactively 'consult-line)))
+  
+  (defun al/grep-from-region ())
+  (defun al/mc-from-isearch ())
 
   (defun al/grep-current-file-buffer ()
     (interactive)
