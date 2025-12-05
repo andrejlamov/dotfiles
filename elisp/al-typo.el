@@ -15,50 +15,66 @@
 (setq typo-original-buffer "*typo-original*")
 (setq typo-practice-buffer "*typo*")
 
-(defun typo-generate-all-combo-buffer (&optional fingers)
+(defun typo ()
   (interactive)
-  (progn
-    (let ((text (typo-generate-strings (typo-pairs fingers))))
+  (typo-generate-all-combo-buffer))
 
-      (switch-to-buffer typo-practice-buffer)
-      (erase-buffer)
-      (insert text)
+(defun typo-generate-all-combo-buffer (&optional fingers)
+  (let ((text (typo-generate-strings (typo-pairs fingers))))
 
-      (ignore-errors (kill-buffer typo-original-buffer))
-      (switch-to-buffer typo-original-buffer)
-      (erase-buffer)
-      (insert text)
-      (read-only-mode)
+    (ignore-errors (kill-buffer typo-practice-buffer))
+    (switch-to-buffer typo-practice-buffer)
+    (erase-buffer)
+    (insert text)
 
-      (switch-to-buffer typo-practice-buffer)
-      (goto-char (point-min))
-      (typo-mode))))
+    (ignore-errors (kill-buffer typo-original-buffer))
+    (switch-to-buffer typo-original-buffer)
+    (erase-buffer)
+    (insert text)
+    (read-only-mode)
 
-(defun typo-after-change-functions (beg end l)
-  (print `(:beg ,beg :end ,end :l ,l))
+    (switch-to-buffer typo-practice-buffer)
+    (goto-char (point-min))
+    (typo-mode)))
+
+(defun typo-gather-stats ()
+  (interactive)
+  (save-excursion
+    (with-current-buffer typo-practice-buffer
+      (let* ((res nil)
+             (size (buffer-size))
+             (buffer-string (buffer-substring 1 size)))
+        (dotimes (i size)
+          (-let ((a (text-properties-at i buffer-string)))
+            (when a
+            (print a))))))))
+
+(defun typo-after-change-functions (begin end len)
   (let ((original-char (save-excursion
                          (with-current-buffer typo-original-buffer
                            (char-before end))))
         (practice-char (save-excursion
                          (with-current-buffer typo-practice-buffer
                            (char-before end)))))
+    (cond
+     ((equal end begin) (save-excursion
+                          (let ((original-string (with-current-buffer typo-original-buffer
+                                                   (buffer-substring begin (+ end len)))))
+                            (goto-char begin)
+                            (insert original-string))))
+     ((and original-char practice-char) (progn
+                                          (if (equal original-char practice-char)
+                                              (add-text-properties begin (1+ end)
+                                                                   `(is-correct t
+                                                                                timestamp ,(time-to-seconds (current-time))
+                                                                                face (:foreground "green")))
+                                            (add-text-properties begin (1+ end)
+                                                                 `(is-correct nil
+                                                                              timestamp ,(time-to-seconds (current-time))
+                                                                              face (:foreground "red" :lol t))))
+                                          (delete-region begin end)
+                                          (goto-char end))))))
 
-    (if (equal end beg)
-        (let ((original-string (save-excursion
-                                 (with-current-buffer typo-original-buffer
-                                   (buffer-substring beg (+ end l))))))
-          (save-excursion
-            (with-current-buffer typo-practice-buffer
-              (goto-char beg)
-              (insert original-string))))
-      (if (and original-char practice-char)
-          (progn
-            (with-current-buffer typo-practice-buffer
-              (if (equal original-char practice-char)
-                  (put-text-property beg (1+ end) 'face '(:foreground "green"))
-                (put-text-property beg (1+ end) 'face '(:foreground "red"))))
-            (delete-region beg end)
-            (goto-char end))))))
 
 (define-derived-mode typo-mode fundamental-mode  "typo"
   (add-hook 'after-change-functions 'typo-after-change-functions nil t))
@@ -91,7 +107,7 @@
                        (setq word (concat (typo-random-char domain) word)))
                      (setq sentance
                            (cons (propertize word
-                                             'pairs `(,p0 ,p1))
+                                             'pair `(,p0 ,p1))
                                  sentance))))
                  (->> sentance
                       (-flatten)
