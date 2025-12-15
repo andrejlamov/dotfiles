@@ -736,6 +736,7 @@
 
 (progn
   "registers"
+  (setq register-preview-delay 0)
   (global-set-key (kbd "M-M") 'point-to-register)
   (global-set-key (kbd "M-m") 'jump-to-register))
 (progn
