@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t -*-
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
+
 (progn
   "Bootstrap straight package manager."
   (defvar bootstrap-version)
@@ -28,8 +29,7 @@
 (progn
   (setq vc-follow-symlinks t)
   (add-to-list 'load-path "~/elisp/")
-  (savehist-mode 1)
-  )
+  (savehist-mode 1))
 
 (progn
   (defvar al/meta-spc-map (make-sparse-keymap))
@@ -47,12 +47,10 @@
   (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region))
 
 (progn
-  (menu-bar-mode -1)
   (ignore-errors
     (scroll-bar-mode -1)
     (set-fringe-mode 0))
   (tool-bar-mode -1)
-  '(global-display-line-numbers-mode)
   (setq visible-bell nil)
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
@@ -60,11 +58,6 @@
   (setq-default indent-tabs-mode nil)
   (setq confirm-nonexistent-file-or-buffer nil)
   (setq use-short-answers t)
-  '(straight-use-package 'prism)
-
-  '(straight-use-package 'ef-themes)
-  '(straight-use-package '(standard-themes :type git :host github :repo "protesilaos/standard-themes"))
-  '(straight-use-package '(modus-themes :type git :host github :repo "protesilaos/modus-themes"))
   (straight-use-package '(doric-themes :type git :host github :repo "protesilaos/doric-themes"))
 
   (blink-cursor-mode -1)
@@ -100,7 +93,6 @@
     (al/tmux-theme)
     (advice-add 'load-theme :after 'al/tmux-theme)))
 
-
 (progn
   (straight-use-package 'no-littering)
   (require 'no-littering)
@@ -109,7 +101,6 @@
   (setq make-backup-files nil)
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
-
 
 (progn
   (straight-use-package 'helpful)
@@ -131,35 +122,6 @@
   (progn
     (global-set-key (kbd "M-v") 'scroll-down-line)
     (global-set-key (kbd "C-v") 'scroll-up-line)))
-
-
-(progn
-  (setq-default whitespace-style
-                '(face tabs newline trailing  tab-mark newline-mark))
-
-  (setq-default whitespace-display-mappings
-                '( ;; space -> · else .
-                  (space-mark 32 [183] [46])
-                  ;; new line -> ¬ else $
-                  (newline-mark ?\n [172 ?\n] [36 ?\n])
-                  ;; carriage return (Windows) -> ¶ else #
-                  (newline-mark ?\r [182] [35])
-                  ;; tabs -> » else >
-                  (tab-mark ?\t [187 ?\t] [62 ?\t])))
-
-  (setq-default whitespace-global-modes
-                '(not shell-mode
-                      help-mode
-                      magit-mode
-                      magit-diff-mode
-                      ibuffer-mode
-                      dired-mode
-                      wdired-mode
-                      corfu-mode
-                      occur-mode))
-
-  (global-whitespace-mode 1))
-
 
 (progn
   (straight-use-package 'adaptive-wrap)
@@ -190,7 +152,6 @@
    :override
    #'al/adaptive-wrap--prefix-face))
 
-
 (progn
   (winner-mode +1)
   (global-set-key (kbd "M-S-p") 'winner-undo)
@@ -198,21 +159,19 @@
   (global-set-key (kbd "M-P") 'winner-undo)
   (global-set-key (kbd "M-N") 'winner-redo))
 
-
 (progn
   (straight-use-package 'transient)
   (require 'transient)
   (keymap-set transient-predicate-map
               "<mouse-set-region>"
-              #'transient--do-stay)
-  )
+              #'transient--do-stay))
+
 (progn
   (straight-use-package 'magit)
   (setq magit-diff-refine-hunk 'all)
   (add-hook 'magit-status-mode-hook (lambda ()
                                       (adaptive-wrap-prefix-mode -1)
                                       (toggle-truncate-lines 1))))
-
 
 (progn
   (straight-use-package 'smartparens)
@@ -271,7 +230,6 @@
   (define-key occur-mode-map (kbd "C-c C-p") 'occur-edit-mode)
   (setq wgrep-auto-save-buffer t))
 
-
 (progn
   (straight-use-package 'vertico)
   (straight-use-package 'consult)
@@ -299,9 +257,6 @@
   (keymap-set vertico-map "M-N" #'vertico-repeat-next)
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
 
-
-  
-
   (global-set-key (kbd "C-x b") 'consult-buffer)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
   (global-set-key (kbd "M-l") 'consult-ls-git)
@@ -319,7 +274,6 @@
     (let ((text (buffer-substring (region-beginning) (region-end))))
       (consult-line text)))
 
-
   (defun al/consult-line-from-isearch ()
     (interactive)
     (consult-line isearch-string))
@@ -333,7 +287,7 @@
     (if (region-active-p)
         (al/consult-line-from-region)
       (call-interactively 'consult-line)))
-  
+
   (defun al/grep-from-region ())
   (defun al/mc-from-isearch ())
 
@@ -359,10 +313,6 @@
   (straight-use-package 'marginalia)
   (marginalia-mode 1))
 
-
-
-
-
 (progn
   (straight-use-package 'expand-region)
   (require 'expand-region)
@@ -384,14 +334,12 @@
         (delete-region start-point (- end-point 1)))))
   (define-key al/meta-spc-map (kbd "wd") #'al/whitespace-delete-forward))
 
-
 (progn
   "avy"
   (straight-use-package 'avy)
   (keymap-unset prog-mode-map "M-q")
   (global-set-key (kbd "M-q") 'avy-goto-char-timer)
   (global-set-key (kbd "M-Q") 'avy-goto-line))
-
 
 (progn
   "window managment"
@@ -401,7 +349,6 @@
   (ace-window-display-mode 1)
   (custom-set-faces
    '(aw-leading-char-face ((t (:inherit (bold ef-themes-reset-soft) :height 1)))))
-
   (setq windmove-wrap-around t)
   (global-unset-key (kbd "C-x o"))
 
@@ -410,9 +357,9 @@
   (global-set-key (kbd "M-O") 'crux-transpose-windows)
   (global-set-key (kbd "M-o") 'ace-window))
 
-
 (progn
   "shell"
+  (require 'shell)
   (defun al/shell ()
     (interactive)
     (shell (generate-new-buffer-name "*shell*")))
@@ -424,10 +371,8 @@
   (define-key shell-mode-map (kbd "C-x x r") 'al/shell-rename)
   (define-key al/meta-spc-map (kbd "as") #'al/shell))
 
-
 (progn
   (straight-use-package 'deadgrep))
-
 
 (progn
   "lsp"
@@ -436,7 +381,6 @@
     (add-to-list 'eglot-stay-out-of 'flymake))
   ;; todo: how do i set these? https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#workspacedidchangeconfiguration
   )
-
 
 (progn
   "use eglot format for tab command when in treesitter tsx mode. treesitter indention does not work in jsx files."
@@ -456,13 +400,11 @@
 
   )
 
-
 (progn
   "js,jsx,ts,tsx,html,css"
   (straight-use-package 'typescript-mode)
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook 'tsx-ts-mode))
-
 
 (progn
   (straight-use-package 'crux))
@@ -478,13 +420,11 @@
   (global-set-key (kbd "C-;") 'embark-dwim)
   (global-set-key (kbd "C-h B") 'embark-bindings))
 
-
 (progn
   ;; todo: https://www.ackerleytng.com/posts/emacs-xref/
   ;; todo: https://git.sr.ht/~pkal/xref-union/
   (straight-use-package 'dumb-jump)
   (global-set-key (kbd "M-s j") 'dumb-jump-go))
-
 
 (progn
   "isearch"
@@ -506,13 +446,10 @@
     (isearch-process-search-string nil "")
     (isearch-process-search-string nil (al/get-selected))))
 
-
 (progn
   "regexp builder"
   (require 're-builder)
-  (setq reb-re-syntax 'string)
-  )
-
+  (setq reb-re-syntax 'string))
 
 (progn
   (straight-use-package 'which-key)
@@ -520,10 +457,8 @@
   (setq which-key-idle-secondary-delay 0.01)
   (which-key-mode 1))
 
-
 (progn
   (straight-use-package 'cider))
-
 
 (progn
   (global-auto-revert-mode 1)
@@ -538,18 +473,13 @@
   '(setq dired-listing-switches "-al --group-directories-first")
   (setq dired-dwim-target t))
 
-
 (progn
   (straight-use-package 'markdown-mode)
-  (setq markdown-command "pandoc -t html5")
-  )
-
+  (setq markdown-command "pandoc -t html5"))
 
 (progn
   (straight-use-package 'flymake-shellcheck)
-  (add-hook 'sh-mode-hook 'flymake-shellcheck-load)
-
-  )
+  (add-hook 'sh-mode-hook 'flymake-shellcheck-load))
 
 (progn
   (straight-use-package 'exec-path-from-shell)
@@ -557,73 +487,13 @@
 
 (progn
   "python"
-  (straight-use-package 'elpy)
   (setq python-indent-guess-indent-offset nil)
   (setq python-indent-offset 4)
 
-  
-  (defun al/python-eval-thing-between-spaces ()
-    (interactive)
-    (let ((end (save-excursion (re-search-forward "\s\\|$")))
-          (start (save-excursion (re-search-backward "\s\\|$"))))
-      (al/python-eval-string (-> (buffer-substring start end)
-                                 (string-trim)))))
 
-  (defun al/python-eval-string (code-snippet)
-    (interactive)
-    (let* ((this-buffer (current-buffer))
-           (process (python-shell-get-process)))
-      (switch-to-buffer-other-window (process-buffer process))
-      (end-of-buffer)
-      (python-shell-send-string code-snippet process)
-      (switch-to-buffer-other-window this-buffer)))
 
-  (defun al/python-eval-dwim ()
-    (interactive)
-    (let* ((this-buffer (current-buffer))
-           (process (python-shell-get-process))
-           (code-snippet (buffer-substring
-                          (if (region-active-p)
-                              (region-beginning)
-                            (save-excursion
-                              (python-nav-beginning-of-statement)
-                              (point)))
-                          (if (region-active-p)
-                              (region-end)
-                            (save-excursion
-                              (python-nav-end-of-statement)
-                              (point))))))
-      (switch-to-buffer-other-window (process-buffer process))
-      (end-of-buffer)
-      (python-shell-send-string code-snippet process)
-      (switch-to-buffer-other-window this-buffer)))
-
-  (defun al/python-eval-defun ()
-    (interactive)
-    (let* ((process (python-shell-get-process))
-           (code-snippet (buffer-substring
-                          (save-excursion
-                            (python-nav-beginning-of-defun)
-                            (point))
-                          (save-excursion
-                            (python-nav-end-of-defun)
-                            (point)))))
-      (save-window-excursion
-        (switch-to-buffer-other-window (process-buffer process))
-        (end-of-buffer))
-      (python-shell-send-string code-snippet process)))
-
-  (defun al/django-shell ()
-    (interactive)
-    (let ((python-shell-interpreter "python")
-          (python-shell-interpreter-args "manage.py shell -i ipython"))
-      (call-interactively 'run-python)))
-
-  (defun al/django-shell2 ()
-    (interactive)
-    (let ((python-shell-interpreter ".venv/bin/python")
-          (python-shell-interpreter-args "manage.py shell"))
-      (call-interactively 'run-python)))
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "-i --simple-prompt --no-color-info")
 
   (defun al/uv-python ()
     (interactive)
@@ -631,14 +501,22 @@
           (python-shell-interpreter-args "run ipython --simple-prompt -i"))
       (call-interactively 'run-python)))
 
-  (add-hook 'python-mode-hook (lambda ()
-                                (keymap-set python-mode-map "C-x C-S-e" #'al/python-eval-thing-between-spaces)
-                                (keymap-set python-mode-map "C-x C-e" #'al/python-eval-dwim)
-                                (keymap-set python-mode-map "C-M-x" #'al/python-eval-defun))))
+  (require 'evalka)
+  (evalka-init)
+  (add-hook 'inferior-python-mode-hook
+            (lambda ()
+              (setq-local completion-at-point-functions
+                          (remove 'python-shell-completion-at-point
+                                  completion-at-point-functions))))
+  (setq python-shell-completion-setup-code ""
+        python-shell-completion-module-string-code ""
+        python-shell-completion-string-code ""
+        python-shell-completion-native-enable nil)
+  (defun python-shell-completion-at-point () nil)))
+
 
 (progn
   (straight-use-package 'yaml-mode))
-
 
 (progn
   (straight-use-package 'org-download)
@@ -659,7 +537,6 @@
         org-startup-indented t
         org-default-notes-file "~/org/todo.org"
         org-hide-leading-stars t))
-
 
 (progn
   (require 'al-watch))
@@ -689,8 +566,7 @@
 
 (progn
   (straight-use-package 'docker)
-  (global-set-key (kbd "M-SPC c") 'docker)
-  )
+  (global-set-key (kbd "M-SPC c") 'docker))
 
 (progn
   (straight-use-package 'eyebrowse)
@@ -702,8 +578,7 @@
 
 (progn
   (straight-use-package 'native-complete)
-  (native-complete-setup-bash)
-  )
+  (native-complete-setup-bash))
 
 (progn
   (straight-use-package 'xclip)
@@ -731,14 +606,14 @@
 
   '(add-hook 'emacs-lisp-mode-hook (lambda ()
                                      (al/prism)))
-  (straight-use-package 'aggressive-indent-mode)
-  )
+  (straight-use-package 'aggressive-indent-mode))
 
 (progn
   "registers"
   (setq register-preview-delay 0)
   (global-set-key (kbd "M-M") 'point-to-register)
   (global-set-key (kbd "M-m") 'jump-to-register))
+
 (progn
   "compile"
   (setq compilation-always-kill t
@@ -748,8 +623,7 @@
 
 (progn
   "rust"
-  (straight-use-package 'rust-mode)
-  )
+  (straight-use-package 'rust-mode))
 
 (progn
   (straight-use-package 'multiple-cursors)
@@ -775,7 +649,6 @@
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
   (define-key isearch-mode-map (kbd "C-<") 'al/mc-mark-lazy-isearch-overlays))
 
-
 (progn
   "postgres"
   (straight-use-package '(pgmacs :type git :host github :repo "emarsden/pgmacs"))
@@ -786,7 +659,6 @@
           (server :default "localhost")
           (port :default 5432))))
 
-
 (progn
   "llm"
   (straight-use-package 'gptel)
@@ -794,11 +666,39 @@
 
 (progn
   "term and shell"
-
   (straight-use-package 'vterm))
-
 
 (progn
   "compilation"
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
 
+(progn
+  "whitespace"
+  (setq-default whitespace-style
+                '(face tabs newline trailing spaces space
+                       indentation tab-mark newline-mark)
+                whitespace-line-column nil
+                fill-column 1024)
+
+  (setq-default whitespace-display-mappings
+                '( ;; space -> · else .
+                  (space-mark 32 [183] [46])
+                  ;; new line -> ¬ else $
+                  (newline-mark ?\n [172 ?\n] [36 ?\n])
+                  ;; carriage return (Windows) -> ¶ else #
+                  (newline-mark ?\r [182] [35])
+                  ;; tabs -> » else >
+                  (tab-mark ?\t [187 ?\t] [62 ?\t])))
+
+  (setq-default whitespace-global-modes
+                '(not shell-mode
+                      help-mode
+                      magit-mode
+                      magit-diff-mode
+                      ibupffer-mode
+                      dired-mode
+                      wdired-mode
+                      corfu-mode
+                      occur-mode))
+
+  (global-whitespace-mode 1))
