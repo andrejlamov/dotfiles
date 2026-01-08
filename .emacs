@@ -370,7 +370,14 @@
     (rename-buffer (s-concat name " *shell*") t))
 
   (define-key shell-mode-map (kbd "C-x x r") 'al/shell-rename)
-  (define-key al/meta-spc-map (kbd "as") #'al/shell))
+  (define-key al/meta-spc-map (kbd "as") #'al/shell)
+
+  (defun set-no-process-query-on-exit ()
+    (let ((proc (get-buffer-process (current-buffer))))
+      (when (processp proc)
+        (set-process-query-on-exit-flag proc nil))))
+  (add-hook 'term-exec-hook 'set-no-process-query-on-exit)
+  (add-hook 'shell-mode-hook 'set-no-process-query-on-exit))
 
 (progn
   (straight-use-package 'deadgrep))
