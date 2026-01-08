@@ -670,7 +670,11 @@
 (progn
   "llm"
   (straight-use-package 'gptel)
-  (gptel-make-gh-copilot "Copilot"))
+  (gptel-make-gh-copilot "Copilot")
+
+  (straight-use-package '(gptel-agent :type git :host github :repo "karthink/gptel-agent"))
+  (straight-use-package 'gptel-agent)
+  (gptel-agent-update))
 
 (progn
   "term and shell"
