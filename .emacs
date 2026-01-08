@@ -51,6 +51,7 @@
     (scroll-bar-mode -1)
     (set-fringe-mode 0))
   (tool-bar-mode -1)
+  (menu-bar-mode -1)
   (setq visible-bell nil)
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
