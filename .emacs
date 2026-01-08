@@ -520,7 +520,7 @@
         python-shell-completion-module-string-code ""
         python-shell-completion-string-code ""
         python-shell-completion-native-enable nil)
-  (defun python-shell-completion-at-point () nil)))
+  (defun python-shell-completion-at-point () nil))
 
 
 (progn
