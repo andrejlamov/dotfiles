@@ -432,6 +432,7 @@
   ;; todo: https://www.ackerleytng.com/posts/emacs-xref/
   ;; todo: https://git.sr.ht/~pkal/xref-union/
   (straight-use-package 'dumb-jump)
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   (global-set-key (kbd "M-s j") 'dumb-jump-go))
 
 (progn
