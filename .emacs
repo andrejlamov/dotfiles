@@ -403,10 +403,7 @@
     (if (and (member 'eglot--managed-mode minor-mode-list) (boundp 'tsx-ts-mode-map))
         (define-key tsx-ts-mode-map [remap indent-for-tab-command] 'al/eglot-indent-for-tab-command)))
 
-  (add-hook 'eglot-managed-mode-hook 'al/setup-eglot-format)
-
-
-  )
+  (add-hook 'eglot-managed-mode-hook 'al/setup-eglot-format))
 
 (progn
   "js,jsx,ts,tsx,html,css"
