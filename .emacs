@@ -550,10 +550,10 @@
 (progn
   (require 'al-watch))
 
-(progn
-  (require 'al-back)
-  (al-back-init)
-  (global-set-key (kbd "M-,") 'al-back-go-backward))
+;; (progn
+;;   (require 'al-back)
+;;   (al-back-init)
+;;   (global-set-key (kbd "M-,") 'al-back-go-backward))
 
 (progn
   "kubernetes"
