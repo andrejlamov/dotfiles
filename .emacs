@@ -681,3 +681,15 @@
 (progn
   "compilation"
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
+
+
+(progn
+  "combobulate"
+  (straight-use-package 'combobulate))
+
+
+
+(progn
+  (require 'copilot)
+  (straight-use-package 'copilot)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
