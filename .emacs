@@ -497,9 +497,9 @@
   (setq python-indent-offset 4)
 
 
-
-  (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt --no-color-info")
+  (straight-use-package 'elpy)
+  (setq python-shell-interpreter "python3"
+        python-shell-interpreter-args "-i")
 
   (defun al/uv-python ()
     (interactive)
@@ -507,8 +507,11 @@
           (python-shell-interpreter-args "run ipython --simple-prompt -i"))
       (call-interactively 'run-python)))
 
-  (require 'evalka)
-  (evalka-init)
+  ;;(require 'evalka)
+  ;;(evalka-init)
+  (require 'elpy)
+  (keymap-set elpy-mode-map "C-x C-e" #'elpy-shell-send-region-or-buffer)
+  (keymap-set elpy-mode-map "C-M-x" #'elpy-shell-send-defun)
   (add-hook 'inferior-python-mode-hook
             (lambda ()
               (setq-local completion-at-point-functions
