@@ -80,16 +80,18 @@
   (add-hook 'after-change-functions 'typo-after-change-functions nil t))
 
 (defun typo-pairs (&optional fingers)
-  (->> typo-fingers
+  (--> typo-fingers
        (-map (lambda (p0)
                (-map (lambda (p1)
                        (-sort (lambda (a b)
                                 (string< (symbol-name a) (symbol-name b)))
                               `(,p0 ,p1)))
-                     (or fingers typo-fingers))))
-       (-flatten-n 1)
+                     (or fingers typo-fingers))) it)
+       (-flatten-n 1 it)
        (-filter (-lambda ((p0 p1))
-                  (not (equal p0 p1))))))
+                  (not (equal p0 p1))) it)
+       (-distinct it)
+       (sort it :key (lambda (_) (random)))))
 
 (defun typo-random-char (s)
   (let ((len (random (length s))))
