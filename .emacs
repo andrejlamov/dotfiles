@@ -414,16 +414,16 @@
 (progn
   (straight-use-package 'crux))
 
-(progn
-  (straight-use-package 'embark)
-  (straight-use-package 'embark-consult)
-  (require 'embark)
+;; (progn
+;;   (straight-use-package 'embark)
+;;   (straight-use-package 'embark-consult)
+;;   (require 'embark)
 
-  ;; embark
-  (global-set-key (kbd "C-.") 'embark-act)
-  (global-set-key (kbd "M-.") 'embark-act)
-  (global-set-key (kbd "C-;") 'embark-dwim)
-  (global-set-key (kbd "C-h B") 'embark-bindings))
+;;   ;; embark
+;;   (global-set-key (kbd "C-.") 'embark-act)
+;;   (global-set-key (kbd "M-.") 'embark-act)
+;;   (global-set-key (kbd "C-;") 'embark-dwim)
+;;   (global-set-key (kbd "C-h B") 'embark-bindings))
 
 (progn
   ;; todo: https://www.ackerleytng.com/posts/emacs-xref/
