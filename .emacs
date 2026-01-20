@@ -693,6 +693,6 @@
 
 
 (progn
-  (require 'copilot)
   (straight-use-package 'copilot)
+  (require 'copilot)
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
