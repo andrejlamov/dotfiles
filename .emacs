@@ -175,53 +175,6 @@
                                       (toggle-truncate-lines 1))))
 
 (progn
-  (straight-use-package 'smartparens)
-  (require 'smartparens-config)
-  (smartparens-global-mode -1)
-  (show-smartparens-global-mode t)
-
-  ;; sp move
-  (global-set-key (kbd "C-M-a") 'sp-beginning-of-sexp)
-  (global-set-key (kbd "C-M-e") 'sp-end-of-sexp)
-  (global-set-key (kbd "C-M-f") 'sp-forward-sexp)
-  (global-set-key (kbd "C-M-b") 'sp-backward-sexp)
-  (global-set-key (kbd "C-M-n") 'sp-down-sexp)
-  (global-set-key (kbd "C-M-S-n") 'sp-backward-down-sexp)
-  (global-set-key (kbd "C-M-p") 'sp-up-sexp)
-  (global-set-key (kbd "C-M-S-p") 'sp-backward-up-sexp)
-
-  ;; sp slurp & barf
-  (global-set-key (kbd "C-M-h") 'sp-backward-slurp-sexp)
-  (global-set-key (kbd "C-M-S-h") 'sp-backward-barf-sexp)
-  (global-set-key (kbd "C-M-l") 'sp-forward-slurp-sexp)
-  (global-set-key (kbd "C-M-S-l") 'sp-forward-barf-sexp)
-
-  ;; sp wrap
-  (global-set-key (kbd "C-M-S-r") 'sp-rewrap-sexp)
-  (global-set-key (kbd "C-M-u") 'sp-unwrap-sexp)
-  (global-set-key (kbd "C-M-S-u") 'sp-backward-unwrap-sexp)
-  (global-set-key (kbd "C-M-(") 'sp-wrap-round)
-  (global-set-key (kbd "C-M-{") 'sp-wrap-curly)
-  (global-set-key (kbd "C-M-[") 'sp-wrap-square)
-
-  ;; sp juggle
-  (global-set-key (kbd "C-M-S-s") 'sp-split-sexp)
-  (global-set-key (kbd "C-M-s") 'sp-splice-sexp)
-  (global-set-key (kbd "C-M-r") 'sp-raise-sexp)
-  (global-set-key (kbd "C-M-j") 'sp-join-sexp)
-  (global-set-key (kbd "C-M-t") 'sp-transpose-sexp)
-  (global-set-key (kbd "C-M-S-a") 'sp-absorb-sexp)
-  (global-set-key (kbd "C-M-S-e") 'sp-emit-sexp)
-  (global-set-key (kbd "C-M-o") 'sp-convolute-sexp)
-
-  ;; sp destruct
-  (global-set-key (kbd "C-M-c") 'sp-change-inner)
-  (global-set-key (kbd "C-M-S-c") 'sp-change-enclosing)
-  (global-set-key (kbd "C-M-k") 'sp-kill-sexp)
-  (global-set-key (kbd "C-M-S-k") 'sp-backward-kill-sexp)
-  (global-set-key (kbd "C-M-w") 'sp-copy-sexp))
-
-(progn
   "wgrep, wdired, etc"
   (straight-use-package 'wgrep)
   (require 'dired)
