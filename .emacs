@@ -286,7 +286,8 @@
                                   (point))))
             (end-point (re-search-forward "[^[:space:]\n]")))
         (delete-region start-point (- end-point 1)))))
-  (define-key al/meta-spc-map (kbd "wd") #'al/whitespace-delete-forward))
+  (define-key al/meta-spc-map (kbd "wd") #'al/whitespace-delete-forward)
+  (define-key al/meta-spc-map (kbd "wf") #'fill-paragraph))
 
 (progn
   "avy"
@@ -630,14 +631,27 @@
   "compilation"
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
 
-
 (progn
   "combobulate"
   (straight-use-package 'combobulate))
-
-
 
 (progn
   (straight-use-package 'copilot)
   (require 'copilot)
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+
+(progn
+  "whitespace mode"
+  (custom-set-faces
+   '(whitespace-line ((t (:foreground nil))))
+   '(whitespace-long- ((t (:foreground "#505050"))))
+   '(whitespace-trailing ((t (:foreground "red" :weight bold)))))
+  (setopt whitespace-style '(face trailing tabs spaces lines newline missing-newline-at-eof empty indentation space-after-tab space-before-tab space-mark tab-mark))
+
+  (add-hook 'prog-mode-hook 'whitespace-mode)
+  (add-hook 'dired-mode-hook 'whitespace-mode)
+  (add-hook 'org-mode-hook 'whitespace-mode))
+
+
+(progn
+  (straight-use-package 'colorful-mode))
