@@ -574,7 +574,8 @@
   (setq compilation-always-kill t
         compilation-ask-about-save nil
         compilation-scroll-output 'first-error)
-  (global-set-key (kbd "M-SPC r") 'recompile))
+  (global-set-key (kbd "C-c c") 'compile)
+  (global-set-key (kbd "C-c C") 'recompile))
 
 (progn
   "rust"
