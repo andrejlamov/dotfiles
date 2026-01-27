@@ -1,7 +1,7 @@
 (require 'dash)
 (require 's)
 
-(setq typo-lf1 "§1qa!QA`~"
+(setq typo-lf1 "1qa!QA`~"
       typo-lf2 "2wsz@WSZ"
       typo-lf3 "3edx#EDX"
       typo-lf4 "4rfcvgt5$RFCVGT6^"
