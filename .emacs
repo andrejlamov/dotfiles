@@ -339,7 +339,7 @@
   "lsp"
   (straight-use-package 'eglot)
   (with-eval-after-load 'eglot
-    (add-to-list 'eglot-stay-out-of 'flymake))
+    '(add-to-list 'eglot-stay-out-of 'flymake))
   ;; todo: how do i set these? https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#workspacedidchangeconfiguration
   )
 
