@@ -656,3 +656,8 @@
 
 (progn
   (straight-use-package 'colorful-mode))
+
+(progn
+  (straight-use-package 'bufler)
+  (bufler-mode)
+  (define-key al/meta-spc-map (kbd "b") #'bufler-list))
