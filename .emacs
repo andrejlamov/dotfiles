@@ -211,7 +211,6 @@
   (keymap-set vertico-map "M-N" #'vertico-repeat-next)
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
 
-  (global-set-key (kbd "C-x b") 'consult-buffer)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
   (global-set-key (kbd "M-l") 'consult-ls-git)
   (global-set-key (kbd "M-L") 'consult-project-buffer)
@@ -660,4 +659,5 @@
 (progn
   (straight-use-package 'bufler)
   (bufler-mode)
-  (define-key al/meta-spc-map (kbd "b") #'bufler-list))
+  (define-key al/meta-spc-map (kbd "b") #'bufler-list)
+  (global-set-key (kbd "C-x b") 'bufler-switch-buffer))
