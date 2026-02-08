@@ -1,14 +1,12 @@
 ;; -*- lexical-binding: t -*-
 (setq use-package-always-defer t)
+(setq use-package-compute-statistics t)
+(setq use-package-always-ensure t)
+
 (load-theme 'modus-operandi-deuteranopia t nil)
 
 (use-package emacs
   :config
-  (require 'package)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (package-initialize)
-  (setq use-package-always-ensure t)
-
   (setq inhibit-startup-screen t)
   (setq initial-buffer-choice t)
   (setq user-emacs-directory (expand-file-name "~/.config/emacs/.emacs.d"))
