@@ -1,12 +1,8 @@
 ;; -*- lexical-binding: t -*-
-(setq use-package-always-defer t)
-(setq use-package-compute-statistics t)
-(setq use-package-always-ensure t)
-
-(load-theme 'modus-operandi-deuteranopia t nil)
 
 (use-package emacs
   :config
+  (load-theme 'modus-operandi-deuteranopia t nil)
   (setq inhibit-startup-screen t)
   (setq initial-buffer-choice t)
   (setq user-emacs-directory (expand-file-name "~/.config/emacs/.emacs.d"))
@@ -15,14 +11,12 @@
   (setq-default indent-tabs-mode nil)
   (setq confirm-nonexistent-file-or-buffer nil)
   (setq use-short-answers t)
-  (visual-line-mode 1)
+
+  (display-line-numbers-mode 1)
+  (setq display-line-numbers-type 'relative)
+  (visual-line-mode)
   (add-hook 'prog-mode-hook 'visual-line-mode)
-  (ignore-errors
-    (setq visible-bell nil)
-    (scroll-bar-mode -1)
-    (set-fringe-mode 0))
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
+  
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
   (global-set-key (kbd "C-z") 'repeat)
@@ -68,7 +62,7 @@
   (fido-mode 1)
   (setq icomplete-in-buffer nil
         tab-always-indent 'complete
-        completion-styles '(flex basic)
+        completion-styles '(basic)
         completion-auto-help nil
         icomplete-show-matches-on-no-input t)
 
@@ -79,13 +73,13 @@
                   (res (completing-read "Complete: " collection predicate t initial)))
              (when res
                (delete-region start end)
-               (insert res)))b
+               (insert res)))
                t)
   ;; Completion-in-region is a variable holding the stratey of region-completion.
   (setq completion-in-region-function #'al/completion-in-region-function)
   (define-key icomplete-fido-mode-map (kbd "TAB") 'icomplete-fido-ret))
 
-'(use-package magit
+(use-package magit
   :ensure t)
 
 (use-package winner
@@ -104,15 +98,19 @@
   (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark missing-newline-at-eof))
   (add-hook 'prog-mode-hook 'whitespace-mode))
 
-'(progn
-  (setq al/-occur-debouncer nil)
-  (defun al/-occur-on-change (beg end len)
-    (occur-1 (minibuffer-contents) nil (list (window-buffer (minibuffer-selected-window))) "*Occur*"))
+(use-package gptel
+  :ensure t
+  :config
+  (gptel-make-gemini "Gemini" :key (getenv "GEMINI_API_KEY") :stream t)
+  (setq gptel- 'org-mode)
+  (setq gptel-log-level 'debug))
 
-  (defun al/live-occur ()
-    (interactive)
-    (minibuffer-with-setup-hook
-        (lambda ()
-          (add-hook 'after-change-functions #'al/-occur-on-change nil t))
-      (read-string "Enter special input: "))))
 
+(use-package markdown-mode
+  :ensure t)
+
+(use-package org
+  :ensure t
+  :config
+  ;; Just allow running all languages in src blocks.
+  (setq org-confirm-babel-evaluate nil))
