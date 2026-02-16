@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t -*-
-(use-package no-littering
+
+'(use-package no-littering
   :ensure t
   :config
   (let ((dir (no-littering-expand-var-file-name "lock-files/")))
@@ -23,7 +24,7 @@
 
 (use-package emacs
   :config
-  (load-theme 'modus-operandi-deuteranopia t nil)
+  (load-theme 'modus-vivendi-deuteranopia t nil)
   (add-to-list 'load-path (expand-file-name "../lisp"))
 
   (setq inhibit-startup-screen t)
@@ -37,8 +38,14 @@
   (setq use-short-answers t)
   (winner-mode 1)
   (require 'dired-x)
-  (display-line-numbers-mode 1)
-  ;; (setq display-line-numbers-type t)
+
+  ;;isearch
+  (setq isearch-regexp-lax-whitespace t)
+  (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+  (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+  (add-hook 'prog-mode-hook (lambda ()
+                              (display-line-numbers-mode)
+                              (setq display-line-numbers-type t)))
   ;; (visual-line-mode)
   ;; (add-hook 'prog-mode-hook 'visual-line-mode)
 
@@ -59,26 +66,15 @@
   :demand t
   :config
   (fido-mode 1)
-  '(fido-vertical-mode 1)
-  (setq icomplete-in-buffer nil
+  (fido-vertical-mode 1)
+  (setq completion-auto-help 'visible)
+  (setq completion-show-help nil)
+  (setq completion-auto-select 'second-tab)
+  (setq icomplete-in-buffer t
         tab-always-indent 'complete
-        completion-styles '(subtring)
-        completion-category-overrides '()
-        completion-auto-help nil
-        enable-recursive-minibuffers nil
-        icomplete-show-matches-on-no-input t)
-  ;; This complition-in-region-function is using the send completion style as
-  ;; minibuffer, so that we get a consistent experience that looks good in terminal.
-  (defun al/completion-in-region-function (start end collection &optional predicate)
-    (let* ((initial (buffer-substring-no-properties start end))
-           (res (completing-read "Complete: " collection predicate t initial)))
-      (when res
-        (delete-region start end)
-        (insert res)))
-    t)
-  ;; Completion-in-region is a variable holding the stratey of region-completion.
-  (setq completion-in-region-function #'al/completion-in-region-function)
-  (define-key icomplete-fido-mode-map (kbd "TAB") 'icomplete-fido-ret))
+        completion-auto-help t
+        icomplete-show-matches-on-no-input t))
+
 
 (use-package magit
   :ensure t)

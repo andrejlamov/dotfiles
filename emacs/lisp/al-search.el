@@ -3,20 +3,23 @@
 (require 'magit)
 
 (cl-defun al/live (&key (title "")
-                     (fun (lambda ()))
-                     (initial-input nil)
-                     (on-complete (lambda ())))
+                        (fun (lambda ()))
+                        (initial-input nil)
+                        (on-complete (lambda ()))
+                        (on-init (lambda ())))
   (let* ((timer nil)
          (my-buffer (window-buffer (minibuffer-selected-window)))
          (on-keypress (lambda (beg end length)
                         (when (timerp timer)
                           (cancel-timer timer))
                         (setq timer (run-at-time 1 nil (lambda ()
-                                                      (let ((contents (minibuffer-contents)))
-                                                        (with-current-buffer my-buffer
-                                                          (funcall fun contents)))))))))
+                                                         (let ((contents (minibuffer-contents)))
+                                                           (with-current-buffer my-buffer
+                                                             (funcall fun contents)))))))))
     (minibuffer-with-setup-hook
-        (lambda () (add-hook 'after-change-functions on-keypress nil t))
+        (lambda ()
+          (funcall on-init)
+          (add-hook 'after-change-functions on-keypress nil t))
       (let ((res (read-string title initial-input)))
         (when res
           (funcall on-complete))))))
@@ -25,24 +28,32 @@
 (defun al/live-occur ()
   (interactive)
   (al/live :title "Occur:"
+           :on-init (lambda ()
+                      (local-set-key (kbd "C-n") (lambda () (interactive)
+                                                   (with-selected-window (get-buffer-window "*Occur*")
+                                                     (next-line 1)
+                                                     (occur-mode-goto-occurrence) )))
+                      (local-set-key (kbd "C-p") (lambda () (interactive)
+                                                   (with-selected-window  (get-buffer-window "*Occur*")
+                                                     (previous-line 1)
+                                                     (occur-mode-goto-occurrence)))))
            :fun (lambda (contents)
-                  (occur contents))
-           :on-complete (lambda ()
-                          (split-window-vertically nil (selected-window))
-                          (other-window 1)
-                          (switch-to-buffer "*Occur*"))))
+                  (occur contents))))
 
 ;;;###autoload
 (defun al/live-grep ()
   (interactive)
-  (al/live :title "Grep:"
-           :initial-input  "grep --color=auto -nH --null -e "
-           :fun (lambda (contents)
-             (grep contents))
-           :on-complete (lambda ()
-             (split-window-vertically nil (selected-window))
-             (other-window 1)
-             (switch-to-buffer "*grep*"))))
+  (let ((confirm-kill-processes nil))
+    (al/live :title "Grep:"
+             :on-init (lambda ()
+                        (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t))))
+             :initial-input  "grep --color=auto -nH --null -e "
+             :fun (lambda (contents)
+                    (grep contents))
+             :on-complete (lambda ()
+                            (split-window-vertically nil (selected-window))
+                            (other-window 1)
+                            (switch-to-buffer "*grep*")))))
 
 ;;;###autoload
 (defun al/live-git-ls-files ()
@@ -56,6 +67,5 @@
                           (other-window 1)
                           (switch-to-buffer "*git-ls-files*")
                           (dired-virtual (magit-toplevel)))))
-
 
 (provide 'al-search)
