@@ -7,3 +7,4 @@ export PATH="/opt/homebrew/bin":"~/.local/bin":$PATH
 export XDG_CONFIG_HOME=~/.config
 alias tmux="tmux new-session -A -s main"
 alias emacs="emacs -nw"
+source ~/.secrets.env
