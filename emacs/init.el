@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t -*-
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 (use-package exec-path-from-shell
   :init
   (when (memq window-system '(mac ns x))
@@ -63,7 +64,6 @@
   (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
 
 
-
   (defun al/backward-kill-or-kill-region ()
     (interactive)
     (if (region-active-p)
@@ -100,7 +100,7 @@
   :config
   (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark missing-newline-at-eof)))
 
-(use-package gptelp
+(use-package gptel
   :ensure t
   :config
   (gptel-make-gemini "Gemini" :key (getenv "GEMINI_API_KEY") :stream t)
@@ -129,3 +129,4 @@
 
 (use-package bufler
   :bind (("C-x b" . bufler-switch-buffer)))
+

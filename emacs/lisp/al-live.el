@@ -12,7 +12,7 @@
          (on-keypress (lambda (beg end length)
                         (when (timerp timer)
                           (cancel-timer timer))
-                        (setq timer (run-at-time 1 nil (lambda ()
+                        (setq timer (run-at-time 0.2 nil (lambda ()
                                                          (let ((contents (minibuffer-contents)))
                                                            (with-current-buffer my-buffer
                                                              (funcall fun contents)))))))))
@@ -27,7 +27,7 @@
 ;;;###autoload
 (defun al-live/occur ()
   (interactive)
-  (al/live :title "Occur: "
+  (al-live :title "Occur: "
            :on-init (lambda ()
                       (local-set-key (kbd "C-n") (lambda () (interactive)
                                                    (with-selected-window (get-buffer-window "*Occur*")
@@ -44,7 +44,7 @@
 (defun al-live/grep ()
   (interactive)
   (let ((confirm-kill-processes nil))
-    (al/live :title "Grep: "
+    (al-live :title "Grep: "
              :on-init (lambda ()
                         (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t)))
                         (local-set-key (kbd "C-n") (lambda () (interactive)
@@ -60,9 +60,30 @@
                     (grep contents)))))
 
 ;;;###autoload
+(defun al-live/grep-marked-dired-files ()
+  (interactive)
+  (let ((confirm-kill-processes nil)
+        (marked-files (with-current-buffer (window-buffer (minibuffer-selected-window))
+                        (s-join " " (dired-get-marked-files)))))
+    (al-live :title "Grep: "
+             :on-init (lambda ()
+                        (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t)))
+                        (local-set-key (kbd "C-n") (lambda () (interactive)
+                                                     (with-selected-window (get-buffer-window "*grep*")
+                                                       (next-line 1)
+                                                       (compile-goto-error))))
+                        (local-set-key (kbd "C-p") (lambda () (interactive)
+                                                     (with-selected-window  (get-buffer-window "*grep*")
+                                                       (previous-line 1)
+                                                       (compile-goto-error)))))
+             :initial-input  (concat "grep --color=auto -nH --null -e " marked-files)
+             :fun (lambda (contents)
+                    (grep contents)))))
+
+;;;###autoload
 (defun al-live/git-ls-files ()
   (interactive)
-  (al/live :title "Command: "
+  (al-live :title "Command: "
            :on-init (lambda ()
                       )
            :initial-input  (concat "cd " (magit-toplevel) " && git ls-files  | grep  | xargs ls -lah ;")
