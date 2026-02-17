@@ -2,7 +2,7 @@
 (require 'dired-x)
 (require 'magit)
 
-(cl-defun al/live (&key (title "")
+(cl-defun al-live (&key (title "")
                         (fun (lambda ()))
                         (initial-input nil)
                         (on-complete (lambda ()))
@@ -25,9 +25,9 @@
           (funcall on-complete))))))
 
 ;;;###autoload
-(defun al/live-occur ()
+(defun al-live/occur ()
   (interactive)
-  (al/live :title "Occur:"
+  (al/live :title "Occur: "
            :on-init (lambda ()
                       (local-set-key (kbd "C-n") (lambda () (interactive)
                                                    (with-selected-window (get-buffer-window "*Occur*")
@@ -41,31 +41,35 @@
                   (occur contents))))
 
 ;;;###autoload
-(defun al/live-grep ()
+(defun al-live/grep ()
   (interactive)
   (let ((confirm-kill-processes nil))
-    (al/live :title "Grep:"
+    (al/live :title "Grep: "
              :on-init (lambda ()
-                        (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t))))
+                        (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t)))
+                        (local-set-key (kbd "C-n") (lambda () (interactive)
+                                                     (with-selected-window (get-buffer-window "*grep*")
+                                                       (next-line 1)
+                                                       (compile-goto-error))))
+                        (local-set-key (kbd "C-p") (lambda () (interactive)
+                                                     (with-selected-window  (get-buffer-window "*grep*")
+                                                       (previous-line 1)
+                                                       (compile-goto-error)))))
              :initial-input  "grep --color=auto -nH --null -e "
              :fun (lambda (contents)
-                    (grep contents))
-             :on-complete (lambda ()
-                            (split-window-vertically nil (selected-window))
-                            (other-window 1)
-                            (switch-to-buffer "*grep*")))))
+                    (grep contents)))))
 
 ;;;###autoload
-(defun al/live-git-ls-files ()
+(defun al-live/git-ls-files ()
   (interactive)
-  (al/live :title ""
-           :initial-input  (concat "cd " (magit-toplevel) " && git ls-files  | grep  | xargs ls -lah")
+  (al/live :title "Command: "
+           :on-init (lambda ()
+                      )
+           :initial-input  (concat "cd " (magit-toplevel) " && git ls-files  | grep  | xargs ls -lah ;")
            :fun (lambda (contents)
-                  (shell-command contents "*git-ls-files*"))
+                  (async-shell-command contents "*git-ls-files*"))
            :on-complete (lambda ()
-                          (split-window-vertically nil (selected-window))
-                          (other-window 1)
-                          (switch-to-buffer "*git-ls-files*")
+                          (switch-to-buffer-other-window "*git-ls-files*")
                           (dired-virtual (magit-toplevel)))))
 
-(provide 'al-search)
+(provide 'al-live)

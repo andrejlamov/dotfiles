@@ -1,5 +1,11 @@
 ;; -*- lexical-binding: t -*-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(use-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 '(use-package no-littering
   :ensure t
   :config
@@ -46,8 +52,8 @@
   (add-hook 'prog-mode-hook (lambda ()
                               (display-line-numbers-mode)
                               (setq display-line-numbers-type t)))
-  ;; (visual-line-mode)
-  ;; (add-hook 'prog-mode-hook 'visual-line-mode)
+  (visual-line-mode)
+  (add-hook 'prog-mode-hook 'visual-line-mode)
 
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
@@ -60,20 +66,21 @@
     (if (region-active-p)
         (call-interactively 'kill-region)
       (call-interactively 'backward-kill-word)))
-  (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region))
+  (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region)
 
-(use-package icomplete
-  :demand t
-  :config
+
   (fido-mode 1)
   (fido-vertical-mode 1)
   (setq completion-auto-help 'visible)
   (setq completion-show-help nil)
   (setq completion-auto-select 'second-tab)
-  (setq icomplete-in-buffer t
+  (setq icomplete-in-buffer nil
         tab-always-indent 'complete
         completion-auto-help t
-        icomplete-show-matches-on-no-input t))
+        icomplete-show-matches-on-no-input t)
+
+  (setq enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode 1))
 
 
 (use-package magit
@@ -104,7 +111,28 @@
   :config
   (setq org-confirm-babel-evaluate nil))
 
-(use-package al-search
+(use-package al-live
   :load-path "../lisp/"
-  :commands al/live-git-ls-files al/live-grep al/live-occur
-  )
+  :commands al-live/git-ls-files al-live/grep al-live/occur)
+
+(use-package eglot
+  :ensure t)
+
+(use-package company
+  :ensure t
+  :init (global-company-mode)
+  :config
+  (setq company-idle-delay 0))
+
+(use-package bufler
+  :bind (("C-x b" . bufler-switch-buffer)))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-pcm-leading-wildcard t))
+
+
+
