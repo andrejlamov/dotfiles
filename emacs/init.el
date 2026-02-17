@@ -116,7 +116,7 @@
 
 (use-package al-live
   :load-path "../lisp/"
-  :commands al-live/git-ls-files al-live/grep al-live/occur)
+  :commands al-live/git-ls-files al-live/grep al-live/occur al-live/grep-marked-dired-files)
 
 (use-package eglot
   :ensure t)

@@ -1,6 +1,9 @@
+
+
 (require 'cl-lib)
 (require 'dired-x)
 (require 'magit)
+(require 's)
 
 (cl-defun al-live (&key (title "")
                         (fun (lambda ()))
@@ -59,12 +62,12 @@
              :fun (lambda (contents)
                     (grep contents)))))
 
+;; TODO: C-return got to the buffer, while only return goes to the current line if any
 ;;;###autoload
 (defun al-live/grep-marked-dired-files ()
   (interactive)
   (let ((confirm-kill-processes nil)
-        (marked-files (with-current-buffer (window-buffer (minibuffer-selected-window))
-                        (s-join " " (dired-get-marked-files)))))
+        (marked-files (s-join " " (dired-get-marked-files))))
     (al-live :title "Grep: "
              :on-init (lambda ()
                         (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t)))
@@ -84,8 +87,8 @@
 (defun al-live/git-ls-files ()
   (interactive)
   (al-live :title "Command: "
-           :on-init (lambda ()
-                      )
+           :on-init (lambda ())
+           ;; TODO: put cursor in the correct position to "continue" with chosen command
            :initial-input  (concat "cd " (magit-toplevel) " && git ls-files  | grep  | xargs ls -lah ;")
            :fun (lambda (contents)
                   (async-shell-command contents "*git-ls-files*"))
