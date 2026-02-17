@@ -55,11 +55,14 @@
   (visual-line-mode)
   (add-hook 'prog-mode-hook 'visual-line-mode)
 
+
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
   (global-set-key (kbd "C-z") 'repeat)
   (global-set-key (kbd "C-x C-f") 'find-file)
   (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
+
+
 
   (defun al/backward-kill-or-kill-region ()
     (interactive)
@@ -74,6 +77,7 @@
   (setq completion-auto-help 'visible)
   (setq completion-show-help nil)
   (setq completion-auto-select 'second-tab)
+  (setq completion-category-overrides '((file (styles partial-completion))))
   (setq icomplete-in-buffer nil
         tab-always-indent 'complete
         completion-auto-help t
@@ -81,7 +85,6 @@
 
   (setq enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode 1))
-
 
 (use-package magit
   :ensure t)
@@ -97,7 +100,7 @@
   :config
   (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark missing-newline-at-eof)))
 
-(use-package gptel
+(use-package gptelp
   :ensure t
   :config
   (gptel-make-gemini "Gemini" :key (getenv "GEMINI_API_KEY") :stream t)
@@ -126,13 +129,3 @@
 
 (use-package bufler
   :bind (("C-x b" . bufler-switch-buffer)))
-
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles partial-completion))))
-  (completion-pcm-leading-wildcard t))
-
-
-
