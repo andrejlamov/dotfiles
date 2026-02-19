@@ -6,8 +6,7 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-'(use-package no-littering
+(use-package no-littering
   :ensure t
   :config
   (let ((dir (no-littering-expand-var-file-name "lock-files/")))
@@ -44,17 +43,23 @@
   (setq comint-completion-addsuffix nil)
   (setq use-short-answers t)
   (winner-mode 1)
+
+  ;;dired
   (require 'dired-x)
 
   ;;isearch
   (setq isearch-regexp-lax-whitespace t)
   (global-set-key (kbd "C-s") 'isearch-forward-regexp)
   (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+
+  (global-set-key (kbd "C-M-v") 'scroll-other-window-down)
+  (global-set-key (kbd "C-M-S-v") 'scroll-other-window)
+
   (add-hook 'prog-mode-hook (lambda ()
                               (display-line-numbers-mode)
                               (setq display-line-numbers-type t)))
-  (visual-line-mode)
-  (add-hook 'prog-mode-hook 'visual-line-mode)
+  ;(visual-line-mode)
+  ;(add-hook 'prog-mode-hook 'visual-line-mode)
 
 
   (defvar al/meta-spc-map (make-sparse-keymap))
@@ -71,29 +76,43 @@
       (call-interactively 'backward-kill-word)))
   (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region)
 
-
-  (fido-mode 1)
+(fido-mode -1)
   (fido-vertical-mode 1)
-  (setq completion-auto-help 'visible)
-  (setq completion-show-help nil)
-  (setq completion-auto-select 'second-tab)
-  (setq completion-category-overrides '((file (styles partial-completion))))
-  (setq icomplete-in-buffer nil
-        tab-always-indent 'complete
-        completion-auto-help t
-        icomplete-show-matches-on-no-input t)
-
+  (defun al/icomplete-styles ()
+    (setq-local completion-styles '(orderless)))
+  (add-hook 'icomplete-minibuffer-setup-hook 'al/icomplete-styles)
+  (define-key icomplete-fido-mode-map (kbd "TAB") #'icomplete-force-complete)
   (setq enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode 1))
+
+(use-package orderless
+  :ensure t
+  :config
+  (fido-mode)
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-pcm-leading-wildcard t))
+
+
+(use-package paredit
+  :hook emacs-lisp-mode
+  :bind (:map paredit-mode-map
+              ("M-q" . nil)
+              ("M-s" . nil)))
 
 (use-package magit
   :ensure t)
 
 (use-package avy
   :ensure t
+  :init
+  (global-unset-key (kbd "M-q"))
   :bind (("M-q" . avy-goto-char)
          :map isearch-mode-map
-         ("M-q" . avy-isearch)))
+         ("M-q" . avy-isearch)
+         :map prog-mode-map
+         ("M-q" . avy-goto-char)))
 
 (use-package whitespace
   :init (add-hook 'prog-mode-hook 'whitespace-mode)
@@ -116,17 +135,23 @@
 
 (use-package al-live
   :load-path "../lisp/"
-  :commands al-live/git-ls-files al-live/grep al-live/occur al-live/grep-marked-dired-files)
+  :bind (("M-s g" . al-live/grep)
+         ("M-s p" . al-live/git-grep)
+         ("M-s o" . al-live/occur)
+         ("M-s f" . al-live/find)
+         ("M-s l" . al-live/git-ls-files)))
 
 (use-package eglot
   :ensure t)
 
 (use-package company
+  :hook ((prog-mode . company-mode)
+         (shell-mode . company-mode)
+         (text-mode . company-mode))
   :ensure t
-  :init (global-company-mode)
   :config
   (setq company-idle-delay 0))
 
 (use-package bufler
+  :init (bufler-mode)
   :bind (("C-x b" . bufler-switch-buffer)))
-

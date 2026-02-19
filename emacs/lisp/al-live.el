@@ -1,8 +1,6 @@
-
-
+;; TODO: do something with find-grep-dired (make it use git ls-files)
 (require 'cl-lib)
 (require 'dired-x)
-(require 'magit)
 (require 's)
 
 (cl-defun al-live (&key (title "")
@@ -26,6 +24,12 @@
       (let ((res (read-string title initial-input)))
         (when res
           (funcall on-complete))))))
+
+(defun al-live/command-with-cursor-position (title command-prefix command-postfix)
+  (list
+   :position (+ (length title) (length command-prefix) 1)
+   :title title
+   :command (concat command-prefix command-postfix)))
 
 ;;;###autoload
 (defun al-live/occur ()
@@ -62,6 +66,28 @@
              :fun (lambda (contents)
                     (grep contents)))))
 
+;;;###autoload
+(defun al-live/git-grep ()
+  (interactive)
+  (let ((confirm-kill-processes nil))
+    (al-live :title "Gitgrep: "
+             :on-init (lambda ()
+                        (goto-char (point-max))
+                        (add-hook 'grep-mode-hook (lambda () (setq-local compilation-always-kill t)))
+                        (local-set-key (kbd "C-n") (lambda () (interactive)
+                                                     (with-selected-window (get-buffer-window "*grep*")
+                                                       (next-line 1)
+                                                       (compile-goto-error))))
+                        (local-set-key (kbd "C-p") (lambda () (interactive)
+                                                     (with-selected-window  (get-buffer-window "*grep*")
+                                                       (previous-line 1)
+                                                       (compile-goto-error)))))
+             :initial-input "git grep -n "
+             :fun (lambda (contents)
+                    (grep contents)))))
+
+
+
 ;; TODO: C-return got to the buffer, while only return goes to the current line if any
 ;;;###autoload
 (defun al-live/grep-marked-dired-files ()
@@ -86,13 +112,14 @@
 ;;;###autoload
 (defun al-live/git-ls-files ()
   (interactive)
-  (let ((title "Command:")
-        (prefix-command (concat "cd " (magit-toplevel) " && git ls-files  | grep "))
-        (postfix-command " | xargs ls -1;")
+  (let ((command (al-live/command-with-cursor-position
+                  "Command:"
+                  (concat "cd " (magit-toplevel) " && git ls-files  | grep -i ")
+                  " | xargs ls -1"))
         (result nil))
-    (al-live :title title
+    (al-live :title (plist-get command :title)
              :on-init (lambda ()
-                        (goto-char (+ (length title) +1 (length prefix-command)))
+                        (goto-char (plist-get command :position))
                         (local-set-key (kbd "C-n") (lambda () (interactive)
                                                      (with-selected-window (get-buffer-window "*git-ls-files*")
                                                        (next-line 1)
@@ -103,11 +130,11 @@
                                                        (previous-line 1)
                                                        (find-file-other-window (ffap-guess-file-name-at-point))
                                                        (setq result (current-buffer))))))
-             :initial-input  (concat prefix-command postfix-command)
+             :initial-input  (plist-get command :command)
              :fun (lambda (contents)
                     (async-shell-command contents "*git-ls-files*"))
              :on-complete (lambda ()
-                            (switch-to-buffer result)
-                            '(dired-virtual (magit-toplevel))))))
+                            (when result
+                                (switch-to-buffer result))))))
 
 (provide 'al-live)
