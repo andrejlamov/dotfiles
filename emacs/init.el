@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t -*-
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'load-path (expand-file-name "../lisp"))
 
 (use-package exec-path-from-shell
   :init
@@ -9,30 +10,25 @@
 (use-package no-littering
   :ensure t
   :config
-  (let ((dir (no-littering-expand-var-file-name "lock-files/")))
-  (make-directory dir t)
-  (setq lock-file-name-transforms `((".*" ,dir t))))
+  (setq backup-directory-alist
+        `((".*" . ,(no-littering-expand-var-file-name "backup/"))))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-  (require 'recentf)
-  (add-to-list 'recentf-exclude
-               (recentf-expand-file-name no-littering-var-directory))
-  (add-to-list 'recentf-exclude
-               (recentf-expand-file-name no-littering-etc-directory))
-
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-
-  (when (and (fboundp 'startup-redirect-eln-cache)
-           (fboundp 'native-comp-available-p)
-           (native-comp-available-p))
-  (startup-redirect-eln-cache
-   (convert-standard-filename
-    (expand-file-name  "var/eln-cache/" user-emacs-directory)))))
 
 (use-package emacs
+  :custom
+  (tab-always-indent 'complete)
+  (read-extended-command-predicate #'command-completion-default-include-p)
   :config
-  (load-theme 'modus-vivendi-deuteranopia t nil)
-  (add-to-list 'load-path (expand-file-name "../lisp"))
 
+  ;; meta space
+  (defvar al/meta-spc-map (make-sparse-keymap))
+  (global-set-key (kbd "M-SPC") al/meta-spc-map)
+
+  ;; theme
+  (load-theme 'modus-vivendi-tinted t nil)
+  (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
   (setq initial-buffer-choice t)
   (setq user-emacs-directory (expand-file-name "~/.config/emacs/.emacs.d"))
@@ -42,10 +38,35 @@
   (setq confirm-nonexistent-file-or-buffer nil)
   (setq comint-completion-addsuffix nil)
   (setq use-short-answers t)
-  (winner-mode 1)
 
-  ;;dired
-  (require 'dired-x)
+  ;; shell
+  (add-hook 'shell-mode-hook
+          (lambda ()
+            (setenv "PAGER" "cat")))
+  ;; (define-key al/meta-spc-map (kbd "a !") 'shell-command)
+  ;; (define-key al/meta-spc-map (kbd "a s") 'shell)
+  ;; (define-key al/meta-spc-map (kbd "a &") 'async-shell-command)
+
+  ;; highiligh line
+  (setq-default cursor-in-non-selected-windows nil)
+  (add-hook 'prog-mode-hook 'hl-line-mode)
+
+  ;; cursor
+  (blink-cursor-mode -1)
+
+  ;; default to truncate long lines
+  (setq-default truncate-lines t)
+  ;; remove truncate dollar sign
+  (set-display-table-slot standard-display-table 'truncation ?\ )
+
+
+  ;; winner
+  (winner-mode 1)
+  (define-key al/meta-spc-map (kbd "w p") 'winner-undo)
+  (define-key al/meta-spc-map (kbd "w n") 'winner-redo)
+
+  ;; align
+  (setq align-region-separate 'entire)
 
   ;;isearch
   (setq isearch-regexp-lax-whitespace t)
@@ -57,17 +78,25 @@
 
   (add-hook 'prog-mode-hook (lambda ()
                               (display-line-numbers-mode)
-                              (setq display-line-numbers-type t)))
+                              (setq display-line-numbers-type 'relative)))
   ;(visual-line-mode)
   ;(add-hook 'prog-mode-hook 'visual-line-mode)
 
+  ;; compile mode
+  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+  (setq compilation-always-kill t
+        compilation-ask-about-save nil
+        compilation-scroll-output 'first-error)
 
-  (defvar al/meta-spc-map (make-sparse-keymap))
-  (global-set-key (kbd "M-SPC") al/meta-spc-map)
+  (define-key project-prefix-map (kbd "C") 'project-recompile)
+
+  ;; js default
+  (setq js-indent-level 2
+        js-jsx-indent-level 2)
+
   (global-set-key (kbd "C-z") 'repeat)
   (global-set-key (kbd "C-x C-f") 'find-file)
-  (global-set-key (kbd "C-x C-S-f") 'find-file-literally)
-
+  (global-set-key (kbd "C-x C-S-f") 'ffap)
 
   (defun al/backward-kill-or-kill-region ()
     (interactive)
@@ -76,22 +105,53 @@
       (call-interactively 'backward-kill-word)))
   (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region)
 
-(fido-mode -1)
-  (fido-vertical-mode 1)
-  (defun al/icomplete-styles ()
-    (setq-local completion-styles '(orderless)))
-  (add-hook 'icomplete-minibuffer-setup-hook 'al/icomplete-styles)
-  (define-key icomplete-fido-mode-map (kbd "TAB") #'icomplete-force-complete)
+  ;; (fido-mode -1)
+  ;; (fido-vertical-mode 1)
+  ;; (defun al/icomplete-styles ()
+  ;;   (setq-local completion-styles '(orderless)))
+  ;; (add-hook 'icomplete-minibuffer-setup-hook 'al/icomplete-styles)
+  ;; (define-key icomplete-fido-mode-map (kbd "TAB") #'icomplete-force-complete)
   (setq enable-recursive-minibuffers t)
-  (minibuffer-depth-indicate-mode 1))
+  (minibuffer-depth-indicate-mode 1)
+
+  ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
+  ;; to switch display modes.
+  (setq context-menu-mode t)
+  ;; Support opening new minibuffers from inside existing minibuffers.
+  (setq enable-recursive-minibuffers t)
+  ;; Hide commands in M-x which do not work in the current mode.  Vertico
+  ;; commands are hidden in normal buffers. This setting is useful beyond
+  ;; Vertico.
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt))
+
+  )
+;; Enable Vertico.
+(use-package vertico
+  :custom
+  (vertico-scroll-margin 0) ;; Different scroll margin
+   (vertico-count 10) ;; Show more candidates
+   (vertico-resize nil) ;; Grow and shrink the Vertico minibuffer
+   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+   :init
+  (vertico-mode)
+  (keymap-set vertico-map "C-:" #'vertico-quick-exit)
+  (keymap-set vertico-map "C-;" #'vertico-quick-insert)
+  (vertico-grid-mode))
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
+
 
 (use-package orderless
-  :ensure t
-  :config
-  (fido-mode)
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil)
   (completion-pcm-leading-wildcard t))
 
 
@@ -102,17 +162,15 @@
               ("M-s" . nil)))
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :config
+  (setq magit-diff-refine-hunk 'all))
 
 (use-package avy
   :ensure t
-  :init
-  (global-unset-key (kbd "M-q"))
-  :bind (("M-q" . avy-goto-char)
+  :bind (("C-:" . avy-goto-char-2)
          :map isearch-mode-map
-         ("M-q" . avy-isearch)
-         :map prog-mode-map
-         ("M-q" . avy-goto-char)))
+         ("C-:" . avy-isearch)))
 
 (use-package whitespace
   :init (add-hook 'prog-mode-hook 'whitespace-mode)
@@ -133,25 +191,93 @@
   :config
   (setq org-confirm-babel-evaluate nil))
 
+(use-package which-key
+  :init
+  (setq which-key-idle-delay 0)
+  (which-key-mode))
+
 (use-package al-live
   :load-path "../lisp/"
-  :bind (("M-s g" . al-live/grep)
-         ("M-s p" . al-live/git-grep)
+  :bind (("M-s G" . al-live/grep)
+         ("M-s g" . al-live/git-grep)
          ("M-s o" . al-live/occur)
          ("M-s f" . al-live/find)
-         ("M-s l" . al-live/git-ls-files)))
+         ("M-s l" . al-live/git-ls-files))
+  :config
+  (setq list-matching-lines-default-context-lines 0))
+
+(use-package al-debouncer
+  :load-path "../lisp/")
 
 (use-package eglot
   :ensure t)
 
-(use-package company
-  :hook ((prog-mode . company-mode)
-         (shell-mode . company-mode)
-         (text-mode . company-mode))
-  :ensure t
-  :config
-  (setq company-idle-delay 0))
-
 (use-package bufler
   :init (bufler-mode)
-  :bind (("C-x b" . bufler-switch-buffer)))
+  :bind (("C-x b" . bufler-switch-buffer)
+         ("C-x B" . bufler-list)))
+
+(use-package vterm
+  :config
+  (add-hook 'vterm-mode-hook (lambda () (hl-line-mode -1))))
+
+(use-package yaml-mode)
+
+(use-package ace-window
+  :bind (("M-o" . ace-window))
+  :custom
+  (aw-background t)
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :config
+  (custom-set-faces
+   '(aw-leading-char-face ((t (:inherit (bold ef-themes-reset-soft)
+                                        :height 1))))))
+
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  :config
+
+  (defun my-corfu-enable-in-minibuffer ()
+    (setq-local corfu-auto t)
+    (setq-local corfu-echo-delay nil
+                corfu-popupinfo-delay nil)
+    (corfu-mode 1))
+(add-hook 'minibuffer-setup-hook #'my-corfu-enable-in-minibuffer))
+
+(use-package docker)
+
+
+;; TODO: create cursors from phi-search matches
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c" . mc/edit-lines) ;; TODO: breaks with relative line number mode?
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this))
+  :config
+  (require 'phi-replace)
+  
+  (defun al/use-phi-search ()
+    (if multiple-cursors-mode (progn
+                                (message "enabled")
+                                (global-set-key (kbd "C-s") 'phi-search)
+                                (global-set-key (kbd "C-r") 'phi-search-backward)
+                                (global-set-key (kbd "M-%") 'phi-replace-query))
+
+      (message "disabled")
+      (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+      (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+      (global-set-key (kbd "M-%") 'query-replace)))
+  (add-hook 'multiple-cursors-mode-hook 'al/use-phi-search))
+
+(use-package phi-search)
+
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)))
+
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview)
+  :config
+  (setq kubernetes-poll-frequency 3600
+        kubernetes-redraw-frequency 3600))

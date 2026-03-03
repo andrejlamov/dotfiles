@@ -6,7 +6,7 @@
   (interactive "b")
   (setq evalka-target-buffer buffer))
 
-
+;; TODO: sending newlines breaks this
 (defun evalka-send-snippet (&optional snippet target-buffer)
   (interactive)
   (setq target-buffer (or target-buffer evalka-target-buffer))

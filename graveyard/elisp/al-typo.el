@@ -15,6 +15,7 @@
 (setq typo-original-buffer "*typo-original*")
 (setq typo-practice-buffer "*typo*")
 
+
 (defun typo ()
   (interactive)
   (typo-generate-all-combo-buffer))
