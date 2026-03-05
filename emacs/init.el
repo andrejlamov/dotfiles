@@ -28,6 +28,7 @@
 
   ;; theme
   (load-theme 'modus-vivendi-tinted t nil)
+
   (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
   (setq initial-buffer-choice t)
@@ -39,10 +40,12 @@
   (setq comint-completion-addsuffix nil)
   (setq use-short-answers t)
 
+
+
   ;; shell
   (add-hook 'shell-mode-hook
-          (lambda ()
-            (setenv "PAGER" "cat")))
+            (lambda ()
+              (setenv "PAGER" "cat")))
   ;; (define-key al/meta-spc-map (kbd "a !") 'shell-command)
   ;; (define-key al/meta-spc-map (kbd "a s") 'shell)
   ;; (define-key al/meta-spc-map (kbd "a &") 'async-shell-command)
@@ -55,7 +58,11 @@
   (blink-cursor-mode -1)
 
   ;; default to truncate long lines
-  (setq-default truncate-lines t)
+  (setq-default truncate-lines nil)
+  (global-visual-line-mode 1)
+  (setq visual-wrap-extra-indent 2)
+
+  (global-visual-wrap-prefix-mode 1)
   ;; remove truncate dollar sign
   (set-display-table-slot standard-display-table 'truncation ?\ )
 
@@ -79,9 +86,7 @@
   (add-hook 'prog-mode-hook (lambda ()
                               (display-line-numbers-mode)
                               (setq display-line-numbers-type 'relative)))
-  ;(visual-line-mode)
-  ;(add-hook 'prog-mode-hook 'visual-line-mode)
-
+  
   ;; compile mode
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
   (setq compilation-always-kill t
@@ -125,7 +130,7 @@
   (setq read-extended-command-predicate #'command-completion-default-include-p)
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
-   '(read-only t cursor-intangible t face minibuffer-prompt))
+        '(read-only t cursor-intangible t face minibuffer-prompt))
 
   )
 ;; Enable Vertico.
@@ -239,8 +244,8 @@
   :config
 
   (defun my-corfu-enable-in-minibuffer ()
-    (setq-local corfu-auto t)
-    (setq-local corfu-echo-delay nil
+        (setq-local corfu-auto t)
+        (setq-local corfu-echo-delay nil
                 corfu-popupinfo-delay nil)
     (corfu-mode 1))
 (add-hook 'minibuffer-setup-hook #'my-corfu-enable-in-minibuffer))
