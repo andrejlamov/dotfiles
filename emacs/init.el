@@ -279,10 +279,3 @@
 
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
-
-(use-package kubernetes
-  :ensure t
-  :commands (kubernetes-overview)
-  :config
-  (setq kubernetes-poll-frequency 3600
-        kubernetes-redraw-frequency 3600))
