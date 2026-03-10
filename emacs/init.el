@@ -231,12 +231,11 @@
 (use-package ace-window
   :bind (("M-o" . ace-window))
   :custom
-  (aw-background t)
+  (aw-background nil)
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :config
-  (custom-set-faces
-   '(aw-leading-char-face ((t (:inherit (bold ef-themes-reset-soft)
-                                        :height 1))))))
+  (setq aw-display-mode-overlay nil)
+  (ace-window-display-mode))
 
 (use-package corfu
   :init
@@ -261,7 +260,6 @@
          ("C-c C-<" . mc/mark-all-like-this))
   :config
   (require 'phi-replace)
-  
   (defun al/use-phi-search ()
     (if multiple-cursors-mode (progn
                                 (message "enabled")
@@ -279,3 +277,9 @@
 
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
+
+(use-package dumb-jump
+  :ensure t
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
