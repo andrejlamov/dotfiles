@@ -21,6 +21,7 @@
   (tab-always-indent 'complete)
   (read-extended-command-predicate #'command-completion-default-include-p)
   :config
+  (global-auto-revert-mode t)
 
   ;; meta space
   (defvar al/meta-spc-map (make-sparse-keymap))
@@ -47,9 +48,6 @@
   (add-hook 'shell-mode-hook
             (lambda ()
               (setenv "PAGER" "cat")))
-  ;; (define-key al/meta-spc-map (kbd "a !") 'shell-command)
-  ;; (define-key al/meta-spc-map (kbd "a s") 'shell)
-  ;; (define-key al/meta-spc-map (kbd "a &") 'async-shell-command)
 
   ;; highiligh line
   (setq-default cursor-in-non-selected-windows nil)
@@ -66,7 +64,6 @@
   (global-visual-wrap-prefix-mode 1)
   ;; remove truncate dollar sign
   (set-display-table-slot standard-display-table 'truncation ?\ )
-
 
   ;; winner
   (winner-mode 1)
@@ -87,7 +84,7 @@
   (add-hook 'prog-mode-hook (lambda ()
                               (display-line-numbers-mode)
                               (setq display-line-numbers-type 'relative)))
-  
+
   ;; compile mode
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
   (setq compilation-always-kill t
@@ -111,49 +108,33 @@
       (call-interactively 'backward-kill-word)))
   (global-set-key (kbd "C-w") 'al/backward-kill-or-kill-region)
 
-  ;; (fido-mode -1)
-  ;; (fido-vertical-mode 1)
-  ;; (defun al/icomplete-styles ()
-  ;;   (setq-local completion-styles '(orderless)))
-  ;; (add-hook 'icomplete-minibuffer-setup-hook 'al/icomplete-styles)
-  ;; (define-key icomplete-fido-mode-map (kbd "TAB") #'icomplete-force-complete)
   (setq enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode 1)
-
-  ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
-  ;; to switch display modes.
   (setq context-menu-mode t)
-  ;; Support opening new minibuffers from inside existing minibuffers.
-  (setq enable-recursive-minibuffers t)
-  ;; Hide commands in M-x which do not work in the current mode.  Vertico
-  ;; commands are hidden in normal buffers. This setting is useful beyond
-  ;; Vertico.
   (setq read-extended-command-predicate #'command-completion-default-include-p)
-  ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
+        '(read-only t cursor-intangible t face minibuffer-prompt)))
 
-  )
 ;; Enable Vertico.
 (use-package vertico
   :custom
   (vertico-scroll-margin 0) ;; Different scroll margin
-   (vertico-count 20) ;; Show more candidates
-   (vertico-resize nil) ;; Grow and shrink the Vertico minibuffer
-   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
-   :init
-   (vertico-mode)
-   (keymap-set vertico-map "C-:" #'vertico-quick-exit)
-   (keymap-set vertico-map "C-;" #'vertico-quick-insert))
+  (vertico-count 20)        ;; Show more candidates
+  (vertico-resize nil)      ;; Grow and shrink the Vertico minibuffer
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init
+  (vertico-mode)
+  (keymap-set vertico-map "C-:" #'vertico-quick-exit)
+  (keymap-set vertico-map "C-;" #'vertico-quick-insert))
 
 (use-package marginalia
   :config
   (marginalia-mode))
+
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
   :init
   (savehist-mode))
-
 
 (use-package orderless
   :custom
@@ -246,11 +227,11 @@
   :config
 
   (defun my-corfu-enable-in-minibuffer ()
-        (setq-local corfu-auto t)
-        (setq-local corfu-echo-delay nil
+    (setq-local corfu-auto t)
+    (setq-local corfu-echo-delay nil
                 corfu-popupinfo-delay nil)
     (corfu-mode 1))
-(add-hook 'minibuffer-setup-hook #'my-corfu-enable-in-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'my-corfu-enable-in-minibuffer))
 
 (use-package docker)
 
