@@ -27,7 +27,8 @@
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
 
   ;; theme
-  (load-theme 'modus-vivendi-tinted t nil)
+  (load-theme 'modus-operandi-tinted t nil)
+  (set-face-attribute 'default nil :height 80)
 
   (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
@@ -137,15 +138,17 @@
 (use-package vertico
   :custom
   (vertico-scroll-margin 0) ;; Different scroll margin
-   (vertico-count 10) ;; Show more candidates
+   (vertico-count 20) ;; Show more candidates
    (vertico-resize nil) ;; Grow and shrink the Vertico minibuffer
    (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
    :init
-  (vertico-mode)
-  (keymap-set vertico-map "C-:" #'vertico-quick-exit)
-  (keymap-set vertico-map "C-;" #'vertico-quick-insert)
-  (vertico-grid-mode))
+   (vertico-mode)
+   (keymap-set vertico-map "C-:" #'vertico-quick-exit)
+   (keymap-set vertico-map "C-;" #'vertico-quick-insert))
 
+(use-package marginalia
+  :config
+  (marginalia-mode))
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
   :init
@@ -283,3 +286,6 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+
+
+(use-package crux)
