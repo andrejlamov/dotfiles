@@ -42,12 +42,15 @@
   (setq comint-completion-addsuffix nil)
   (setq use-short-answers t)
 
+  ;; dired
+   (when (memq window-system '(mac))
+     (setq insert-directory-program "gls"))
+   (setq dired-listing-switches "-alh")
 
-
-  ;; shell
-  (add-hook 'shell-mode-hook
-            (lambda ()
-              (setenv "PAGER" "cat")))
+   ;; shell
+   (add-hook 'shell-mode-hook
+             (lambda ()
+               (setenv "PAGER" "cat")))
 
   ;; highiligh line
   (setq-default cursor-in-non-selected-windows nil)
