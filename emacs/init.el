@@ -29,7 +29,7 @@
 
   ;; theme
   (load-theme 'modus-operandi-tinted t nil)
-  (set-face-attribute 'default nil :height 80)
+  (set-face-attribute 'default nil :height 120)
 
   (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
