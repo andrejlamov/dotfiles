@@ -1,6 +1,10 @@
-;; -*- lexical-binding: t -*-
+;;; -*- lexical-binding: t -*-
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'load-path (expand-file-name "../lisp"))
+(setq use-package-always-defer t)
+
+(use-package s)
+(use-package dash)
 
 (use-package exec-path-from-shell
   :init
@@ -27,9 +31,16 @@
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
 
+  ;; registers
+  (define-key al/meta-spc-map "r" 'point-to-register)
+  (define-key al/meta-spc-map "R" 'jump-to-register)
+  (setq register-preview-delay 0)
+
   ;; theme
   (load-theme 'modus-operandi-tinted t nil)
-  (set-face-attribute 'default nil :height 120)
+  (if (equal (system-name) "void")
+      (set-face-attribute 'default nil :height 80)
+    (set-face-attribute 'default nil :height 120))
 
   (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
@@ -43,15 +54,18 @@
   (setq use-short-answers t)
 
   ;; dired
-   (when (memq window-system '(mac))
+   (when (equal window-system 'mac)
      (setq insert-directory-program "gls"))
    (setq dired-listing-switches "-alh")
 
    ;; shell
+   (defun al/named-shell (name)
+     (interactive "sName:")
+     (shell (s-concat name)))
+   (define-key al/meta-spc-map (kbd "a s") 'al/named-shell)
    (add-hook 'shell-mode-hook
              (lambda ()
                (setenv "PAGER" "cat")))
-
   ;; highiligh line
   (setq-default cursor-in-non-selected-windows nil)
   (add-hook 'prog-mode-hook 'hl-line-mode)
@@ -70,8 +84,8 @@
 
   ;; winner
   (winner-mode 1)
-  (define-key al/meta-spc-map (kbd "w p") 'winner-undo)
-  (define-key al/meta-spc-map (kbd "w n") 'winner-redo)
+  (define-key al/meta-spc-map (kbd "w u") 'winner-undo)
+  (define-key al/meta-spc-map (kbd "w r") 'winner-redo)
 
   ;; align
   (setq align-region-separate 'entire)
