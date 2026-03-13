@@ -11,13 +11,6 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-(use-package no-littering
-  :ensure t
-  :config
-  (setq backup-directory-alist
-        `((".*" . ,(no-littering-expand-var-file-name "backup/"))))
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 
 (use-package emacs
@@ -132,7 +125,15 @@
   (setq minibuffer-prompt-properties
         '(read-only t cursor-intangible t face minibuffer-prompt)))
 
-;; Enable Vertico.
+(use-package no-littering
+  :ensure t
+  :config
+  (setq backup-directory-alist
+        `((".*" . ,(no-littering-expand-var-file-name "backup/"))))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
+
 (use-package vertico
   :custom
   (vertico-scroll-margin 0) ;; Different scroll margin
