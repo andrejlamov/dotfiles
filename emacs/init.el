@@ -24,9 +24,13 @@
   (defvar al/meta-spc-map (make-sparse-keymap))
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
 
+
   ;; registers
   (define-key al/meta-spc-map "R" 'point-to-register)
   (define-key al/meta-spc-map "r" 'jump-to-register)
+  (advice-add 'jump-to-register :after (lambda (&rest r)
+                                         (when (eq major-mode 'shell-mode)
+                                           (end-of-buffer))))
   (setq register-preview-delay 0)
 
   ;; theme
