@@ -25,8 +25,8 @@
   (global-set-key (kbd "M-SPC") al/meta-spc-map)
 
   ;; registers
-  (define-key al/meta-spc-map "r" 'point-to-register)
-  (define-key al/meta-spc-map "R" 'jump-to-register)
+  (define-key al/meta-spc-map "R" 'point-to-register)
+  (define-key al/meta-spc-map "r" 'jump-to-register)
   (setq register-preview-delay 0)
 
   ;; theme
