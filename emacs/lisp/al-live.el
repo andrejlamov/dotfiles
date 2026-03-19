@@ -10,7 +10,7 @@
 (require 'subr-x)
 (require 's)
 (require 'al-debouncer)
-(require 'corfu)
+
 
 (cl-defun al-live/construct(&key (title "")
                                  (fun (lambda ()))
@@ -28,13 +28,6 @@
     (minibuffer-with-setup-hook
         (lambda ()
           (funcall on-init)
-          (setq-local completion-at-point-functions
-                           '(comint-completion-at-point
-                             pcomplete-completions-at-point
-                             t))
-          (setq-local corfu-echo-delay nil
-                      corfu-popupinfo-delay nil)
-          (corfu-mode 1)
           (add-hook 'after-change-functions on-keypress nil t))
       (let ((res (read-string title initial-input)))
         (when res
