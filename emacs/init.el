@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'load-path (expand-file-name "../lisp"))
-(setq use-package-always-defer t)
 
 (use-package s)
 (use-package dash)
@@ -39,6 +38,28 @@
       (set-face-attribute 'default nil :height 80)
     (set-face-attribute 'default nil :height 120))
 
+  ;; (defun my/apply-monochrome-bold-syntax ()
+  ;;   "Strip colors from font-lock and use typography instead."
+  ;;   (interactive)
+  ;;   (let ((fg (face-attribute 'default :foreground)))
+  ;;     ;; Reset common faces to default foreground
+  ;;     (dolist (face '(font-lock-variable-name-face
+  ;;                     font-lock-function-name-face
+  ;;                     font-lock-type-face
+  ;;                     font-lock-constant-face
+  ;;                     font-lock-string-face
+  ;;                     font-lock-warning-face))
+  ;;       (set-face-attribute face nil :foreground fg :weight 'normal :slant 'normal))
+
+  ;;     ;; Set specific typographic rules
+  ;;     (set-face-attribute 'font-lock-keyword-face nil :foreground fg :weight 'bold)
+  ;;     (set-face-attribute 'font-lock-builtin-face nil :foreground fg :weight 'bold)
+  ;;     (set-face-attribute 'font-lock-string-face nil :foreground fg :weight 'bold)
+  ;;     (set-face-attribute 'font-lock-comment-face nil :foreground fg :slant 'italic)))
+
+  ;; ;; Run it now:
+  ;; (my/apply-monochrome-bold-syntax)
+  
   (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
   (setq initial-buffer-choice t)
@@ -84,6 +105,11 @@
   (define-key al/meta-spc-map (kbd "w u") 'winner-undo)
   (define-key al/meta-spc-map (kbd "w r") 'winner-redo)
 
+
+
+  ;; just stop
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
   ;; align
   (setq align-region-separate 'entire)
 
@@ -129,14 +155,6 @@
   (setq minibuffer-prompt-properties
         '(read-only t cursor-intangible t face minibuffer-prompt)))
 
-(use-package no-littering
-  :ensure t
-  :config
-  (setq backup-directory-alist
-        `((".*" . ,(no-littering-expand-var-file-name "backup/"))))
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
-
 
 (use-package vertico
   :custom
@@ -179,9 +197,11 @@
 
 (use-package avy
   :ensure t
-  :bind (("C-:" . avy-goto-char-2)
-         :map isearch-mode-map
-         ("C-:" . avy-isearch)))
+  :bind
+  (("C-:" . avy-goto-char-2)
+   ("C-;" . avy-goto-char)
+   :map isearch-mode-map
+   ("C-:" . avy-isearch)))
 
 (use-package whitespace
   :init (add-hook 'prog-mode-hook 'whitespace-mode)
@@ -192,6 +212,7 @@
   :ensure t
   :config
   (gptel-make-gemini "Gemini" :key (getenv "GEMINI_API_KEY") :stream t)
+  (gptel-make-gh-copilot "Copilot")
   (setq gptel-log-level 'debug))
 
 (use-package markdown-mode
@@ -292,3 +313,16 @@
 
 
 (use-package crux)
+
+(use-package yasnippet
+  :ensure t
+  :bind (:map yas-minor-mode-map
+         ("C-c y" . yas-expand)         ("C-c & C-n" . yas-next-field)
+         ("C-c & C-p" . yas-prev-field))
+  :config
+  (yas-global-mode 1)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "<tab>") nil))
+
+(use-package yasnippet-snippets
+  :ensure t)

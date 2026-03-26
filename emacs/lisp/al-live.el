@@ -11,7 +11,6 @@
 (require 's)
 (require 'al-debouncer)
 
-
 (cl-defun al-live/construct(&key (title "")
                                  (fun (lambda ()))
                                  (initial-input nil)
