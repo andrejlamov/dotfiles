@@ -326,3 +326,8 @@
 
 (use-package yasnippet-snippets
   :ensure t)
+
+
+(use-package al-typo
+  :load-path "../lisp"
+  :commands typo)
