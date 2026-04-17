@@ -74,11 +74,6 @@
   (setq comint-completion-addsuffix nil)
   (setq use-short-answers t)
 
-  ;; dired
-   (when (equal window-system 'mac)
-     (setq insert-directory-program "gls"))
-   (setq dired-listing-switches "-alh")
-   (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode)
 
    ;; shell
    (defun al/named-shell (name)
@@ -133,7 +128,7 @@
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
   (setq compilation-always-kill t
         compilation-ask-about-save nil
-        compilation-scroll- output 'first-error)
+        compilation-scroll-output 'first-error)
 
   (define-key project-prefix-map (kbd "C") 'project-recompile)
 
@@ -276,8 +271,8 @@
   :config
 
   (defun my-corfu-enable-in-minibuffer ()
-    (setq-local corfu-auto t)
-    (setq-local corfu-echo-delay nil
+    (setq-local corfu-auto t
+                corfu-echo-delay nil
                 corfu-popupinfo-delay nil)
     (corfu-mode 1))
   (add-hook 'minibuffer-setup-hook #'my-corfu-enable-in-minibuffer))
@@ -343,3 +338,10 @@
   :config
   (setq wgrep-auto-save-buffer t))
 
+(use-package dired
+  :ensure nil
+  :config
+   (when (equal window-system 'mac)
+     (setq insert-directory-program "gls"))
+   (setq dired-listing-switches "-alh")
+   (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode))
