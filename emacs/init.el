@@ -127,6 +127,8 @@
         compilation-scroll-output 'first-error)
 
   (define-key project-prefix-map (kbd "C") 'project-recompile)
+  (define-key al/meta-spc-map (kbd "C") 'recompile)
+  (define-key al/meta-spc-map (kbd "c") 'compile)
 
   ;; js default
   (setq js-indent-level 2
