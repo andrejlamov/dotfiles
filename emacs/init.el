@@ -25,7 +25,7 @@
 
   ;; grep
   (setq grep-save-buffers t)
-  
+
 
   ;; registers
   (define-key al/meta-spc-map "R" 'point-to-register)
@@ -62,7 +62,7 @@
 
   ;; ;; Run it now:
   ;; (my/apply-monochrome-bold-syntax)
-  
+
   (global-set-key (kbd "M-q") 'fill-paragraph)
   (setq inhibit-startup-screen t)
   (setq initial-buffer-choice t)
@@ -75,14 +75,14 @@
   (setq use-short-answers t)
 
 
-   ;; shell
-   (defun al/named-shell (name)
-     (interactive "sName:")
-     (shell (s-concat name)))
-   (define-key al/meta-spc-map (kbd "a s") 'al/named-shell)
-   (add-hook 'shell-mode-hook
-             (lambda ()
-               (setenv "PAGER" "cat")))
+  ;; shell
+  (defun al/named-shell (name)
+    (interactive "sName:")
+    (shell (s-concat name)))
+  (define-key al/meta-spc-map (kbd "a s") 'al/named-shell)
+  (add-hook 'shell-mode-hook
+            (lambda ()
+              (setenv "PAGER" "cat")))
   ;; highiligh line
   (setq-default cursor-in-non-selected-windows nil)
   (add-hook 'prog-mode-hook 'hl-line-mode)
@@ -288,7 +288,7 @@
          ("C-c C-<" . mc/mark-all-like-this))
   :config
   (setq mc/always-run-for-all t)
-  (require 'phi-replace) 
+  (require 'phi-replace)
   (defun al/use-phi-search ()
     (if multiple-cursors-mode (progn
                                 (message "enabled")
@@ -319,8 +319,8 @@
 (use-package yasnippet
   :ensure t
   :bind (:map yas-minor-mode-map
-         ("C-c y" . yas-expand)         ("C-c & C-n" . yas-next-field)
-         ("C-c & C-p" . yas-prev-field))
+              ("C-c y" . yas-expand)         ("C-c & C-n" . yas-next-field)
+              ("C-c & C-p" . yas-prev-field))
   :config
   (yas-global-mode 1)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
@@ -341,7 +341,7 @@
 (use-package dired
   :ensure nil
   :config
-   (when (equal window-system 'mac)
-     (setq insert-directory-program "gls"))
-   (setq dired-listing-switches "-alh")
-   (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode))
+  (when (equal window-system 'mac)
+    (setq insert-directory-program "gls"))
+  (setq dired-listing-switches "-alh")
+  (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode))
