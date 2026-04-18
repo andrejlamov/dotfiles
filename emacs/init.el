@@ -99,10 +99,6 @@
   ;; remove truncate dollar sign
   (set-display-table-slot standard-display-table 'truncation ?\ )
 
-  ;; winner
-  (winner-mode 1)
-  (define-key al/meta-spc-map (kbd "w u") 'winner-undo)
-  (define-key al/meta-spc-map (kbd "w r") 'winner-redo)
 
 
 
@@ -154,6 +150,14 @@
   (setq minibuffer-prompt-properties
         '(read-only t cursor-intangible t face minibuffer-prompt)))
 
+
+(use-package winner
+  :ensure nil
+  :init
+  (winner-mode 1)
+  :config
+  (define-key al/meta-spc-map (kbd "w u") 'winner-undo)
+  (define-key al/meta-spc-map (kbd "w r") 'winner-redo))
 
 (use-package vertico
   :custom
