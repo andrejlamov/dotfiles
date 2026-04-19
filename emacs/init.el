@@ -207,7 +207,7 @@
    ("C-;" . avy-goto-char)
    ("C-M-;" . avy-goto-char-in-line)
    :map isearch-mode-map
-   ("C-:" . avy-isearch)))
+   ("C-;" . avy-isearch)))
 
 (use-package whitespace
   :init (add-hook 'prog-mode-hook 'whitespace-mode)
