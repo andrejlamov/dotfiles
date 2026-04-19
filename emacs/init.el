@@ -6,9 +6,10 @@
 (use-package dash)
 
 (use-package exec-path-from-shell
+  :defer nil
+  :when (memq window-system '(mac ns x))
   :init
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
 
 
 
