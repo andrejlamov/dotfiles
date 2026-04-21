@@ -274,15 +274,7 @@
 
 (use-package corfu
   :init
-  (global-corfu-mode)
-  :config
-
-  (defun my-corfu-enable-in-minibuffer ()
-    (setq-local corfu-auto t
-                corfu-echo-delay nil
-                corfu-popupinfo-delay nil)
-    (corfu-mode 1))
-  (add-hook 'minibuffer-setup-hook #'my-corfu-enable-in-minibuffer))
+  (global-corfu-mode))
 
 (use-package docker)
 
