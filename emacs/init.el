@@ -1,14 +1,18 @@
 ;;; -*- lexical-binding: t -*-
+(require 'package-x)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 (add-to-list 'load-path (expand-file-name "../lisp"))
 
 (use-package s)
 (use-package dash)
 
+
 (use-package exec-path-from-shell
   :defer nil
-  :when (memq window-system '(mac ns x))
-  :init
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
   (exec-path-from-shell-initialize))
 
 
