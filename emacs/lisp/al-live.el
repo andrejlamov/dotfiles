@@ -14,6 +14,7 @@
 (cl-defun al-live/construct(&key (title "")
                                  (fun (lambda ()))
                                  (initial-input nil)
+                                 (initial-run nil)
                                  (on-complete (lambda ()))
                                  (on-init (lambda ())))
   (let* ((my-buffer (window-buffer (minibuffer-selected-window)))
@@ -27,7 +28,9 @@
     (minibuffer-with-setup-hook
         (lambda ()
           (funcall on-init)
-          (add-hook 'after-change-functions on-keypress nil t))
+          (add-hook 'after-change-functions on-keypress nil t)
+          (when initial-run
+            (funcall on-keypress nil nil nil)))
       (let ((res (read-string title initial-input)))
         (when res
           (funcall on-complete))))))
@@ -150,6 +153,7 @@
              :on-init (lambda ()
                         (goto-char (point-max)))
              :initial-input "git grep -in "
+             :initial-run nil
              :on-complete (lambda ()
                             (switch-to-buffer-other-window "*grep*")
                             (next-error-no-select))
