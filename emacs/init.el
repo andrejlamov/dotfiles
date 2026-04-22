@@ -226,7 +226,7 @@
 (use-package gptel
   :ensure t
   :config
-  (gptel-make-gemini "Gemini" :key (getenv "GEMINI_API_KEY") :stream t)
+  (gptel-make-gemini "Gemini" :key (exec-path-from-shell-copy-env "GEMINI_API_KEY") :stream t)
   (gptel-make-gh-copilot "Copilot")
   (setq gptel-log-level 'debug))
 
