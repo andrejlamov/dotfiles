@@ -43,7 +43,7 @@
   ;; theme
   (load-theme 'modus-operandi-tinted t nil)
   (if (equal (system-name) "asus-void")
-      (set-face-attribute 'default nil :height 105)
+      (set-face-attribute 'default nil :height 100)
     (set-face-attribute 'default nil :height 120))
 
   ;; (defun my/apply-monochrome-bold-syntax ()
