@@ -79,6 +79,10 @@
   (setq comint-completion-addsuffix nil)
   (setq use-short-answers t)
 
+  (defun al/open-init ()
+    (interactive)
+    (find-file "~/.config/emacs/init.el"))
+  (define-key al/meta-spc-map (kbd "a i") 'al/open-init)
 
   ;; shell
   (defun al/named-shell (name)
