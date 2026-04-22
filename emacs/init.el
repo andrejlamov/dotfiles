@@ -12,7 +12,7 @@
   :defer nil
   :ensure t
   :if (memq window-system '(mac ns x))
-  :config
+  :init
   (exec-path-from-shell-initialize))
 
 
