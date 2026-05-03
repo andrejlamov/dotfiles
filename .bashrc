@@ -3,11 +3,10 @@ export COLORTERM=truecolor
 export PS1='$(pwd)$ '
 export HOMEBREW_NO_AUTO_UPDATE=1
 export COMPOSE_MENU=0
-export PATH="~/.opencode/bin":"/opt/homebrew/bin":"~/.local/bin":$PATH
-export XDG_CONFIG_HOME=~/.config
-export PATH=~/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin":"/opt/homebrew/bin":"$HOME/.local/bin":$PATH
+export XDG_CONFIG_HOME=$HOME/.config
 alias  tmux="tmux new-session -A -s main"
 alias  emacs="emacs -nw"
 
-source ~/.secrets.env
+source $HOME/.secrets.env
 
