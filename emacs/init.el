@@ -104,6 +104,15 @@
   (global-visual-line-mode 1)
   (setq visual-wrap-extra-indent 2)
 
+
+  (defun al/truncate ()
+    (interactive)
+    (visual-line-mode -1)
+    (visual-wrap-prefix-mode -1)
+    (toggle-truncate-lines))
+
+  (add-hook 'compilation-mode-hook 'al/truncate)
+
   (global-visual-wrap-prefix-mode 1)
   ;; remove truncate dollar sign
   (set-display-table-slot standard-display-table 'truncation ?\ )
