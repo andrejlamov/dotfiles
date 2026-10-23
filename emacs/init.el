@@ -267,7 +267,9 @@
   :load-path "../lisp/")
 
 (use-package eglot
-  :ensure t)
+  :ensure t
+  :config
+  (setq eglot-ignored-server-capabilities '(:semanticTokensProvider)))
 
 (use-package bufler
   :init (bufler-mode)
