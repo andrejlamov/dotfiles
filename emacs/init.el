@@ -130,6 +130,16 @@
   (setq isearch-regexp-lax-whitespace t)
   (global-set-key (kbd "C-s") 'isearch-forward-regexp)
   (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+  (defun al/isearch-mark-with-region ()
+    (interactive)
+    (let ((x isearch-other-end)
+          (y (point)))
+      (goto-char x)
+      (call-interactively 'set-mark-command)
+      (goto-char y))
+    (isearch-exit))
+
+  (define-key isearch-mode-map (kbd "C-SPC") 'al/isearch-mark-with-region)
 
   (global-set-key (kbd "C-M-v") 'scroll-other-window-down)
   (global-set-key (kbd "C-M-S-v") 'scroll-other-window)
