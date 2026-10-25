@@ -197,8 +197,8 @@
   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
   :init
   (vertico-mode)
-  (keymap-set vertico-map "C-:" #'vertico-quick-exit)
-  (keymap-set vertico-map "C-;" #'vertico-quick-insert))
+  (keymap-set vertico-map "C-;" #'vertico-quick-exit)
+  (keymap-set vertico-map "C-:" #'vertico-quick-insert))
 
 (use-package marginalia
   :config
