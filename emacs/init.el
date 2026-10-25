@@ -373,3 +373,5 @@
     (setq insert-directory-program "gls"))
   (setq dired-listing-switches "-alh")
   (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode))
+(use-package cider
+  :config nil)
