@@ -15,7 +15,9 @@
   :init
   (exec-path-from-shell-initialize))
 
-
+(use-package ef-themes
+  :config
+  (ef-themes-load-random-dark))
 
 (use-package emacs
   :custom
@@ -41,7 +43,6 @@
   (setq register-preview-delay 0)
 
   ;; theme
-  (load-theme 'modus-operandi-tinted t nil)
   (if (equal (system-name) "asus-void")
       (set-face-attribute 'default nil :height 100)
     (set-face-attribute 'default nil :height 120))
