@@ -343,7 +343,14 @@
   (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
 
 
-(use-package crux)
+(use-package crux
+  :config
+  (define-key al/meta-spc-map (kbd "w t") 'crux-transpose-windows))
+
+(use-package rotate
+  :config
+  (define-key al/meta-spc-map (kbd "w r") 'rotate-window)
+  (define-key al/meta-spc-map (kbd "w R") 'rotate-layout))
 
 (use-package yasnippet
   :ensure t
