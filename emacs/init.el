@@ -381,5 +381,12 @@
     (setq insert-directory-program "gls"))
   (setq dired-listing-switches "-alh")
   (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode))
+
+(use-package dired-du
+  :vc (:url "https://github.com/calancha/dired-du")
+  :config
+  (setq dired-du-size-format t)
+  (add-hook 'dired-mode 'dired-du-mode))
+
 (use-package cider
   :config nil)
